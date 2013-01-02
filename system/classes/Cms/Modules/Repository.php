@@ -152,8 +152,14 @@ class Repository implements ArrayAccess {
 					}
 				}
 
+				$plugin = ucfirst($module).'Plugin';
+
 				// Todo: Dependency injection?
-				app()->plugins->register($module, ucfirst($module).'Plugin');
+				if(class_exists($plugin))
+				{
+					app()->plugins->register($module, $plugin);
+				}
+
 				app()->view->addNamespace($module, $path.'views');
 			}
 

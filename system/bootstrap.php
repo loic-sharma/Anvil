@@ -216,8 +216,8 @@ foreach($app->modules->get() as $module => $details)
 |
 */
 
-Plugins::register('url', 'Cms\Plugins\UrlPlugin');
-Plugins::register('session', 'Cms\Plugins\SessionPlugin');
+Plugins::register('url', new Cms\Plugins\UrlPlugin);
+Plugins::register('session', new Cms\Plugins\SessionPlugin);
 
 /*
 |--------------------------------------------------------------------------

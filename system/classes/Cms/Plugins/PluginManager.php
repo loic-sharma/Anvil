@@ -41,11 +41,10 @@ class PluginManager {
 	{
 		if(is_string($class) and class_exists($class))
 		{
-			$this->plugins[$plugin] = $this->app->share(function($app) use($class)
-			{
-				return $app->make($class);
-			});
+			$class = $this->app->make($class);
 		}
+
+		$this->plugins[$plugin] = $class;
 	}
 
 	/**
@@ -55,40 +54,7 @@ class PluginManager {
 	 */
 	public function all()
 	{
-		$plugins = array();
-
-		foreach($this->plugins as $plugin => $value)
-		{
-			$plugins[$plugin] = $this->make($plugin);
-		}
-
-		return $plugins;
-	}
-
-	/**
-	 * Retrieve the instance of a Plugin.
-	 *
-	 * @param  string  $plugin
-	 * @return object
-	 */
-	public function make($plugin)
-	{
-		if(isset($this->plugins[$plugin]))
-		{
-			// We need to create an instance of the plugin if the value
-			// is still a closure. 
-			if($this->plugins[$plugin] instanceof Closure)
-			{
-				$this->plugins[$plugin] = $this->plugins[$plugin]($this->app);
-			}
-
-			return $this->plugins[$plugin];
-		}
-
-		else
-		{
-			throw new \InvalidArgumentException("Plugin [$plugin] does not exist");
-		}
+		return $this->plugins;
 	}
 
 	/**
@@ -99,6 +65,6 @@ class PluginManager {
 	 */
 	public function __get($plugin)
 	{
-		return $this->make($plugin);
+		return $this->plugins[$plugin];
 	}
 }
