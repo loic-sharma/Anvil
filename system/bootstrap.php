@@ -51,8 +51,7 @@ $app->instance('path.base', dirname(__DIR__));
 | Register The Autoloader
 |--------------------------------------------------------------------------
 |
-| Inject the autoloader into the app and register the base Cms
-| class path.
+| Inject the autoloader into the app.
 |
 */
 
@@ -60,8 +59,6 @@ $app->bind('autoloader', function($app) use($autoloader)
 {
 	return $autoloader;
 });
-
-$autoloader->add('Cms', $app->path.'/classes');
 
 /*
 |--------------------------------------------------------------------------

@@ -1,18 +1,14 @@
 {
-    "name": "cms",
-    "description": "A cms.",
-    "keywords": ["cms"],
-    "authors": [
-        {
-            "name": "Loic Sharma",
-            "email": "sharma.loic@gmail.com"
-        }
-    ],
+    "minimum-stability": "dev",
     "require": {
         "illuminate/foundation": "1.2.*",
         "dandoescode/uhoh": "0.0.*",
         "meido/form": "1.0.*",
         "loic-sharma/menu": ">1.0.0"
     },
-    "minimum-stability": "dev"
+    "autoload": {
+        "classmap": [
+            "system/classes"
+        ]
+    }
 }
