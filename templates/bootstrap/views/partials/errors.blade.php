@@ -1,3 +1,5 @@
-<div class="alert">
-	<span><b>Warning!</b> Alerts may warn users of impending danger.</span>
-</div>
+@foreach($errors->all() as $error)
+	<div class="alert">
+		<span><b>Error:</b> {{ $error }}.</span>
+	</div>
+@endforeach
