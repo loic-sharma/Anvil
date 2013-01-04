@@ -4,7 +4,7 @@
 	@foreach($comments as $comment)
 		<div class="row">
 			<div class="span2">
-				  <img src="{{ $post->author->gravatarUrl(100) }}" class="img-polaroid" width="100" height="100"> 
+				  <img src="{{ $comment->author->gravatarUrl(100) }}" class="img-polaroid" width="100" height="100"> 
 	   		</div>
 	   		<div class="span6">
 	   			<p class="muted">Posted by {{ $comment->author->display_name }} one day ago.</p>
