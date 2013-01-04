@@ -122,7 +122,7 @@ $app->bindIf('config.loader', function($app)
 |
 */
 
-// $app->startExceptionHandling();
+$app->startExceptionHandling();
 
 /*
 |--------------------------------------------------------------------------

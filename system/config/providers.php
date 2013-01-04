@@ -26,7 +26,7 @@ return array(
 	'Illuminate\View\ViewServiceProvider',
 
 	'Cms\Providers\RoutingServiceProvider',
-	'Cms\Providers\ExceptionServiceProvider',
+//	'Cms\Providers\ExceptionServiceProvider',
 	'Cms\Providers\ViewServiceProvider',
 	'Cms\Providers\ModuleServiceProvider',
 	'Cms\Providers\SettingsServiceProvider',
