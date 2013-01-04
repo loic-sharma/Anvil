@@ -44,6 +44,16 @@ class PluginManager {
 			$class = $this->app->make($class);
 		}
 
+		// If the class inherits the Plugin class, let's
+		// wrap it around in the Facade class so that attributes
+		// can managed.
+		if($class instanceof Plugin)
+		{
+			$class = new Facade($class);
+		}
+
+		$this->app['view']->share($plugin, $class);
+
 		$this->plugins[$plugin] = $class;
 	}
 

@@ -11,6 +11,8 @@ abstract class Plugin {
 	 */
 	protected static $app;
 
+	protected $attributes = array();
+
 	/**
 	 * Set the application instance.
 	 *
@@ -22,6 +24,11 @@ abstract class Plugin {
 		static::$app = $app;
 	}
 
+	public function setAttributes($attributes)
+	{
+		$this->attributes = $attributes;
+	}
+
 	/**
 	 * Get the value of an attribute.
 	 *
@@ -30,11 +37,11 @@ abstract class Plugin {
 	 * @param  mixed   $default
 	 * @return mixed
 	 */
-	public function attribute(array $options = null, $key = null, $default = null)
+	public function attribute($key = null, $default = null)
 	{
-		if(isset($options[$key]))
+		if(isset($this->attributes[$key]))
 		{
-			return $options[$key];
+			return $this->attributes[$key];
 		}
 
 		else

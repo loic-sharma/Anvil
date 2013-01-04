@@ -1,9 +1,9 @@
 <?php namespace Cms\Providers;
 
+use Illuminate\View\Environment;
 use Illuminate\Support\MessageBag;
 use Illuminate\View\ViewServiceProvider as IlluminateViewServiceProvider;
 use Cms\View\FileViewFinder;
-use Cms\View\Environment;
 use Cms\Plugins\PluginManager;
 
 class ViewServiceProvider extends IlluminateViewServiceProvider {

@@ -17,6 +17,7 @@ class Environment extends IlluminateEnvironment {
 	{
 		$path = $this->finder->find($view);
 
+		
 		$plugins = $this->shared['plugins']->all();
 
 		foreach(array_merge($plugins, $data) as $key => $value)
