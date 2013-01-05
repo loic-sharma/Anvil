@@ -2,27 +2,47 @@
 
 namespace Cms;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 use Illuminate\Foundation\Application as IlluminateApplication;
 
 class Application extends IlluminateApplication {
 
-	protected $uri;
+	/**
+	 * The current request's detected controller.
+	 *
+	 * @var string
+	 */
 	protected $controller;
 
+	/**
+	 * Is the current request the home page?
+	 *
+	 * @var bool
+	 */
 	protected $isHome = false;
 
+	/**
+	 * Run the application.
+	 *
+	 * @return void
+	 */
 	public function run()
 	{
+		// Try to run the application.
 		try
 		{
 			parent::run();
 		}
 
+		// Because of the default routing system, it is possible that the CMS
+		// created a route to a nonexistent controller. If that happens, let's
+		// throw a more accurate exception.
 		catch(ReflectionException $e)
 		{
 			if($e->getMessage() == "Class {$this->controller} does not exist")
 			{
-				throw new Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+				throw new NotFoundHttpException;
 			}
 
 			else
