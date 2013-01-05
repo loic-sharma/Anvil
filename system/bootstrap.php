@@ -195,19 +195,6 @@ $services->load($cms, $config['providers']);
 
 /*
 |--------------------------------------------------------------------------
-| Load the CMS Modules
-|--------------------------------------------------------------------------
-|
-|
-*/
-
-foreach(Modules::get() as $module => $details)
-{
-	Modules::boot($module);
-}
-
-/*
-|--------------------------------------------------------------------------
 | Register Plugins
 |--------------------------------------------------------------------------
 |
@@ -218,6 +205,22 @@ foreach(Modules::get() as $module => $details)
 
 Plugins::register('url', new Cms\Plugins\UrlPlugin);
 Plugins::register('session', new Cms\Plugins\SessionPlugin);
+
+/*
+|--------------------------------------------------------------------------
+| Load the CMS Modules
+|--------------------------------------------------------------------------
+|
+| Allow the modules to bootstrap their code. This happens before the CMS
+| attempts to detect the default route so that module's routes have
+| precedence over the CMS's.
+|
+*/
+
+foreach(Modules::get() as $module => $details)
+{
+	Modules::boot($module);
+}
 
 /*
 |--------------------------------------------------------------------------
