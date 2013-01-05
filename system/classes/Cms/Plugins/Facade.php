@@ -64,6 +64,9 @@ class Facade {
 	 */
 	public function __call($method, $args)
 	{
+		// First things first, reset all of the plugin's attributes.
+		$this->plugin->setAttributes(array());
+
 		// If only an array was passed to the method, then we will
 		// assume that the array contains attributes.
 		if(count($args) == 1 && is_array($args[0]))
@@ -112,6 +115,8 @@ class Facade {
 			}
 		}
 
+		// If we're not dealing with attributes, let's just call the plugin's
+		// method normally.
 		switch (count($args))
 		{
 			case 0:

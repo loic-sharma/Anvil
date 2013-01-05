@@ -135,6 +135,8 @@ class Repository implements ArrayAccess {
 
 			if(is_dir($path))
 			{
+				// Add the module's controller and model directories (if they exist)
+				// to the autoloader's list of directories.
 				$directories = array($path.'controllers', $path.'models');
 
 				$directories = array_filter($directories, function($directory)
@@ -144,6 +146,8 @@ class Repository implements ArrayAccess {
 
 				$this->autoloader->add(null, $directories);
 
+				// Load the module's start file, routes, filters, and plugin
+				// if they exist.
 				foreach(array('start', 'routes', 'filters', 'plugin') as $file)
 				{
 					if(file_exists($path.$file.'.php'))

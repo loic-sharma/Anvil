@@ -11,6 +11,11 @@ abstract class Plugin {
 	 */
 	protected static $app;
 
+	/**
+	 * The attributes.
+	 *
+	 * @var array
+	 */
 	protected $attributes = array();
 
 	/**
@@ -24,7 +29,13 @@ abstract class Plugin {
 		static::$app = $app;
 	}
 
-	public function setAttributes($attributes)
+	/**
+	 * Set the plugin's attributes.
+	 *
+	 * @param  array  $attributes
+	 * @return void
+	 */
+	public function setAttributes(array $attributes)
 	{
 		$this->attributes = $attributes;
 	}

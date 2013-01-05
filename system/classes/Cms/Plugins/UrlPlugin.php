@@ -2,7 +2,24 @@
 
 namespace Cms\Plugins;
 
-class UrlPlugin extends Plugin {
+class UrlPlugin {
+
+	/**
+	 * The application container.
+	 *
+	 * @var Cms\Application
+	 */
+	protected $app;
+
+	/**
+	 * Get the application container.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->app = app();
+	}
 
 	/**
 	 * Retrieve the base URL.
@@ -11,7 +28,7 @@ class UrlPlugin extends Plugin {
 	 */
 	public function base()
 	{
-		return static::$app['request']->root();
+		return $this->app->request->root();
 	}
 
 	/**
@@ -21,10 +38,7 @@ class UrlPlugin extends Plugin {
 	 */
 	public function current()
 	{
-		// Todo.
-		//throw new \Exception;
-
-		return '';
+		return $this->app->request->getUri();
 	}
 
 	/**
@@ -35,6 +49,6 @@ class UrlPlugin extends Plugin {
 	 */
 	public function to($uri)
 	{
-		return static::$app['url']->to($uri);
+		return $this->app->url->to($uri);
 	}
 }

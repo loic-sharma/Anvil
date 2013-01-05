@@ -4,7 +4,7 @@ use Illuminate\Support\ServiceProvider;
 use Cms\Modules\Repository as ModuleRepository;
 use Cms\Modules\DatabaseLoader;
 use Cms\Plugins\PluginManager;
-use CMS\Plugins\Plugin;
+use Cms\Plugins\Plugin;
 
 class ModuleServiceProvider extends ServiceProvider {
 

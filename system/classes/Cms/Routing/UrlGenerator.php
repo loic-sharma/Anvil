@@ -22,6 +22,11 @@ class UrlGenerator extends IlluminateUrlGenerator {
 		return rtrim($baseUrl, '/').'/';	
 	}
 
+	/**
+	 * Retrieve the current URI.
+	 *
+	 * @return string
+	 */
 	public function current()
 	{
 		return $this->request->getUri();

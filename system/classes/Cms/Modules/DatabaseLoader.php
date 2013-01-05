@@ -41,6 +41,7 @@ class DatabaseLoader implements LoaderInterface {
 		{
 			$modules = $this->database->table('modules')->get();
 
+			// Organize the modules by their slugs. 
 			foreach($modules as $module)
 			{
 				$this->modules[$module->slug] = $module;
