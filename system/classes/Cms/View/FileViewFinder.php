@@ -29,15 +29,13 @@ class FileViewFinder extends IlluminateViewFinder {
 	 * @param  Settings    $settings
 	 * @return void
 	 */
-	public function __construct(Filesystem $files, Settings $settings)
+	public function __construct(Filesystem $files)
 	{
 		$this->files = $files;
-
-		$this->templatePath = App::make('path.base').'/templates/'.$settings->get('template').'/views/';
 	}
 
 	/**
-	 * Set the current template path.
+	 * Set the template path.
 	 *
 	 * @param  string  $path
 	 * @return void
@@ -45,6 +43,16 @@ class FileViewFinder extends IlluminateViewFinder {
 	public function setTemplatePath($path)
 	{
 		$this->templatePath = rtrim($path, '/').'/';
+	}
+
+	/**
+	 * Get the current template path.
+	 *
+	 * @return string
+	 */
+	public function getTemplatePath()
+	{
+		return $this->templatePath;
 	}
 
 	/**
