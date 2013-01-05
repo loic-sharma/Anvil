@@ -11,22 +11,8 @@ class BlogPlugin extends Plugin {
 		$this->postService = $postService;
 	}
 
-	public function posts(array $options = array())
+	public function posts($skip = 0, $take = 10, $orderBy = 'created_at', $orderDir = 'ASC')
 	{
-		$limit    = $this->attribute($options, 'limit', 10);
-		$offset   = $this->attribute($options, 'offset', 0);
-		$orderBy  = $this->attribute($options, 'order-by', 'created_at');
-		$orderDir = $this->attribute($options, 'order-dir', 'ASC');
-
-		/*
-			return $this->post
-				->with('author')
-				->orderBy($orderBy, $orderDir)
-				->skip($offset)
-				->take($limit)
-				->get();
-		*/
-
-		return $this->postService->getPosts();
+		return $this->postService->getPosts($skip, $take, $orderBy, $orderDir);
 	}
 }

@@ -4,10 +4,10 @@ namespace Blog;
 
 class PostService {
 
-	public function getPosts($offset = 0, $limit = 10)
+	public function getPosts($offset = 0, $limit = 10, $orderBy = 'created_at', $orderDir = 'ASC')
 	{
 		return Post::with('author')
-					->orderBy('created_at', 'ASC')
+					->orderBy($orderBy, $orderDir)
 					->skip($offset)
 					->take($limit)
 					->get();
