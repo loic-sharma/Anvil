@@ -9,10 +9,8 @@ class SessionPlugin extends Plugin {
 	 *
 	 * @return array
 	 */
-	public function messages()
+	public function messages($format = null)
 	{
-		$format = $this->attribute('format', null);
-
 		$shared = static::$app->make('view')->getShared();
 
 		return $shared['errors']->all($format);
