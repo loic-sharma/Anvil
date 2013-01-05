@@ -110,7 +110,10 @@ return array(
 		'HttpNotFoundException' => 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException',
 
 		'Autoloader' => 'Cms\Facades\Autoloader',
+		'Modules'    => 'Cms\Facades\Modules',
 		'Plugins'    => 'Cms\Facades\Plugins',
 		'Settings'   => 'Cms\Facades\Settings',
+
+		'Sentry'     => 'Cartalyst\Sentry\Facades\Sentry',
 	),
 );

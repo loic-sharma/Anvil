@@ -201,9 +201,9 @@ $services->load($app, $config['providers']);
 |
 */
 
-foreach($app->modules->get() as $module => $details)
+foreach(Modules::get() as $module => $details)
 {
-	$app->modules->boot($module);
+	Modules::boot($module);
 }
 
 /*
@@ -226,7 +226,8 @@ Plugins::register('session', new Cms\Plugins\SessionPlugin);
 |
 | Each action corresponds, by default, to a module and a controller.
 | Although a module may have already registered a route that matches the
-| request, this will be serve as a back up route.
+| request, this will be serve as a back up route. Note that any routes
+| registered after the default route is set will be ignored.
 |
 */
 

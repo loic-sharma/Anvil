@@ -31,6 +31,8 @@ return array(
 	'Cms\Providers\ModuleServiceProvider',
 	'Cms\Providers\SettingsServiceProvider',
 
+	'Cartalyst\Sentry\SentryServiceProvider',
+
 	'Meido\HTML\Providers\HTMLServiceProvider',
 	'Meido\Form\Providers\FormServiceProvider',
 );
