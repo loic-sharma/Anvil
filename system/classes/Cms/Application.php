@@ -81,23 +81,40 @@ class Application extends IlluminateApplication {
 
 		else
 		{
-			// If we have multiple segments, remove everything except
-			// the first segment. We'll use the first segment for the
-			// controller.
-			$firstSlash = strpos($uri, '/');
-
-			if($firstSlash !== false)
+			try
 			{
-				$uri = substr($uri, 0, $firstSlash);
+				// To do: add security, and refactor this.
+				$this['view.finder']->find('public.'.$uri);
+
+				$me = $this;
+
+				return $this['router']->any($uri, function() use ($me, $uri)
+				{
+					return $me['view']->make('public.'.$uri);
+				});
 			}
 
-			$this->controller = ucfirst($uri).'Controller';
-
-			// Let's check if we're home. To do: currently this will be false if
-			// there is more than segment (even if we are home).
-			if($this->controller == $this['settings']->get('defaultController') && $firstSlash == false)
+			// The view doesn't exist if an invalid argument exception was thrown.
+			catch(\InvalidArgumentException $e)
 			{
-				$this->isHome = true;
+				// If we have multiple segments, remove everything except
+				// the first segment. We'll use the first segment for the
+				// controller.
+				$firstSlash = strpos($uri, '/');
+
+				if($firstSlash !== false)
+				{
+					$uri = substr($uri, 0, $firstSlash);
+				}
+
+				$this->controller = ucfirst($uri).'Controller';
+
+				// Let's check if we're home. To do: currently this will be false if
+				// there is more than segment (even if we are home).
+				if($this->controller == $this['settings']->get('defaultController') && $firstSlash == false)
+				{
+					$this->isHome = true;
+				}
 			}
 		}
 
