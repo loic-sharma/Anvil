@@ -21,16 +21,16 @@ $autoloader = include 'vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
-| Create The Application
+| Create The CMS
 |--------------------------------------------------------------------------
 |
 | The first thing we will do is create a new Laravel application instance
-| which serves as the "glue" for all the components of Laravel, and is
+| which serves as the "glue" for all the components of the CMS, and is
 | the IoC container for the system binding all of the various parts.
 |
 */
 
-$app = new Illuminate\Foundation\Application;
+$cms = new Cms\Application;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +43,8 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$app->instance('path', __DIR__);
-$app->instance('path.base', dirname(__DIR__));
+$cms->instance('path', __DIR__);
+$cms->instance('path.base', dirname(__DIR__));
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +55,7 @@ $app->instance('path.base', dirname(__DIR__));
 |
 */
 
-$app->bind('autoloader', function($app) use($autoloader)
+$cms->bind('autoloader', function() use($autoloader)
 {
 	return $autoloader;
 });
@@ -71,7 +71,7 @@ $app->bind('autoloader', function($app) use($autoloader)
 |
 */
 
-$app->detectEnvironment(array(
+$cms->detectEnvironment(array(
 
 	'local' => array('localhost', '*.dev', '*.app'),
 
@@ -92,7 +92,7 @@ $env = 'development';
 
 Facade::clearResolvedInstances();
 
-Facade::setFacadeApplication($app);
+Facade::setFacadeApplication($cms);
 
 /*
 |--------------------------------------------------------------------------
@@ -105,9 +105,9 @@ Facade::setFacadeApplication($app);
 |
 */
 
-$app->bindIf('config.loader', function($app)
+$cms->bindIf('config.loader', function($cms)
 {
-	return new FileLoader(new Filesystem, $app['path'].'/config');
+	return new FileLoader(new Filesystem, $cms['path'].'/config');
 
 }, true);
 
@@ -122,7 +122,7 @@ $app->bindIf('config.loader', function($app)
 |
 */
 
-$app->startExceptionHandling();
+$cms->startExceptionHandling();
 
 /*
 |--------------------------------------------------------------------------
@@ -135,9 +135,9 @@ $app->startExceptionHandling();
 |
 */
 
-$config = new Config($app['config.loader'], $env);
+$config = new Config($cms['config.loader'], $env);
 
-$app->instance('config', $config);
+$cms->instance('config', $config);
 
 /*
 |--------------------------------------------------------------------------
@@ -163,7 +163,7 @@ date_default_timezone_set($config['app']['timezone']);
 |
 */
 
-$app->registerAliasLoader($config['app']['aliases']);
+$cms->registerAliasLoader($config['app']['aliases']);
 
 /*
 |--------------------------------------------------------------------------
@@ -191,7 +191,7 @@ Request::enableHttpMethodParameterOverride();
 
 $services = new ProviderRepository(new Filesystem);
 
-$services->load($app, $config['providers']);
+$services->load($cms, $config['providers']);
 
 /*
 |--------------------------------------------------------------------------
@@ -231,4 +231,4 @@ Plugins::register('session', new Cms\Plugins\SessionPlugin);
 |
 */
 
-$app['controller.router']->setDefaultRoute();
+$cms->setDefaultRoute();
