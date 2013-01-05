@@ -2,7 +2,7 @@
 
 <p class="muted">Posted by {{ $post->author->display_name }} three days ago.</p>
 <p>This is the post!</p>
-<p><a href="comments.php">3 Comments</a></p>
+<p><span class="badge">{{ $post->comments->count() }} Comments</span></p>
 
 <hr>
 
