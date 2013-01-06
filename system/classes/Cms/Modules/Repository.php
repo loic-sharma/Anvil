@@ -145,6 +145,7 @@ class Repository implements ArrayAccess {
 				});
 
 				$this->autoloader->add(null, $directories);
+				$this->autoloader->add(ucfirst($module), $path.'classes');
 
 				// Load the module's start file, routes, filters, and plugin
 				// if they exist.
