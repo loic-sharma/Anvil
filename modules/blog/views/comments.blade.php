@@ -7,7 +7,7 @@
 				  <img src="{{ $comment->author->gravatarUrl(100) }}" class="img-polaroid" width="100" height="100"> 
 	   		</div>
 	   		<div class="span6">
-	   			<p class="muted">Posted by {{ $comment->author->display_name }} one day ago.</p>
+	   			<p class="muted">Posted by {{ $comment->author->displayName() }} one day ago.</p>
 	   			<p>{{ $comment->content }}</p>
 	   		</div>
 	   	</div>

@@ -6,6 +6,11 @@ class User extends Eloquent {
 
 	public $hidden = array('password');
 
+	public function displayName()
+	{
+		return $this->attributes['first_name'].' '.$this->attributes['last_name'];
+	}
+
 	public function gravatarUrl($size = 60)
 	{
 		$url  = 'http://www.gravatar.com/avatar/';
