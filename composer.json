@@ -9,7 +9,7 @@
     },
     "autoload": {
         "classmap": [
-            "system/classes"
+            "cms/classes"
         ]
     }
 }

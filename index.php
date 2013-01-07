@@ -7,10 +7,10 @@
 define('CMS_START', microtime(true));
 
 // --------------------------------------------------------------
-// Load the system.
+// Start the CMS.
 // --------------------------------------------------------------
 
-include 'system/bootstrap.php';
+include 'cms/start.php';
 
 // --------------------------------------------------------------
 // Run the CMS.
