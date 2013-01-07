@@ -2,18 +2,17 @@
 
 class PageController extends Controller {
 
-	public $layout = 'layouts.default';
-
-	protected $pageService;
-
-	public function __construct(PageService $pageService)
+	/**
+	 * Retrieve a page.
+	 *
+	 * @param  string  $slug
+	 * @return void
+	 */
+	public function page($slug)
 	{
-		$this->pageService = $pageService;
-	}
+		$page = Page::where('slug', '=', $slug)->first();
 
-	public function page($page)
-	{
-		if(is_null($page = $this->pageService->getPageBySlug($page)))
+		if(is_null($page))
 		{
 			throw new HttpNotFoundException;
 		}

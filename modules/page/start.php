@@ -1,6 +1,5 @@
 <?php
 
 Autoloader::map(array(
-
-	'PageService' => __DIR__.'/services/PageService.php',
+	'PageController' => __DIR__.'/controllers/PageController.php',
 ));

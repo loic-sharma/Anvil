@@ -1,3 +1,3 @@
 <?php
 
-Route::any('page/{page}', 'PageController@page');
+Route::get('page/{page}', 'PageController@page');
