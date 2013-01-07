@@ -5,7 +5,7 @@ Autoloader::map(array(
 	'User' => __DIR__.'/models/User.php',
 ));
 
-class UserPlugin extends Plugin {
+class UserPlugin {
 
 	public function loggedIn()
 	{

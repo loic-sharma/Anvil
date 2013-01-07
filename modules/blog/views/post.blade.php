@@ -4,8 +4,8 @@
 <p>This is the post!</p>
 <p><span class="badge">{{ $post->comments->count() }} Comments</span></p>
 
-<hr>
+@if($post->comments_enabled && $user->loggedIn())
+	<hr>
 
-@if($post->comments_enabled)
-  {{ View::make('blog::comments', array('comments' => $post->comments)) }}
+	{{ View::make('blog::comments', array('comments' => $post->comments)) }}
 @endif
