@@ -12,12 +12,12 @@ class UserPlugin {
 		return Sentry::check();
 	}
 
-	public function has_cp_permissions()
+	public function displayName()
 	{
-		
+		$user = Sentry::getUser();
+
+		return $user->first_name . ' ' . $user->last_name;
 	}
 }
 
 Plugins::register('user', 'UserPlugin');
-
-app()->view->share('auth', app()->auth);
