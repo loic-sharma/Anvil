@@ -2,57 +2,66 @@
 
 class TemplatePlugin extends Plugin {
 
+	/**
+	 * The URL to the template's directory.
+	 *
+	 * @var string
+	 */
 	protected $templateUrl;
 
+	/**
+	 * Generate the template's URL.
+	 *
+	 * @return void
+	 */
 	public function __construct()
 	{
 		$this->templateUrl  = URL::base().'templates/';
 		$this->templateUrl .= Settings::get('template');
 	}
 
-	public function options()
-	{
-		var_dump($this->attributes());
-	}
-
-	public function option()
-	{
-		// @todo
-		return 'option method from template plugin';
-	}
-
+	/**
+	 * Generate the HTML to load a CSS file from the current theme.
+	 *
+	 * @param  string  $file
+	 * @return string
+	 */
 	public function css($file)
 	{
 		return '<link href="'.$this->templateUrl.'/css/'.$file.'" rel="stylesheet" type="text/css" />';
 	}
 
-	public function image($options)
-	{
-		$file = $this->attribute($options, 'file', null);
-
-		if( ! is_null($file))
-		{
-			return '<link href="'.$this->templateUrl.'/img/'.$file.'" rel="shortcut icon" type="image/x-icon" />';
-		}
-	}
-
+	/**
+	 * Generate the HTML to load a JS file from the current theme.
+	 *
+	 * @param  string  $file
+	 * @return string
+	 */
 	public function js($file)
 	{
-		return '<link href="'.$this->templateUrl.'/img/'.$file.'" rel="shortcut icon" type="image/x-icon" />';
+		return '<script src="'.$this->templateUrl.'/js/'.$file.'" type="text/javascript"></script>';
 	}
 
+	/**
+	 * Generate the HTML to load a favicon file from the current theme.
+	 *
+	 * @param  string  $file
+	 * @return string
+	 */
 	public function favicon($file)
 	{
-		return '<link href="'.$this->templateUrl.'/img/'.$file.'" rel="shortcut icon" type="image/x-icon" />';
+		return '<link href="'.$this->templateUrl.'/img/'.$file.'.ico" rel="shortcut icon" type="image/x-icon" />';
 	}
 
-	public function metadata()
+	/**
+	 * Load a template partial.
+	 *
+	 * @param  string  $view
+	 * @param  array   $data
+	 * @return string
+	 */
+	public function partial($view, array $data = array())
 	{
-
-	}
-
-	public function partial($view)
-	{
-		return View::make('partials.'.$view);
+		return View::make('partials.'.$view, $data);
 	}
 }
