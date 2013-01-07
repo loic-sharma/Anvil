@@ -38,7 +38,7 @@ class Application extends IlluminateApplication {
 		// Because of the default routing system, it is possible that the CMS
 		// created a route to a nonexistent controller. If that happens, let's
 		// throw a more accurate exception.
-		catch(ReflectionException $e)
+		catch(\ReflectionException $e)
 		{
 			if($e->getMessage() == "Class {$this->controller} does not exist")
 			{
@@ -47,7 +47,7 @@ class Application extends IlluminateApplication {
 
 			else
 			{
-				throw new ReflectionException($e->getMessage());
+				throw new \ReflectionException($e->getMessage());
 			}
 		}
 	}
