@@ -9,11 +9,34 @@ use Cms\Settings\Repository as Settings;
 
 class FileViewFinder extends IlluminateViewFinder {
 
+	/**
+	 * The filesystem instance.
+	 *
+	 * @var Illuminate\Filesystem
+	 */
 	protected $files;
 
-	protected $paths = array();
+	/**
+	 * The path to the current template's directory.
+	 *
+	 * @var string
+	 */
 	protected $templatePath;
+
+	/**
+	 * The path to the modules' directory.
+	 *
+	 * @var string
+	 */
 	protected $modulePath;
+
+	/**
+	 * Additional paths registered to the view finder. These paths
+	 * take precedence over the template path and the module path.
+	 *
+	 * @var array
+	 */
+	protected $paths = array();
 
 	/**
 	 * The extensions recognized by the View Finder.
