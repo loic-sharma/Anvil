@@ -2,11 +2,6 @@
 
 class UsersController extends Controller {
 
-	/**
-	 * Register the user filters.
-	 *
-	 * @return void
-	 */
 	public function __construct()
 	{
 		$this->beforeFilter('logged_in', array(
@@ -18,11 +13,6 @@ class UsersController extends Controller {
 		));
 	}
 
-	/**
-	 * Display the user's profile page.
-	 *
-	 * @return void
-	 */
 	public function getProfile()
 	{
 		$this->page->addBreadcrumb('Profile');
