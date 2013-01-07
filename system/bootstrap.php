@@ -193,7 +193,6 @@ $services = new ProviderRepository(new Filesystem);
 
 $services->load($cms, $config['providers']);
 
-
 /*
 |--------------------------------------------------------------------------
 | Boot the User's Session
