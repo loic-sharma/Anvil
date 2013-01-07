@@ -4,24 +4,11 @@ class UsersController extends Controller {
 
 	public function __construct()
 	{
-		// To do: add global filters for these:
-		$this->beforeFilter(function()
-		{
-			if( ! Sentry::check())
-			{
-				return Redirect::to('users/login');
-			}
-		}, array(
+		$this->beforeFilter('logged_in', array(
 			'only' => array('getProfile'),
 		));
 
-		$this->beforeFilter(function()
-		{
-			if(Sentry::check())
-			{
-				return Redirect::to('users/profile');
-			}
-		}, array(
+		$this->beforeFilter('logged_out', array(
 			'only' => array('getLogin', 'postLogin')
 		));
 	}
