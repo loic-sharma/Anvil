@@ -19,6 +19,7 @@ class PageController extends Controller {
 
 		$this->page->addBreadcrumb($page->title);
 
+		$this->page->layout  = 'layouts.'.$page->layout;
 		$this->page->content = $page->content;
 	}
 }
