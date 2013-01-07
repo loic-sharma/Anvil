@@ -2,6 +2,11 @@
 
 class UsersController extends Controller {
 
+	/**
+	 * Show the login form.
+	 *
+	 * @return void
+	 */
 	public function getLogin()
 	{
 		$this->page->addBreadcrumb('Login');
@@ -9,6 +14,11 @@ class UsersController extends Controller {
 		$this->page->setContent('users::login');
 	}
 
+	/**
+	 * Log the user in.
+	 *
+	 * @return RedirectResponse
+	 */
 	public function postLogin()
 	{
 		$form = Validator::make(Input::all(), array(
@@ -59,5 +69,17 @@ class UsersController extends Controller {
 		Input::flash();
 
 		return Redirect::to('users/login')->withErrors($form->messages());
+	}
+
+	/**
+	 * Log the user out.
+	 *
+	 * @return RedirectResponse
+	 */
+	public function getLogout()
+	{
+		Sentry::logout();
+
+		return Redirect::to('users/login');
 	}
 }
