@@ -20,7 +20,7 @@ return array(
 	'Illuminate\Foundation\Providers\PublisherServiceProvider',
 	'Illuminate\Redis\RedisServiceProvider',
 	'Illuminate\Database\SeedServiceProvider',
-	'Illuminate\Session\SessionServiceProvider',
+//	'Illuminate\Session\SessionServiceProvider',
 	'Illuminate\Translation\TranslationServiceProvider',
 	'Illuminate\Validation\ValidationServiceProvider',
 	'Illuminate\View\ViewServiceProvider',
@@ -29,6 +29,7 @@ return array(
 //	'Cms\Providers\ExceptionServiceProvider',
 	'Cms\Providers\ViewServiceProvider',
 	'Cms\Providers\ModuleServiceProvider',
+	'Cms\Providers\SessionServiceProvider',
 	'Cms\Providers\SettingsServiceProvider',
 
 	'Cartalyst\Sentry\SentryServiceProvider',

@@ -193,13 +193,27 @@ $services = new ProviderRepository(new Filesystem);
 
 $services->load($cms, $config['providers']);
 
+
+/*
+|--------------------------------------------------------------------------
+| Boot the User's Session
+|--------------------------------------------------------------------------
+|
+| By default, Laravel boots the session in the route's before filter.
+| However, we want the plugin's and modules to have access to the session
+| data so we will start the session in advance. 
+|
+*/
+
+$cms['session']->start($cms['cookie']);
+
 /*
 |--------------------------------------------------------------------------
 | Register Plugins
 |--------------------------------------------------------------------------
 |
-| Plugins are classes that are directly injected into templates. Load the
-| default plugins nows.
+| Plugins are classes that are directly injected into view. Load the
+| core plugins nows.
 |
 */
 
