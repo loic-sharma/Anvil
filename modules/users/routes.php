@@ -4,7 +4,9 @@ class UsersController extends Controller {
 
 	public function getLogin()
 	{
-		$this->page->content = View::make('users::login');
+		$this->page->addBreadcrumb('Login');
+
+		$this->page->setContent('users::login');
 	}
 
 	public function postLogin()
@@ -16,25 +18,46 @@ class UsersController extends Controller {
 
 		if($form->passes())
 		{
-			$user = array(
-				'username' => Input::get('email'),
+			$credentials = array(
+				'email'    => Input::get('email'),
 				'password' => Input::get('password'),
 			);
 
-			if(Auth::attempt($user))
+			try
 			{
-				die('success');
-			//	return Redirect::to('users/profile');
+				if(Sentry::authenticate($credentials))
+				{
+					return Redirect::to('users/profile');
+				}
+
+				else
+				{
+					$form->addError('email', 'Failed authentication.');
+				}
 			}
 
-			else
+			catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
 			{
-				$form->getMessages()->add('email', 'Invalid username and password combination.');
+				$form->addError('email', 'Invalid username and password combination');
+			}
+
+			// These should never happen with the validation.
+			catch (Cartalyst\Sentry\Users\LoginRequiredException $e) {}
+			catch (Cartalyst\Sentry\Users\UserNotActivatedException $e) {}
+
+			catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e)
+			{
+				$form->addError('email', 'User suspended.');
+			}
+
+			catch (Cartalyst\Sentry\Throttling\UserBannedException $e)
+			{
+				$form->addError('email', 'User banned.');
 			}
 		}
 
 		Input::flash();
 
-		return Redirect::to('users/login')->withErrors($form->getMessages());
+		return Redirect::to('users/login')->withErrors($form->messages());
 	}
 }

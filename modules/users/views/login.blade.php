@@ -3,7 +3,6 @@
 
 {{ Form::open('users/login', 'POST', array('id' => 'login')) }}
 
-{{ var_dump($errors->all()) }}
 <ul>
 	<li>
 		{{ Form::label('email', 'E-mail') }}
