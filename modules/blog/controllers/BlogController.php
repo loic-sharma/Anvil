@@ -4,6 +4,11 @@ use Blog\Post;
 
 class BlogController extends Controller {
 
+	/**
+	 * Display all of the blog posts.
+	 *
+	 * @return void
+	 */
 	public function getIndex()
 	{
 		$posts = Post::all();
@@ -13,6 +18,12 @@ class BlogController extends Controller {
 		$this->page->setContent('blog::posts', compact('posts'));
 	}
 
+	/**
+	 * Display a single blog post.
+	 *
+	 * @param  int   $id
+	 * @return void
+	 */
 	public function getPost($id)
 	{
 		$post = Post::find($id);
