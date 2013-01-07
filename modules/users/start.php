@@ -9,7 +9,7 @@ class UserPlugin extends Plugin {
 
 	public function loggedIn()
 	{
-		return true;
+		return Sentry::check();
 	}
 
 	public function has_cp_permissions()
