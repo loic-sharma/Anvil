@@ -1,21 +1,8 @@
 <?php
 
-
-use Menu\Factory as MenuFactory;
-use Menu\FilterRepository as MenuFilter;
-use Menu\Renderer as MenuRenderer;
-
 class NavigationPlugin extends Plugin {
 
-	public $factory;
-	public $renderer;
 	public $menus = array();
-
-	public function __construct()
-	{
-		// todo, service providers...
-		$this->factory  = new MenuFactory(new MenuFilter, new MenuRenderer);
-	}
 
 	public function links($group)
 	{
@@ -24,7 +11,7 @@ class NavigationPlugin extends Plugin {
 
 	protected function getMenu($group)
 	{
-		$menu = $this->factory->get($group);
+		$menu = Menu::get($group);
 
 		if( ! in_array($group, $this->menus))
 		{

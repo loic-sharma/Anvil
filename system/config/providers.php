@@ -31,6 +31,7 @@ return array(
 	'Cms\Providers\ModuleServiceProvider',
 	'Cms\Providers\SessionServiceProvider',
 	'Cms\Providers\SettingsServiceProvider',
+	'Cms\Providers\MenuServiceProvider',
 
 	'Cartalyst\Sentry\SentryServiceProvider',
 

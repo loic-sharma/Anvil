@@ -1,10 +1,6 @@
 <?php
 
-$app = app();
-
-$navigation = $app->plugins->navigation;
-
-$navigation->factory->filter(function($item) use ($app)
+Menu::filter(function($item)
 {
 	if($item['a.href'] == Url::current())
 	{
@@ -15,7 +11,7 @@ $navigation->factory->filter(function($item) use ($app)
 	{
 		if($item['a.href'] == Url::base())
 		{
-			if($app->isHome() == true)
+			if(app()->isHome() == true)
 			{
 				$item['li.class'] = 'active';
 			}
