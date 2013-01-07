@@ -1,19 +1,12 @@
 <?php
 
-use Blog\PostService;
+use Blog\Post;
 
 class BlogController extends Controller {
 
-	protected $postService;
-
-	public function __construct(PostService $postService)
-	{
-		$this->postService = $postService;
-	}
-
 	public function getIndex()
 	{
-		$posts = $this->postService->getPosts();
+		$posts = Post::all();
 
 		$this->page->addBreadcrumb('Blog');
 
@@ -22,7 +15,7 @@ class BlogController extends Controller {
 
 	public function getPost($id)
 	{
-		$post = $this->postService->getPostById($id);
+		$post = Post::find($id);
 
 		if(is_null($post))
 		{
