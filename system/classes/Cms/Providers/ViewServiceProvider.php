@@ -9,6 +9,32 @@ use Cms\Plugins\PluginManager;
 class ViewServiceProvider extends IlluminateViewServiceProvider {
 
 	/**
+	 * Register the service provider.
+	 *
+	 * @return void
+	 */
+	public function register()
+	{
+		$this->registerTemplatePath();
+
+		parent::register();
+	}
+
+	/**
+	 * Register the template path.
+	 *
+	 * @return void
+	 */
+	public function registerTemplatePath()
+	{
+		$this->app['template.path'] = $this->app->share(function($app)
+		{
+			$currentTemplate = $app['settings']->get('template');
+
+			return $app['path.base'].'/templates/'.$currentTemplate;
+		});
+	}
+	/**
 	 * Register the view finder implementation.
 	 *
 	 * @return void
@@ -19,8 +45,8 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 		{
 			$finder = new FileViewFinder($app['files']);
 
-			$finder->setTemplatePath($app['path.base'].'/templates/'.$app['settings']->get('template').'/views');
-			$finder->setModulePath($this->app['module.path']);
+			$finder->setTemplatePath($app['template.path']);
+			$finder->setModulePath($app['module.path']);
 
 			return $finder;
 		});
