@@ -1,10 +1,8 @@
 <?php
 
-class User extends Eloquent {
+use Cartalyst\Sentry\Users\Eloquent\User;
 
-	public $table = 'users';
-
-	public $hidden = array('password');
+class User extends SentryUser {
 
 	public function displayName()
 	{
@@ -25,10 +23,5 @@ class User extends Eloquent {
 		$url = $this->gravatarUrl($size);
 
 		return '<img src="'.$url.'" alt="Gravatar" class="gravatar" />';
-	}
-
-	public function setPassword($password)
-	{
-		return Hash::make($password);
 	}
 }
