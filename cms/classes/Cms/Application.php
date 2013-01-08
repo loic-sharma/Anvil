@@ -70,55 +70,51 @@ class Application extends IlluminateApplication {
 	public function setDefaultRoute()
 	{
 		$uri = $this['request']->path();
-
-		// If the request is empty, then we're home! Use the
-		// default controller.
+		$defaultController = $this['settings']->get('defaultController');
+		
 		if($uri == '/')
 		{
-			$this->controller = $this['settings']->get('defaultController');
+			$this->controller = $defaultController;
 			$this->isHome = true;
 		}
 
 		else
 		{
-			try
+			$segments = explode('/', $uri);
+
+			// Handle admin routing separately.
+			if($segments[0] == 'admin')
 			{
-				// To do: add security, and refactor this.
-				$this['view.finder']->find('public.'.$uri);
+				$uri = implode('/', array_slice($segments, 0, 2));
 
-				$me = $this;
-
-				return $this['router']->any($uri, function() use ($me, $uri)
+				// The second segment will be directly routed to a module.
+				if(count($segments) >= 2)
 				{
-					return $me['view']->make('public.'.$uri);
-				});
-			}
-
-			// The view doesn't exist if an invalid argument exception was thrown.
-			catch(\InvalidArgumentException $e)
-			{
-				// If we have multiple segments, remove everything except
-				// the first segment. We'll use the first segment for the
-				// controller.
-				$firstSlash = strpos($uri, '/');
-
-				if($firstSlash !== false)
-				{
-					$uri = substr($uri, 0, $firstSlash);
+					$this->controller = ucfirst($segments[1]).'AdminController';
 				}
 
-				$this->controller = ucfirst($uri).'Controller';
+				else
+				{
+					// By default, use the admin controller.
+					$this->controller = 'AdminController';
+				}
+			}
 
-				// Let's check if we're home. To do: currently this will be false if
-				// there is more than segment (even if we are home).
-				if($this->controller == $this['settings']->get('defaultController') && $firstSlash == false)
+			// Handle normal non-admin routes.
+			else
+			{
+				$uri = $segments[0];
+
+				$this->controller = ucfirst($segments[0]).'Controller';
+
+				// Let's do one last check to see if this is the home page.
+				if($this->controller == $defaultController && ! isset($segments[1]))
 				{
 					$this->isHome = true;
 				}
 			}
 		}
 
-		// Register the default route.
 		$this['router']->controller($this->controller, $uri);
 	}
 }
