@@ -69,8 +69,8 @@ class Application extends IlluminateApplication {
 	 */
 	public function setDefaultRoute()
 	{
-		$uri = $this['request']->path();
-		$defaultController = $this['settings']->get('defaultController');
+		$uri = $this->make('request')->path();
+		$defaultController = $this->make('settings')->get('defaultController');
 		
 		if($uri == '/')
 		{
@@ -85,18 +85,28 @@ class Application extends IlluminateApplication {
 			// Handle admin routing separately.
 			if($segments[0] == 'admin')
 			{
-				$uri = implode('/', array_slice($segments, 0, 2));
-
-				// The second segment will be directly routed to a module.
-				if(count($segments) >= 2)
+				// Let's make sure the user is actually an
+				// admin. Otherwise, redirect to the home page.
+				if(Sentry::check())
 				{
-					$this->controller = ucfirst($segments[1]).'AdminController';
+					$uri = implode('/', array_slice($segments, 0, 2));
+
+					// The second segment will be directly routed to a module.
+					if(count($segments) >= 2)
+					{
+						$this->controller = ucfirst($segments[1]).'AdminController';
+					}
+
+					else
+					{
+						// By default, use the admin controller.
+						$this->controller = 'AdminController';
+					}
 				}
 
 				else
 				{
-					// By default, use the admin controller.
-					$this->controller = 'AdminController';
+					
 				}
 			}
 
@@ -115,6 +125,6 @@ class Application extends IlluminateApplication {
 			}
 		}
 
-		$this['router']->controller($this->controller, $uri);
+		$this->make('router')->controller($this->controller, $uri);
 	}
 }
