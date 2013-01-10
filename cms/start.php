@@ -107,7 +107,7 @@ Facade::setFacadeApplication($cms);
 
 $cms->bindIf('config.loader', function($cms)
 {
-	return new FileLoader(new Filesystem, $cms['path'].'/config');
+	return new FileLoader(new Filesystem, $cms['path.base'].'/config');
 
 }, true);
 

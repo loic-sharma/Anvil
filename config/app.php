@@ -45,7 +45,7 @@ return array(
 
 	'fallback_locale' => 'en',
 
-	'locale_path' => __DIR__.'/../lang',
+	'locale_path' => __DIR__.'/../cms/lang',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -71,7 +71,7 @@ return array(
 	|
 	*/
 
-	'manifest' => __DIR__.'/../storage/meta',
+	'manifest' => __DIR__.'/../cms/storage/meta',
 
 	/*
 	|--------------------------------------------------------------------------
