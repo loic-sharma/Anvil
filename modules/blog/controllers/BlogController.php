@@ -38,4 +38,16 @@ class BlogController extends Controller {
 
 		$this->page->setContent('blog::post', compact('post'));
 	}
+
+	/**
+	 * Submit a new blog comment.
+	 *
+	 * @param  int  $id
+	 * @return void
+	 */
+	public function postPost($id)
+	{
+		$form = Validator::make(Input::all(), array(
+		));
+	}
 }
