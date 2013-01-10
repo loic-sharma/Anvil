@@ -189,7 +189,7 @@ Request::enableHttpMethodParameterOverride();
 |
 */
 
-$services = new ProviderRepository(new Filesystem);
+$services = new ProviderRepository(new Filesystem, $config['app']['manifest']);
 
 $services->load($cms, $config['providers']);
 
