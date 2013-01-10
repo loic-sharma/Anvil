@@ -2,9 +2,14 @@
 
 namespace Cms;
 
+use Cms\Settings\Repository as Settings;
+
+use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
+use Illuminate\Foundation\Application as IlluminateApplication;
+
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use Illuminate\Foundation\Application as IlluminateApplication;
 
 class Application extends IlluminateApplication {
 
@@ -67,10 +72,10 @@ class Application extends IlluminateApplication {
 	 *
 	 * @return void
 	 */
-	public function setDefaultRoute()
+	public function setDefaultRoute(Request $request, Settings $settings, Router $router)
 	{
-		$uri = $this->make('request')->path();
-		$defaultController = $this->make('settings')->get('defaultController');
+		$uri = $request->path();
+		$defaultController = $settings->get('defaultController');
 		
 		if($uri == '/')
 		{
@@ -125,6 +130,6 @@ class Application extends IlluminateApplication {
 			}
 		}
 
-		$this->make('router')->controller($this->controller, $uri);
+		$router->controller($this->controller, $uri);
 	}
 }
