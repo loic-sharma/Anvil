@@ -70,6 +70,9 @@ class Application extends IlluminateApplication {
 	/**
 	 * Create a route to the detected current controller.
 	 *
+	 * @param  Illuminate\Http\Request    $request
+	 * @param  Cms\Settings\Repository    $settings
+	 * @param  Illuminate\Routing\Router  $router
 	 * @return void
 	 */
 	public function setDefaultRoute(Request $request, Settings $settings, Router $router)
