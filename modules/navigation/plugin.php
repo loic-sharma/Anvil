@@ -2,13 +2,30 @@
 
 class NavigationPlugin extends Plugin {
 
+	/**
+	 * All of the previously retrieve menus.
+	 *
+	 * @var array
+	 */
 	public $menus = array();
 
+	/**
+	 * Display a menu.
+	 *
+	 * @param  string  $group
+	 * @return string
+	 */
 	public function links($group)
 	{
 		return $this->getMenu($group)->render();
 	}
 
+	/**
+	 * Retrieve a menu.
+	 *
+	 * @param  string  $group
+	 * @return Menu\Items\Collection
+	 */
 	protected function getMenu($group)
 	{
 		$menu = Menu::get($group);
@@ -17,61 +34,37 @@ class NavigationPlugin extends Plugin {
 		{
 			$this->menus[] = $group;
 
-			$group = Navigation\Group::with('links')
-						->where('slug', '=', $group)
-						->first();
-
-			if( ! is_null($group))
+			$group = Navigation\Group::with(array('links' => function($query)
 			{
-				$userPower = 0;
+				// Take all links that have no required power.
+				$query->whereNull('required_power');
 
+				// If the user is logged in, take all links whose required power
+				// is less than the user's power.
 				if(Auth::check())
 				{
 					$userPower = Auth::user()->group->power;
+
+					$query->orWhere('required_power', '<=', $userPower);
+					$query->where('required_power', '!=', 0);
 				}
 
+				// If the user is logged out, take all links that require
+				// a logged out user.
+				else
+				{
+					$query->orWhere('required_power', 0);
+				}
+
+			}))->where('slug', '=', $group)->first();
+
+			if( ! is_null($group))
+			{
 				foreach($group->links as $link)
 				{
-					// Check if the link has a required power.
-					if( ! is_null($link->required_power))
-					{
-						// If the link's required power is 0, then the user must be logged out.
-						if($link->required_power == 0)
-						{
-							if($userPower != 0)
-							{
-								continue;
-							}
-						}
+					$parent = $this->getParent($menu, $link);
 
-						// Otherwise, the user's power must just be greater than the required
-						// power.
-						elseif($link->required_power >= $userPower)
-						{
-							continue;
-						}
-					}
-
-					$parentItem = $menu;
-
-					if( ! is_null($link->parent_id))
-					{
-						// Fetch the item whose id matches the current item's parent id.
-						$parentItem = $menu->get(function($item) use ($link)
-						{
-							return ($item['id'] == $link->parent_id);
-						});
-
-						// If there are no items that match the current item's parent id,
-						// simply add it to the menu.
-						if(is_null($parentItem))
-						{
-							// @todo: throw exception?
-							$parentItem = $menu;
-						}
-					}
-
-					$parentItem->add($link->title, function($item) use ($link)
+					$parent->add($link->title, function($item) use ($link)
 					{
 						$item['id']  = $link->id;
 						$item['url'] = $link->url;
@@ -81,5 +74,36 @@ class NavigationPlugin extends Plugin {
 		}
 
 		return $menu;
+	}
+
+	/**
+	 * Get a link's parent menu.
+	 *
+	 * @param  Menu\Items\Collection
+	 * @param  Menu\Items\Item
+	 * @return Menu\Items\Item
+	 */
+	protected function getParent($menu, $link)
+	{
+		$parent = $menu;
+
+		if( ! is_null($link->parent_id))
+		{
+			// Fetch the item whose id matches the current item's parent id.
+			$parent = $menu->get(function($item) use ($link)
+			{
+				return ($item['id'] == $link->parent_id);
+			});
+
+			// If there are no items that match the current item's parent id,
+			// simply add it to the menu.
+			if(is_null($parent))
+			{
+				// To do: throw an exception?
+				$parent = $menu;
+			}
+		}
+
+		return $parent;
 	}
 }
