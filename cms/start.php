@@ -216,8 +216,8 @@ $cms['session']->start($cms['cookie']);
 |
 */
 
-Plugins::register('url', new Cms\Plugins\UrlPlugin);
-Plugins::register('session', new Cms\Plugins\SessionPlugin);
+$cms['plugins']->register('url', new Cms\Plugins\UrlPlugin);
+$cms['plugins']->register('session', new Cms\Plugins\SessionPlugin);
 
 /*
 |--------------------------------------------------------------------------
