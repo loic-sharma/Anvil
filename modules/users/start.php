@@ -1,7 +1,7 @@
 <?php
 
 Autoloader::map(array(
-	'UserController' => __DIR__.'/controllers/UserController.php',
+	'UsersController' => __DIR__.'/controllers/UsersController.php',
 
 	'User' => __DIR__.'/models/User.php',
 
