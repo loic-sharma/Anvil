@@ -27,14 +27,11 @@ return array(
 
 	'Cms\Providers\AuthServiceProvider',
 	'Cms\Providers\RoutingServiceProvider',
-//	'Cms\Providers\ExceptionServiceProvider',
 	'Cms\Providers\ViewServiceProvider',
 	'Cms\Providers\ModuleServiceProvider',
 	'Cms\Providers\SessionServiceProvider',
 	'Cms\Providers\SettingsServiceProvider',
 	'Cms\Providers\MenuServiceProvider',
-
-//	'Cartalyst\Sentry\SentryServiceProvider',
 
 	'Meido\HTML\Providers\HTMLServiceProvider',
 	'Meido\Form\Providers\FormServiceProvider',
