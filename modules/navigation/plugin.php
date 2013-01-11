@@ -23,32 +23,42 @@ class NavigationPlugin extends Plugin {
 
 			if( ! is_null($group))
 			{
+				$userPower = 0;
+
+				if(Auth::check())
+				{
+					$userPower = Auth::user()->group->power;
+				}
+
 				foreach($group->links as $link)
 				{
-					$parentItem = $menu;
-
-					if( ! is_null($link->parent_id))
+					if(is_null($link->required_power) || $link->required_power <= $userPower)
 					{
-						// Fetch the item whose id matches the current item's parent id.
-						$parentItem = $menu->get(function($item) use ($link)
-						{
-							return ($item['id'] == $link->parent_id);
-						});
+						$parentItem = $menu;
 
-						// If there are no items that match the current item's parent id,
-						// simply add it to the menu.
-						if(is_null($parentItem))
+						if( ! is_null($link->parent_id))
 						{
-							// @todo: throw exception?
-							$parentItem = $menu;
+							// Fetch the item whose id matches the current item's parent id.
+							$parentItem = $menu->get(function($item) use ($link)
+							{
+								return ($item['id'] == $link->parent_id);
+							});
+
+							// If there are no items that match the current item's parent id,
+							// simply add it to the menu.
+							if(is_null($parentItem))
+							{
+								// @todo: throw exception?
+								$parentItem = $menu;
+							}
 						}
-					}
 
-					$parentItem->add($link->title, function($item) use ($link)
-					{
-						$item['id']  = $link->id;
-						$item['url'] = $link->url;
- 					});
+						$parentItem->add($link->title, function($item) use ($link)
+						{
+							$item['id']  = $link->id;
+							$item['url'] = $link->url;
+	 					});
+					}
 				}
 			}
 		}
