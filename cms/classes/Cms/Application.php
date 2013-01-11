@@ -2,13 +2,13 @@
 
 namespace Cms;
 
+
+use Cms\Auth\AuthManager as Auth;
 use Cms\Settings\Repository as Settings;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Application as IlluminateApplication;
-
-use Cartalyst\Sentry\Sentry as Auth;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

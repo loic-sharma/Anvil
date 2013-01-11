@@ -3,7 +3,6 @@
     "require": {
         "illuminate/foundation": "1.2.*",
         "dandoescode/uhoh": "0.0.*",
-        "cartalyst/sentry": "2.0.*",
         "meido/form": "1.0.*",
         "loic-sharma/menu": ">1.0.0"
     },

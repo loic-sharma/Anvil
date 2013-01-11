@@ -1,5 +1,5 @@
 <?php
-
+/*
 use Cartalyst\Sentry\Users\Eloquent\User as SentryUser;
 
 class User extends SentryUser {
@@ -25,3 +25,4 @@ class User extends SentryUser {
 		return '<img src="'.$url.'" alt="Gravatar" class="gravatar" />';
 	}
 }
+*/

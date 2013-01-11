@@ -2,7 +2,7 @@
 
 Route::addFilter('logged_in', function()
 {
-	if( ! Sentry::check())
+	if( ! Auth::check())
 	{
 		return Redirect::to('users/login');
 	}
@@ -10,7 +10,7 @@ Route::addFilter('logged_in', function()
 
 Route::addFilter('logged_out', function()
 {
-	if(Sentry::check())
+	if(Auth::check())
 	{
 		return Redirect::to('users/profile');
 	}

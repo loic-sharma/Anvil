@@ -63,7 +63,7 @@ class UsersController extends Controller {
 
 			try
 			{
-				if(Sentry::authenticate($credentials))
+				if(Auth::attempt($credentials))
 				{
 					return Redirect::to('users/profile');
 				}
@@ -106,7 +106,7 @@ class UsersController extends Controller {
 	 */
 	public function getLogout()
 	{
-		Sentry::logout();
+		Auth::logout();
 
 		return Redirect::to('users/login');
 	}

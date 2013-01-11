@@ -127,7 +127,8 @@ return array(
 		'Modules'    => 'Cms\Facades\Modules',
 		'Plugins'    => 'Cms\Facades\Plugins',
 		'Settings'   => 'Cms\Facades\Settings',
+		'User'       => 'Cms\Auth\Models\User',
 
-		'Sentry'     => 'Cartalyst\Sentry\Facades\Sentry',
+//		'Sentry'     => 'Cms\Facades\Sentry',
 	),
 );

@@ -96,7 +96,7 @@ class UsersController extends Controller {
 	 */
 	public function getLogout()
 	{
-		Sentry::logout();
+		Auth::logout();
 
 		return Redirect::to('users/login');
 	}
