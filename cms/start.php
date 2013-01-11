@@ -230,9 +230,9 @@ Plugins::register('session', new Cms\Plugins\SessionPlugin);
 |
 */
 
-foreach(Modules::get() as $module => $details)
+foreach($cms['modules']->get() as $module => $details)
 {
-	Modules::boot($module);
+	$cms['modules']->boot($module);
 }
 
 /*
