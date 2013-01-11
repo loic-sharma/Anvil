@@ -4,7 +4,7 @@ namespace Cms\Routing\Controllers;
 
 use App;
 use Settings;
-use Illuminate\Container;
+use Illuminate\Container\Container;
 use Illuminate\Routing\Router;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controllers\Controller as IlluminateController;

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Config\FileLoader;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Foundation\ProviderRepository;

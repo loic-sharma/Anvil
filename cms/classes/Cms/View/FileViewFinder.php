@@ -3,7 +3,7 @@
 namespace Cms\View;
 
 use App;
-use Illuminate\Filesystem;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\FileViewFinder as IlluminateViewFinder;
 use Cms\Settings\Repository as Settings;
 
