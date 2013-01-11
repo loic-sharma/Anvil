@@ -32,33 +32,50 @@ class NavigationPlugin extends Plugin {
 
 				foreach($group->links as $link)
 				{
-					if(is_null($link->required_power) || $link->required_power <= $userPower)
+					// Check if the link has a required power.
+					if( ! is_null($link->required_power))
 					{
-						$parentItem = $menu;
-
-						if( ! is_null($link->parent_id))
+						// If the link's required power is 0, then the user must be logged out.
+						if($link->required_power == 0)
 						{
-							// Fetch the item whose id matches the current item's parent id.
-							$parentItem = $menu->get(function($item) use ($link)
+							if($userPower != 0)
 							{
-								return ($item['id'] == $link->parent_id);
-							});
-
-							// If there are no items that match the current item's parent id,
-							// simply add it to the menu.
-							if(is_null($parentItem))
-							{
-								// @todo: throw exception?
-								$parentItem = $menu;
+								continue;
 							}
 						}
 
-						$parentItem->add($link->title, function($item) use ($link)
+						// Otherwise, the user's power must just be greater than the required
+						// power.
+						elseif($link->required_power >= $userPower)
 						{
-							$item['id']  = $link->id;
-							$item['url'] = $link->url;
-	 					});
+							continue;
+						}
 					}
+
+					$parentItem = $menu;
+
+					if( ! is_null($link->parent_id))
+					{
+						// Fetch the item whose id matches the current item's parent id.
+						$parentItem = $menu->get(function($item) use ($link)
+						{
+							return ($item['id'] == $link->parent_id);
+						});
+
+						// If there are no items that match the current item's parent id,
+						// simply add it to the menu.
+						if(is_null($parentItem))
+						{
+							// @todo: throw exception?
+							$parentItem = $menu;
+						}
+					}
+
+					$parentItem->add($link->title, function($item) use ($link)
+					{
+						$item['id']  = $link->id;
+						$item['url'] = $link->url;
+ 					});
 				}
 			}
 		}
