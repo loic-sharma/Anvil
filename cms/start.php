@@ -247,4 +247,4 @@ foreach(Modules::get() as $module => $details)
 |
 */
 
-$cms->setDefaultRoute($cms['request'], $cms['settings'], $cms['router']);
+$cms->setDefaultRoute($cms['request'], $cms['settings'], $cms['sentry'], $cms['router']);

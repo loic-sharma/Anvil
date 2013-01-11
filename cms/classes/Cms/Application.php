@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Application as IlluminateApplication;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Cartalyst\Sentry\Sentry as Auth;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Application extends IlluminateApplication {
 
@@ -75,7 +76,7 @@ class Application extends IlluminateApplication {
 	 * @param  Illuminate\Routing\Router  $router
 	 * @return void
 	 */
-	public function setDefaultRoute(Request $request, Settings $settings, Router $router)
+	public function setDefaultRoute(Request $request, Settings $settings, Auth $auth, Router $router)
 	{
 		$uri = $request->path();
 		$defaultController = $settings->get('defaultController');
@@ -95,7 +96,7 @@ class Application extends IlluminateApplication {
 			{
 				// Let's make sure the user is actually an
 				// admin. Otherwise, redirect to the home page.
-				if(Sentry::check())
+				if($auth->check())
 				{
 					$uri = implode('/', array_slice($segments, 0, 2));
 
@@ -114,7 +115,7 @@ class Application extends IlluminateApplication {
 
 				else
 				{
-					
+					throw new NotFoundHttpException;
 				}
 			}
 
