@@ -16,8 +16,18 @@ class TemplatePlugin extends Plugin {
 	 */
 	public function __construct()
 	{
-		$this->templateUrl  = URL::base().'templates/';
-		$this->templateUrl .= Settings::get('template');
+		$this->setTemplate(Settings::get('template'));
+	}
+
+	/**
+	 * Set the plugin's template.
+	 *
+	 * @param  string  $template
+	 * @return void
+	 */
+	public function setTemplate($template)
+	{
+		$this->templateUrl = URL::base().'templates/'.$template;
 	}
 
 	/**
