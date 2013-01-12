@@ -17,7 +17,7 @@ use Illuminate\Foundation\ProviderRepository;
 |
 */
 
-$autoloader = include 'vendor/autoload.php';
+$autoloader = include __DIR__.'/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
