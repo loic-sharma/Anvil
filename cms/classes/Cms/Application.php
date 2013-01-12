@@ -22,11 +22,25 @@ class Application extends IlluminateApplication {
 	protected $controller;
 
 	/**
+	 * The current request's URI that corresponds to a route.
+	 *
+	 * @var string
+	 */
+	protected $uri;
+
+	/**
 	 * Is the current request the home page?
 	 *
 	 * @var bool
 	 */
 	protected $isHome = false;
+
+	/**
+	 * Is the current request for the admin panel?
+	 *
+	 * @var bool
+	 */
+	protected $isAdminPanel = false;
 
 	/**
 	 * Run the application.
@@ -69,6 +83,16 @@ class Application extends IlluminateApplication {
 	}
 
 	/**
+	 * Determine if the current request is for the Admin panel.
+	 *
+	 * @return bool
+	 */
+	public function isAdmin()
+	{
+		return $this->isAdmin;
+	}
+
+	/**
 	 * Create a route to the detected current controller.
 	 *
 	 * @param  Illuminate\Http\Request    $request
@@ -94,6 +118,8 @@ class Application extends IlluminateApplication {
 			// Handle admin routing separately.
 			if($segments[0] == 'admin')
 			{
+				$this->isAdminPanel = true;
+
 				// Let's make sure the user is actually an
 				// admin. Otherwise, redirect to the home page.
 				if($auth->check())
@@ -109,8 +135,11 @@ class Application extends IlluminateApplication {
 					else
 					{
 						// By default, use the admin controller.
-						$this->controller = 'AdminController';
+						$this->controller = 'Cms\Controllers\AdminController';
 					}
+
+					$this['view.finder']->setTemplatePath($this['path.base'].'/templates/admin');
+					$this['plugins']->template->setTemplate('admin');
 				}
 
 				else
