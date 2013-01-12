@@ -51,42 +51,27 @@ class UsersController extends Controller {
 				'password' => Input::get('password'),
 			);
 
-			try
+			if(Auth::attempt($credentials))
 			{
-				if(Sentry::authenticate($credentials))
-				{
-					return Redirect::to('users/profile');
-				}
-
-				else
-				{
-					$form->addError('email', 'Failed authentication.');
-				}
+				return Redirect::to('users/profile');
 			}
 
-			catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+			else
 			{
-				$form->addError('email', 'Invalid username and password combination');
-			}
+				$errors = new MessageBag;
 
-			// These should never happen with the validation.
-			catch (Cartalyst\Sentry\Users\LoginRequiredException $e) {}
-			catch (Cartalyst\Sentry\Users\UserNotActivatedException $e) {}
-
-			catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e)
-			{
-				$form->addError('email', 'User suspended.');
+				$errors->add('login', 'Invalid credentials.');
 			}
+		}
 
-			catch (Cartalyst\Sentry\Throttling\UserBannedException $e)
-			{
-				$form->addError('email', 'User banned.');
-			}
+		else
+		{
+			$errors = $form->messages();
 		}
 
 		Input::flash();
 
-		return Redirect::to('users/login')->withErrors($form->messages());
+		return Redirect::to('users/login')->withErrors($errors);
 	}
 
 	/**
