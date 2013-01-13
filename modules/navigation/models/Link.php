@@ -21,6 +21,11 @@ class Link extends Eloquent {
 			return Url::to(substr($url, 6));
 		}
 
+		elseif(strpos($url, '{adminUrl}/') === 0)
+		{
+			return Url::to('admin/'.substr($url, 11));
+		}
+
 		else
 		{
 			return $url;
