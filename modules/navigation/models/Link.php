@@ -7,8 +7,19 @@ use Eloquent;
 
 class Link extends Eloquent {
 
+	/**
+	 * The model's table.
+	 *
+	 * @var string
+	 */
 	public $table = 'navigation_links';
 
+	/**
+	 * Get the link's URL.
+	 *
+	 * @param  string  $url
+	 * @return string
+	 */
 	public function getUrl($url)
 	{
 		if($url == '/' || $url == '{url}/')
@@ -32,6 +43,11 @@ class Link extends Eloquent {
 		}
 	}
 
+	/**
+	 * Get the link's navigation group.
+	 *
+	 * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function group()
 	{
 		return $this->belongsTo('Navigation\Group');
