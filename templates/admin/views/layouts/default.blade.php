@@ -17,9 +17,7 @@
 			
 					<div class="navbar-content">
 						<ul class="nav">
-							<li class="active"><a href="#">Home</a></li>
-							<li><a href="#">About</a></li>
-							<li><a href="{{ $url->to('users/logout') }}">Logout</a></li>
+							{{ $navigation->links('admin') }}
 						</ul>
 					</div>
 				</div>
