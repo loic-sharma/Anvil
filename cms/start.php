@@ -242,8 +242,8 @@ foreach($cms['modules']->get() as $module => $details)
 |
 | Each action corresponds, by default, to a module and a controller.
 | Although a module may have already registered a route that matches the
-| request, this will be serve as a back up route. Note that any routes
-| registered after the default route is set will be ignored.
+| request, the CMS will still register a default route. Note that any
+| routes registered after the default route will be ignored.
 |
 */
 
