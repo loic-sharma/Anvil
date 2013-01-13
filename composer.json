@@ -1,5 +1,6 @@
 {
-    "minimum-stability": "dev",
+    "name": "loic-sharma/cms",
+    "description": "A simple CMS built ontop of Laravel 4",
     "config": {
       "vendor-dir": "cms/vendor/"
     },
@@ -12,5 +13,6 @@
         "classmap": [
             "cms/classes"
         ]
-    }
+    },
+    "minimum-stability": "dev"
 }
