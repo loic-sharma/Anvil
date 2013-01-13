@@ -6,8 +6,8 @@
 			
 			<div class="meta muted">
 				<div class="date">
-					Posted on
-					<span>{{ $post->date() }}</span>
+					Posted
+					<span>{{ $post->date() }}.</span>
 				</div>
 
 				<div class="author">

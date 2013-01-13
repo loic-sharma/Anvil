@@ -4,6 +4,7 @@ namespace Blog;
 
 use URL;
 use Eloquent;
+use ExpressiveDate;
 
 class Post extends Eloquent {
 
@@ -48,7 +49,7 @@ class Post extends Eloquent {
 	 */ 
 	public function date()
 	{
-		return $this->attributes['created_at'];
+		return ExpressiveDate::make($this->attributes['created_at'])->getRelativeDate();
 	}
 
 	/**

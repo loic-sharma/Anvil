@@ -3,6 +3,7 @@
 namespace Blog;
 
 use Eloquent;
+use ExpressiveDate;
 
 class Comment extends Eloquent {
 
@@ -32,7 +33,7 @@ class Comment extends Eloquent {
 
 	public function date()
 	{
-		return $this->attributes['created_at'];
+		return ExpressiveDate::make($this->attributes['created_at'])->getRelativeDate();
 	}
 
 	/**
