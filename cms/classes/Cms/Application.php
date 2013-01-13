@@ -156,7 +156,7 @@ class Application extends IlluminateApplication {
 				$this->controller = ucfirst($segments[0]).'Controller';
 
 				// Let's do one last check to see if this is the home page.
-				if($this->controller == $defaultController && ! isset($segments[1]))
+				if($this->controller == $defaultController and ! isset($segments[1]))
 				{
 					$this->isHome = true;
 				}

@@ -67,7 +67,7 @@ class Facade {
 
 		// If only an array was passed to the method, then we will
 		// assume that the array contains attributes.
-		if(count($args) == 1 && is_array($args[0]))
+		if(count($args) == 1 and is_array($args[0]))
 		{
 			$this->plugin->setAttributes($args[0]);
 

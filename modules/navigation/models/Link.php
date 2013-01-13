@@ -22,7 +22,7 @@ class Link extends Eloquent {
 	 */
 	public function getUrl($url)
 	{
-		if($url == '/' || $url == '{url}/')
+		if($url == '/' or $url == '{url}/')
 		{
 			return Url::base();
 		}
