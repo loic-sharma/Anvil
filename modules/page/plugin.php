@@ -10,13 +10,6 @@ class PagePlugin {
 	public $layout = 'layouts.default';
 
 	/**
-	 * The current template.
-	 *
-	 * @var string
-	 */
-	public $template;
-
-	/**
 	 * The page's title.
 	 *
 	 * @var string
@@ -44,7 +37,6 @@ class PagePlugin {
 	 */
 	public function __construct()
 	{
-		$this->template = Settings::get('template');
 		$this->title = Settings::get('title');
 
 		$this->addBreadcrumb('Home', '/');
