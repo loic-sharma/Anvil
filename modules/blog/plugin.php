@@ -1,6 +1,6 @@
 <?php
 
-use Blog\PostService;
+use Blog\Post;
 
 class BlogPlugin extends Plugin {
 
@@ -17,8 +17,8 @@ class BlogPlugin extends Plugin {
 	{
 		return Post::with('author')
 					->orderBy($orderBy, $orderDir)
-					->skip($offset)
-					->take($limit)
+					->skip($skip)
+					->take($take)
 					->get();
 	}
 }
