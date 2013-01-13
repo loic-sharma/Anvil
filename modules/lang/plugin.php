@@ -2,24 +2,25 @@
 
 class LangPlugin extends Plugin {
 
-	public function code()
+	/**
+	 * Get a language line.
+	 *
+	 * @param  string  $line
+	 * @param  array   $payload
+	 * @return mixed
+	 */
+	public function get($line, array $payload = array())
 	{
-		
-	}
-
-	public function get(array $payload = array())
-	{
-		$line = $this->attributes('line', null);
-		$default = $this->attributes('default', null);
-
-		if( ! is_null($line))
+		if( ! is_null($line = $this->attribute('line', null)))
 		{
-			unset($payload['line']);
-			unset($payload['default']);
-
-			Lang::get($line, $payload);
+			return Lang::get($line, $payload);
 		}
 
-		return $default;
+		// If no line was given, just return the default
+		// if one was inputted, or just null.
+		else
+		{
+			return $this->attribute('default', null);
+		}
 	}
 }
