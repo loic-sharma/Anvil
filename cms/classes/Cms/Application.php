@@ -97,7 +97,7 @@ class Application extends IlluminateApplication {
 	 * @param  Illuminate\Routing\Router  $router
 	 * @return void
 	 */
-	public function setDefaultRoute(Request $request, Settings $settings, Auth $auth, Router $router)
+	public function start(Request $request, Settings $settings, Auth $auth, Router $router)
 	{
 		$uri = $request->path();
 		$defaultController = $settings->get('defaultController');

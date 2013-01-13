@@ -237,7 +237,7 @@ foreach($cms['modules']->get() as $module => $details)
 
 /*
 |--------------------------------------------------------------------------
-| Register the Default Route
+| Start the CMS
 |--------------------------------------------------------------------------
 |
 | Each action corresponds, by default, to a module and a controller.
@@ -247,4 +247,4 @@ foreach($cms['modules']->get() as $module => $details)
 |
 */
 
-$cms->setDefaultRoute($cms['request'], $cms['settings'], $cms['auth'], $cms['router']);
+$cms->start($cms['request'], $cms['settings'], $cms['auth'], $cms['router']);
