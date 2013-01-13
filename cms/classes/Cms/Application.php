@@ -40,56 +40,6 @@ class Application extends IlluminateApplication {
 	protected $isAdminPanel = false;
 
 	/**
-	 * Run the application.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		// Try to run the application.
-		try
-		{
-			parent::run();
-		}
-
-		// Because of the default routing system, it is possible that the CMS
-		// created a route to a nonexistent controller. If that happens, let's
-		// throw a more accurate exception.
-		catch(\ReflectionException $e)
-		{
-			if($e->getMessage() == "Class {$this->controller} does not exist")
-			{
-				throw new NotFoundHttpException;
-			}
-
-			else
-			{
-				throw new \ReflectionException($e->getMessage());
-			}
-		}
-	}
-
-	/**
-	 * Determine if the current request is the home page.
-	 *
-	 * @return bool
-	 */
-	public function isHome()
-	{
-		return $this->isHome;
-	}
-
-	/**
-	 * Determine if the current request is for the Admin panel.
-	 *
-	 * @return bool
-	 */
-	public function isAdmin()
-	{
-		return $this->isAdminPanel;
-	}
-
-	/**
 	 * Create a route to the detected current controller.
 	 *
 	 * @param  Illuminate\Http\Request    $request
@@ -164,5 +114,55 @@ class Application extends IlluminateApplication {
 		}
 
 		$router->controller($this->controller, $uri);
+	}
+
+	/**
+	 * Run the application.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		// Try to run the application.
+		try
+		{
+			parent::run();
+		}
+
+		// Because of the default routing system, it is possible that the CMS
+		// created a route to a nonexistent controller. If that happens, let's
+		// throw a more accurate exception.
+		catch(\ReflectionException $e)
+		{
+			if($e->getMessage() == "Class {$this->controller} does not exist")
+			{
+				throw new NotFoundHttpException;
+			}
+
+			else
+			{
+				throw new \ReflectionException($e->getMessage());
+			}
+		}
+	}
+
+	/**
+	 * Determine if the current request is the home page.
+	 *
+	 * @return bool
+	 */
+	public function isHome()
+	{
+		return $this->isHome;
+	}
+
+	/**
+	 * Determine if the current request is for the Admin panel.
+	 *
+	 * @return bool
+	 */
+	public function isAdmin()
+	{
+		return $this->isAdminPanel;
 	}
 }
