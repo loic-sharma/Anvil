@@ -2,6 +2,11 @@
 
 class UsersController extends Controller {
 
+	/**
+	 * Register the route's filters.
+	 *
+	 * @return void
+	 */
 	public function __construct()
 	{
 		$this->beforeFilter('logged_in', array(
@@ -13,6 +18,11 @@ class UsersController extends Controller {
 		));
 	}
 
+	/**
+	 * Get the user's profile.
+	 *
+	 * @return void
+	 */
 	public function getProfile()
 	{
 		$this->page->addBreadcrumb('Profile');
