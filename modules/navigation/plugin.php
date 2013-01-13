@@ -69,6 +69,14 @@ class NavigationPlugin extends Plugin {
 						$item['id']  = $link->id;
 						$item['url'] = $link->url;
  					});
+
+					// Let's also add a dropdown.
+					$parent['li.class'] = 'dropdown';
+					$parent['a.role'] = 'button';
+					$parent['a.class'] = 'dropdown-toggle';
+ 					$parent['a.data-toggle'] = 'dropdown';
+ 					$parent['ul.class'] = 'dropdown-menu';
+ 					$parent['ul.role'] = 'menu';
 				}
 			}
 		}
