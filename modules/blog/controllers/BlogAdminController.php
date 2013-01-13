@@ -2,6 +2,11 @@
 
 class BlogAdminController extends Controller {
 
+	/**
+	 * Display the admin home page.
+	 *
+	 * @return void
+	 */
 	public function getIndex()
 	{
 		$this->page->addBreadcrumb('Blog');
