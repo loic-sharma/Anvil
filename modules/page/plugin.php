@@ -38,8 +38,6 @@ class PagePlugin {
 	public function __construct()
 	{
 		$this->title = Settings::get('title');
-
-		$this->addBreadcrumb('Home', '/');
 	}
 
 	/**
@@ -136,9 +134,28 @@ class PagePlugin {
 	 *
 	 * @return array
 	 */
-	public function breadcrumbs()
+	public function breadcrumbs($addBaseBreadcrumb = true)
 	{
-		return $this->breadcrumbs;
+		$breadcrumbs = $this->breadcrumbs;
+
+		if($addBaseBreadcrumb)
+		{
+			if(App::isAdmin())
+			{
+				$name = 'Admin';
+				$link = Url::to('admin');
+			}
+
+			else
+			{
+				$name = 'Home';
+				$link = Url::base();
+			}
+
+			array_unshift($breadcrumbs, (object) compact('name', 'link'));
+		}
+
+		return $breadcrumbs;
 	}
 
 	/**
