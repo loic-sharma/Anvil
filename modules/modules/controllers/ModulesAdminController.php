@@ -9,7 +9,7 @@ class ModulesAdminController extends Controller {
 	 */
 	public function getIndex()
 	{
-		$this->page->addBreadcrumb('Module');
+		$this->page->addBreadcrumb('Modules');
 		$this->page->setContent('modules::admin.home');
 	}
 }
