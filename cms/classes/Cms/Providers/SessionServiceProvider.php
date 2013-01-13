@@ -1,6 +1,4 @@
-<?php
-
-namespace Cms\Providers;
+<?php namespace Cms\Providers;
 
 use Illuminate\Session\SessionServiceProvider as IlluminateSessionServiceProvider;
 

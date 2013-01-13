@@ -1,6 +1,4 @@
-<?php
-
-namespace Cms\Settings;
+<?php namespace Cms\Settings;
 
 use Illuminate\Database\DatabaseManager;
 

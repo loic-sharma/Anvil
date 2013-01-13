@@ -1,6 +1,4 @@
-<?php
-
-namespace Blog;
+<?php namespace Blog;
 
 use URL;
 use Eloquent;

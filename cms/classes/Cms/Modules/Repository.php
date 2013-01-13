@@ -1,6 +1,4 @@
-<?php
-
-namespace Cms\Modules;
+<?php namespace Cms\Modules;
 
 use ArrayAccess;
 use Composer\Autoload\ClassLoader;

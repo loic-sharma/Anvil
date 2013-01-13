@@ -1,6 +1,4 @@
-<?php
-
-namespace Cms\Auth\Models;
+<?php namespace Cms\Auth\Models;
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Database\Eloquent\Model;

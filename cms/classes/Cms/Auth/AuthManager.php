@@ -1,6 +1,4 @@
-<?php
-
-namespace Cms\Auth;
+<?php namespace Cms\Auth;
 
 use Illuminate\Auth\AuthManager as IlluminateAuthManager;
 

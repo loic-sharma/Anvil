@@ -1,6 +1,4 @@
-<?php
-
-namespace Cms\Plugins;
+<?php namespace Cms\Plugins;
 
 class SessionPlugin extends Plugin {
 

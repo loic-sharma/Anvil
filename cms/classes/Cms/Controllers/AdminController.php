@@ -1,6 +1,4 @@
-<?php
-
-namespace Cms\Controllers;
+<?php namespace Cms\Controllers;
 
 use Cms\Routing\Controllers\Controller;
 

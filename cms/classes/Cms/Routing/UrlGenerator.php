@@ -1,6 +1,4 @@
-<?php
-
-namespace Cms\Routing;
+<?php namespace Cms\Routing;
 
 use Illuminate\Routing\UrlGenerator as IlluminateUrlGenerator;
 

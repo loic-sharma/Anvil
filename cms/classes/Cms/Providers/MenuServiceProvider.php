@@ -1,6 +1,4 @@
-<?php
-
-namespace Cms\Providers;
+<?php namespace Cms\Providers;
 
 use Menu\Factory as MenuFactory;
 use Menu\FilterRepository as MenuFilter;

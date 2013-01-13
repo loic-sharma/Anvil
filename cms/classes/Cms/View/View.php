@@ -1,6 +1,4 @@
-<?php
-
-namespace Cms\View;
+<?php namespace Cms\View;
 
 use Illuminate\View\View as IlluminateView;
 

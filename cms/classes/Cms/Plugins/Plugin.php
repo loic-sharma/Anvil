@@ -1,6 +1,4 @@
-<?php
-
-namespace Cms\Plugins;
+<?php namespace Cms\Plugins;
 
 abstract class Plugin {
 

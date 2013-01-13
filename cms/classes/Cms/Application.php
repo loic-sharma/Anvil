@@ -1,7 +1,4 @@
-<?php
-
-namespace Cms;
-
+<?php namespace Cms;
 
 use Cms\Auth\AuthManager as Auth;
 use Cms\Settings\Repository as Settings;

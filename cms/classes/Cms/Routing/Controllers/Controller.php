@@ -1,6 +1,4 @@
-<?php
-
-namespace Cms\Routing\Controllers;
+<?php namespace Cms\Routing\Controllers;
 
 use App;
 use Settings;
