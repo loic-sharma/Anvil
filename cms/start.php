@@ -199,7 +199,7 @@ $services->load($cms, $config['providers']);
 |--------------------------------------------------------------------------
 |
 | By default, Laravel boots the session in the route's before filter.
-| However, we want the plugin's and modules to have access to the session
+| However, we want the plugins and modules to have access to the session
 | data so we will start the session in advance. 
 |
 */
