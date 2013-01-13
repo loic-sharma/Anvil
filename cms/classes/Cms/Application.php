@@ -138,7 +138,10 @@ class Application extends IlluminateApplication {
 						$this->controller = 'Cms\Controllers\AdminController';
 					}
 
-					$this['view.finder']->setTemplatePath($this['path.base'].'/templates/admin');
+					// Register the admin template.
+					$this['template.path'] = $this['path.base'].'/templates/admin';
+
+					$this['view.finder']->setTemplatePath($this['template.path']);
 					$this['plugins']->template->setTemplate('admin');
 				}
 
