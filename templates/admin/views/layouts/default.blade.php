@@ -43,6 +43,8 @@
 					<span><b>Error:</b> {{ $error }}</span>
 				</div>
 			@endforeach
+
+			{{ $page->content() }}
 		</div>
 	</body>
 </html>
