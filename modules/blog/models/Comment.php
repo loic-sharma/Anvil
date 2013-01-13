@@ -30,6 +30,11 @@ class Comment extends Eloquent {
 		return $this->attributes['created_at'];
 	}
 
+	public function date()
+	{
+		return $this->attributes['created_at'];
+	}
+
 	/**
 	 * Get the comment's content.
 	 *

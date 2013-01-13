@@ -1,6 +1,7 @@
 <?php
 
 use Blog\Post;
+use Blog\Comment;
 
 class BlogPlugin extends Plugin {
 
@@ -20,5 +21,15 @@ class BlogPlugin extends Plugin {
 					->skip($skip)
 					->take($take)
 					->get();
+	}
+
+	/**
+	 * Retrieve the blog comments.
+	 *
+	 * @return array
+	 */
+	public function comments()
+	{
+		return Comment::with(array('post', 'author'))->get();
 	}
 }

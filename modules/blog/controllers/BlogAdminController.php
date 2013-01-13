@@ -12,4 +12,17 @@ class BlogAdminController extends Controller {
 		$this->page->addBreadcrumb('Blog');
 		$this->page->setContent('blog::admin.home');
 	}
+
+	/**
+	 * Display the comments.
+	 *
+	 * @return void
+	 */
+	public function getComments()
+	{
+		$this->page->addBreadcrumb('Blog', 'admin/blog');
+		$this->page->addBreadcrumb('Comments');
+
+		$this->page->setContent('blog::admin.comments');
+	}
 }
