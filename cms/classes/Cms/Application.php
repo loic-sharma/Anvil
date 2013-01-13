@@ -89,7 +89,7 @@ class Application extends IlluminateApplication {
 	 */
 	public function isAdmin()
 	{
-		return $this->isAdmin;
+		return $this->isAdminPanel;
 	}
 
 	/**
