@@ -46,5 +46,8 @@
 
 			{{ $page->content() }}
 		</div>
+
+		{{ $template->js('jquery.js') }}
+		{{ $template->js('bootstrap-dropdown.js') }}
 	</body>
 </html>
