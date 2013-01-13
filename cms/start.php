@@ -71,13 +71,11 @@ $cms->bind('autoloader', function() use($autoloader)
 |
 */
 
-$cms->detectEnvironment(array(
+$env = $cms->detectEnvironment(array(
 
-	'local' => array('localhost', '*.dev', '*.app'),
+	'local' => array('your-machine-name'),
 
 ));
-
-$env = 'development';
 
 /*
 |--------------------------------------------------------------------------
@@ -221,7 +219,7 @@ $cms['plugins']->register('session', new Cms\Plugins\SessionPlugin);
 
 /*
 |--------------------------------------------------------------------------
-| Load the CMS Modules
+| Load The CMS Modules
 |--------------------------------------------------------------------------
 |
 | Allow the modules to bootstrap their code. This happens before the CMS
@@ -237,7 +235,7 @@ foreach($cms['modules']->get() as $module => $details)
 
 /*
 |--------------------------------------------------------------------------
-| Start the CMS
+| Start The CMS
 |--------------------------------------------------------------------------
 |
 | Each action corresponds, by default, to a module and a controller.
