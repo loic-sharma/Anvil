@@ -3,7 +3,6 @@
 return array(
 
 	'Illuminate\Foundation\Providers\ArtisanServiceProvider',
-//	'Illuminate\Auth\AuthServiceProvider',
 	'Illuminate\Cache\CacheServiceProvider',
 	'Illuminate\Foundation\Providers\ComposerServiceProvider',
 	'Illuminate\Routing\ControllerServiceProvider',
@@ -20,7 +19,6 @@ return array(
 	'Illuminate\Foundation\Providers\PublisherServiceProvider',
 	'Illuminate\Redis\RedisServiceProvider',
 	'Illuminate\Database\SeedServiceProvider',
-//	'Illuminate\Session\SessionServiceProvider',
 	'Illuminate\Translation\TranslationServiceProvider',
 	'Illuminate\Validation\ValidationServiceProvider',
 	'Illuminate\View\ViewServiceProvider',
@@ -33,6 +31,6 @@ return array(
 	'Cms\Providers\SettingsServiceProvider',
 	'Cms\Providers\MenuServiceProvider',
 
-	'Meido\HTML\Providers\HTMLServiceProvider',
+	'Meido\HTML\HTMLServiceProvider',
 	'Meido\Form\Providers\FormServiceProvider',
 );
