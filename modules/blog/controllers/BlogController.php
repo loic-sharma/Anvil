@@ -1,6 +1,7 @@
 <?php
 
 use Blog\Post;
+use Blog\Comment;
 
 class BlogController extends Controller {
 
@@ -48,6 +49,42 @@ class BlogController extends Controller {
 	public function postPost($id)
 	{
 		$form = Validator::make(Input::all(), array(
+			'comment' => 'required'
 		));
+
+		if($form->passes())
+		{
+			$post = Post::find($id);
+
+			if( ! is_null($post))
+			{
+				$comment = new Comment;
+
+				$comment->author_id = Auth::user()->id;
+				$comment->post_id   = $id;
+				$comment->content   = Input::get('comment');
+
+				$comment->save();
+
+				return Redirect::to('blog/post/'.$id);
+			}
+
+			else
+			{
+				$errors = new MessageBag;
+
+				$errors->add('post', 'Post does not exist.');
+			}
+		}
+
+		else
+		{
+			$errors = $form->messages();
+		}
+
+		Input::flash();
+
+		return Redirect::back()->withErrors($errors);
+
 	}
 }
