@@ -26,11 +26,16 @@
 
 		<div class="container">
 			<ul class="breadcrumb">
-				<li>
-					<a href="#">Admin</a>
-					<span class="divider">/</span>
-				</li>
-				<li class="active">Home</li>
+				@foreach($page->breadcrumbs() as $breadcrumb)
+					@if($breadcrumb->link)
+						<li>
+							<a href="{{ $breadcrumb->link }} ">{{ $breadcrumb->name }}</a>
+							<span class="dividider">/</span>
+						</li>
+					@else
+						<li class="active">{{ $breadcrumb->name }}</span>
+					@endif
+				@endforeach
 			</ul>
 
 			@foreach($errors->all(':message') as $error)
