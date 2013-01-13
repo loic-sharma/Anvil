@@ -2,6 +2,11 @@
 
 class ModulesPlugin {
 
+	/**
+	 * Get all of the module's information.
+	 *
+	 * @return array
+	 */
 	public function get()
 	{
 		$modules = array();
