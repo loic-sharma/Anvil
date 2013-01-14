@@ -5,6 +5,8 @@ class UsersAdminController extends Controller {
 	public function getIndex()
 	{
 		$this->page->addBreadcrumb('Users');
+
+		$this->page->setContent('users::admin.home');
 	}
 
 	public function getGroups()

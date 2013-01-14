@@ -1,5 +1,6 @@
 <?php namespace Cms\Auth\Models;
 
+use ExpressiveDate;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Database\Eloquent\Model;
 
@@ -113,6 +114,18 @@ class User extends Model implements UserInterface {
 	public function displayName()
 	{
 		return $this->attributes['first_name'].' '.$this->attributes['last_name'];
+	}
+
+	/**
+	 * Get the date the user registered.
+	 *
+	 * @return string
+	 */
+	public function date()
+	{
+		$date = new ExpressiveDate($this->attributes['created_at']);
+
+		return $date->getRelativeDate();
 	}
 
 	/**
