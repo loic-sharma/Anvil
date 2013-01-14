@@ -9,7 +9,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($users->groups() as $group)
+		@foreach($groups->get() as $group)
 			<tr>
 				<td>{{ $group->name }}</td>
 				<td>{{ $group->power }}</td>

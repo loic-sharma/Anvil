@@ -12,6 +12,13 @@ class Group extends Model {
 	public $table = 'groups';
 
 	/**
+	 * Wether the table timestamps.
+	 *
+	 * @var bool
+	 */
+	public $timestamps = false;
+
+	/**
 	 * Get all of the group's users.
 	 *
 	 */

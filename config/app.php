@@ -130,7 +130,6 @@ return array(
 		'Settings'   => 'Cms\Facades\Settings',
 		'User'       => 'Cms\Auth\Models\User',
 		'Group'      => 'Cms\Auth\Models\Group',
-
-//		'Sentry'     => 'Cms\Facades\Sentry',
+		'Permission' => 'Cms\Auth\Models\Permission',
 	),
 );
