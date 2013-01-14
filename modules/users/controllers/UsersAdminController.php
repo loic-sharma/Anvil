@@ -13,6 +13,8 @@ class UsersAdminController extends Controller {
 	{
 		$this->page->addBreadcrumb('Users', 'admin/users');
 		$this->page->addBreadcrumb('Groups');
+
+		$this->page->setContent('users::admin.groups');
 	}
 
 	public function getPermissions()

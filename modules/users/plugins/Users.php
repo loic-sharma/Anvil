@@ -11,4 +11,14 @@ class UsersPlugin {
 	{
 		return User::all();
 	}
+
+	/**
+	 * Get all of the user groups.
+	 *
+	 * @return array
+	 */
+	public function groups()
+	{
+		return Group::all();
+	}
 }

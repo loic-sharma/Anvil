@@ -129,6 +129,7 @@ return array(
 		'Plugins'    => 'Cms\Facades\Plugins',
 		'Settings'   => 'Cms\Facades\Settings',
 		'User'       => 'Cms\Auth\Models\User',
+		'Group'      => 'Cms\Auth\Models\Group',
 
 //		'Sentry'     => 'Cms\Facades\Sentry',
 	),
