@@ -10,5 +10,9 @@
 
 	{{ Form::textarea('content', Input::old('content', $post->content), array('class' => 'span12')) }}
 
+	<label class="checkbox">
+		{{ Form::checkbox('comments_enabled', 1, $post->comments_enabled) }} Enable Comments.
+	</label>
+
 	{{ Form::submit('Save', array('class' => 'btn')) }}
 {{ Form::close() }}
