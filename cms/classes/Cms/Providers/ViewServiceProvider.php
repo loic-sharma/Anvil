@@ -15,9 +15,20 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 	 */
 	public function register()
 	{
+		$this->registerTemplatesPath();
 		$this->registerTemplatePath();
 
 		parent::register();
+	}
+
+	/**
+	 * Register the path to the templates.
+	 *
+	 * @return void
+	 */
+	public function registerTemplatesPath()
+	{
+		$this->app['templates.path'] = $this->app['path.base'].'/templates';
 	}
 
 	/**
@@ -31,7 +42,7 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 		{
 			$currentTemplate = $app['settings']->get('template');
 
-			return $app['path.base'].'/templates/'.$currentTemplate;
+			return $app['templates.path'].'/'.$currentTemplate;
 		});
 	}
 	/**
