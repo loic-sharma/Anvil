@@ -24,3 +24,5 @@
 		@endforeach
 	</tbody>
 </table>
+
+<a href="{{ $url->to('admin/blog/post/create') }}" class="btn">Create a new Post</a>

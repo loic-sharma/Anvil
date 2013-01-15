@@ -1,4 +1,8 @@
-<h3>Edit Post</h3>
+@if($editing)
+	<h3>Edit Post</h3>
+@else
+	<h3>Create a Post</h3>
+@endif
 
 {{ Form::open() }}
 
