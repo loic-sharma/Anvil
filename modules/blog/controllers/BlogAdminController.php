@@ -141,4 +141,31 @@ class BlogAdminController extends Controller {
 
 		return Redirect::back()->withErrors($errors);
 	}
+
+	/**
+	 * Delete a post.
+	 *
+	 * @param  int  $id
+	 * @return Illuminate\Http\RedirectResponse
+	 */
+	public function getDeletePost($id)
+	{
+		$post = Post::find($id);
+
+		if( ! is_null($post))
+		{
+			$post->delete();
+
+			return Redirect::to('admin/blog');
+		}
+
+		else
+		{
+			$errors = new MessageBag;
+
+			$errors->add('post', 'Post does not exist.');
+		}
+
+		return Redirect::back()->withErrors($errors);
+	}
 }
