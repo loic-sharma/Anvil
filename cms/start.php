@@ -9,7 +9,7 @@ use Illuminate\Foundation\ProviderRepository;
 
 /*
 |--------------------------------------------------------------------------
-| Load the Autoloader
+| Load The Autoloader
 |--------------------------------------------------------------------------
 |
 | The CMS relies heavily on Composer components. We'll need the autoloader
