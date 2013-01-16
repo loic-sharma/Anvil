@@ -9,7 +9,7 @@
 			</tr>
 			<tr>
 				<td>Template</td>
-				<td>{{ Form::select('templates', $templates->get()) }}</td>
+				<td>{{ Form::select('template', $templates, Settings::get('template')) }}</td>
 			</tr>
 		</tbody>
 	</table>

@@ -6,7 +6,9 @@ class SettingsAdminController extends Controller {
 	{
 		$this->page->addBreadcrumb('Settings');
 
-		$this->page->setcontent('settings::admin.home');
+		$templates = App::make('plugins')->templates->getAssociative();
+
+		$this->page->setcontent('settings::admin.home', compact('templates'));
 	}
 
 	public function postIndex()
@@ -18,6 +20,9 @@ class SettingsAdminController extends Controller {
 
 		if($form->passes())
 		{
+			Settings::set('title', Input::get('title'));
+			Settings::set('template', Input::get('template'));
+
 			return Redirect::to('admin/settings');
 		}
 
