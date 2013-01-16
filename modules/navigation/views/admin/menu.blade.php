@@ -24,4 +24,4 @@
 	</tbody>
 </table>
 
-<a href="{{ $url->to('admin/navigation/'.$menu.'/create') }}" class="btn">Add Link</a>
+<a href="{{ $url->to('admin/navigation/menu/'.$menu.'/add-link') }}" class="btn">Add Link</a>

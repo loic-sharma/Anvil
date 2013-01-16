@@ -14,6 +14,13 @@ class Group extends Eloquent {
 	public $table = 'navigation_groups';
 
 	/**
+	 * Wether the table timestamps.
+	 *
+	 * @var bool
+	 */
+	public $timestamps = false;
+
+	/**
 	 * Get the navigation group's links.
 	 *
 	 * @return Illuminate\Database\Eloquent\Relations\HasMany

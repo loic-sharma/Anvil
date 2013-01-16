@@ -15,6 +15,13 @@ class Link extends Eloquent {
 	public $table = 'navigation_links';
 
 	/**
+	 * Wether the table timestamps.
+	 *
+	 * @var bool
+	 */
+	public $timestamps = false;
+
+	/**
 	 * Get the link's URL.
 	 *
 	 * @param  string  $url
