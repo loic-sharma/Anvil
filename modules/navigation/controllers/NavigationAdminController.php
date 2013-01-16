@@ -12,12 +12,48 @@ class NavigationAdminController extends Controller {
 		$this->page->setContent('navigation::admin.home');
 	}
 
+	public function getAddMenu()
+	{
+		$editing = false;
+		$menu = new Group;
+
+		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
+		$this->page->addBreadcrumb('Add Menu');
+
+		$this->page->setContent('navigation::admin.menu', compact('editing', 'menu'));
+	}
+
+	public function postAddMenu()
+	{
+		$form = Validator::make(Input::all(), array(
+			'title' => 'required',
+			'slug' => 'required',
+		));
+
+		if($form->passes())
+		{
+			$menu = new Group;
+
+			$menu->title = Input::get('title');
+			$menu->slug = Input::get('slug');
+
+			$menu->save();
+
+			return Redirect::to('admin/navigation/menu/'.$menu->slug);
+		}
+
+		else
+		{
+			return Redirect::back()->withErrors($form);
+		}
+	}
+
 	public function getMenu($menu)
 	{
 		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
 		$this->page->addBreadcrumb('Menu');
 
-		$this->page->setContent('navigation::admin.menu', compact('menu'));
+		$this->page->setContent('navigation::admin.links', compact('menu'));
 	}
 
 	public function getCreateLink($menu)
@@ -56,7 +92,7 @@ class NavigationAdminController extends Controller {
 
 				$link->save();
 
-				return Redirect::to('admin/navigation/menu/'.$slug.'/edit');
+				return Redirect::to('admin/navigation/menu/'.$slug);
 			}
 
 			else
@@ -86,7 +122,7 @@ class NavigationAdminController extends Controller {
 		}
 
 		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
-		$this->page->addBreadcrumb('Menu', 'admin/navigation/menu/'.$link->group->slug.'/edit');
+		$this->page->addBreadcrumb('Menu', 'admin/navigation/menu/'.$link->group->slug);
 		$this->page->addBreadcrumb('Edit Link');
 
 		$this->page->setContent('navigation::admin.link', compact('editing', 'link'));
@@ -112,7 +148,7 @@ class NavigationAdminController extends Controller {
 
 				$link->save();
 
-				return Redirect::to('admin/navigation/link/'.$id.'/edit');
+				return Redirect::to('admin/navigation/link/'.$id);
 			}
 
 			else
@@ -138,6 +174,6 @@ class NavigationAdminController extends Controller {
 			$link->delete();
 		}
 
-		return Redirect::to('admin/navigation/menu/'.$menu.'/edit');
+		return Redirect::to('admin/navigation/menu/'.$menu);
 	}
 }
