@@ -128,4 +128,16 @@ class NavigationAdminController extends Controller {
 			$errors = $form->messages();
 		}
 	}
+
+	public function getDeleteLink($menu, $id)
+	{
+		$link = Link::find($id);
+
+		if( ! is_null($link))
+		{
+			$link->delete();
+		}
+
+		return Redirect::to('admin/navigation/menu/'.$menu.'/edit');
+	}
 }

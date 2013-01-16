@@ -7,3 +7,5 @@ Route::post('admin/navigation/menu/{slug}/add-link', 'NavigationAdminController@
 
 Route::get('admin/navigation/link/{id}/edit', 'NavigationAdminController@getEditLink');
 Route::post('admin/navigation/link/{id}/edit', 'NavigationAdminController@postEditLink');
+
+Route::get('admin/navigation/menu/{slug}/link/{id}/delete', 'NavigationAdminController@getDeleteLink');
