@@ -56,7 +56,7 @@ class NavigationAdminController extends Controller {
 
 				$link->save();
 
-				return Redirect::to('admin/navigation/menu/'.$slug.'/add-link');
+				return Redirect::to('admin/navigation/menu/'.$slug.'/edit');
 			}
 
 			else
