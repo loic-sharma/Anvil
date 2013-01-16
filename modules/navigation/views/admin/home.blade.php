@@ -15,7 +15,7 @@
 				<td>{{ $group->slug }}</td>
 				<td>
 					<a href="{{ $url->to('admin/navigation/menu/'.$group->slug) }}" class="btn btn-warning">Edit</a>
-					<a href="{{ $url->to('admin/navigation/menu/'.$group->slug.'/delete') }}" class="btn btn-danger">Disable</a> 
+					<a href="{{ $url->to('admin/navigation/menu/'.$group->slug.'/delete') }}" class="btn btn-danger">Delete</a> 
 				</td>
 			</tr>
 		@endforeach

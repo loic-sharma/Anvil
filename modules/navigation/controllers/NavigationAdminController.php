@@ -50,10 +50,26 @@ class NavigationAdminController extends Controller {
 
 	public function getMenu($menu)
 	{
+		$links = Group::with('links')
+			->where('slug', $menu)
+			->first()->links;
+
 		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
 		$this->page->addBreadcrumb('Menu');
 
-		$this->page->setContent('navigation::admin.links', compact('menu'));
+		$this->page->setContent('navigation::admin.links', compact('menu', 'links'));
+	}
+
+	public function getDeleteMenu($menu)
+	{
+		$links = Group::where('slug', $menu)->first();
+
+		if(  ! is_null($links))
+		{
+			$links->delete();
+		}
+
+		return Redirect::to('admin/navigation');
 	}
 
 	public function getCreateLink($menu)

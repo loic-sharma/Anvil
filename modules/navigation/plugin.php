@@ -23,18 +23,6 @@ class NavigationPlugin {
 	}
 
 	/**
-	 * Get a menu's links.
-	 *
-	 * @return array
-	 */
-	public function menu($menu)
-	{
-		return Group::with('links')
-			->where('slug', $menu)
-			->first()->links;
-	}
-
-	/**
 	 * Display a menu.
 	 *
 	 * @param  string  $group

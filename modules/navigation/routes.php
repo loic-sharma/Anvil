@@ -5,6 +5,8 @@ Route::post('admin/navigation/menu/add', 'NavigationAdminController@postAddMenu'
 
 Route::get('admin/navigation/menu/{slug}', 'NavigationAdminController@getMenu');
 
+Route::get('admin/navigation/menu/{slug}/delete', 'NavigationAdminController@getDeleteMenu');
+
 Route::get('admin/navigation/menu/{slug}/add-link', 'NavigationAdminController@getCreateLink');
 Route::post('admin/navigation/menu/{slug}/add-link', 'NavigationAdminController@postCreateLink');
 
