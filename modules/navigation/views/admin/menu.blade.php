@@ -16,8 +16,8 @@
 				<td><a href="{{ $link->url }}">{{ $link->url }}</a></td>
 				<td>{{ $link->requiredPower() }}</td>
 				<td>
-					<a href="{{ $url->to('admin/navigation/group/'.$link->id.'/edit') }}" class="btn btn-warning">Edit</a>
-					<a href="{{ $url->to('admin/navigation/group/'.$link->id.'/delete') }}" class="btn btn-danger">Disable</a> 
+					<a href="{{ $url->to('admin/navigation/link/'.$link->id.'/edit') }}" class="btn btn-warning">Edit</a>
+					<a href="{{ $url->to('admin/navigation/link/'.$link->id.'/delete') }}" class="btn btn-danger">Disable</a> 
 				</td>
 			</tr>
 		@endforeach

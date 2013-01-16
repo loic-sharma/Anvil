@@ -74,4 +74,58 @@ class NavigationAdminController extends Controller {
 
 		return Redirect::back()->withErrors($errors);
 	}
+
+	public function getEditLink($id)
+	{
+		$editing = true;
+		$link = Link::find($id);
+
+		if(is_null($link))
+		{
+			return Redirect::back();
+		}
+
+		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
+		$this->page->addBreadcrumb('Menu', 'admin/navigation/menu/'.$link->group->slug.'/edit');
+		$this->page->addBreadcrumb('Edit Link');
+
+		$this->page->setContent('navigation::admin.link', compact('editing', 'link'));
+	}
+
+	public function postEditLink($id)
+	{
+		$form = Validator::make(Input::all(), array(
+			'title' => array('required'),
+			'url' => array('required', 'url'),
+			'required_power' => array('numeric'),
+		));
+
+		if($form->passes())
+		{
+			$link = Link::find($id);
+
+			if( ! is_null($link))
+			{
+				$link->title = Input::get('title');
+				$link->url = Input::get('url');
+				$link->required_power = Input::get('required_power', NULL);
+
+				$link->save();
+
+				return Redirect::to('admin/navigation/link/'.$id.'/edit');
+			}
+
+			else
+			{
+				$errors = new MessageBag;
+
+				$errors->add('error', 'Link does not exist.');
+			}
+		}
+
+		else
+		{
+			$errors = $form->messages();
+		}
+	}
 }
