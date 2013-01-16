@@ -34,7 +34,7 @@
 						</li>
 					@else
 						<li class="active">{{ $breadcrumb->name }}</span>
-					@endif
+		   			@endif
 				@endforeach
 			</ul>
 

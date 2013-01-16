@@ -44,6 +44,26 @@ class Link extends Eloquent {
 	}
 
 	/**
+	 * Get the link's required power.
+	 *
+	 * @return mixed
+	 */
+	public function requiredPower()
+	{
+		$requiredPower = $this->attributes['required_power'];
+
+		if(is_null($requiredPower))
+		{
+			return 'None';
+		}
+
+		else
+		{
+			return $requiredPower;
+		}
+	}
+
+	/**
 	 * Get the link's navigation group.
 	 *
 	 * @return Illuminate\Database\Eloquent\Relations\BelongsTo

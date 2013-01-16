@@ -1,6 +1,9 @@
 <?php
 
-class NavigationPlugin extends Plugin {
+use Navigation\Group;
+use Navigation\Link;
+
+class NavigationPlugin {
 
 	/**
 	 * All of the previously retrieve menus.
@@ -10,6 +13,28 @@ class NavigationPlugin extends Plugin {
 	public $menus = array();
 
 	/**
+	 * Get all of the navigation groups.
+	 *
+	 * @return array
+	 */
+	public function groups()
+	{
+		return Group::all();
+	}
+
+	/**
+	 * Get a menu's links.
+	 *
+	 * @return array
+	 */
+	public function menu($menu)
+	{
+		return Group::with('links')
+			->where('slug', $menu)
+			->first()->links;
+	}
+
+	/**
 	 * Display a menu.
 	 *
 	 * @param  string  $group
@@ -17,7 +42,7 @@ class NavigationPlugin extends Plugin {
 	 */
 	public function links($group)
 	{
-		return $this->getMenu($group)->render();
+		return $this->getMenuLink($group)->render();
 	}
 
 	/**
@@ -26,7 +51,7 @@ class NavigationPlugin extends Plugin {
 	 * @param  string  $group
 	 * @return Menu\Items\Collection
 	 */
-	protected function getMenu($group)
+	protected function getMenuLink($group)
 	{
 		$menu = Menu::get($group);
 
