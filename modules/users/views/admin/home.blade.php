@@ -23,3 +23,5 @@
 		@endforeach
 	</tbody>
 </table>
+
+<a href="{{ $url->to('admin/users/create') }}" class="btn">Create User</a>
