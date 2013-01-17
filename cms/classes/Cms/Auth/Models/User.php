@@ -1,5 +1,6 @@
 <?php namespace Cms\Auth\Models;
 
+use Hash;
 use ExpressiveDate;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Database\Eloquent\Model;
@@ -86,6 +87,16 @@ class User extends Model implements UserInterface {
 		return $_permissions;
 	}
 
+	/**
+	 * Automatically hash the password when it is set.
+	 *
+	 * @param  string  $password
+	 * @return void
+	 */
+	public function setPassword($password)
+	{
+		$this->attributes['password'] = Hash::make($password);
+	}
 
 	/**
 	 * Verify a user has a certain permission.
