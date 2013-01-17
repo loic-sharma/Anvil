@@ -129,6 +129,18 @@ class UsersAdminController extends Controller {
 		return Redirect::to('admin/users/'.$id.'/edit')->withErrors($errors);
 	}
 
+	public function getDeleteUser($id)
+	{
+		$user = User::find($id);
+
+		if( ! is_null($user))
+		{
+			$user->delete();
+		}
+
+		return Redirect::to('admin/users');
+	}
+
 	public function getGroups()
 	{
 		$this->page->addBreadcrumb('Users', 'admin/users');

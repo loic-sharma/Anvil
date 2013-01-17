@@ -5,3 +5,5 @@ Route::post('admin/users/create', 'UsersAdminController@postCreateUser');
 
 Route::get('admin/users/{id}/edit', 'UsersAdminController@getEditUser');
 Route::post('admin/users/{id}/edit', 'UsersAdminController@postEditUser');
+
+Route::get('admin/users/{id}/delete', 'UsersAdminController@getDeleteUser');
