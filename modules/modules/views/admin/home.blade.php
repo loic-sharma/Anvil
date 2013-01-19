@@ -16,12 +16,16 @@
 				<td>{{ $module->description }}</td>
 				<td>{{ $module->version }}</td>
 				<td>
-					@if(isset($module->hasAdminPanel) and $module->hasAdminPanel)
+					@if($module->hasAdminPanel)
 						<a href="{{ $url->to('admin/'.$module->slug) }}" class="btn btn-success">View</a>
 					@endif
 
-					@if( ! isset($module->isCore) or $module->isCore == false)
+					@if($module->isCore == false)
 						<a href="{{ $url->to('admin/modules/'.$module->slug.'/disable') }}" class="btn btn-danger">Disable</a> 
+					@endif
+
+					@if($module->isCore == true and $module->hasAdminPanel == false)
+						No actions.
 					@endif
 				</td>
 			</tr>

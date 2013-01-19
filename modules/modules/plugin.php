@@ -21,7 +21,19 @@ class ModulesPlugin {
 
 				include $path.'/module.php';
 
-				$modules[] = new $moduleName;
+				$module = new $moduleName;
+
+				// These settings are not requrired. If they aren't set,
+				// we'll just use false as default.
+				foreach(array('hasAdminPanel', 'isCore') as $setting)
+				{
+					if( ! isset($module->$setting))
+					{
+						$module->$setting = false;
+					}
+				}
+
+				$modules[] = $module;
 			}
 		}
 
