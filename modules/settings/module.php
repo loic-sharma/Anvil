@@ -28,5 +28,19 @@ class SettingsModule {
 	 *
 	 * @var string
 	 */
-	public $slug = 'blog';
+	public $slug = 'settings';
+
+	/**
+	 * Wether the module has an admin panel.
+	 *
+	 * @var bool
+	 */ 
+	public $hasAdminPanel = true;
+
+	/**
+	 * Wether the module is a core module. 
+	 *
+	 * @var bool
+	 */
+	public $isCore = true;
 }

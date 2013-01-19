@@ -16,8 +16,13 @@
 				<td>{{ $module->description }}</td>
 				<td>{{ $module->version }}</td>
 				<td>
-					<a href="{{ $url->to('admin/'.$module->slug) }}" class="btn btn-success">View</a>
-					<a href="{{ $url->to('admin/modules/'.$module->slug.'/disable') }}" class="btn btn-danger">Disable</a> 
+					@if(isset($module->hasAdminPanel) and $module->hasAdminPanel)
+						<a href="{{ $url->to('admin/'.$module->slug) }}" class="btn btn-success">View</a>
+					@endif
+
+					@if( ! isset($module->isCore) or $module->isCore == false)
+						<a href="{{ $url->to('admin/modules/'.$module->slug.'/disable') }}" class="btn btn-danger">Disable</a> 
+					@endif
 				</td>
 			</tr>
 		@endforeach

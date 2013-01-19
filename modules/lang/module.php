@@ -29,4 +29,18 @@ class LangModule {
 	 * @var string
 	 */
 	public $slug = 'lang';
+
+	/**
+	 * Wether the module has an admin panel.
+	 *
+	 * @var bool
+	 */ 
+	public $hasAdminPanel = false;
+
+	/**
+	 * Wether the module is a core module. 
+	 *
+	 * @var bool
+	 */
+	public $isCore = true;
 }

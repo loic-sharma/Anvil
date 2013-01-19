@@ -29,4 +29,18 @@ class NavigationModule {
 	 * @var string
 	 */
 	public $slug = 'navigation';
+
+	/**
+	 * Wether the module has an admin panel.
+	 *
+	 * @var bool
+	 */ 
+	public $hasAdminPanel = true;
+
+	/**
+	 * Wether the module is a core module. 
+	 *
+	 * @var bool
+	 */
+	public $isCore = true;
 }

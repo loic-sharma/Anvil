@@ -28,5 +28,19 @@ class ModulesModule {
 	 *
 	 * @var string
 	 */
-	public $slug = 'blog';
+	public $slug = 'modules';
+
+	/**
+	 * Wether the module has an admin panel.
+	 *
+	 * @var bool
+	 */ 
+	public $hasAdminPanel = false;
+
+	/**
+	 * Wether the module is a core module. 
+	 *
+	 * @var bool
+	 */
+	public $isCore = true;
 }
