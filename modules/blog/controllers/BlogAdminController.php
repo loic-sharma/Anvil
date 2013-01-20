@@ -55,31 +55,22 @@ class BlogAdminController extends Controller {
 	 */ 
 	public function postCreatePost()
 	{
-		$form = Validator::make(Input::all(), array(
-			'title'   => 'required',
-			'content' => 'required', 
-		));
+		$post = new Post;
 
-		if($form->passes())
+		$post->author_id = Auth::user()->id;
+		$post->title = Input::get('title');
+		$post->content = Input::get('content');
+		$post->comments_enabled = Input::get('comments_enabled', 0);
+
+		if($post->save())
 		{
-			$post = new Post;
-
-			$post->author_id = Auth::user()->id;
-			$post->title = Input::get('title');
-			$post->content = Input::get('content');
-			$post->comments_enabled = Input::get('comments_enabled');
-
-			$post->save();
-
 			return Redirect::to('admin/blog/post/'.$post->id);
 		}
 
 		else
 		{
-			$errors = $form->messages();
+			return Redirect::back()->withInput()->withErrors($post->errors());
 		}
-
-		return Redirect::back()->withErrors($errors);
 	}
 
 	/**
@@ -125,7 +116,7 @@ class BlogAdminController extends Controller {
 			{
 				$post->title   = Input::get('title');
 				$post->content = Input::get('content');
-				$post->comments_enabled = Input::get('comments_enabled');
+				$post->comments_enabled = Input::get('comments_enabled', 0);
 
 				$post->save();
 

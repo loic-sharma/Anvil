@@ -14,6 +14,18 @@ class Post extends Eloquent {
 	public $table = 'posts';
 
 	/**
+	 * The model's validation rules.
+	 *
+	 * @var array
+	 */
+	public $rules = array(
+		'author_id'        => array('required', 'numeric'),
+		'title'            => array('required'),
+		'content'          => array('required'),
+		'comments_enabled' => array('integer'),
+	);
+
+	/**
 	 * Wether the table keeps track of timestamps.
 	 *
 	 * @var bool
