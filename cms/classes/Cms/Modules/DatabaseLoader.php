@@ -37,7 +37,10 @@ class DatabaseLoader implements LoaderInterface {
 	{
 		if(empty($this->modules))
 		{
-			$modules = $this->database->table('modules')->get();
+			$modules = $this->database
+						->table('modules')
+						->orderBy('is_core', 'desc')
+						->get();
 
 			// Organize the modules by their slugs. 
 			foreach($modules as $module)
