@@ -43,38 +43,31 @@ class PageAdminController extends Controller {
 	 */
 	public function postEdit($slug)
 	{
-		$form = Validator::make(Input::all(), array(
-			'title' => 'required',
-			'content' => 'required',
-		));
+		$page = Page::where('slug', $slug)->first();
 
-		if($form->passes())
+		if(is_null($page))
 		{
-			$page = Page::where('slug', $slug)->first();
+			$errors = new MessageBag;
 
-			if(is_null($page))
-			{
-				$errors = new MessageBag;
-
-				$errors->add('page', 'Page does not exist.');
-			}
-
-			else
-			{
-				$page->title = Input::get('title');
-				$page->content = Input::get('content');
-
-				$page->save();
-
-				return Redirect::to('admin/page/'.$slug.'/edit');
-			}
+			$errors->add('page', 'Page does not exist.');
 		}
 
 		else
 		{
-			$errors = $form->messages();
+			$page->title = Input::get('title');
+			$page->content = Input::get('content');
+
+			if($page->save())
+			{
+				return Redirect::to('admin/page/'.$slug.'/edit');
+			}
+
+			else
+			{
+				$errors = $page->errors();
+			}
 		}
 
-		return Redirect::back()->withErrors($errors);
+		return Redirect::back()->withInput()->withErrors($errors);
 	}
 }
