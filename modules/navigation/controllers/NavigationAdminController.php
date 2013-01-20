@@ -25,26 +25,19 @@ class NavigationAdminController extends Controller {
 
 	public function postAddMenu()
 	{
-		$form = Validator::make(Input::all(), array(
-			'title' => 'required',
-			'slug' => 'required',
-		));
+		$menu = new Group;
 
-		if($form->passes())
+		$menu->title = Input::get('title');
+		$menu->slug = Input::get('slug');
+
+		if($menu->save())
 		{
-			$menu = new Group;
-
-			$menu->title = Input::get('title');
-			$menu->slug = Input::get('slug');
-
-			$menu->save();
-
 			return Redirect::to('admin/navigation/menu/'.$menu->slug);
 		}
 
 		else
 		{
-			return Redirect::back()->withErrors($form);
+			return Redirect::back()->withInput()->withErrors($menu->errors());
 		}
 	}
 

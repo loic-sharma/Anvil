@@ -21,6 +21,16 @@ class Group extends Eloquent {
 	public $timestamps = false;
 
 	/**
+	 * The model's validation rules.
+	 *
+	 * @var array
+	 */
+	public $rules = array(
+		'title' => 'required',
+		'slug'  => 'required',
+	);
+
+	/**
 	 * Get the navigation group's links.
 	 *
 	 * @return Illuminate\Database\Eloquent\Relations\HasMany
