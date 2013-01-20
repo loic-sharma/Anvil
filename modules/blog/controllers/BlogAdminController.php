@@ -103,40 +103,34 @@ class BlogAdminController extends Controller {
 	 */
 	public function postPost($id)
 	{
-		$form = Validator::make(Input::all(), array(
-			'title'   => 'required',
-			'content' => 'required',
-		));
+		$post = Post::find($id);
 
-		if($form->passes())
+		if( ! is_null($post))
 		{
-			$post = Post::find($id);
+			$post->title   = Input::get('title');
+			$post->content = Input::get('content');
+			$post->comments_enabled = Input::get('comments_enabled', 0);
 
-			if( ! is_null($post))
+			if($post->save())
 			{
-				$post->title   = Input::get('title');
-				$post->content = Input::get('content');
-				$post->comments_enabled = Input::get('comments_enabled', 0);
-
-				$post->save();
-
 				return Redirect::to('admin/blog/post/'.$id);
 			}
 
 			else
 			{
-				$errors = new MessageBag;
-
-				$errors->add('post', 'Post does not exist.');
+				$errors = $post->errors();
 			}
+
 		}
 
 		else
 		{
-			$errors = $form->messages();
+			$errors = new MessageBag;
+
+			$errors->add('post', 'Post does not exist.');
 		}
 
-		return Redirect::back()->withErrors($errors);
+		return Redirect::back()->withInput()->withErrors($errors);
 	}
 
 	/**
