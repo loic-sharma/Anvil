@@ -12,7 +12,7 @@ class BlogController extends Controller {
 	 */
 	public function getIndex()
 	{
-		$posts = Post::all();
+		$posts = Post::orderBy('created_at', 'desc')->get();
 
 		$this->page->addBreadcrumb('Blog');
 
