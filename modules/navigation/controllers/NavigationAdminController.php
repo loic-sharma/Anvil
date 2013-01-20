@@ -139,39 +139,33 @@ class NavigationAdminController extends Controller {
 
 	public function postEditLink($id)
 	{
-		$form = Validator::make(Input::all(), array(
-			'title' => array('required'),
-			'url' => array('required', 'url'),
-			'required_power' => array('numeric'),
-		));
+		$link = Link::find($id);
 
-		if($form->passes())
+		if( ! is_null($link))
 		{
-			$link = Link::find($id);
+			$link->title = Input::get('title');
+			$link->url = Input::get('url');
+			$link->required_power = Input::get('required_power', NULL);
 
-			if( ! is_null($link))
+			if($link->save())
 			{
-				$link->title = Input::get('title');
-				$link->url = Input::get('url');
-				$link->required_power = Input::get('required_power', NULL);
-
-				$link->save();
-
-				return Redirect::to('admin/navigation/link/'.$id);
+				return Redirect::to('admin/navigation/link/'.$id.'/edit');
 			}
 
 			else
 			{
-				$errors = new MessageBag;
-
-				$errors->add('error', 'Link does not exist.');
+				$errors = $link->errors();
 			}
 		}
 
 		else
 		{
-			$errors = $form->messages();
+			$errors = new MessageBag;
+
+			$errors->add('error', 'Link does not exist.');
 		}
+
+		return Redirect::to('admin/navigation/link/'.$id.'/edit')->withInput()->withErrors($errors);
 	}
 
 	public function getDeleteLink($menu, $id)

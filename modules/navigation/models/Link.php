@@ -22,6 +22,17 @@ class Link extends Eloquent {
 	public $timestamps = false;
 
 	/**
+	 * Get the model's validation rule.
+	 *
+	 * @var array
+	 */
+	public $rules = array(
+		'title'          => array('required'),
+		'url'            => array('required', 'url'),
+		'required_power' => array('numeric'),
+	);
+
+	/**
 	 * Get the link's URL.
 	 *
 	 * @param  string  $url
