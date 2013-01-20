@@ -235,6 +235,22 @@ foreach($cms['modules']->get() as $module => $details)
 
 /*
 |--------------------------------------------------------------------------
+| Register the Profiler
+|--------------------------------------------------------------------------
+|
+| The profiler displays data such as the CMS's execution time and the
+| the CMS's executed queries. It can also be used to keep track of
+| logs and timers, useful for module developers. 
+|
+*/
+
+$cms['router']->after(function($request, $response) use($cms)
+{
+	$response->setContent($response->getContent().$cms['profiler']);
+});
+
+/*
+|--------------------------------------------------------------------------
 | Start The CMS
 |--------------------------------------------------------------------------
 |

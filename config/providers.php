@@ -30,6 +30,7 @@ return array(
 	'Cms\Providers\SessionServiceProvider',
 	'Cms\Providers\SettingsServiceProvider',
 	'Cms\Providers\MenuServiceProvider',
+	'Cms\Providers\ProfilerServiceProvider',
 
 	'Meido\HTML\HTMLServiceProvider',
 	'Meido\Form\Providers\FormServiceProvider',

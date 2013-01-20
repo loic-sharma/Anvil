@@ -94,7 +94,6 @@ return array(
 		'Cookie'     => 'Illuminate\Support\Facades\Cookie',
 		'Crypt'      => 'Illuminate\Support\Facades\Crypt',
 		'DB'         => 'Illuminate\Support\Facades\DB',
-		'Eloquent'   => 'Illuminate\Database\Eloquent\Model',
 		'Event'      => 'Illuminate\Support\Facades\Event',
 		'File'       => 'Illuminate\Support\Facades\File',
 		'Hash'       => 'Illuminate\Support\Facades\Hash',
@@ -123,6 +122,7 @@ return array(
 
 		'HttpNotFoundException' => 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException',
 
+		'Eloquent'   => 'Cms\Database\Eloquent',
 		'Autoloader' => 'Cms\Facades\Autoloader',
 		'Menu'       => 'Cms\Facades\Menu',
 		'Modules'    => 'Cms\Facades\Modules',
@@ -131,5 +131,7 @@ return array(
 		'User'       => 'Cms\Auth\Models\User',
 		'Group'      => 'Cms\Auth\Models\Group',
 		'Permission' => 'Cms\Auth\Models\Permission',
+
+		'Profiler'   => 'Profiler\Facades\Profiler',
 	),
 );
