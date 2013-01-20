@@ -28,35 +28,25 @@ class UsersAdminController extends Controller {
 
 	public function postCreateUser()
 	{
-		$form = Validator::make(Input::all(), array(
-			'email' => array('required', 'email'),
-			'password' => array('required', 'confirmed'),
-			'first_name' => array('alpha_dash'),
-			'last_name' => array('alpha_dash'),
-			'group' => array('required', 'numeric'),
-		));
+		$user = new User;
 
-		if($form->passes())
+		$user->email = Input::get('email');
+		$user->first_name = Input::get('first_name');
+		$user->last_name = Input::get('last_name');
+		$user->group_id = Input::get('group');
+		$user->password = Input::get('password');
+
+		if($user->save())
 		{
-			$user = new User;
-
-			$user->email = Input::get('email');
-			$user->first_name = Input::get('first_name');
-			$user->last_name = Input::get('last_name');
-			$user->group_id = Input::get('group');
-			$user->password = Input::get('password');
-
-			$user->save();
-
 			return Redirect::to('admin/users/'.$user->id.'/edit');
 		}
 
 		else
 		{
-			$errors = $form->messages();
+			$errors = $user->errors();
 		}
 
-		return Redirect::to('admin/users/create')->withErrors($errors);
+		return Redirect::to('admin/users/create')->withInput()->withErrors($errors);
 	}
 
 	public function getEditUser($id)
@@ -84,49 +74,39 @@ class UsersAdminController extends Controller {
 
 	public function postEditUser($id)
 	{
-		$form = Validator::make(Input::all(), array(
-			'email' => array('required', 'email'),
-			'password' => array('confirmed'),
-			'first_name' => array('alpha_dash'),
-			'last_name' => array('alpha_dash'),
-			'group' => array('required', 'numeric'),
-		));
+		$user = User::find($id);
 
-		if($form->passes())
+		// The password isn't required and the email
+		// does not need to be unique when the user is being
+		// edited.
+		$user->rules['password'] = array('required');
+		$user->rules['email'] = array('required');
+
+		if( ! is_null($user))
 		{
-			$user = User::find($id);
+			$user->email = Input::get('email');
+			$user->first_name = Input::get('first_name');
+			$user->last_name = Input::get('last_name');
+			$user->group_id = Input::get('group');
 
-			if( ! is_null($user))
+			// Only save the password if one is inputted.
+			if(Input::get('password') != '')
 			{
-				$user->email = Input::get('email');
-				$user->first_name = Input::get('first_name');
-				$user->last_name = Input::get('last_name');
-				$user->group_id = Input::get('group');
+				$user->password = Input::get('password');
+			}
 
-				if(Input::get('password') != '')
-				{
-					$user->password = Input::get('password');
-				}
-
-				$user->save();
-
+			if($user->save())
+			{
 				return Redirect::to('admin/users/'.$id.'/edit');
 			}
 
 			else
 			{
-				$errors = new MessageBag;
-
-				$errors->add('user', 'User does not exist.');
+				$errors = $user->errors();
 			}
 		}
 
-		else
-		{
-			$errors = $form->messages();
-		}
-
-		return Redirect::to('admin/users/'.$id.'/edit')->withErrors($errors);
+		return Redirect::to('admin/users/'.$id.'/edit')->withInput()->withErrors($errors);
 	}
 
 	public function getDeleteUser($id)

@@ -2,10 +2,10 @@
 
 use Hash;
 use ExpressiveDate;
+use Cms\Database\Eloquent;
 use Illuminate\Auth\UserInterface;
-use Illuminate\Database\Eloquent\Model;
 
-class User extends Model implements UserInterface {
+class User extends Eloquent implements UserInterface {
 
 	/**
 	 * The table's name.
@@ -19,8 +19,19 @@ class User extends Model implements UserInterface {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array(
-		'password',
+	protected $hidden = array('password');
+
+	/**
+	 * The model's validation rules.
+	 *
+	 * @return array
+	 */
+	public $rules = array(
+		'email'      => array('required', 'email', 'unique:users'),
+		'password'   => array('required', 'confirmed'),
+		'first_name' => array('alpha_dash'),
+		'last_name'  => array('alpha_dash'),
+		'group_id'   => array('required', 'numeric'),
 	);
 
 	/**
