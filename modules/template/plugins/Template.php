@@ -72,6 +72,6 @@ class TemplatePlugin extends Plugin {
 	 */
 	public function partial($view, array $data = array())
 	{
-		return View::make('partials.'.$view, $data);
+		return View::make('partials.'.$view, $data)->render();
 	}
 }
