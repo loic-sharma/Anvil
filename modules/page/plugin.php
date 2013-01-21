@@ -69,7 +69,7 @@ class PagePlugin {
 	 */
 	public function setContent($view, $data = array())
 	{
-		$this->content = View::make($view, $data);
+		$this->content = View::make($view, $data)->render();
 	}
 
 	/**
