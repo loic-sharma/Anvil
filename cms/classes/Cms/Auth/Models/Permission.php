@@ -17,4 +17,16 @@ class Permission extends Model {
 	 * @var bool
 	 */
 	public $timestamps = false;
+
+	/**
+	 * The model's validation rules.
+	 *
+	 * @var array
+	 */
+	public $rules = array(
+		'name'           => 'required',
+		'slug'           => 'required',
+		'required_power' => 'numeric',
+		'max_power'      => 'numeric',
+	);	
 }

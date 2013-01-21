@@ -128,12 +128,4 @@ class UsersAdminController extends Controller {
 
 		$this->page->setContent('users::admin.groups');
 	}
-
-	public function getPermissions()
-	{
-		$this->page->addBreadcrumb('Users', 'admin/users');
-		$this->page->addBreadcrumb('Permissions');
-
-		$this->page->setContent('users::admin.permissions');
-	}
 }
