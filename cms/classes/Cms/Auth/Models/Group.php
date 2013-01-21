@@ -19,6 +19,13 @@ class Group extends Model {
 	public $timestamps = false;
 
 	/**
+	 * A cached copy of the groups' permissions.
+	 *
+	 * @var array
+	 */
+	protected static $_permissions = array();
+
+	/**
 	 * Get all of the group's users.
 	 *
 	 */
@@ -28,38 +35,29 @@ class Group extends Model {
 	}
 
 	/**
-	 * Set the groups's permissions.
+	 * Get the group's permissions.
 	 *
-	 * @param  array  $permissions
-	 * @return void
-	 */
-	public function setPermissions($permissions)
-	{
-		$this->attributes['permissions'] = json_encode($permissions);
-	}
-
-	/**
-	 * Get the group's permission.
 	 *
 	 */
-	public function getPermissions($permissions)
+	public function getPermissions()
 	{
-		if (is_null($permissions))
+		$name = $this->name;
+		$power = $this->power;
+
+		if( ! isset(static::$_permissions[$name]))
 		{
-			return array();
+			static::$_permissions[$name] = Permission::where(function($query) use($power)
+			{
+				$query->whereNull('required_power');
+				$query->orWhere('required_power', '>=', $power);
+			})->where(function($query)
+			{
+				$query->whereNull('max_power');
+				$query->orWhere('max_power', '<=', $this->power);
+			})->get();
 		}
 
-		if (is_array($permissions))
-		{
-			return $permissions;
-		}
-
-		if ( ! $_permissions = json_decode($permissions, true))
-		{
-			throw new \InvalidArgumentException("Cannot JSON decode permissions [$permissions].");
-		}
-
-		return $_permissions;
+		return static::$_permissions[$name];
 	}
 
 	/**
@@ -68,16 +66,16 @@ class Group extends Model {
 	 * @param  string  $permission
 	 * @return bool
 	 */
-	public function can($permission)
+	public function can($action)
 	{
-		if(isset($this->permissions[$permission]))
+		foreach($this->permissions as $permission)
 		{
-			return $this->permissions[$permission];
+			if($permission->slug == $action)
+			{
+				return true;
+			}
 		}
 
-		else
-		{
-			return false;
-		}
+		return false;
 	}
 }

@@ -69,7 +69,7 @@ class Application extends IlluminateApplication {
 
 				// Let's make sure the user is actually an
 				// admin. Otherwise, redirect to the home page.
-				if($auth->check())
+				if($auth->check() and $auth->user()->can('access_admin_panel'))
 				{
 					$uri = implode('/', array_slice($segments, 0, 2));
 
