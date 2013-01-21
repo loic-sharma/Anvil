@@ -16,7 +16,7 @@
 	<p>No comments.</p>
 @endif
 
-@if($user->loggedIn())
+@if($user->can('post_comment'))
 	<hr>
 
 	<h3>Post Comment</h3>

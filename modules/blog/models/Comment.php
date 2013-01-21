@@ -20,6 +20,17 @@ class Comment extends Eloquent {
 	public $timestamps = true;
 
 	/**
+	 * The model's validation rules.
+	 *
+	 * @var array
+	 */
+	public $rules = array(
+		'post_id'   => 'required',
+		'author_id' => 'required',
+		'comment'   => 'required',
+	);
+
+	/**
 	 * Get the date the post was created.
 	 *
 	 * @return string
@@ -29,9 +40,14 @@ class Comment extends Eloquent {
 		return $this->attributes['created_at'];
 	}
 
+	/**
+	 * Get the expressive date for the comment's creation date.
+	 *
+	 * @return string
+	 */
 	public function date()
 	{
-		return ExpressiveDate::make($this->attributes['created_at'])->getRelativeDate();
+		return ExpressiveDate::make($this->getDate())->getRelativeDate();
 	}
 
 	/**

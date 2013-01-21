@@ -48,11 +48,7 @@ class BlogController extends Controller {
 	 */
 	public function postPost($id)
 	{
-		$form = Validator::make(Input::all(), array(
-			'comment' => 'required'
-		));
-
-		if($form->passes())
+		if(Auth::user()->can('post_comment'))
 		{
 			$post = Post::find($id);
 
@@ -64,9 +60,15 @@ class BlogController extends Controller {
 				$comment->post_id   = $id;
 				$comment->content   = Input::get('comment');
 
-				$comment->save();
+				if($comment->save())
+				{
+					return Redirect::to('blog/post/'.$id);
+				}
 
-				return Redirect::to('blog/post/'.$id);
+				else
+				{
+					$errors = $comment->errors();
+				}
 			}
 
 			else
@@ -79,12 +81,11 @@ class BlogController extends Controller {
 
 		else
 		{
-			$errors = $form->messages();
+			$errors = new MessageBag;
+
+			$errors->add('user', 'User cannot create new comments.');
 		}
 
-		Input::flash();
-
-		return Redirect::back()->withErrors($errors);
-
+		return Redirect::back()->withInput()->withErrors($errors);
 	}
 }
