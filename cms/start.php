@@ -161,7 +161,7 @@ date_default_timezone_set($config['app']['timezone']);
 |
 */
 
-$cms->registerAliasLoader($config['app']['aliases']);
+$cms->registerAliasLoader($config['cms']['aliases']);
 
 /*
 |--------------------------------------------------------------------------
@@ -187,9 +187,9 @@ Request::enableHttpMethodParameterOverride();
 |
 */
 
-$services = new ProviderRepository(new Filesystem, $config['app']['manifest']);
+$services = new ProviderRepository(new Filesystem, $config['cms']['manifest']);
 
-$services->load($cms, $config['providers']);
+$services->load($cms, $config['cms']['providers']);
 
 /*
 |--------------------------------------------------------------------------
