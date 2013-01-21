@@ -49,25 +49,19 @@ class NavigationPlugin {
 
 			$group = Navigation\Group::with(array('links' => function($query)
 			{
-				// Take all links that have no required power.
-				$query->whereNull('required_power');
+				$power = Auth::user()->group->power;
 
-				// If the user is logged in, take all links whose required power
-				// is less than the user's power.
-				if(Auth::check())
+				$query->where(function($query) use ($power)
 				{
-					$userPower = Auth::user()->group->power;
+					$query->whereNull('required_power');
+					$query->orWhere('required_power', '<=', $power);
+				});
 
-					$query->orWhere('required_power', '<=', $userPower);
-					$query->where('required_power', '!=', 0);
-				}
-
-				// If the user is logged out, take all links that require
-				// a logged out user.
-				else
+				$query->where(function($query) use($power)
 				{
-					$query->orWhere('required_power', 0);
-				}
+					$query->whereNull('max_power');
+					$query->orWhere('max_power', '>=', $power);
+				});
 
 			}))->where('slug', '=', $group)->first();
 
