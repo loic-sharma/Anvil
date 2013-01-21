@@ -49,11 +49,11 @@ class Group extends Model {
 			static::$_permissions[$name] = Permission::where(function($query) use($power)
 			{
 				$query->whereNull('required_power');
-				$query->orWhere('required_power', '>=', $power);
+				$query->orWhere('required_power', '<=', $power);
 			})->where(function($query)
 			{
 				$query->whereNull('max_power');
-				$query->orWhere('max_power', '<=', $this->power);
+				$query->orWhere('max_power', '>=', $this->power);
 			})->get();
 		}
 
