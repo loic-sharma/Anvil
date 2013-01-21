@@ -13,8 +13,8 @@
 		@foreach($permissions->get() as $permission)
 			<tr>
 				<td>{{ $permission->name }}</td>
-				<td>{{ $permission->required_power }}</td>
-				<td>{{ $permission->max_power }}</td>
+				<td>{{ is_null($permission->required_power) ? 'None' : $permission->required_power }}</td>
+				<td>{{ is_null($permission->max_power) ? 'None' : $permission->max_power }}</td>
 				<td>
 					<a href="{{ $url->to('admin/permission/'.$permission->id.'/edit') }}" class="btn btn-warning">Edit</a>
 					<a href="{{ $url->to('admin/permission/'.$permission->id.'/delete') }}" class="btn btn-danger">Disable</a> 
