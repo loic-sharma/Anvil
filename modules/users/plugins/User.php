@@ -21,4 +21,14 @@ class UserPlugin {
 	{
 		return Auth::user()->displayName();
 	}
+
+	/**
+	 * Get a user's permissions.
+	 *
+	 * @return bool
+	 */
+	public function can($permission)
+	{
+		return Auth::user()->can($permission);
+	}
 }
