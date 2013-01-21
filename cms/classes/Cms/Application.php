@@ -60,7 +60,7 @@ class Application extends IlluminateApplication {
 
 		else
 		{
-			$segments = explode('/', $uri);
+			$segments = explode('/', trim($uri, '/'));
 
 			// Handle admin routing separately.
 			if($segments[0] == 'admin')
@@ -113,7 +113,15 @@ class Application extends IlluminateApplication {
 			}
 		}
 
-		$router->controller($this->controller, $uri);
+		try
+		{
+			$router->controller($this->controller, $uri);
+		}
+
+		// If the controller does not exist, Illuminate will
+		// through an exception. Since there might be a custom route
+		// already set to save the day, we'll silently kill the exception.
+		catch(\ReflectionException $e) {}
 	}
 
 	/**
