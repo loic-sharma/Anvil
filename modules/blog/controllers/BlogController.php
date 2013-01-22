@@ -58,7 +58,7 @@ class BlogController extends Controller {
 
 				$comment->author_id = Auth::user()->id;
 				$comment->post_id   = $id;
-				$comment->content   = Input::get('comment');
+				$comment->content   = Input::get('content');
 
 				if($comment->save())
 				{

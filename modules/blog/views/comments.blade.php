@@ -22,7 +22,7 @@
 	<h3>Post Comment</h3>
 
 	{{ Form::open() }}
-		{{ Form::textarea('comment', null, array('rows' => '5', 'placeholder' => 'Comment', 'class' => 'span8')) }}
+		{{ Form::textarea('content', null, array('rows' => '5', 'placeholder' => 'Comment', 'class' => 'span8')) }}
 
 		{{ Form::submit('Post', array('class' => 'btn')) }}
 	{{ Form::close() }}

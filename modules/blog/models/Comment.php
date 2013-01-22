@@ -27,7 +27,7 @@ class Comment extends Eloquent {
 	public $rules = array(
 		'post_id'   => 'required',
 		'author_id' => 'required',
-		'comment'   => 'required',
+		'content'   => 'required',
 	);
 
 	/**
