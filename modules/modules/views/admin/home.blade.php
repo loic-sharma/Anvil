@@ -17,7 +17,7 @@
 				<td>{{ $module->version }}</td>
 				<td>
 					@if($module->hasAdminPanel)
-						<a href="{{ $url->to('admin/'.$module->slug) }}" class="btn btn-success">View</a>
+						<a href="{{ $url->to('admin/'.$module->slug) }}" class="btn btn-success">Manage</a>
 					@endif
 
 					@if($module->isCore == false)
