@@ -1,7 +1,7 @@
 <?php namespace Cms\Auth;
 
 use Cms\Auth\Models\User;
-use Cms\Auth\Models\Group;
+use Cms\Auth\Models\Guest;
 use Illuminate\Auth\AuthManager as IlluminateAuthManager;
 
 class AuthManager extends IlluminateAuthManager {
@@ -37,9 +37,7 @@ class AuthManager extends IlluminateAuthManager {
 
 		if(is_null($user))
 		{
-			$user = new User;
-
-			$user->group = Group::where('name', 'guest')->first();
+			$user = new Guest;
 		}
 
 		return $user;

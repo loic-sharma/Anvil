@@ -37,7 +37,7 @@ class Group extends Model {
 	/**
 	 * Get the group's permissions.
 	 *
-	 *
+	 * @return array
 	 */
 	public function getPermissions()
 	{
