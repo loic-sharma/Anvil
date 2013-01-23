@@ -3,16 +3,6 @@
 class UsersController extends Controller {
 
 	/**
-	 * Register the route's filters.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-
-	}
-
-	/**
 	 * Get the user's profile.
 	 *
 	 * @return void
