@@ -7,5 +7,5 @@
 @if($post->comments_enabled)
 	<hr>
 
-	{{ View::make('blog::comments', array('comments' => $comments->get('blog-post-'.$post->id))) }}
+	{{ View::make('blog::comments', array('comments' => $post->comments)) }}
 @endif
