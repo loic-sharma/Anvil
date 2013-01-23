@@ -12,5 +12,7 @@ class AdminController extends Controller {
 	public function getIndex()
 	{
 		$this->page->addBreadcrumb('Home');
+
+		$this->page->setContent('admin::home');
 	}
 }
