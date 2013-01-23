@@ -1,7 +1,4 @@
-<?php namespace Blog;
-
-use Eloquent;
-use ExpressiveDate;
+<?php
 
 class Comment extends Eloquent {
 
@@ -25,10 +22,32 @@ class Comment extends Eloquent {
 	 * @var array
 	 */
 	public $rules = array(
-		'post_id'   => 'required',
+		'area'      => 'required',
 		'author_id' => 'required',
 		'content'   => 'required',
 	);
+
+	/**
+	 * Get the name of the area the comment belongs to.
+	 *
+	 * @return string
+	 */
+	public function getAreaName()
+	{
+		$name = str_replace('-', ' ', $this->attributes['area']);
+
+		return ucwords($name);
+	}
+
+	/**
+	 * Get the link to the comment's area.
+	 *
+	 * @return string
+	 */
+	public function getAreaLink()
+	{
+		return Url::to(str_replace('-', '/', $this->attributes['area']));
+	}
 
 	/**
 	 * Get the date the post was created.
@@ -68,15 +87,5 @@ class Comment extends Eloquent {
 	public function author()
 	{
 		return $this->belongsTo('User');
-	}
-
-	/**
-	 *  Get the comment's post.
-	 *
-	 * @return Blog\Post
-	 */
-	public function post()
-	{
-		return $this->belongsTo('Blog\Post');
 	}
 }

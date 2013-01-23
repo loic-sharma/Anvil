@@ -1,7 +1,6 @@
 <?php
 
 use Blog\Post;
-use Blog\Comment;
 
 class BlogController extends Controller {
 
@@ -56,8 +55,8 @@ class BlogController extends Controller {
 			{
 				$comment = new Comment;
 
+				$comment->area      = 'blog-post-'.$id;
 				$comment->author_id = Auth::user()->id;
-				$comment->post_id   = $id;
 				$comment->content   = Input::get('content');
 
 				if($comment->save())

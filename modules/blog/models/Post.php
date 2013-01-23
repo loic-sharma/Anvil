@@ -1,6 +1,7 @@
 <?php namespace Blog;
 
 use URL;
+use Comment;
 use Eloquent;
 use ExpressiveDate;
 
@@ -42,16 +43,10 @@ class Post extends Eloquent {
 		return $this->belongsTo('User');
 	}
 
-	/**
-	 * Get the post's comments.
-	 *
-	 * @return array
-	 */
-	public function comments()
+	public function getComments()
 	{
-		return $this->hasMany('Blog\Comment');
+		return Comment::where('area', 'blog-post-'.$this->attributes['id'])->get();
 	}
-
 	/**
 	 * Get the date the post was created.
 	 *

@@ -17,19 +17,6 @@ class BlogAdminController extends Controller {
 	}
 
 	/**
-	 * Display the comments.
-	 *
-	 * @return void
-	 */
-	public function getComments()
-	{
-		$this->page->addBreadcrumb('Blog', 'admin/blog');
-		$this->page->addBreadcrumb('Comments');
-
-		$this->page->setContent('blog::admin.comments');
-	}
-
-	/**
 	 * Show the form to create a new blog post.
 	 *
 	 * @return void
@@ -155,33 +142,6 @@ class BlogAdminController extends Controller {
 			$errors = new MessageBag;
 
 			$errors->add('post', 'Post does not exist.');
-		}
-
-		return Redirect::back()->withErrors($errors);
-	}
-
-	/**
-	 * Delete a comment.
-	 *
-	 * @param  int  $id
-	 * @return Illuminate\Http\RedirectResponse
-	 */
-	public function getDeleteComment($id)
-	{
-		$comment = Comment::find($id);
-
-		if( ! is_null($comment))
-		{
-			$comment->delete();
-
-			return Redirect::to('admin/blog/comments');
-		}
-
-		else
-		{
-			$errors = new MessageBag;
-
-			$errors->add('comment', 'Comment does not exist.');
 		}
 
 		return Redirect::back()->withErrors($errors);
