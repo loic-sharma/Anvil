@@ -103,7 +103,7 @@ class User extends Eloquent implements UserInterface {
 	}
 
 	/**
-	 * Verify a user has a certain permission.
+	 * Verify that a user has a certain permission.
 	 *
 	 * @param  string  $permission
 	 * @return bool
@@ -111,6 +111,17 @@ class User extends Eloquent implements UserInterface {
 	public function can($permission)
 	{
 		return $this->group->can($permission);
+	}
+
+	/**
+	 * Verify that a user does not have a certain permission.
+	 *
+	 * @param  string  $permission
+	 * @return bool
+	 */
+	public function cannot($permission)
+	{
+		return ! $this->can($permission);
 	}
 
 	/**

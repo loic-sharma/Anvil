@@ -61,9 +61,9 @@ class Group extends Model {
 	}
 
 	/**
-	 * Verify if the group has a certain permission.
+	 * Verify that the group has a certain permission.
 	 *
-	 * @param  string  $permission
+	 * @param  string  $action
 	 * @return bool
 	 */
 	public function can($action)
@@ -77,5 +77,16 @@ class Group extends Model {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Verify that the group does not have a certain permission.
+	 *
+	 * @param  string  $action
+	 * @return bool
+	 */
+	public function cannot($action)
+	{
+		return ! $this->can($action);
 	}
 }
