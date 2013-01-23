@@ -12,6 +12,13 @@ class UsersPlugin {
 		return User::all();
 	}
 
+	/**
+	 * Redirect a method straight to the user model.
+	 *
+	 * @param  string  $method
+	 * @param  array   $args
+	 * @return mixed
+	 */
 	public function __call($method, $args)
 	{
 		switch (count($args))
