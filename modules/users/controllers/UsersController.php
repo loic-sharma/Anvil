@@ -93,6 +93,6 @@ class UsersController extends Controller {
 	{
 		Auth::logout();
 
-		return Redirect::to('users/login');
+		return Redirect::to('login');
 	}
 }

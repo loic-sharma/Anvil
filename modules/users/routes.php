@@ -1,5 +1,8 @@
 <?php
 
+Route::get('login', 'UsersController@getLogin');
+Route::get('logout', 'UsersController@getLogout');
+
 Route::get('admin/users/create', 'UsersAdminController@getCreateUser');
 Route::post('admin/users/create', 'UsersAdminController@postCreateUser');
 
