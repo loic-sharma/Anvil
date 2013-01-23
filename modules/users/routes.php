@@ -3,6 +3,8 @@
 Route::get('login', 'UsersController@getLogin');
 Route::post('login', 'UsersController@postLogin');
 
+Route::get('profile', 'UsersController@getProfile');
+
 Route::get('logout', 'UsersController@getLogout');
 
 Route::get('admin/users/create', 'UsersAdminController@getCreateUser');
