@@ -47,7 +47,7 @@ class Application extends IlluminateApplication {
 	 * @param  Illuminate\Routing\Router  $router
 	 * @return void
 	 */
-	public function start(Request $request, Settings $settings, Auth $auth, Router $router)
+	public function start(Request $request, Settings $settings, Router $router)
 	{
 		$uri = $request->path();
 		$defaultController = $settings->get('defaultController');
@@ -67,35 +67,22 @@ class Application extends IlluminateApplication {
 			{
 				$this->isAdminPanel = true;
 
-				// Let's make sure the user is actually an
-				// admin. Otherwise, redirect to the home page.
-				if($auth->check() and $auth->user()->can('access_admin_panel'))
+				$uri = implode('/', array_slice($segments, 0, 2));
+
+				// The second segment will be directly routed to a module.
+				if(count($segments) >= 2)
 				{
-					$uri = implode('/', array_slice($segments, 0, 2));
-
-					// The second segment will be directly routed to a module.
-					if(count($segments) >= 2)
-					{
-						$this->controller = ucfirst($segments[1]).'AdminController';
-					}
-
-					else
-					{
-						// By default, use the admin controller.
-						$this->controller = 'Cms\Controllers\AdminController';
-					}
-
-					// Register the admin template.
-					$this['template.path'] = $this['path.base'].'/templates/admin';
-
-					$this['view.finder']->setTemplatePath($this['template.path']);
-					$this['plugins']->template->setTemplate('admin');
+					$this->controller = ucfirst($segments[1]).'AdminController';
 				}
 
 				else
 				{
-					throw new NotFoundHttpException;
+					// By default, use the admin controller.
+					$this->controller = 'Cms\Controllers\AdminController';
 				}
+
+				// Register the admin template.
+				$this->setTemplate('admin');
 			}
 
 			// Handle normal non-admin routes.
@@ -122,6 +109,20 @@ class Application extends IlluminateApplication {
 		// through an exception. Since there might be a custom route
 		// already set to save the day, we'll silently kill the exception.
 		catch(\ReflectionException $e) {}
+	}
+
+	/**
+	 * Set the site's current template.
+	 *
+	 * @param  string  $template
+	 * @return void
+	 */
+	public function setTemplate($template)
+	{
+		$this['template.path'] = $this['path.base'].'/templates/'.$template;
+
+		$this['view.finder']->setTemplatePath($this['template.path']);
+		$this['plugins']->template->setTemplate($template);
 	}
 
 	/**

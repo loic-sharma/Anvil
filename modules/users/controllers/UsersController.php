@@ -9,13 +9,7 @@ class UsersController extends Controller {
 	 */
 	public function __construct()
 	{
-		$this->beforeFilter('loggedIn', array(
-			'only' => array('getProfile'),
-		));
 
-		$this->beforeFilter('loggedOut', array(
-			'only' => array('getLogin', 'postLogin')
-		));
 	}
 
 	/**
