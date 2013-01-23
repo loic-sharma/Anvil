@@ -63,9 +63,7 @@ class UsersController extends Controller {
 			$errors = $form->messages();
 		}
 
-		Input::flash();
-
-		return Redirect::to('users/login')->withErrors($errors);
+		return Redirect::to('users/login')->withInput()->withErrors($errors);
 	}
 
 	/**
