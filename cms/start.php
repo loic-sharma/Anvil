@@ -233,7 +233,7 @@ App::error(function(Exception $exception, $code)
 |
 */
 
-$cms['session']->start($cms['cookie']);
+Session::start($cms['cookie']);
 
 /*
 |--------------------------------------------------------------------------
@@ -245,8 +245,8 @@ $cms['session']->start($cms['cookie']);
 |
 */
 
-$cms['plugins']->register('url', new Cms\Plugins\UrlPlugin);
-$cms['plugins']->register('session', new Cms\Plugins\SessionPlugin);
+Plugins::register('url', new Cms\Plugins\UrlPlugin);
+Plugins::register('session', new Cms\Plugins\SessionPlugin);
 
 /*
 |--------------------------------------------------------------------------
@@ -259,9 +259,9 @@ $cms['plugins']->register('session', new Cms\Plugins\SessionPlugin);
 |
 */
 
-foreach($cms['modules']->get() as $module => $details)
+foreach(Modules::get() as $module => $details)
 {
-	$cms['modules']->boot($module);
+	Modules::boot($module);
 }
 
 /*
@@ -275,7 +275,7 @@ foreach($cms['modules']->get() as $module => $details)
 |
 */
 
-$cms['router']->after(function($request, $response) use($cms)
+Route::after(function($request, $response) use($cms)
 {
 	$response->setContent($response->getContent().$cms['profiler']);
 });
@@ -292,4 +292,4 @@ $cms['router']->after(function($request, $response) use($cms)
 |
 */
 
-$cms->start($cms['request'], $cms['settings'], $cms['auth'], $cms['router']);
+$cms->start($cms['request'], $cms['settings'], $cms['router']);
