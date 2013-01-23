@@ -9,11 +9,11 @@ class UsersController extends Controller {
 	 */
 	public function __construct()
 	{
-		$this->beforeFilter('logged_in', array(
+		$this->beforeFilter('loggedIn', array(
 			'only' => array('getProfile'),
 		));
 
-		$this->beforeFilter('logged_out', array(
+		$this->beforeFilter('loggedOut', array(
 			'only' => array('getLogin', 'postLogin')
 		));
 	}

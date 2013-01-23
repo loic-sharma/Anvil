@@ -10,7 +10,7 @@
 |
 */
 
-Route::filter('logged_in', function()
+Route::filter('loggedIn', function()
 {
 	if( ! Auth::check())
 	{
@@ -20,20 +20,23 @@ Route::filter('logged_in', function()
 
 Route::filter('admin', function()
 {
-	if(Auth::check())
-	{
-		$group = Auth::user()->group;
+	$group = Auth::user()->group;
 
-		if($group->name == 'admin' or $group->power >= 100)
+	if($group->name != 'admin' and $group->power < 100)
+	{
+		if(Auth::check())
 		{
-			return true;
+			return Redirect::to('users/profile');
+		}
+
+		else
+		{
+			return Redirect::to('users/login');
 		}
 	}
-
-	return false;
 });
 
-Route::filter('logged_out', function()
+Route::filter('loggedOut', function()
 {
 	if(Auth::check())
 	{
@@ -41,14 +44,18 @@ Route::filter('logged_out', function()
 	}
 });
 
+Route::filter('requirePower', function($power)
+{
+	if(Auth::user()->group->power < $power)
+	{
+		if(Auth::check())
+		{
+			return Redirect::to('users/profile');
+		}
 
-/*
-|--------------------------------------------------------------------------
-| Load The Autoloader
-|--------------------------------------------------------------------------
-|
-| The CMS relies heavily on Composer components. We'll need the autoloader
-| to load those components, and then to load the CMS itself.
-|
-*/
-Route::filter('admin/*', 'admin');
+		else
+		{
+			return Redirect::to('users/login');
+		}
+	}
+});
