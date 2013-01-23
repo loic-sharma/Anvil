@@ -64,6 +64,25 @@ class User extends Eloquent implements UserInterface {
 	}
 
 	/**
+	 * Check if a user belongs to a certain group.
+	 *
+	 * @param  string|int  $group
+	 * @return bool
+	 */
+	public function is($group)
+	{
+		if(is_int($group))
+		{
+			return $this->group->id = $group;
+		}
+
+		else
+		{
+			return $this->group->name = $group;
+		}
+	}
+
+	/**
 	 * Get the group's permission.
 	 *
 	 */
