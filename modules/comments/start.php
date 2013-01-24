@@ -9,14 +9,13 @@ View::composer('comments::comments', function($event)
 {
 	$data = $event->view->getData();
 
-	if(isset($data['area']))
+	// If the view has an area but no comments, we need to
+	// load the area's comments.
+	if(isset($data['area']) and ! isset($data['comments']))
 	{
-		if( ! isset($data['comments']))
-		{
-			$event->view->with('comments', Comment::with('author')
-				->where('area', $data['area'])
-				->orderBy('id', 'DESC')
-				->get());
-		}
+		$event->view->with('comments', Comment::with('author')
+			->where('area', $data['area'])
+			->orderBy('id', 'DESC')
+			->get());
 	}
 });

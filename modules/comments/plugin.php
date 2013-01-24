@@ -19,4 +19,15 @@ class CommentsPlugin extends Plugin {
 
 		return $comments->orderBy('id', $order)->get();
 	}
+
+	/**
+	 * A quick helper to show a comment area.
+	 *
+	 * @param  string  $area
+	 * @return string
+	 */
+	public function show($area)
+	{
+		return View::make('comments::comments', compact('area'))->render();
+	}
 }
