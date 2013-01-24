@@ -21,7 +21,8 @@
 
 	<h3>Post Comment</h3>
 
-	{{ Form::open() }}
+	{{ Form::open('comments/post') }}
+		{{ Form::hidden('area', $area) }}
 		{{ Form::textarea('content', null, array('rows' => '5', 'placeholder' => 'Comment', 'class' => 'span8')) }}
 
 		{{ Form::submit('Post', array('class' => 'btn')) }}
