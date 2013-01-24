@@ -56,6 +56,7 @@ class PageAdminController extends Controller {
 		{
 			$page->title = Input::get('title');
 			$page->content = Input::get('content');
+			$page->comments_enabled = Input::get('comments_enabled', 0);
 
 			if($page->save())
 			{

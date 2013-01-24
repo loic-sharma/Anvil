@@ -6,5 +6,9 @@
 
 	{{ Form::textarea('content', Input::old('content', $page->content), array('class' => 'span12')) }}
 
+	<label class="checkbox">
+		{{ Form::checkbox('comments_enabled', 1, Input::old('comments_enabled', $page->comments_enabled)) }} Enable Comments.
+	</label>
+
 	{{ Form::submit('Save', array('class' => 'btn')) }}
 {{ Form::close() }}
