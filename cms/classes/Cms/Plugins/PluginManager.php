@@ -72,8 +72,19 @@ class PluginManager {
 	 * @param  string  $plugin
 	 * @return object
 	 */
-	public function __get($plugin)
+	public function get()
 	{
 		return $this->plugins[$plugin];
+	}
+
+	/**
+	 * Retrieve the instance of a Plugin.
+	 *
+	 * @param  string  $plugin
+	 * @return object
+	 */
+	public function __get($plugin)
+	{
+		return $this->get($plugin);
 	}
 }
