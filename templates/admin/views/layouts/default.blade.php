@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-		{{ $template->css('bootstrap.min.css') }}
+		{{ $template->assets('css') }}
 	</head>
 
 	<body>
@@ -47,7 +47,6 @@
 			{{ $page->content() }}
 		</div>
 
-		{{ $template->js('jquery.js') }}
-		{{ $template->js('bootstrap-dropdown.js') }}
+		{{ $template->assets('js') }}
 	</body>
 </html>

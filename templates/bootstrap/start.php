@@ -1,5 +1,7 @@
 <?php
 
+Plugins::get('template')->addAsset('css', 'css/bootstrap.css');
+
 Menu::filter(function($item)
 {
 	if($item['a.href'] == Url::current())

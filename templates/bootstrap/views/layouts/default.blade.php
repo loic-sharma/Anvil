@@ -5,7 +5,7 @@
 		<title>{{ $page->title() }}</title>
 		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-		{{ $template->css('bootstrap.css') }}
+		{{ $template->assets('css') }}
 	</head>
 
 	<body>
@@ -24,5 +24,7 @@
 				{{ $template->partial('sidebar') }}
 			</div>
 		</div>
+
+		{{ $template->assets('js') }}
 	</body>
 </html>
