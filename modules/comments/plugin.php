@@ -26,8 +26,10 @@ class CommentsPlugin extends Plugin {
 	 * @param  string  $area
 	 * @return string
 	 */
-	public function show($area)
+	public function show($area, $order = 'DESC')
 	{
-		return View::make('comments::comments', compact('area'))->render();
+		$comments = $this->get($area, $order);
+
+		return View::make('comments::comments', compact('area', 'comments'))->render();
 	}
 }
