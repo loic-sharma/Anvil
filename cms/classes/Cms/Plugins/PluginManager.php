@@ -72,7 +72,7 @@ class PluginManager {
 	 * @param  string  $plugin
 	 * @return object
 	 */
-	public function get()
+	public function get($plugin)
 	{
 		return $this->plugins[$plugin];
 	}
