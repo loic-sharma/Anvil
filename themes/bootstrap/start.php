@@ -1,6 +1,6 @@
 <?php
 
-Plugins::get('template')->addAsset('css', 'css/bootstrap.css');
+Plugins::get('theme')->addAsset('css', 'css/bootstrap.css');
 
 Menu::filter(function($item)
 {

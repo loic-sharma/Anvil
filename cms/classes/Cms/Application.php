@@ -81,8 +81,8 @@ class Application extends IlluminateApplication {
 					$this->controller = 'Cms\Controllers\AdminController';
 				}
 
-				// Register the admin template.
-				$this->setTemplate('admin');
+				// Register the admin theme.
+				$this->setTheme('admin');
 			}
 
 			// Handle normal non-admin routes.
@@ -112,17 +112,17 @@ class Application extends IlluminateApplication {
 	}
 
 	/**
-	 * Set the site's current template.
+	 * Set the site's current theme.
 	 *
-	 * @param  string  $template
+	 * @param  string  $theme
 	 * @return void
 	 */
-	public function setTemplate($template)
+	public function setTheme($theme)
 	{
-		$this['template.path'] = $this['path.base'].'/templates/'.$template;
+		$this['theme.path'] = $this['path.base'].'/themes/'.$theme;
 
-		$this['view.finder']->setTemplatePath($this['template.path']);
-		$this['plugins']->template->setTemplate($template);
+		$this['view.finder']->setThemePath($this['theme.path']);
+		$this['plugins']->theme->setTheme($theme);
 	}
 
 	/**

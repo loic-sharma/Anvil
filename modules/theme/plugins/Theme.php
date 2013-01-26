@@ -1,13 +1,13 @@
 <?php
 
-class TemplatePlugin extends Plugin {
+class ThemePlugin extends Plugin {
 
 	/**
-	 * The URL to the template's directory.
+	 * The URL to the theme's directory.
 	 *
 	 * @var string
 	 */
-	protected $templateUrl;
+	protected $themeUrl;
 
 	/**
 	 * The different supported asset types.
@@ -24,24 +24,24 @@ class TemplatePlugin extends Plugin {
 	protected $assets = array();
 
 	/**
-	 * Set the default template.
+	 * Set the default theme.
 	 *
 	 * @return void
 	 */
 	public function __construct()
 	{
-		$this->setTemplate(Settings::get('template'));
+		$this->setTheme(Settings::get('theme'));
 	}
 
 	/**
-	 * Set the plugin's template.
+	 * Set the current theme.
 	 *
-	 * @param  string  $template
+	 * @param  string  $theme
 	 * @return void
 	 */
-	public function setTemplate($template)
+	public function setTheme($theme)
 	{
-		$this->templateUrl = URL::base().'templates/'.$template;
+		$this->themeUrl = URL::base().'themes/'.$theme;
 	}
 
 	/**
@@ -110,7 +110,7 @@ class TemplatePlugin extends Plugin {
 
 		else
 		{
-			return $this->templateUrl.'/'.$path;
+			return $this->themeUrl.'/'.$path;
 		}
 	}
 
@@ -148,7 +148,7 @@ class TemplatePlugin extends Plugin {
 	}
 
 	/**
-	 * Load a template partial.
+	 * Load a theme partial.
 	 *
 	 * @param  string  $view
 	 * @param  array   $data

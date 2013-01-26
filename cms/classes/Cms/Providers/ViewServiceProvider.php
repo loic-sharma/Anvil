@@ -15,34 +15,34 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 	 */
 	public function register()
 	{
-		$this->registerTemplatesPath();
-		$this->registerTemplatePath();
+		$this->registerThemesPath();
+		$this->registerThemePath();
 
 		parent::register();
 	}
 
 	/**
-	 * Register the path to the templates.
+	 * Register the path to the themes.
 	 *
 	 * @return void
 	 */
-	public function registerTemplatesPath()
+	public function registerThemesPath()
 	{
-		$this->app['templates.path'] = $this->app['path.base'].'/templates';
+		$this->app['themes.path'] = $this->app['path.base'].'/themes';
 	}
 
 	/**
-	 * Register the template path.
+	 * Register the theme path.
 	 *
 	 * @return void
 	 */
-	public function registerTemplatePath()
+	public function registerThemePath()
 	{
-		$this->app['template.path'] = $this->app->share(function($app)
+		$this->app['theme.path'] = $this->app->share(function($app)
 		{
-			$currentTemplate = $app['settings']->get('template');
+			$currentTheme = $app['settings']->get('theme');
 
-			return $app['templates.path'].'/'.$currentTemplate;
+			return $app['themes.path'].'/'.$currentTheme;
 		});
 	}
 	/**
@@ -56,7 +56,7 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 		{
 			$finder = new FileViewFinder($app['files']);
 
-			$finder->setTemplatePath($app['template.path']);
+			$finder->setThemePath($app['theme.path']);
 			$finder->setModulePath($app['module.path']);
 
 			return $finder;

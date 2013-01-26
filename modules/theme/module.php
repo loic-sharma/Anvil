@@ -1,20 +1,20 @@
 <?php
 
-class TemplateModule {
+class ThemeModule {
 
 	/**
 	 * The module's full name.
 	 *
 	 * @var string
 	 */
-	public $name = 'Template Module';
+	public $name = 'Theme Module';
 
 	/**
 	 * The module's description.
 	 *
 	 * @var string
 	 */
-	public $description = 'Manage your templates.';
+	public $description = 'Manage your themes.';
 
 	/**
 	 * The module's version.
@@ -28,14 +28,14 @@ class TemplateModule {
 	 *
 	 * @var string
 	 */
-	public $slug = 'template';
+	public $slug = 'theme';
 
 	/**
 	 * Wether the module has an admin panel.
 	 *
 	 * @var bool
 	 */ 
-	public $hasAdminPanel = false;
+	public $hasAdminPanel = true;
 
 	/**
 	 * Wether the module is a core module. 

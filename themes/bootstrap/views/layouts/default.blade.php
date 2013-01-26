@@ -5,26 +5,26 @@
 		<title>{{ $page->title() }}</title>
 		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-		{{ $template->assets('css') }}
+		{{ $theme->assets('css') }}
 	</head>
 
 	<body>
-		{{ $template->partial('navigation') }}
+		{{ $theme->partial('navigation') }}
 
 		<div class="container">
 
-			{{ $template->partial('breadcrumbs') }}
-			{{ $template->partial('errors') }}
+			{{ $theme->partial('breadcrumbs') }}
+			{{ $theme->partial('errors') }}
 
 			<div class="row">
 				<div class="span8">
 					{{ $page->content() }}
 				</div>
 
-				{{ $template->partial('sidebar') }}
+				{{ $theme->partial('sidebar') }}
 			</div>
 		</div>
 
-		{{ $template->assets('js') }}
+		{{ $theme->assets('js') }}
 	</body>
 </html>

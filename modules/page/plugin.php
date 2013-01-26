@@ -79,7 +79,7 @@ class PagePlugin {
 	 */
 	public function render()
 	{
-		$path = App::make('template.path');
+		$path = App::make('theme.path');
 
 		if(file_exists($path.'/start.php'))
 		{

@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-		{{ $template->assets('css') }}
+		{{ $theme->assets('css') }}
 	</head>
 
 	<body>
@@ -47,6 +47,6 @@
 			{{ $page->content() }}
 		</div>
 
-		{{ $template->assets('js') }}
+		{{ $theme->assets('js') }}
 	</body>
 </html>
