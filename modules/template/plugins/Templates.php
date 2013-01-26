@@ -16,12 +16,23 @@ class TemplatesPlugin {
 	 */
 	public function get()
 	{
-		$path = App::make('templates.path');
+		$themePath = App::make('templates.path');
+		$themes = array();
 
-		return array_map(function($template) use($path)
+		foreach($this->getPaths() as $path)
 		{
-			return str_replace($path.'/', '', $template);
-		}, $this->getPaths());
+			if(is_dir($path) and file_exists($path.'/theme.php'))
+			{
+				include $path.'/theme.php';
+
+				$theme = str_replace($themePath.'/', '', $path);
+				$theme = ucfirst($theme.'Theme');
+
+				$themes[] = new $theme;
+			}
+		}
+
+		return $themes;
 	}
 
 	/**

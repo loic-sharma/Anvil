@@ -4,9 +4,14 @@ class SettingsAdminController extends Controller {
 
 	public function getIndex()
 	{
-		$this->page->addBreadcrumb('Settings');
+		$templates = array();
 
-		$templates = App::make('plugins')->templates->getAssociative();
+		foreach(Plugins::get('templates')->get() as $template)
+		{
+			$templates[$template->slug] = $template->name;
+		}
+
+		$this->page->addBreadcrumb('Settings');
 
 		$this->page->setcontent('settings::admin.home', compact('templates'));
 	}
