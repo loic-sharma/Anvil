@@ -102,7 +102,7 @@ class Application extends IlluminateApplication {
 
 		try
 		{
-			$router->controller($this->controller, $uri);
+			$router->controller($uri, $this->controller);
 		}
 
 		// If the controller does not exist, Illuminate will
