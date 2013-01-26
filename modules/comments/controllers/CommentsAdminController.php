@@ -29,9 +29,9 @@ class CommentsAdminController extends Controller {
 
 		else
 		{
-			$errors = new MessageBag;
-
-			$errors->add('comment', 'Comment does not exist.');
+			$errors = new MessageBag(array(
+				'comment' => 'Comment does not exist.',
+			));
 		}
 
 		return Redirect::back()->withErrors($errors);

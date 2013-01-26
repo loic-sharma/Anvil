@@ -106,9 +106,9 @@ class NavigationAdminController extends Controller {
 
 			else
 			{
-				$errors = new MessageBag;
-
-				$errors->add('menu', 'Menu does not exist.');
+				$errors = new MessageBag(array(
+					'menu' => 'Menu does not exist.',
+				));
 			}
 		}
 
@@ -160,9 +160,9 @@ class NavigationAdminController extends Controller {
 
 		else
 		{
-			$errors = new MessageBag;
-
-			$errors->add('error', 'Link does not exist.');
+			$errors = new MessageBag(array(
+				'link' => 'Link does not exist.',
+			));
 		}
 
 		return Redirect::to('admin/navigation/link/'.$id.'/edit')->withInput()->withErrors($errors);

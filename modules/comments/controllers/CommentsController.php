@@ -25,9 +25,9 @@ class CommentsController extends Controller {
 
 		else
 		{
-			$errors = new MessageBag;
-
-			$errors->add('user', 'User cannot create new comments.');
+			$errors = new MessageBag(array(
+				'user' => 'User cannot create new comments.'
+			));
 		}
 
 		return Redirect::back()->withInput()->withErrors($errors);

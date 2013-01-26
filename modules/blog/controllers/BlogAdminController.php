@@ -112,9 +112,9 @@ class BlogAdminController extends Controller {
 
 		else
 		{
-			$errors = new MessageBag;
-
-			$errors->add('post', 'Post does not exist.');
+			$errors = new MessageBag(array(
+				'post' => 'Post does not exist.',
+			));
 		}
 
 		return Redirect::back()->withInput()->withErrors($errors);
@@ -139,9 +139,9 @@ class BlogAdminController extends Controller {
 
 		else
 		{
-			$errors = new MessageBag;
-
-			$errors->add('post', 'Post does not exist.');
+			$errors = new MessageBag(array(
+				'post' => 'Post does not exist.',
+			));
 		}
 
 		return Redirect::back()->withErrors($errors);
