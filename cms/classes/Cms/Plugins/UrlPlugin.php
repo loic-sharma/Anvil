@@ -1,23 +1,9 @@
 <?php namespace Cms\Plugins;
 
+use Url;
+use Request;
+
 class UrlPlugin {
-
-	/**
-	 * The application container.
-	 *
-	 * @var Cms\Application
-	 */
-	protected $app;
-
-	/**
-	 * Get the application container.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		$this->app = app();
-	}
 
 	/**
 	 * Retrieve the base URL.
@@ -26,7 +12,7 @@ class UrlPlugin {
 	 */
 	public function base()
 	{
-		return $this->app->request->root();
+		return Request::root();
 	}
 
 	/**
@@ -36,7 +22,7 @@ class UrlPlugin {
 	 */
 	public function current()
 	{
-		return $this->app->request->getUri();
+		return Request::getUri();
 	}
 
 	/**
@@ -47,6 +33,6 @@ class UrlPlugin {
 	 */
 	public function to($uri)
 	{
-		return $this->app->url->to($uri);
+		return Url::to($uri);
 	}
 }
