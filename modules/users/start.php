@@ -12,3 +12,8 @@ Autoloader::map(array(
 	'UsersPlugin'       => __DIR__.'/plugins/Users.php',
 	'UserPlugin'        => __DIR__.'/plugins/User.php',
 ));
+
+Plugins::register('permissions', new PermissionsPlugin);
+Plugins::register('groups', new GroupsPlugin);
+Plugins::register('users', new UsersPlugin);
+Plugins::register('user', new UserPlugin);
