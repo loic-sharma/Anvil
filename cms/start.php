@@ -246,7 +246,6 @@ Session::start($cms['cookie']);
 */
 
 Plugins::register('url', new Cms\Plugins\UrlPlugin);
-Plugins::register('session', new Cms\Plugins\SessionPlugin);
 
 /*
 |--------------------------------------------------------------------------
