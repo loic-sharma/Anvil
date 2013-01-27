@@ -73,7 +73,12 @@ class Eloquent extends IlluminateEloquent {
 	{
 		foreach($this->hash as $attribute)
 		{
-			$this->attributes[$attribute] = Hash::make($this->attributes[$attribute]);
+			// We only want to hash fresh attributes. We will assume that
+			// old attributes are already hashed.
+			if($this->attributes[$attribute] != $this->original[$attribute])
+			{
+				$this->attributes[$attribute] = Hash::make($this->attributes[$attribute]);
+			}
 		}
 	}
 
