@@ -95,12 +95,17 @@ class Repository {
 	 */
 	public function getPath($module = null)
 	{
-		if( ! is_null($module))
+		// We will return the module path if we weren't given a
+		// module name.
+		if(is_null($module))
 		{
-			$module .= '/';
+			return $this->path;
 		}
 
-		return $this->path.'/'.$module;
+		else
+		{
+			return $this->path.'/'.$module.'/';
+		}
 	}
 
 	/**
