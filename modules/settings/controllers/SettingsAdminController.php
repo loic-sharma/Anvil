@@ -13,13 +13,11 @@ class SettingsAdminController extends Controller {
 	{
 		$form = Validator::make(Input::all(), array(
 			'title'    => 'required',
-			'template' => 'required',
 		));
 
 		if($form->passes())
 		{
 			Settings::set('title', Input::get('title'));
-			Settings::set('template', Input::get('template'));
 
 			return Redirect::to('admin/settings');
 		}
