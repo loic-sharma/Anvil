@@ -108,12 +108,4 @@ class UsersAdminController extends Controller {
 
 		return Redirect::to('admin/users');
 	}
-
-	public function getGroups()
-	{
-		$this->page->addBreadcrumb('Users', 'admin/users');
-		$this->page->addBreadcrumb('Groups');
-
-		$this->page->setContent('users::admin.groups');
-	}
 }

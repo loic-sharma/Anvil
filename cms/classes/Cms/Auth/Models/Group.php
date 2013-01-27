@@ -19,6 +19,16 @@ class Group extends Model {
 	public $timestamps = false;
 
 	/**
+	 * The model's validation rules.
+	 *
+	 * @var array
+	 */
+	protected $rules = array(
+		'name'  => array('required'),
+		'power' => array('required', 'numeric'),
+	);
+
+	/**
 	 * A cached copy of the groups' permissions.
 	 *
 	 * @var array

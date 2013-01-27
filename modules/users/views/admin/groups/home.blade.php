@@ -1,0 +1,25 @@
+<h1>Groups</h1>
+
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Power</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach($groups->get() as $group)
+			<tr>
+				<td>{{ $group->name }}</td>
+				<td>{{ $group->power }}</td>
+				<td>
+					<a href="{{ $url->to('admin/group/'.$group->id.'/edit') }}" class="btn btn-warning">Edit</a>
+					<a href="{{ $url->to('admin/group/'.$group->id.'/delete') }}" class="btn btn-danger">Delete</a> 
+				</td>
+			</tr>
+		@endforeach
+	</tbody>
+</table>
+
+<a href="{{ $url->to('admin/group/create') }}" class="btn">Create Group</a>
