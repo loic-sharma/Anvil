@@ -1,5 +1,6 @@
 <?php namespace Cms\Modules;
 
+use Cms;
 use Composer\Autoload\ClassLoader;
 
 class Repository {
@@ -159,10 +160,10 @@ class Repository {
 				// Todo: Dependency injection?
 				if(class_exists($plugin))
 				{
-					app()->plugins->register($module, $plugin);
+					Cms::make('plugins')->register($module, $plugin);
 				}
 
-				app()->view->addNamespace($module, $path.'views');
+				Cms::make('view')->addNamespace($module, $path.'views');
 			}
 
 			else
