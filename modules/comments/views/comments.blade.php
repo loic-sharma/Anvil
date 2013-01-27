@@ -21,10 +21,11 @@
 
 	<h3>Post Comment</h3>
 
-	{{ Form::open('comments/post') }}
-		{{ Form::hidden('area', $area) }}
-		{{ Form::textarea('content', null, array('rows' => '5', 'placeholder' => 'Comment', 'class' => 'span8')) }}
+	<form method="POST" action="{{ $url->to('comments/post') }}" accept-charset="utf-8">
+		<input type="hidden" name="area" value="{{ $area }}">
 
-		{{ Form::submit('Post', array('class' => 'btn')) }}
-	{{ Form::close() }}
+		<textarea name="content" rows="5" placeholder="Comment" class="span8"></textarea>
+
+		<input type="submit" value="Post" class="btn">
+	</form>
 @endif

@@ -5,16 +5,16 @@
 @endif
 
 <div class="span6">
-	{{ Form::open() }}
+	<form method="POST" action="{{ $url->current() }}" accept-charset="utf-8">
 
-		{{ Form::text('name', Input::old('name', $permission->name), array('class' => 'span6', 'placeholder' => 'Name')) }}
+		<input type="text" name="name" value="{{ Input::old('name', $permission->name) }}" class="span6" placeholder="Name">
 
-		{{ Form::text('slug', Input::old('slug', $permission->slug), array('class' => 'span6', 'placeholder' => 'Slug')) }}
+		<input type="text" name="slug" value="{{ Input::old('slug', $permission->slug) }}" class="span6" placeholder="Slug">
 
-		{{ Form::text('required_power', Input::old('required_power', $permission->required_power), array('class' => 'span6', 'placeholder' => 'Required Power')) }}
+		<input type="text" name="required_power" value="{{ Input::old('required_power', $permission->required_power) }}" class="span6" placeholder="Required Power">
 
-		{{ Form::text('max_power', Input::old('max_power', $permission->max_power), array('class' => 'span6', 'placeholder' => 'Max Power')) }}
+		<input type="text" name="max_power" value="{{ Input::old('max_power', $permission->max_power) }}" class="span6" placeholder="Max Power">
 
-		{{ Form::submit('Save', array('class' => 'btn')) }}
-	{{ Form::close() }}
+		<input type="submit" value="Save" class="btn">
+	</form>
 </div>

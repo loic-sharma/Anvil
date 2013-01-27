@@ -1,17 +1,17 @@
 <h1>Login</h1>
 
-{{ Form::open() }}
+<form method="POST" action="{{ $url->current() }}" accept-charset="utf-8">
 	<div class="control-group">
 		<div class="controls">
-			{{ Form::text('email', Input::old('email'), array('placeholder' => 'Username', 'class' => 'input-large'))}}
+			<input type="text" name="email" value="{{ Input::old('email') }}" placeholder="Username" class="input-large">
 		</div>
 	</div>
 
 	<div class="control-group">
 		<div class="controls">
-			{{ Form::password('password', array('placeholder' => 'Password', 'class' => 'input-large')) }}
+			<input type="password" name="password" placeholder="Password" class="input-large">
 		</div>
 	</div>
 
-	{{ Form::submit('Login', array('class' => 'btn')) }}
-{{ Form::close() }}
+	<input type="submit" value="Login" class="btn">
+</form>

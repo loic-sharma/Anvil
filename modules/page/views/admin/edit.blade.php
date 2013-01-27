@@ -1,14 +1,19 @@
 <h3>Edit Page</h3>
 
-{{ Form::open() }}
+<form method="POST" action="{{ $url->current() }}" accept-charset="utf-8">
 
-	{{ Form::text('title', Input::old('title', $page->title), array('class' => 'span12'))}}
+	<input type="text" name="title" value="{{ Input::old('title', $page->title) }}" class="span12">
 
-	{{ Form::textarea('content', Input::old('content', $page->content), array('class' => 'span12')) }}
+	<textarea name="content" class="span12">{{ Input::old('content', $page->content) }}</textarea>
 
 	<label class="checkbox">
-		{{ Form::checkbox('comments_enabled', 1, Input::old('comments_enabled', $page->comments_enabled)) }} Enable Comments.
+		@if(Input::old('comments_enabled', $page->comments_enabled))
+			<input type="checkbox" name="comments_enabled" value="1" checked="checked">
+		@else
+			<input type="checkbox" name="comments_enabled" value="1">	
+		@end
+		Enable Comments.
 	</label>
 
-	{{ Form::submit('Save', array('class' => 'btn')) }}
-{{ Form::close() }}
+	<input type="submit" value="Save" class="btn">
+</form>

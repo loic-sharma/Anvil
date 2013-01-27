@@ -1,18 +1,28 @@
 <h1>Settings</h1>
 
-{{ Form::open() }}
+<form method="POST" action="{{ $url->current() }}" accept-charset="utf-8">
 	<table class="table table-striped table-bordered">
 		<tbody>
 			<tr>
 				<td>Title</td>
-				<td>{{ Form::text('title', Input::old('title', Settings::get('title'))) }}</td>
+				<td><input type="text" value="{{ Input::old('title', Settings::get('title')) }}"></td>
 			</tr>
 			<tr>
 				<td>Template</td>
-				<td>{{ Form::select('template', $templates, Settings::get('template')) }}</td>
+				<td>
+					<select name="theme">
+						@foreach($themes->get() as $theme)
+							@if(Settings::get('theme') == $theme->slug)
+								<option value="{{ $theme->slug }}" selected>{{ $theme->name }}</option>
+							@else
+								<option value="{{ $theme->slug }}">{{ $theme->name }}</option>
+							@endif
+						@endforeach
+					</select>
+				</td>
 			</tr>
 		</tbody>
 	</table>
 
-	{{ Form::submit('Save', array('class' => 'btn'))}}
-{{ Form::close() }}
+	<input type="submit" value="Save" class="btn">
+</form>

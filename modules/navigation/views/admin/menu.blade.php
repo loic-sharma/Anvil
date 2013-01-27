@@ -5,12 +5,12 @@
 @endif
 
 <div class="span6">
-	{{ Form::open() }}
+	<form method="POST" action="{{ $url->current() }}" accept-charset="utf-8">
 
-		{{ Form::text('title', Input::old('title', $menu->title), array('class' => 'span6', 'placeholder' => 'Title'))}}
+		<input type="text" name="title" value="{{ Input::old('title', $menu->title) }}" class="span6" placeholder="Title">
 
-		{{ Form::text('slug', Input::old('slug', $menu->slug), array('class' => 'span6', 'placeholder' => 'Slug')) }}
+		<input type="text" name="slug" value="{{ Input::old('slug', $menu->slug) }}" class="span6" placeholder="Slug">
 
-		{{ Form::submit('Save', array('class' => 'btn')) }}
-	{{ Form::close() }}
+		<input type="submit" value="Save" class="btn">
+	</form>
 </div>

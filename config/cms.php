@@ -57,9 +57,6 @@ return array(
 		'Cms\Providers\SettingsServiceProvider',
 		'Cms\Providers\MenuServiceProvider',
 		'Cms\Providers\ProfilerServiceProvider',
-
-		'Meido\HTML\HTMLServiceProvider',
-		'Meido\Form\Providers\FormServiceProvider',
 	),
 
 	/*
@@ -102,9 +99,6 @@ return array(
 		'URL'        => 'Illuminate\Support\Facades\URL',
 		'Validator'  => 'Illuminate\Support\Facades\Validator',
 		'View'       => 'Illuminate\Support\Facades\View',
-
-		'HTML'       => 'Meido\HTML\Facades\HTML',
-		'Form'       => 'Meido\Form\Facades\Form',
 
 		'Plugin'     => 'Cms\Plugins\Plugin',
 		'Controller' => 'Cms\Routing\Controllers\Controller',

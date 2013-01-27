@@ -4,16 +4,9 @@ class SettingsAdminController extends Controller {
 
 	public function getIndex()
 	{
-		$themes = array();
-
-		foreach(Plugins::get('themes')->get() as $theme)
-		{
-			$themes[$theme->slug] = $theme->name;
-		}
-
 		$this->page->addBreadcrumb('Settings');
 
-		$this->page->setcontent('settings::admin.home', compact('themes'));
+		$this->page->setcontent('settings::admin.home');
 	}
 
 	public function postIndex()

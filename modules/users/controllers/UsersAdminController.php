@@ -13,17 +13,11 @@ class UsersAdminController extends Controller {
 	{
 		$editing = false;
 		$user = new User;
-		$groups = array();
-
-		foreach(Group::all() as $group)
-		{
-			$groups[$group->id] = $group->name;
-		}
 
 		$this->page->addBreadcrumb('Users', 'admin/users');
 		$this->page->addBreadcrumb('Create User');
 
-		$this->page->setContent('users::admin.user', compact('editing', 'user', 'groups'));
+		$this->page->setContent('users::admin.user', compact('editing', 'user'));
 	}
 
 	public function postCreateUser()
@@ -35,6 +29,7 @@ class UsersAdminController extends Controller {
 		$user->last_name = Input::get('last_name');
 		$user->group_id = Input::get('group');
 		$user->password = Input::get('password');
+		$user->password_confirmation = Input::get('password_confirmation');
 
 		if($user->save())
 		{
@@ -59,17 +54,10 @@ class UsersAdminController extends Controller {
 			return Redirect::back();
 		}
 
-		$groups = array();
-
-		foreach(Group::all() as $group)
-		{
-			$groups[$group->id] = $group->name;
-		}
-
 		$this->page->addBreadcrumb('Users', 'admin/users');
 		$this->page->addBreadcrumb('Create User');
 
-		$this->page->setContent('users::admin.user', compact('editing', 'user', 'groups'));
+		$this->page->setContent('users::admin.user', compact('editing', 'user'));
 	}
 
 	public function postEditUser($id)

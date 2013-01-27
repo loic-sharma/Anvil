@@ -4,15 +4,21 @@
 	<h3>Create a Post</h3>
 @endif
 
-{{ Form::open() }}
+<form method="POST" action="{{ $url->current() }}" accept-charset="utf-8">
 
-	{{ Form::text('title', Input::old('title', $post->title), array('class' => 'span12'))}}
+	<input type="text" name="title" value="{{ Input::old('title', $post->title) }}" class="span12">
 
-	{{ Form::textarea('content', Input::old('content', $post->content), array('class' => 'span12')) }}
+	<textarea name="content" rows="10" cols="50" class="span12">{{ Input::old('content', $post->content) }}</textarea>
 
 	<label class="checkbox">
-		{{ Form::checkbox('comments_enabled', 1, Input::old('comments_enabled', $post->comments_enabled)) }} Enable Comments.
+		@if(Input::old('comments_enabled', $post->comments_enabled))
+			<input checked="checked" type="checkbox" name="comments_enabled" value="1">
+		@else
+			<input type="checkbox" name="comments_enabled" value="1">
+		@endif
+
+		Enable Comments.
 	</label>
 
-	{{ Form::submit('Save', array('class' => 'btn')) }}
-{{ Form::close() }}
+	<input type="submit" value="Save" class="btn">
+</form>

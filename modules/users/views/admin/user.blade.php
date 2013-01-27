@@ -5,22 +5,30 @@
 @endif
 
 <div class="span6">
-	{{ Form::open() }}
+	<form method="POST" action="{{ $url->current() }}" accept-charset="utf-8">
 
-		{{ Form::text('email', Input::old('email', $user->email), array('class' => 'span6', 'placeholder' => 'Email'))}}
+		<input type="text" name="email" value="{{ Input::old('email', $user->email) }}" class="span6" placeholder="Email">
 
-		{{ Form::password('password', array('class' => 'span6', 'placeholder' => 'Password')) }}
+		<input type="password" name="password" class="span6" placeholder="Password">
 
-		{{ Form::password('password_confirmation', array('class' => 'span6', 'placeholder' => 'Confirm Password')) }}
+		<input type="password" name="password_confirmation" class="span6" placeholder="Confirm Password">
 
 		<hr>
 
-		{{ Form::text('first_name', Input::old('first_name', $user->first_name), array('class' => 'span6', 'placeholder' => 'First Name')) }}
+		<input type="text" name="first_name" value="{{ Input::old('first_name', $user->first_name) }}" class="span6" placeholder="First Name">
 
-		{{ Form::text('last_name', Input::old('last_name', $user->last_name), array('class' => 'span6', 'placeholder' => 'Last Name'))}}
+		<input type="text" name="last_name" value="{{ Input::old('last_name', $user->last_name) }}" class="span6" placeholder="Last Name">
 
-		{{ Form::select('group', $groups, Input::old('group', $user->group_id), array('class' => 'span6'))}}
+		<select name="group" class="span6">
+			@foreach($groups->get() as $group)
+				@if(Input::old('group', $user->group_id) == $group->id)
+					<option value="{{ $group->id }}" selected>{{ $group->name }}</option>
+				@else
+					<option value="{{ $group->id }}">{{ $group->name }}</option>
+				@endif
+			@endforeach
+		</select>
 
-		{{ Form::submit('Save', array('class' => 'btn')) }}
-	{{ Form::close() }}
+		<input type="submit" value="Save" class="btn">
+	</form>
 </div>

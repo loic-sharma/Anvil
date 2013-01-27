@@ -5,14 +5,13 @@
 @endif
 
 <div class="span6">
-	{{ Form::open() }}
+	<form method="POST" action="{{ $url->current() }}" accept-charset="utf-8">
+		<input type="text" value="{{ Input::old('title', $link->title) }}" class="span6" placeholder="Title">
 
-		{{ Form::text('title', Input::old('title', $link->title), array('class' => 'span6', 'placeholder' => 'Title'))}}
+		<input type="url" value="{{ Input::old('url', $link->url) }}" class="span6" placeholder="Url">
 
-		{{ Form::text('url', Input::old('url', $link->url), array('class' => 'span6', 'placeholder' => 'Url')) }}
+		<input type="required_power" value="{{ Input::old('required_power', $link->required_power) }}" class="span6" placeholder="Required Power">
 
-		{{ Form::text('required_power', Input::old('required_power', $link->required_power), array('class' => 'span6', 'placeholder' => 'Required Power')) }}
-
-		{{ Form::submit('Save', array('class' => 'btn')) }}
-	{{ Form::close() }}
+		<input type="submit" value="Save" class="btn">
+	</form>
 </div>
