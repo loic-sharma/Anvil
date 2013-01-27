@@ -2,11 +2,27 @@
 
 class ThemesPlugin {
 
+	/**
+	 * Get the paths to the themes.
+	 *
+	 * @return array
+	 */
 	public function getPaths()
 	{
 		$path = App::make('themes.path');
 
 		return glob($path.'/*');
+	}
+
+	/**
+	 * Verify that a theme exists.
+	 *
+	 * @param  string  $theme
+	 * @return bool
+	 */
+	public function exists($theme)
+	{
+		return is_dir(App::make('themes.path').'/'.$theme.'/');
 	}
 
 	/**

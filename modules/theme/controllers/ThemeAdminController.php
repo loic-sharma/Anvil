@@ -42,4 +42,28 @@ class ThemeAdminController extends Controller {
 
 		return Redirect::back()->withInput()->withError($errors);
 	}
+
+	public function getPreview($theme)
+	{
+		if(Plugins::get('themes')->exists($theme))
+		{
+			app()->setTheme($theme);	
+
+			$this->page->content = 'This is a preview.';
+		}
+
+		else
+		{
+			$error = new MessageBag(array(
+				'theme' => 'Theme does not exist.',
+			));
+
+			return Redirect::back()->withError($error);
+		}
+	}
+
+	public function getDelete($theme)
+	{
+
+	}
 }

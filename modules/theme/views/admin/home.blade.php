@@ -27,7 +27,6 @@
 					<td>{{ $theme->author }}</td>
 					<td>{{ $theme->version }}</td>
 					<td>
-						<a href="{{ $url->to('admin/theme/'. $theme->slug .'/enable') }}" class="btn btn-success">Enable</a>
 						<a href="{{ $url->to('admin/theme/'. $theme->slug .'/preview') }}" class="btn btn-success">Preview</a>
 						<a href="{{ $url->to('admin/theme/'. $theme->slug .'/delete') }}" class="btn btn-danger">Delete</a> 
 					</td>
