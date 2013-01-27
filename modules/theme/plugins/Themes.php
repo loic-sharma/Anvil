@@ -9,7 +9,7 @@ class ThemesPlugin {
 	 */
 	public function getPaths()
 	{
-		$path = App::make('themes.path');
+		$path = Cms::make('themes.path');
 
 		return glob($path.'/*');
 	}
@@ -22,7 +22,7 @@ class ThemesPlugin {
 	 */
 	public function exists($theme)
 	{
-		return is_dir(App::make('themes.path').'/'.$theme.'/');
+		return is_dir(Cms::make('themes.path').'/'.$theme.'/');
 	}
 
 	/**
@@ -32,7 +32,7 @@ class ThemesPlugin {
 	 */
 	public function get()
 	{
-		$themePath = App::make('themes.path');
+		$themePath = Cms::make('themes.path');
 		$themes = array();
 
 		foreach($this->getPaths() as $path)

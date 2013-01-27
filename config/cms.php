@@ -107,6 +107,7 @@ return array(
 
 		'Eloquent'   => 'Cms\Database\Eloquent',
 		'Autoloader' => 'Cms\Facades\Autoloader',
+		'Cms'        => 'Cms\Facades\Cms',
 		'Menu'       => 'Cms\Facades\Menu',
 		'Modules'    => 'Cms\Facades\Modules',
 		'Plugins'    => 'Cms\Facades\Plugins',

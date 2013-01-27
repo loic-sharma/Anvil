@@ -79,7 +79,7 @@ class PagePlugin {
 	 */
 	public function render()
 	{
-		$path = App::make('theme.path');
+		$path = Cms::make('theme.path');
 
 		if(file_exists($path.'/start.php'))
 		{
@@ -116,7 +116,7 @@ class PagePlugin {
 	 */
 	public function isHome()
 	{
-		return App::make('controller.router')->isHome();
+		return Cms::make('controller.router')->isHome();
 	}
 
 	/**
@@ -140,7 +140,7 @@ class PagePlugin {
 
 		if($addBaseBreadcrumb)
 		{
-			if(App::isAdmin())
+			if(Cms::isAdmin())
 			{
 				$name = 'Admin';
 				$link = Url::to('admin');

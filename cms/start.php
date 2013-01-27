@@ -206,7 +206,7 @@ Log::useDailyFiles(__DIR__.'/storage/logs/log.txt');
 
 /*
 |--------------------------------------------------------------------------
-| Application Error Handler
+| Cms Error Handler
 |--------------------------------------------------------------------------
 |
 | Here you may handle any errors that occur in your application, including
@@ -217,7 +217,7 @@ Log::useDailyFiles(__DIR__.'/storage/logs/log.txt');
 |
 */
 
-App::error(function(Exception $exception, $code)
+Cms::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
 });
