@@ -137,6 +137,21 @@ class Facade {
 		}
 	}
 
+	/**
+	 * Get a method's parameters.
+	 *
+	 * @return array
+	 */
+	protected function getParameters($method)
+	{
+		return $this->reflector()->getMethod($method)->getParameters();
+	}
+
+	/**
+	 * Get the instance of the plugin's reflection class.
+	 *
+	 * @return ReflectionClass
+	 */
 	protected function reflector()
 	{
 		if(is_null($this->reflector))
@@ -145,10 +160,5 @@ class Facade {
 		}
 
 		return $this->reflector;
-	}
-
-	protected function getParameters($method)
-	{
-		return $this->reflector()->getMethod($method)->getParameters();
 	}
 }
