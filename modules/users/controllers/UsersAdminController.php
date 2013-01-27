@@ -78,9 +78,10 @@ class UsersAdminController extends Controller {
 			$user->group_id = Input::get('group');
 
 			// Only save the password if one is inputted.
-			if(Input::get('password') != '')
+			if(Input::get('password') != '' and Input::get('password_confirmation') != '')
 			{
 				$user->password = Input::get('password');
+				$user->password_confirmation = Input::get('password_confirmation');
 			}
 
 			if($user->save())
