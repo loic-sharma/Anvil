@@ -51,6 +51,8 @@ class BlogAdminController extends Controller {
 
 		if($post->save())
 		{
+			Event::fire('post.create', compact('post'));
+
 			return Redirect::to('admin/blog/post/'.$post->id);
 		}
 
@@ -100,6 +102,8 @@ class BlogAdminController extends Controller {
 
 			if($post->save())
 			{
+				Event::fire('post.edit', compact('post'));
+
 				return Redirect::to('admin/blog/post/'.$id);
 			}
 
@@ -132,7 +136,13 @@ class BlogAdminController extends Controller {
 
 		if( ! is_null($post))
 		{
-			$post->delete();
+			$event = Event::fire('post.delete', compact('post'));
+
+			// Unless the event prevent deletion, delete the post.
+			if( ! isset($event->preventDelete) or $event->preventDelete == false)
+			{
+				$post->delete();
+			}
 
 			return Redirect::to('admin/blog');
 		}
