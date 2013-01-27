@@ -147,7 +147,7 @@ class Repository implements ArrayAccess {
 
 				// Load the module's start file, routes, filters, and plugin
 				// if they exist.
-				foreach(array('start', 'routes', 'filters', 'events', 'plugin') as $file)
+				foreach(array('start', 'routes', 'filters', 'events', 'plugins', 'plugin') as $file)
 				{
 					if(file_exists($path.$file.'.php'))
 					{
