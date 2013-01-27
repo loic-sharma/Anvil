@@ -1,9 +1,8 @@
 <?php namespace Cms\Modules;
 
-use ArrayAccess;
 use Composer\Autoload\ClassLoader;
 
-class Repository implements ArrayAccess {
+class Repository {
 
 	/**
 	 * The instance of the composer Class Loader.
@@ -173,25 +172,5 @@ class Repository implements ArrayAccess {
 
 			$this->booted[] = $module;
 		}
-	}
-
-	public function offsetExists($offset)
-	{
-		return isset($this->modules[$offset]);
-	}
-
-	public function offsetGet($offset)
-	{
-		return $this->modules[$offset];
-	}
-
-	public function offsetSet($offset, $value)
-	{
-		return $this->modules[$offset] = $value;
-	}
-
-	public function offsetUnset($offset)
-	{
-		unset($this->modules[$offset]);
 	}
 }
