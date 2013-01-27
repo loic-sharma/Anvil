@@ -24,7 +24,7 @@ class User extends Eloquent implements UserInterface {
 	/**
 	 * The model's validation rules.
 	 *
-	 * @return array
+	 * @var array
 	 */
 	public $rules = array(
 		'email'      => array('required', 'email', 'unique:users'),
@@ -33,6 +33,13 @@ class User extends Eloquent implements UserInterface {
 		'last_name'  => array('alpha_dash'),
 		'group_id'   => array('required', 'numeric'),
 	);
+
+	/**
+	 * The fields to hash before saving.
+	 *
+	 * @var array
+	 */
+	public $hash = array('password');
 
 	/**
 	 * Get the unique identifier for the user.
@@ -89,17 +96,6 @@ class User extends Eloquent implements UserInterface {
 	public function getPermissions($permissions)
 	{
 		return $this->group->getPermissions($permissions);
-	}
-
-	/**
-	 * Automatically hash the password when it is set.
-	 *
-	 * @param  string  $password
-	 * @return void
-	 */
-	public function setPassword($password)
-	{
-		$this->attributes['password'] = Hash::make($password);
 	}
 
 	/**

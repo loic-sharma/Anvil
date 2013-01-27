@@ -1,5 +1,6 @@
 <?php namespace Cms\Database;
 
+use Hash;
 use Validator;
 use Illuminate\Support\MessageBag;
 use Illuminate\Database\Eloquent\Model as IlluminateEloquent;
@@ -21,26 +22,32 @@ class Eloquent extends IlluminateEloquent {
 	protected $validator;
 
 	/**
+	 * The fields to hash before saving.
+	 *
+	 * @var array
+	 */
+	protected $hash = array();
+
+	/**
 	 * Validate the model, and if it passes, save it to the database.
 	 *
 	 * @return bool
 	 */
 	public function save()
 	{
-		if( ! empty($this->rules))
+		$this->validator = Validator::make($this->attributes, $this->rules);
+
+		if($this->validator->fails())
 		{
-			$this->validator = Validator::make($this->attributes, $this->rules);
-
-			if($this->validator->fails())
-			{
-				return false;
-			}
+			return false;
 		}
+		
+		else
+		{
+			$this->forceSave();
 
-		// The validation passed, save the model.
-		parent::save();
-
-		return true;
+			return true;
+		}
 	}
 
 	/**
@@ -51,7 +58,44 @@ class Eloquent extends IlluminateEloquent {
 	 */
 	public function forceSave()
 	{
+		$this->hashAttributes();
+		$this->removeConfirmationAttributes();
+
 		return parent::save();
+	}
+
+	/**
+	 * Hash attribrutes that are stored as hash.
+	 *
+	 * @return void
+	 */
+	public function hashAttributes()
+	{
+		foreach($this->hash as $attribute)
+		{
+			$this->attributes[$attribute] = Hash::make($this->attributes[$attribute]);
+		}
+	}
+
+	/**
+	 * Remove the attributes used to confirm field values.
+	 *
+	 * @return void
+	 */
+	public function removeConfirmationAttributes()
+	{
+		foreach($this->attributes as $key => $value)
+		{
+			if(strpos($key, '_confirmation') !== false)
+			{
+				$confirmedField = substr($key, 0, -13);
+
+				if(isset($this->attributes[$confirmedField]))
+				{
+					unset($this->attributes[$key]);
+				}
+			}
+		}
 	}
 
 	/**
