@@ -5,7 +5,7 @@
 		<tbody>
 			<tr>
 				<td>Title</td>
-				<td><input type="text" value="{{ Input::old('title', Settings::get('title')) }}"></td>
+				<td><input type="text" name="title" value="{{ Input::old('title', Settings::get('title')) }}"></td>
 			</tr>
 		</tbody>
 	</table>
