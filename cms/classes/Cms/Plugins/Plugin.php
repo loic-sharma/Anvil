@@ -1,5 +1,7 @@
 <?php namespace Cms\Plugins;
 
+use Illuminate\Database\Eloquent\Model as EloquentModel;
+
 abstract class Plugin {
 
 	/**
@@ -10,7 +12,14 @@ abstract class Plugin {
 	protected static $app;
 
 	/**
-	 * The attributes.
+	 * The plugin's model.
+	 *
+	 * @var Illuminate\Database\Eloquent\Model|string
+	 */
+	public $model;
+
+	/**
+	 * The current plugin call's attributes.
 	 *
 	 * @var array
 	 */
@@ -56,6 +65,64 @@ abstract class Plugin {
 		else
 		{
 			return $default;
+		}
+	}
+
+	/**
+	 * Redirect a method call to the plugin's method.
+	 *
+	 * @param  string  $method
+	 * @param  array   $args
+	 * @return mixed
+	 */
+	public function __call($method, $args)
+	{
+		if( ! is_null($this->model))
+		{
+			// Fetch an instance of the model.
+			if(is_object($this->model))
+			{
+				$model = $this->model;
+			}
+
+			else
+			{
+				$model = new $this->model;
+			}
+
+			// If this is an Eloquent model we'll need to fetch
+			// a new query to work with.
+			if($model instanceof EloquentModel)
+			{
+				$model = $model->newQuery();
+			}
+
+			switch (count($args))
+			{
+				case 0:
+					return $model->$method();
+
+				case 1:
+					return $model->$method($args[0]);
+
+				case 2:
+					return $model->$method($args[0], $args[1]);
+
+				case 3:
+					return $model->$method($args[0], $args[1], $args[2]);
+
+				case 4:
+					return $model->$method($args[0], $args[1], $args[2], $args[3]);
+
+				default:
+					return call_user_func_array(array($model, $method), $args);
+			}
+		}
+
+		else
+		{
+			// The plugin has no model, throw an exception.
+			throw new \Exception("Call to undefined method [$method].");
 		}
 	}
 }

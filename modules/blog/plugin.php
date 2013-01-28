@@ -5,6 +5,13 @@ use Blog\Post;
 class BlogPlugin extends Plugin {
 
 	/**
+	 * The plugin's model.
+	 *
+	 * @var string
+	 */
+	public $model = 'Blog\Post';
+
+	/**
 	 * Retrieve the blog posts.
 	 *
 	 * @param  int     $skip
