@@ -24,7 +24,8 @@ class CommentsAdminController extends Controller {
 		{
 			$comment->delete();
 
-			return Redirect::to('admin/comments');
+			return Redirect::to('admin/comments')
+				->with('message', 'Successfully deleted comment.');
 		}
 
 		else

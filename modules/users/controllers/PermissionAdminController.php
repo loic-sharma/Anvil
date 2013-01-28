@@ -49,7 +49,8 @@ class PermissionAdminController extends Controller {
 
 			if($permission->save())
 			{
-				return Redirect::to('admin/permission/'.$id.'/edit');
+				return Redirect::to('admin/permission/'.$id.'/edit')
+						->with('message', 'Successfully created permission.');
 			}
 
 			else

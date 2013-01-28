@@ -29,7 +29,8 @@ class GroupsAdminController extends Controller {
 
 		if($group->save())
 		{
-			return Redirect::to('admin/group/'.$group->id.'/edit');
+			return Redirect::to('admin/group/'.$group->id.'/edit')
+					->with('message', 'Successfully created group.');
 		}
 
 		else
@@ -60,7 +61,8 @@ class GroupsAdminController extends Controller {
 
 			if($group->save())
 			{
-				return Redirect::to('admin/group/'.$group->id.'/edit');
+				return Redirect::to('admin/group/'.$group->id.'/edit')
+						->with('message', 'Successfully edited group.');
 			}
 
 			else
@@ -88,6 +90,7 @@ class GroupsAdminController extends Controller {
 			$group->delete();
 		}
 
-		return Redirect::back();
+		return Redirect::back()
+				->with('message', 'Sucessfully deleted group.');
 	}
 }

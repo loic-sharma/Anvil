@@ -47,9 +47,9 @@ class PageAdminController extends Controller {
 
 		if(is_null($page))
 		{
-			$errors = new MessageBag;
-
-			$errors->add('page', 'Page does not exist.');
+			$errors = new MessageBag(array(
+				'page' => 'Page does not exist.',
+			));
 		}
 
 		else
@@ -60,7 +60,8 @@ class PageAdminController extends Controller {
 
 			if($page->save())
 			{
-				return Redirect::to('admin/page/'.$slug.'/edit');
+				return Redirect::to('admin/page/'.$slug.'/edit')
+						->with('message', 'Successfully edited page.');
 			}
 
 			else
@@ -69,6 +70,8 @@ class PageAdminController extends Controller {
 			}
 		}
 
-		return Redirect::back()->withInput()->withErrors($errors);
+		return Redirect::back()
+				->withInput()
+				->withErrors($errors);
 	}
 }

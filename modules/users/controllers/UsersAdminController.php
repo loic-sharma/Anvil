@@ -33,7 +33,8 @@ class UsersAdminController extends Controller {
 
 		if($user->save())
 		{
-			return Redirect::to('admin/users/'.$user->id.'/edit');
+			return Redirect::to('admin/users/'.$user->id.'/edit')
+					->with('message', 'Successfully created user.');
 		}
 
 		else
@@ -86,7 +87,8 @@ class UsersAdminController extends Controller {
 
 			if($user->save())
 			{
-				return Redirect::to('admin/users/'.$id.'/edit');
+				return Redirect::to('admin/users/'.$id.'/edit')
+						->with('message', 'Successfully edited user.');
 			}
 
 			else
@@ -107,6 +109,7 @@ class UsersAdminController extends Controller {
 			$user->delete();
 		}
 
-		return Redirect::to('admin/users');
+		return Redirect::to('admin/users')
+				->with('message', 'Successfully deleted user.');
 	}
 }

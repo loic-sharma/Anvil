@@ -26,7 +26,8 @@ class ThemeAdminController extends Controller {
 				{
 					Settings::set('theme', $theme->slug);
 
-					return Redirect::back();
+					return Redirect::back()
+						->with('message', 'Successfully changed theme.');
 				}
 			}
 

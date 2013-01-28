@@ -38,6 +38,12 @@
 				@endforeach
 			</ul>
 
+			@if(isset($message))
+				<div class="alert alert-success">
+					<span>{{ $message }}</span>
+				</div>
+			@endif
+
 			@foreach($errors->all(':message') as $error)
 				<div class="alert">
 					<span><b>Error:</b> {{ $error }}</span>

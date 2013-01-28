@@ -19,7 +19,8 @@ class SettingsAdminController extends Controller {
 		{
 			Settings::set('title', Input::get('title'));
 
-			return Redirect::to('admin/settings');
+			return Redirect::to('admin/settings')
+					->with('message', 'Successfully saved settings.');
 		}
 
 		else

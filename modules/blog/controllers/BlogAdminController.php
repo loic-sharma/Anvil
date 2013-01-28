@@ -53,7 +53,11 @@ class BlogAdminController extends Controller {
 		{
 			Event::fire('post.create', compact('post'));
 
-			return Redirect::to('admin/blog/post/'.$post->id);
+			$message  = 'Successfully created post. ';
+			$message .= '<a href="'.Url::to('blog/post/'.$post->id).'">View post</a>';
+
+			return Redirect::to('admin/blog/post/'.$post->id)
+				->with('message', $message);
 		}
 
 		else
@@ -104,14 +108,17 @@ class BlogAdminController extends Controller {
 			{
 				Event::fire('post.edit', compact('post'));
 
-				return Redirect::to('admin/blog/post/'.$id);
+				$message  = 'Successfully edited post. ';
+				$message .= '<a href="'.Url::to('blog/post/'.$post->id).'">View post</a>';
+
+				return Redirect::to('admin/blog/post/'.$id)
+					->with('message', $message);
 			}
 
 			else
 			{
 				$errors = $post->errors();
 			}
-
 		}
 
 		else
@@ -144,7 +151,8 @@ class BlogAdminController extends Controller {
 				$post->delete();
 			}
 
-			return Redirect::to('admin/blog');
+			return Redirect::to('admin/blog')
+				->with('message', 'Successfully deleted post.');
 		}
 
 		else

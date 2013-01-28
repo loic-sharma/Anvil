@@ -32,7 +32,8 @@ class NavigationAdminController extends Controller {
 
 		if($menu->save())
 		{
-			return Redirect::to('admin/navigation/menu/'.$menu->slug);
+			return Redirect::to('admin/navigation/menu/'.$menu->slug)
+				->with('menu', 'Successfully created menu.');
 		}
 
 		else
@@ -62,7 +63,8 @@ class NavigationAdminController extends Controller {
 			$links->delete();
 		}
 
-		return Redirect::to('admin/navigation');
+		return Redirect::to('admin/navigation')
+			->with('message', 'Sucessfully deleted menu.');
 	}
 
 	public function getCreateLink($menu)
@@ -101,7 +103,8 @@ class NavigationAdminController extends Controller {
 
 				$link->save();
 
-				return Redirect::to('admin/navigation/menu/'.$slug);
+				return Redirect::to('admin/navigation/menu/'.$slug)
+					->with('message', 'Successfully created link.');
 			}
 
 			else
@@ -149,7 +152,8 @@ class NavigationAdminController extends Controller {
 
 			if($link->save())
 			{
-				return Redirect::to('admin/navigation/link/'.$id.'/edit');
+				return Redirect::to('admin/navigation/link/'.$id.'/edit')
+					->with('message', 'Sucessfully edited link.');
 			}
 
 			else
@@ -165,7 +169,9 @@ class NavigationAdminController extends Controller {
 			));
 		}
 
-		return Redirect::to('admin/navigation/link/'.$id.'/edit')->withInput()->withErrors($errors);
+		return Redirect::to('admin/navigation/link/'.$id.'/edit')
+			->withInput()
+			->withErrors($errors);
 	}
 
 	public function getDeleteLink($menu, $id)
@@ -177,6 +183,7 @@ class NavigationAdminController extends Controller {
 			$link->delete();
 		}
 
-		return Redirect::to('admin/navigation/menu/'.$menu);
+		return Redirect::to('admin/navigation/menu/'.$menu)
+			->with('message', 'Sucessfully deleted link.');
 	}
 }
