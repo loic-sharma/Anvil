@@ -18,7 +18,7 @@
 					<td>{{ $link->requiredPower() }}</td>
 					<td>
 						<a href="{{ $url->to('admin/navigation/link/'.$link->id.'/edit') }}" class="btn btn-warning">Edit</a>
-						<a href="{{ $url->to('admin/navigation/menu/'.$link->group->slug.'/link/'.$link->id.'/delete') }}" class="btn btn-danger">Delete</a> 
+						<a href="{{ $url->to('admin/navigation/menu/'.$link->menu->slug.'/link/'.$link->id.'/delete') }}" class="btn btn-danger">Delete</a> 
 					</td>
 				</tr>
 			@endforeach

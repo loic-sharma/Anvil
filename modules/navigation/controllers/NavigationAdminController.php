@@ -1,8 +1,5 @@
 <?php
 
-use Navigation\Group;
-use Navigation\Link;
-
 class NavigationAdminController extends Controller {
 
 	public function getIndex()
@@ -15,7 +12,7 @@ class NavigationAdminController extends Controller {
 	public function getAddMenu()
 	{
 		$editing = false;
-		$menu = new Group;
+		$menu = new Navigation\Menu;
 
 		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
 		$this->page->addBreadcrumb('Add Menu');
@@ -25,7 +22,7 @@ class NavigationAdminController extends Controller {
 
 	public function postAddMenu()
 	{
-		$menu = new Group;
+		$menu = new Navigation\Menu;
 
 		$menu->title = Input::get('title');
 		$menu->slug = Input::get('slug');
@@ -44,7 +41,7 @@ class NavigationAdminController extends Controller {
 
 	public function getMenu($menu)
 	{
-		$links = Group::with('links')
+		$links = Navigation\Menu::with('links')
 			->where('slug', $menu)
 			->first()->links;
 
@@ -56,7 +53,7 @@ class NavigationAdminController extends Controller {
 
 	public function getDeleteMenu($menu)
 	{
-		$links = Group::where('slug', $menu)->first();
+		$links = Navigation\Menu::where('slug', $menu)->first();
 
 		if(  ! is_null($links))
 		{
@@ -72,10 +69,10 @@ class NavigationAdminController extends Controller {
 		$editing = false;
 
 		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
-		$this->page->addBreadcrumb('Group', 'admin/navigation/menu/'.$menu.'/edit');
+		$this->page->addBreadcrumb('Menu', 'admin/navigation/menu/'.$menu.'/edit');
 		$this->page->addBreadcrumb('Add Link');
 
-		$link = new Link;
+		$link = new Navigation\Link;
 
 		$this->page->setContent('navigation::admin.link', compact('editing', 'link'));
 	}
@@ -90,13 +87,13 @@ class NavigationAdminController extends Controller {
 
 		if($form->passes())
 		{
-			$menu = Group::where('slug', $slug)->first();
+			$menu = Navigation\Menu::where('slug', $slug)->first();
 
 			if( ! is_null($menu))
 			{
 				$link = new Link;
 
-				$link->group_id = $menu->id;
+				$link->menu_id = $menu->id;
 				$link->title = Input::get('title');
 				$link->url = Input::get('url');
 				$link->required_power = Input::get('required_power', NULL);
@@ -126,7 +123,7 @@ class NavigationAdminController extends Controller {
 	public function getEditLink($id)
 	{
 		$editing = true;
-		$link = Link::find($id);
+		$link = Navigation\Link::find($id);
 
 		if(is_null($link))
 		{
@@ -134,7 +131,7 @@ class NavigationAdminController extends Controller {
 		}
 
 		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
-		$this->page->addBreadcrumb('Menu', 'admin/navigation/menu/'.$link->group->slug);
+		$this->page->addBreadcrumb('Menu', 'admin/navigation/menu/'.$link->menu->slug);
 		$this->page->addBreadcrumb('Edit Link');
 
 		$this->page->setContent('navigation::admin.link', compact('editing', 'link'));
@@ -142,7 +139,7 @@ class NavigationAdminController extends Controller {
 
 	public function postEditLink($id)
 	{
-		$link = Link::find($id);
+		$link = Navigation\Link::find($id);
 
 		if( ! is_null($link))
 		{
@@ -176,7 +173,7 @@ class NavigationAdminController extends Controller {
 
 	public function getDeleteLink($menu, $id)
 	{
-		$link = Link::find($id);
+		$link = Navigation\Link::find($id);
 
 		if( ! is_null($link))
 		{

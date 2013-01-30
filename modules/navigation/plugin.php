@@ -1,16 +1,13 @@
 <?php
 
-use Navigation\Group;
-use Navigation\Link;
-
 class NavigationPlugin {
 
 	/**
-	 * All of the previously retrieve menus.
+	 * The menus that have already been retrieved.
 	 *
 	 * @var array
 	 */
-	public $menus = array();
+	public $loadedMenus = array();
 
 	/**
 	 * Get all of the navigation groups.
@@ -19,38 +16,60 @@ class NavigationPlugin {
 	 */
 	public function groups()
 	{
-		return Group::all();
+		return Navigation\Menu::all();
 	}
 
 	/**
 	 * Display a menu.
 	 *
-	 * @param  string  $group
+	 * @param  string  $name
 	 * @return string
 	 */
-	public function links($group)
+	public function menu($name)
 	{
-		return $this->getMenuLink($group)->render();
+		return $this->get($name)->render();
 	}
 
 	/**
 	 * Retrieve a menu.
 	 *
-	 * @param  string  $group
+	 * @param  string  $name
 	 * @return Menu\Items\Collection
 	 */
-	protected function getMenuLink($group)
+	protected function get($name)
 	{
-		$menu = Menu::get($group);
+		$menu = Menu::get($name);
 
-		if( ! in_array($group, $this->menus))
+		if( ! in_array($name, $this->loadedMenus))
 		{
-			$this->menus[] = $group;
+			// We first need to get all of the links that
+			// the current user has access to on the menu.
+			$links = $this->fetchLinks($name, Auth::user()->group->power);
 
-			$group = Navigation\Group::with(array('links' => function($query)
+			// Now, add the links to the menu.
+			$menu = $this->populateMenu($menu, $links);
+
+			$this->loadedMenus[] = $name;
+		}
+
+		return $menu;
+	}
+
+	/**
+	 * Fetch a menu's links.
+	 *
+	 * @param  string  $name
+	 * @param  int     $power
+	 * @return array
+	 */
+	public function fetchLinks($name, $power = null)
+	{
+		// Filter the links that do not fit the power's requirements if a
+		// power is given.
+		if( ! is_null($power))
+		{
+			$menu =  Navigation\Menu::with(array('links' => function($query) use($power)
 			{
-				$power = Auth::user()->group->power;
-
 				$query->where(function($query) use ($power)
 				{
 					$query->whereNull('required_power');
@@ -62,30 +81,55 @@ class NavigationPlugin {
 					$query->whereNull('max_power');
 					$query->orWhere('max_power', '>=', $power);
 				});
+			}));
+		}
 
-			}))->where('slug', '=', $group)->first();
+		// We'll just get all of the group's links if we
+		// weren't given a power.
+		else
+		{
+			$menu = Navigation\Menu::with('links');
+		}
 
-			if( ! is_null($group))
+		$menu = $menu->where('slug', '=', $name)->first();
+
+		if( ! is_null($menu))
+		{
+			return $menu->links;
+		}
+
+		else
+		{
+			return array();
+		}
+	}
+
+	/**
+	 * Add the menu's links to the menu.
+	 *
+	 * @param  Menu\Menu  $menu
+	 * @param  array      $links
+	 * @return Menu\Menu
+	 */
+	public function populateMenu($menu, $links)
+	{
+		foreach($links as $link)
+		{
+			$parent = $this->getParent($menu, $link);
+
+			$parent->add($link->title, function($item) use ($link)
 			{
-				foreach($group->links as $link)
-				{
-					$parent = $this->getParent($menu, $link);
+				$item['id']  = $link->id;
+				$item['url'] = $link->url;
+			});
 
-					$parent->add($link->title, function($item) use ($link)
-					{
-						$item['id']  = $link->id;
-						$item['url'] = $link->url;
- 					});
-
-					// Let's also add a dropdown.
-					$parent['li.class'] = 'dropdown';
-					$parent['a.role'] = 'button';
-					$parent['a.class'] = 'dropdown-toggle';
- 					$parent['a.data-toggle'] = 'dropdown';
- 					$parent['ul.class'] = 'dropdown-menu';
- 					$parent['ul.role'] = 'menu';
-				}
-			}
+			// Let's also add a dropdown.
+			$parent['li.class'] = 'dropdown';
+			$parent['a.role'] = 'button';
+			$parent['a.class'] = 'dropdown-toggle';
+			$parent['a.data-toggle'] = 'dropdown';
+			$parent['ul.class'] = 'dropdown-menu';
+			$parent['ul.role'] = 'menu';
 		}
 
 		return $menu;

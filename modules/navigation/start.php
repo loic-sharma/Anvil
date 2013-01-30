@@ -1,6 +1,6 @@
 <?php
 
 Autoloader::map(array(
-	'Navigation\Group' => __DIR__.'/models/Group.php',
+	'Navigation\Menu' => __DIR__.'/models/Menu.php',
 	'Navigation\Link'  => __DIR__.'/models/Link.php',
 ));

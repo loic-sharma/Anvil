@@ -82,12 +82,12 @@ class Link extends Eloquent {
 	}
 
 	/**
-	 * Get the link's navigation group.
+	 * Get the link's navigation menu.
 	 *
 	 * @return Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function group()
+	public function menu()
 	{
-		return $this->belongsTo('Navigation\Group');
+		return $this->belongsTo('Navigation\Menu');
 	}
 }

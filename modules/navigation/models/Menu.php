@@ -4,14 +4,14 @@ namespace Navigation;
 
 use Eloquent;
 
-class Group extends Eloquent {
+class Menu extends Eloquent {
 
 	/**
 	 * The model's table.
 	 *
 	 * @var string
 	 */
-	public $table = 'navigation_groups';
+	public $table = 'navigation_menus';
 
 	/**
 	 * Wether the table timestamps.
