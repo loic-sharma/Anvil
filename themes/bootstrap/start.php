@@ -19,7 +19,7 @@ Menu::filter(function($item)
 	{
 		if($item['a.href'] == Url::base())
 		{
-			if(app()->isHome() == true)
+			if(Cms::isHome() == true)
 			{
 				$item['li.class'] = 'active';
 			}
