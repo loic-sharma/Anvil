@@ -101,7 +101,7 @@ class NavigationAdminController extends Controller {
 
 			else
 			{
-				$errors = $form->messages();
+				$errors = $link->errors();
 			}
 		}
 
@@ -143,6 +143,8 @@ class NavigationAdminController extends Controller {
 
 			if($link->save())
 			{
+				Cache::flush();
+
 				return Redirect::to('admin/navigation/link/'.$id.'/edit')
 					->with('message', 'Sucessfully edited link.');
 			}
@@ -171,6 +173,8 @@ class NavigationAdminController extends Controller {
 
 		if( ! is_null($link))
 		{
+			Cache::flush();
+
 			$link->delete();
 		}
 
