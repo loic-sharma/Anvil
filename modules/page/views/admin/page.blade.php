@@ -8,7 +8,7 @@
 
 	<input type="text" name="title" value="{{ Input::old('title', $page->title) }}" class="span12">
 
-	<textarea name="content" class="span12">{{ Input::old('content', $page->content) }}</textarea>
+	<textarea name="content" rows="10" class="span12">{{ Input::old('content', $page->content) }}</textarea>
 
 	<label class="checkbox">
 		@if(Input::old('comments_enabled', $page->comments_enabled))
