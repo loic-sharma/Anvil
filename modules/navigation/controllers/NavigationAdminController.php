@@ -29,6 +29,8 @@ class NavigationAdminController extends Controller {
 
 		if($menu->save())
 		{
+			Cache::flush();
+
 			return Redirect::to('admin/navigation/menu/'.$menu->slug)
 				->with('menu', 'Successfully created menu.');
 		}
@@ -58,6 +60,8 @@ class NavigationAdminController extends Controller {
 		if(  ! is_null($links))
 		{
 			$links->delete();
+
+			Cache::flush();
 		}
 
 		return Redirect::to('admin/navigation')
@@ -79,26 +83,20 @@ class NavigationAdminController extends Controller {
 
 	public function postCreateLink($slug)
 	{
-		$form = Validator::make(Input::all(), array(
-			'title' => array('required'),
-			'url' => array('required', 'url'),
-			'required_power' => array('numeric'),
-		));
+		$menu = Navigation\Menu::where('slug', $slug)->first();
 
-		if($form->passes())
+		if( ! is_null($menu))
 		{
-			$menu = Navigation\Menu::where('slug', $slug)->first();
+			$link = new Navigation\Link;
 
-			if( ! is_null($menu))
+			$link->menu_id = $menu->id;
+			$link->title = Input::get('title');
+			$link->url = Input::get('url');
+			$link->required_power = Input::get('required_power', NULL);
+
+			if($link->save())
 			{
-				$link = new Link;
-
-				$link->menu_id = $menu->id;
-				$link->title = Input::get('title');
-				$link->url = Input::get('url');
-				$link->required_power = Input::get('required_power', NULL);
-
-				$link->save();
+				Cache::flush();
 
 				return Redirect::to('admin/navigation/menu/'.$slug)
 					->with('message', 'Successfully created link.');
@@ -106,15 +104,15 @@ class NavigationAdminController extends Controller {
 
 			else
 			{
-				$errors = new MessageBag(array(
-					'menu' => 'Menu does not exist.',
-				));
+				$errors = $form->messages();
 			}
 		}
 
 		else
 		{
-			$errors = $form->messages();
+			$errors = new MessageBag(array(
+				'menu' => 'Menu does not exist.',
+			));
 		}
 
 		return Redirect::back()->withErrors($errors);
