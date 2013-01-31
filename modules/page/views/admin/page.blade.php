@@ -1,4 +1,4 @@
-@if($editing)
+@if($page->exists)
 	<h3>Edit Page</h3>
 @else
 	<h3>Create Page</h3>
