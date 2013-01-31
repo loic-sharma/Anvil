@@ -108,4 +108,22 @@ class PageAdminController extends Controller {
 				->withInput()
 				->withErrors($errors);
 	}
+
+	/**
+	 * Delete a page.
+	 *
+	 * @return Illuminate\Http\RedirectResponse
+	 */
+	public function getDelete($slug)
+	{
+		$page = Page::where('slug', $slug)->first();
+
+		if( ! is_null($page))
+		{
+			$page->delete();
+
+			return Redirect::to('admin/page')
+					->with('message', 'Succesfully deleted page.');
+		}
+	}
 }
