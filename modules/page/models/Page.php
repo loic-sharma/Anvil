@@ -23,7 +23,28 @@ class Page extends Eloquent {
 	 */
 	public $rules = array(
 		'title'   => 'required',
+		'slug'    => 'required',
 		'content' => 'required',
 	);
 
+	/**
+	 * Fetch the model's layout.
+	 *
+	 * @param  string  $layout
+	 * @return string
+	 */
+	public function giveLayout($layout)
+	{
+		// If the page doesn't have a layout set we'll just
+		// use the default layout.
+		if(is_null($layout))
+		{
+			return 'default';
+		}
+
+		else
+		{
+			return $layout;
+		}
+	}
 }
