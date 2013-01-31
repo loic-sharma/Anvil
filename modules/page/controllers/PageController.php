@@ -17,9 +17,9 @@ class PageController extends Controller {
 			throw new HttpNotFoundException;
 		}
 
-		$this->page->addBreadcrumb($page->title);
-
 		$this->page->layout  = 'layouts.'.$page->layout;
+
+		$this->page->addBreadcrumb($page->title);
 
 		$this->page->setContent('page::home', compact('page'));
 	}
