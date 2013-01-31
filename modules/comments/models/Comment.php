@@ -32,7 +32,7 @@ class Comment extends Eloquent {
 	 *
 	 * @return string
 	 */
-	public function getAreaName()
+	public function giveAreaName()
 	{
 		$name = str_replace('-', ' ', $this->attributes['area']);
 
@@ -44,7 +44,7 @@ class Comment extends Eloquent {
 	 *
 	 * @return string
 	 */
-	public function getAreaLink()
+	public function giveAreaLink()
 	{
 		return Url::to(str_replace('-', '/', $this->attributes['area']));
 	}
@@ -54,7 +54,7 @@ class Comment extends Eloquent {
 	 *
 	 * @return string
 	 */
-	public function getDate()
+	public function giveDate()
 	{
 		return $this->attributes['created_at'];
 	}
@@ -74,7 +74,7 @@ class Comment extends Eloquent {
 	 *
 	 * @return string
 	 */
-	public function getContent()
+	public function giveContent()
 	{
 		return nl2br($this->attributes['content']);
 	}

@@ -93,7 +93,7 @@ class User extends Eloquent implements UserInterface {
 	 * Get the group's permission.
 	 *
 	 */
-	public function getPermissions($permissions)
+	public function givePermissions($permissions)
 	{
 		return $this->group->getPermissions($permissions);
 	}
