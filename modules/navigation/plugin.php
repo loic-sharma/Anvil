@@ -3,13 +3,6 @@
 class NavigationPlugin {
 
 	/**
-	 * The menus that have already been retrieved.
-	 *
-	 * @var array
-	 */
-	public $loadedMenus = array();
-
-	/**
 	 * Get all of the navigation groups.
 	 *
 	 * @return array
@@ -27,7 +20,12 @@ class NavigationPlugin {
 	 */
 	public function menu($name)
 	{
-		return $this->get($name)->render();
+		$power = Auth::user()->group->power;
+
+		return Cache::remember('navigation-'.$name.'-'.$power, 60, function() use($name, $power)
+		{
+			return $this->get($name, $power)->render();
+		});
 	}
 
 	/**
@@ -36,23 +34,16 @@ class NavigationPlugin {
 	 * @param  string  $name
 	 * @return Menu\Items\Collection
 	 */
-	protected function get($name)
+	protected function get($name, $power = null)
 	{
 		$menu = Menu::get($name);
 
-		if( ! in_array($name, $this->loadedMenus))
-		{
-			// We first need to get all of the links that
-			// the current user has access to on the menu.
-			$links = $this->fetchLinks($name, Auth::user()->group->power);
+		// We first need to get all of the links that
+		// the current user has access to on the menu.
+		$links = $this->fetchLinks($name, $power);
 
-			// Now, add the links to the menu.
-			$menu = $this->populateMenu($menu, $links);
-
-			$this->loadedMenus[] = $name;
-		}
-
-		return $menu;
+		// Now, add the links to the menu.
+		return $this->populateMenu($menu, $links);
 	}
 
 	/**
