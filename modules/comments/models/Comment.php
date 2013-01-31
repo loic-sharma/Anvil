@@ -66,7 +66,7 @@ class Comment extends Eloquent {
 	 */
 	public function date()
 	{
-		return ExpressiveDate::make($this->getDate())->getRelativeDate();
+		return ExpressiveDate::make($this->date)->getRelativeDate();
 	}
 
 	/**
