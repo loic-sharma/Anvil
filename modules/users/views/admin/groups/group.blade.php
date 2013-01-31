@@ -1,4 +1,4 @@
-@if($editing)
+@if($group->exists)
 	<h3>Edit Group</h3>
 @else
 	<h3>Create Group</h3>

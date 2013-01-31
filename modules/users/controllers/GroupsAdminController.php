@@ -11,13 +11,12 @@ class GroupsAdminController extends Controller {
 
 	public function getCreate()
 	{
-		$editing = false;
 		$group = new Group;
 
 		$this->page->addBreadcrumb('Groups', 'admin/groups');
 		$this->page->addBreadcrumb('Create Group');
 
-		$this->page->setContent('users::admin.groups.group', compact('editing', 'group'));
+		$this->page->setContent('users::admin.groups.group', compact('group'));
 	}
 
 	public function postCreate()
@@ -41,13 +40,12 @@ class GroupsAdminController extends Controller {
 
 	public function getEdit($id)
 	{
-		$editing = true;
 		$group = Group::find($id);
 
 		$this->page->addBreadcrumb('Groups', 'admin/groups');
 		$this->page->addBreadcrumb('Edit Group');
 
-		$this->page->setContent('users::admin.groups.group', compact('editing', 'group'));
+		$this->page->setContent('users::admin.groups.group', compact('group'));
 	}
 
 	public function postEdit($id)

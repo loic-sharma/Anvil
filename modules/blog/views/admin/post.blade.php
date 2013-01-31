@@ -1,7 +1,7 @@
-@if($editing)
+@if($post->exists)
 	<h3>Edit Post</h3>
 @else
-	<h3>Create a Post</h3>
+	<h3>Create Post</h3>
 @endif
 
 <form method="POST" action="{{ $url->current() }}" accept-charset="utf-8">

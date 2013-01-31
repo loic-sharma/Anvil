@@ -11,13 +11,12 @@ class UsersAdminController extends Controller {
 
 	public function getCreateUser()
 	{
-		$editing = false;
 		$user = new User;
 
 		$this->page->addBreadcrumb('Users', 'admin/users');
 		$this->page->addBreadcrumb('Create User');
 
-		$this->page->setContent('users::admin.user', compact('editing', 'user'));
+		$this->page->setContent('users::admin.user', compact('user'));
 	}
 
 	public function postCreateUser()
@@ -47,7 +46,6 @@ class UsersAdminController extends Controller {
 
 	public function getEditUser($id)
 	{
-		$editing = true;
 		$user = User::find($id);
 
 		if(is_null($user))
@@ -58,7 +56,7 @@ class UsersAdminController extends Controller {
 		$this->page->addBreadcrumb('Users', 'admin/users');
 		$this->page->addBreadcrumb('Create User');
 
-		$this->page->setContent('users::admin.user', compact('editing', 'user'));
+		$this->page->setContent('users::admin.user', compact('user'));
 	}
 
 	public function postEditUser($id)

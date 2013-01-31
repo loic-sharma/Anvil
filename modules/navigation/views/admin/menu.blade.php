@@ -1,4 +1,4 @@
-@if($editing)
+@if($menu->exists)
 	<h3>Edit Menu</h3>
 @else
 	<h3>Add Menu</h3>

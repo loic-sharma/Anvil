@@ -11,13 +11,12 @@ class NavigationAdminController extends Controller {
 
 	public function getAddMenu()
 	{
-		$editing = false;
 		$menu = new Navigation\Menu;
 
 		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
 		$this->page->addBreadcrumb('Add Menu');
 
-		$this->page->setContent('navigation::admin.menu', compact('editing', 'menu'));
+		$this->page->setContent('navigation::admin.menu', compact('menu'));
 	}
 
 	public function postAddMenu()
@@ -70,15 +69,13 @@ class NavigationAdminController extends Controller {
 
 	public function getCreateLink($menu)
 	{
-		$editing = false;
-
 		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
 		$this->page->addBreadcrumb('Menu', 'admin/navigation/menu/'.$menu.'/edit');
 		$this->page->addBreadcrumb('Add Link');
 
 		$link = new Navigation\Link;
 
-		$this->page->setContent('navigation::admin.link', compact('editing', 'link'));
+		$this->page->setContent('navigation::admin.link', compact('link'));
 	}
 
 	public function postCreateLink($slug)
@@ -120,7 +117,6 @@ class NavigationAdminController extends Controller {
 
 	public function getEditLink($id)
 	{
-		$editing = true;
 		$link = Navigation\Link::find($id);
 
 		if(is_null($link))
@@ -132,7 +128,7 @@ class NavigationAdminController extends Controller {
 		$this->page->addBreadcrumb('Menu', 'admin/navigation/menu/'.$link->menu->slug);
 		$this->page->addBreadcrumb('Edit Link');
 
-		$this->page->setContent('navigation::admin.link', compact('editing', 'link'));
+		$this->page->setContent('navigation::admin.link', compact('link'));
 	}
 
 	public function postEditLink($id)

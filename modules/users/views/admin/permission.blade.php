@@ -1,4 +1,4 @@
-@if($editing)
+@if($permission->exists)
 	<h3>Edit Permission</h3>
 @else
 	<h3>Create Permission</h3>

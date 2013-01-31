@@ -25,4 +25,4 @@
 	</tbody>
 </table>
 
-<a href="{{ $url->to('admin/blog/post/create') }}" class="btn">Create a new Post</a>
+<a href="{{ $url->to('admin/blog/post/create') }}" class="btn">Create Post</a>

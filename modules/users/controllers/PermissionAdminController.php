@@ -13,8 +13,6 @@ class PermissionAdminController extends Controller {
 
 	public function getEditPermission($id)
 	{
-		$editing = true;
-
 		$permission = Permission::find($id);
 
 		if(is_null($permission))
@@ -25,7 +23,7 @@ class PermissionAdminController extends Controller {
 		$this->page->addBreadcrumb('Permissions', 'admin/permissions');
 		$this->page->addBreadcrumb('Permission');
 
-		$this->page->setContent('users::admin.permission', compact('editing', 'permission'));
+		$this->page->setContent('users::admin.permission', compact('permission'));
 	}
 
 	public function postEditPermission($id)

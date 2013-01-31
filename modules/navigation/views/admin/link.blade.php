@@ -1,4 +1,4 @@
-@if($editing)
+@if($link->exists)
 	<h3>Edit Link</h3>
 @else
 	<h3>Add Link</h3>

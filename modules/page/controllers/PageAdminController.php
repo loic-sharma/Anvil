@@ -15,13 +15,12 @@ class PageAdminController extends Controller {
 
 	public function getCreate()
 	{
-		$editing = false;
 		$page = new Page;
 
 		$this->page->addBreadcrumb('Pages', 'admin/page');
 		$this->page->addBreadcrumb('Add Page');
 
-		$this->page->setContent('page::admin.page', compact('editing', 'page'));
+		$this->page->setContent('page::admin.page', compact('page'));
 	}
 
 	public function postCreate()
@@ -53,7 +52,6 @@ class PageAdminController extends Controller {
 	 */
 	public function getEdit($slug)
 	{
-		$editing = true;
 		$page = Page::where('slug', $slug)->first();
 
 		if(is_null($page))
@@ -66,7 +64,7 @@ class PageAdminController extends Controller {
 			$this->page->addBreadcrumb('Pages', 'admin/page');
 			$this->page->addBreadcrumb('Edit Page');
 			
-			$this->page->setContent('page::admin.page', compact('editing', 'page'));
+			$this->page->setContent('page::admin.page', compact('page'));
 		}
 	}
 

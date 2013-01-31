@@ -23,7 +23,6 @@ class BlogAdminController extends Controller {
 	 */
 	public function getCreatePost()
 	{
-		$editing = false;
 		$post = new Post;
 
 		// By default we'll enable comments.
@@ -32,7 +31,7 @@ class BlogAdminController extends Controller {
 		$this->page->addBreadcrumb('Blog', 'admin/blog');
 		$this->page->addBreadcrumb('Create Post');
 
-		$this->page->setContent('blog::admin.post', compact('editing', 'post'));
+		$this->page->setContent('blog::admin.post', compact('post'));
 	}
 
 	/**
@@ -57,12 +56,14 @@ class BlogAdminController extends Controller {
 			$message .= '<a href="'.Url::to('blog/post/'.$post->id).'">View post</a>';
 
 			return Redirect::to('admin/blog/post/'.$post->id)
-				->with('message', $message);
+					->with('message', $message);
 		}
 
 		else
 		{
-			return Redirect::back()->withInput()->withErrors($post->errors());
+			return Redirect::back()
+					->withInput()
+					->withErrors($post->errors());
 		}
 	}
 
@@ -74,7 +75,6 @@ class BlogAdminController extends Controller {
 	 */
 	public function getPost($id)
 	{
-		$editing = true;
 		$post = Post::find($id);
 
 		if(is_null($post))
@@ -85,7 +85,7 @@ class BlogAdminController extends Controller {
 		$this->page->addBreadcrumb('Blog', 'admin/blog');
 		$this->page->addBreadcrumb('Post');
 
-		$this->page->setContent('blog::admin.post', compact('editing', 'post'));
+		$this->page->setContent('blog::admin.post', compact('post'));
 	}
 
 	/**
@@ -128,7 +128,9 @@ class BlogAdminController extends Controller {
 			));
 		}
 
-		return Redirect::back()->withInput()->withErrors($errors);
+		return Redirect::back()
+				->withInput()
+				->withErrors($errors);
 	}
 
 	/**
@@ -152,7 +154,7 @@ class BlogAdminController extends Controller {
 			}
 
 			return Redirect::to('admin/blog')
-				->with('message', 'Successfully deleted post.');
+					->with('message', 'Successfully deleted post.');
 		}
 
 		else

@@ -1,4 +1,4 @@
-@if($editing)
+@if($user->exists)
 	<h3>Edit User</h3>
 @else
 	<h3>Create User</h3>
