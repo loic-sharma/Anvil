@@ -1,4 +1,8 @@
-<h3>Edit Page</h3>
+@if($editing)
+	<h3>Edit Page</h3>
+@else
+	<h3>Create Page</h3>
+@endif
 
 <form method="POST" action="{{ $url->current() }}" accept-charset="utf-8">
 
@@ -11,7 +15,7 @@
 			<input type="checkbox" name="comments_enabled" value="1" checked="checked">
 		@else
 			<input type="checkbox" name="comments_enabled" value="1">	
-		@end
+		@endif
 		Enable Comments.
 	</label>
 

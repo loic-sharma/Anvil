@@ -13,6 +13,39 @@ class PageAdminController extends Controller {
 		$this->page->setContent('page::admin.home');
 	}
 
+	public function getCreate()
+	{
+		$editing = false;
+		$page = new Page;
+
+		$this->page->addBreadcrumb('Pages', 'admin/page');
+		$this->page->addBreadcrumb('Add Page');
+
+		$this->page->setContent('page::admin.page', compact('editing', 'page'));
+	}
+
+	public function postCreate()
+	{
+		$page = new Page;
+
+		$page->title = Input::get('title');
+		$page->slug = strtolower(str_replace(' ', '-', $page->title));
+		$page->content = Input::get('content');
+		$page->comments_enabled = Input::get('comments_enabled', 0);
+
+		if($page->save())
+		{
+			return Redirect::to('admin/page/'.$page->slug.'/edit');
+		}
+
+		else
+		{
+			return Redirect::to('admin/page/create')
+					->withInput()
+					->withErrors($page->errors());
+		}
+	}
+
 	/**
 	 * Show the form to edit a page.
 	 *
@@ -20,6 +53,7 @@ class PageAdminController extends Controller {
 	 */
 	public function getEdit($slug)
 	{
+		$editing = true;
 		$page = Page::where('slug', $slug)->first();
 
 		if(is_null($page))
@@ -29,10 +63,10 @@ class PageAdminController extends Controller {
 
 		else
 		{
-			$this->page->addBreadcrumb('Pages', 'admin/pages');
+			$this->page->addBreadcrumb('Pages', 'admin/page');
 			$this->page->addBreadcrumb('Edit Page');
 			
-			$this->page->setContent('page::admin.edit', compact('page'));
+			$this->page->setContent('page::admin.page', compact('editing', 'page'));
 		}
 	}
 

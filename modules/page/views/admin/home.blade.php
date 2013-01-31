@@ -24,3 +24,5 @@
 		@endforeach
 	</tbody>
 </table>
+
+<a href="{{ $url->to('admin/page/create') }}" class="btn">Create Page</a>
