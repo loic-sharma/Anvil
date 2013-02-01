@@ -12,7 +12,7 @@
 	<tbody>
 		@foreach($pages->get() as $page)
 			<tr>
-				<td>{{ $page->title }}</td>
+				<td><a href="{{ $url->to('page/'.$page->slug) }}">{{ $page->title }}</a></td>
 				<td>{{ $page->layout }}</td>
 				<td>{{ $page->slug }}</td>
 				<td>
