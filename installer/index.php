@@ -6,6 +6,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Foundation\ProviderRepository;
+use Illuminate\Routing\Router;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use Illuminate\Foundation\ProviderRepository;
 |
 */
 
-$autoloader = include __DIR__.'/vendor/autoload.php';
+$autoloader = require_once __DIR__.'/../cms/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -178,6 +179,17 @@ Request::enableHttpMethodParameterOverride();
 
 /*
 |--------------------------------------------------------------------------
+| Register The View Path
+|--------------------------------------------------------------------------
+|
+| The installer uses a special view path. Set that here.
+|
+*/
+
+$cms['config']['view.paths'] = array($cms['path'].'/views/');
+
+/*
+|--------------------------------------------------------------------------
 | Register The Core Service Providers
 |--------------------------------------------------------------------------
 |
@@ -187,55 +199,19 @@ Request::enableHttpMethodParameterOverride();
 |
 */
 
-$services = new ProviderRepository(new Filesystem, $config['cms']['manifest']);
+$providers = array(
+	'Illuminate\Cookie\CookieServiceProvider',
+	'Illuminate\Routing\ControllerServiceProvider',
+	'Illuminate\Database\DatabaseServiceProvider',
+	'Illuminate\Filesystem\FilesystemServiceProvider',
+	'Illuminate\Encryption\EncryptionServiceProvider',
+	'Illuminate\Session\SessionServiceProvider',
+	'Illuminate\View\ViewServiceProvider',
+);
 
-$services->load($cms, $config['cms']['providers']);
-
-/*
-|--------------------------------------------------------------------------
-| Application Error Logger
-|--------------------------------------------------------------------------
-|
-| Here we will configure the error logger setup for the application which
-| is built on top of the wonderful Monolog library. By default we will
-| build a rotating log file setup which creates a new file each day.
-|
-*/
-
-Log::useDailyFiles(__DIR__.'/storage/logs/log.txt');
-
-/*
-|--------------------------------------------------------------------------
-| Cms Error Handler
-|--------------------------------------------------------------------------
-|
-| Here you may handle any errors that occur in your application, including
-| logging them or displaying custom views for specific errors. You may
-| even register several error handlers to handle different types of
-| exceptions. If nothing is returned, the default error view is
-| shown, which includes a detailed stack trace during debug.
-|
-*/
-
-Cms::error(function(Exception $exception, $code)
+foreach($providers as $provider)
 {
-	Log::error($exception);
-});
-
-/*
-|--------------------------------------------------------------------------
-| Install the CMS
-|--------------------------------------------------------------------------
-|
-| The installation process creates database configuration. If they don't
-| exist then the CMS needs to be installed.
-|
-*/
-
-if(empty($config['database']))
-{
-	header('Location: '.$cms['url']->base().'installer/');
-	exit;
+	$cms->register(new $provider($cms));
 }
 
 /*
@@ -253,53 +229,23 @@ Session::start($cms['cookie']);
 
 /*
 |--------------------------------------------------------------------------
-| Register Plugins
+| Load the Installation routes.
 |--------------------------------------------------------------------------
 |
-| Plugins are classes that are directly injected into view. Load the
-| core plugins nows.
+| The installer stores all of its routes in the routes file. Let's boot
+| that up now that everything else is already loaded.
 |
 */
 
-Plugins::register('url', new Cms\Plugins\UrlPlugin);
+include $cms['path'].'/routes.php';
 
 /*
 |--------------------------------------------------------------------------
-| Load The CMS Modules
+| Run the Installer.
 |--------------------------------------------------------------------------
 |
-| Allow the modules to bootstrap their code. This happens before the CMS
-| attempts to detect the default route so that module's routes have
-| precedence over the CMS's.
+| Everything is set up. Let's run the installer!
 |
 */
 
-foreach(Modules::get() as $module => $details)
-{
-	Modules::boot($module);
-}
-
-/*
-|--------------------------------------------------------------------------
-| Load the CMS's filters.
-|--------------------------------------------------------------------------
-|
-| The filters manage the user's access to sensitive routes.
-|
-*/
-
-include __DIR__.'/filters.php';
-
-/*
-|--------------------------------------------------------------------------
-| Start The CMS
-|--------------------------------------------------------------------------
-|
-| Each action corresponds, by default, to a module and a controller.
-| Although a module may have already registered a route that matches the
-| request, the CMS will still register a default route. Note that any
-| routes registered after the default route will be ignored.
-|
-*/
-
-$cms->start($cms['request'], $cms['settings'], $cms['router']);
+$cms['router']->dispatch(Request::createFromGlobals())->send();
