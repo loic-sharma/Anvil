@@ -1,6 +1,7 @@
 <?php namespace Cms\Modules;
 
 use Cms;
+use Illuminate\Filesystem\Filesystem;
 use Composer\Autoload\ClassLoader;
 
 class Repository {
@@ -41,8 +42,12 @@ class Repository {
 	 * @param  string           $path
 	 * @return void
 	 */
-	public function __construct(ClassLoader $autoloader, LoaderInterface $loader, $path)
+	public function __construct(Filesystem $filesystem,
+                                ClassLoader $autoloader,
+                                LoaderInterface $loader,
+                                $path)
 	{
+		$this->filesystem = $filesystem;
 		$this->autoloader = $autoloader;
 		$this->modules = $loader->get();
 		$this->path = $path;
@@ -121,7 +126,7 @@ class Repository {
 			return true;
 		}
 
-		return is_dir($this->getPath($module));
+		return $this->filesystem->isDirectory($this->getPath($module));
 	}
 
 	/**
@@ -150,14 +155,10 @@ class Repository {
 				$this->autoloader->add(null, $directories);
 				$this->autoloader->add(ucfirst($module), $path.'classes');
 
-				// Load the module's start file, routes, filters, and plugin
-				// if they exist.
-				foreach(array('start', 'routes', 'filters', 'events', 'plugin') as $file)
+				// Load the module's start files.
+				foreach($this->filesystem->files($path) as $file)
 				{
-					if(file_exists($path.$file.'.php'))
-					{
-						include $path.$file.'.php';
-					}
+					$this->filesystem->requireOnce($file);
 				}
 
 				$plugin = ucfirst($module).'Plugin';

@@ -53,7 +53,7 @@ class ModuleServiceProvider extends ServiceProvider {
 	{
 		$this->app['modules'] = $this->app->share(function($app)
 		{
-			return new ModuleRepository($app['autoloader'], $app['module.loader'], $app['module.path']);
+			return new ModuleRepository($app['files'], $app['autoloader'], $app['module.loader'], $app['module.path']);
 		});
 	}
 
