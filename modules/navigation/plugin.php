@@ -58,6 +58,8 @@ class NavigationPlugin {
 	{
 		// Filter the links that do not fit the power's requirements if a
 		// power is given.
+		$links = 'links';
+
 		if( ! is_null($power))
 		{
 			$links = array('links' => function($query) use($power)
@@ -74,13 +76,6 @@ class NavigationPlugin {
 					$query->orWhere('max_power', '>=', $power);
 				});
 			});
-		}
-
-		// We'll just get all of the group's links if we
-		// weren't given a power.
-		else
-		{
-			$links = 'links';
 		}
 
 		$menu = Navigation\Menu::with($links)
