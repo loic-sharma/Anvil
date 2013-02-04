@@ -60,7 +60,7 @@ class NavigationPlugin {
 		// power is given.
 		if( ! is_null($power))
 		{
-			$menu =  Navigation\Menu::with(array('links' => function($query) use($power)
+			$links = array('links' => function($query) use($power)
 			{
 				$query->where(function($query) use ($power)
 				{
@@ -73,17 +73,20 @@ class NavigationPlugin {
 					$query->whereNull('max_power');
 					$query->orWhere('max_power', '>=', $power);
 				});
-			}));
+			});
 		}
 
 		// We'll just get all of the group's links if we
 		// weren't given a power.
 		else
 		{
-			$menu = Navigation\Menu::with('links');
+			$links = 'links';
 		}
 
-		$menu = $menu->where('slug', '=', $name)->first();
+		$menu = Navigation\Menu::with($links)
+					->where('slug', '=', $name)
+					->first();
+
 
 		if( ! is_null($menu))
 		{
