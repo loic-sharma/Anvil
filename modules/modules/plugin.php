@@ -19,8 +19,6 @@ class ModulesPlugin {
 				$moduleName = str_replace(Cms::make('module.path').'/', '', $path);
 				$moduleName = ucfirst($moduleName).'Module';
 
-				include $path.'/module.php';
-
 				$module = new $moduleName;
 
 				// These settings are not requrired. If they aren't set,
