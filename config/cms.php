@@ -56,7 +56,8 @@ return array(
 		'Cms\Providers\SessionServiceProvider',
 		'Cms\Providers\SettingsServiceProvider',
 		'Cms\Providers\MenuServiceProvider',
-		'Cms\Providers\ProfilerServiceProvider',
+
+		'Profiler\ProfilerServiceProvider',
 	),
 
 	/*
