@@ -22,10 +22,7 @@ class NavigationPlugin {
 	{
 		$power = Auth::user()->group->power;
 
-		return Cache::remember('navigation-'.$name.'-'.$power, 60, function() use($name, $power)
-		{
-			return $this->get($name, $power)->render();
-		});
+		return $this->get($name, $power)->render();
 	}
 
 	/**
@@ -37,10 +34,14 @@ class NavigationPlugin {
 	protected function get($name, $power = null)
 	{
 		$menu = Menu::get($name);
+		$me = $this;
 
-		// We first need to get all of the links that
-		// the current user has access to on the menu.
-		$links = $this->fetchLinks($name, $power);
+		// We first need to get all of the links that the current user
+		// has access to on the menu. We'll cache these links too.
+		$links = Cache::remember('navigation-links-'.$name.'-'.$power, 60, function() use($me, $name, $power)
+		{
+			return $me->fetchLinks($name, $power);
+		});
 
 		// Now, add the links to the menu.
 		return $this->populateMenu($menu, $links);
