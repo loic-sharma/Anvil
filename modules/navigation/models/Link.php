@@ -38,7 +38,7 @@ class Link extends Eloquent {
 	 * @param  string  $url
 	 * @return string
 	 */
-	public function giveUrl($url)
+	public function getUrlAttribute($url)
 	{
 		if($url == '/' or $url == '{url}/')
 		{

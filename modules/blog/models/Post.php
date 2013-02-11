@@ -43,7 +43,7 @@ class Post extends Eloquent {
 		return $this->belongsTo('User');
 	}
 
-	public function giveComments()
+	public function getCommentsAttribute()
 	{
 		return Comment::where('area', 'blog-post-'.$this->attributes['id'])->get();
 	}

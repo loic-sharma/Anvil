@@ -165,6 +165,6 @@ class PagePlugin {
 	 */
 	public function loadTime()
 	{
-		return round(microtime(true) - CMS_START, 4);
+		return round(microtime(true) - LARAVEL_START, 4);
 	}
 }

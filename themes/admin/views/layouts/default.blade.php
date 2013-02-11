@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-		{{ $theme->assets('css') }}
+		{{{ $theme->assets('css') }}}
 	</head>
 
 	<body>
@@ -17,7 +17,7 @@
 			
 					<div class="navbar-content">
 						<ul class="nav">
-							{{ $navigation->menu('admin') }}
+							{{{ $navigation->menu('admin') }}}
 						</ul>
 					</div>
 				</div>
@@ -50,9 +50,9 @@
 				</div>
 			@endforeach
 
-			{{ $page->content() }}
+			{{{ $page->content() }}}
 		</div>
 
-		{{ $theme->assets('js') }}
+		{{{ $theme->assets('js') }}}
 	</body>
 </html>

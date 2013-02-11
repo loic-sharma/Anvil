@@ -49,7 +49,7 @@ class Group extends Model {
 	 *
 	 * @return array
 	 */
-	public function givePermissions()
+	public function getPermissionsAttribute()
 	{
 		$name = $this->name;
 		$power = $this->power;

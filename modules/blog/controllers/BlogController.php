@@ -12,11 +12,10 @@ class BlogController extends Controller {
 	public function getIndex()
 	{
 		$posts = Post::orderBy('created_at', 'desc')->get();
-		$event = Event::fire('posts.get', compact('posts'));
-
+		
 		$this->page->addBreadcrumb('Blog');
 
-		$this->page->setContent('blog::posts', array('posts' => $event->posts));
+		$this->page->setContent('blog::posts', array('posts' => $posts));
 	}
 
 	/**
@@ -27,8 +26,7 @@ class BlogController extends Controller {
 	 */
 	public function getPost($id)
 	{
-		$post  = Post::find($id);
-		$event = Event::fire('post.get', compact('post'));
+		$post = Post::find($id);
 
 		if(is_null($post))
 		{
@@ -38,6 +36,6 @@ class BlogController extends Controller {
 		$this->page->addBreadcrumb('Blog', 'blog');
 		$this->page->addBreadcrumb('Post');
 
-		$this->page->setContent('blog::post', array('post' => $event->post));
+		$this->page->setContent('blog::post', compact('post'));
 	}
 }

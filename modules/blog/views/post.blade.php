@@ -7,5 +7,5 @@
 @if($post->comments_enabled)
 	<hr>
 
-	{{ $comments->show('blog-post-'.$post->id) }}
+	{{{ $comments->show('blog-post-'.$post->id) }}}
 @endif
