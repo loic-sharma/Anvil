@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+	<head>
+		<title><?php echo e($page->title()); ?></title>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+		<?php echo $theme->assets('css'); ?>
+	</head>
+
+	<body>
+		<?php echo $theme->partial('navigation'); ?>
+
+		<div class="container">
+
+			<?php echo $theme->partial('breadcrumbs'); ?>
+			<?php echo $theme->partial('errors'); ?>
+
+			<div class="row">
+				<div class="span8">
+					<?php echo $page->content(); ?>
+				</div>
+
+				<?php echo $theme->partial('sidebar'); ?>
+			</div>
+		</div>
+
+		<?php echo $theme->assets('js'); ?>
+	</body>
+</html>

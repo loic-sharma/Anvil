@@ -4,23 +4,23 @@ define('LARAVEL_START', microtime(true));
 
 /*
 |--------------------------------------------------------------------------
-| Load the CMS
+| Load Anvil
 |--------------------------------------------------------------------------
 |
-| We need to load the CMS. This includes the vendor components that the CMS
-| depends on, as well as the modules that run on the CMS.
+| We need to load Anvil. This includes the vendor components that Anvil
+| depends on, as well as the modules that run on ANvil.
 |
 */
 
-include 'cms/start.php';
+include 'anvil/start.php';
 
 /*
 |--------------------------------------------------------------------------
-| Run The CMS
+| Run Anvil
 |--------------------------------------------------------------------------
 |
 | Now that everything is set up, let's run the request.
 |
 */
 
-$cms->run();
+$anvil->run();

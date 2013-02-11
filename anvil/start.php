@@ -56,7 +56,7 @@ $autoloader = include __DIR__.'/vendor/autoload.php';
 |
 */
 
-$cms = new Cms\Application;
+$anvil = new Cms\Application;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,7 +69,7 @@ $cms = new Cms\Application;
 |
 */
 
-$cms->bindInstallPaths(require __DIR__.'/paths.php');
+$anvil->bindInstallPaths(require __DIR__.'/paths.php');
 
 /*
 |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ $cms->bindInstallPaths(require __DIR__.'/paths.php');
 |
 */
 
-$cms->bind('autoloader', function() use($autoloader)
+$anvil->bind('autoloader', function() use($autoloader)
 {
 	return $autoloader;
 });
@@ -96,7 +96,7 @@ $cms->bind('autoloader', function() use($autoloader)
 |
 */
 
-$env = $cms->detectEnvironment(array(
+$env = $anvil->detectEnvironment(array(
 
 	'local' => array('your-machine-name'),
 
@@ -115,7 +115,7 @@ $env = $cms->detectEnvironment(array(
 
 Facade::clearResolvedInstances();
 
-Facade::setFacadeApplication($cms);
+Facade::setFacadeApplication($anvil);
 
 /*
 |--------------------------------------------------------------------------
@@ -128,9 +128,9 @@ Facade::setFacadeApplication($cms);
 |
 */
 
-$cms->bindIf('config.loader', function($cms)
+$anvil->bindIf('config.loader', function($anvil)
 {
-	return new FileLoader(new Filesystem, $cms['path.base'].'/config');
+	return new FileLoader(new Filesystem, $anvil['path.base'].'config');
 
 }, true);
 
@@ -145,7 +145,7 @@ $cms->bindIf('config.loader', function($cms)
 |
 */
 
-$cms->startExceptionHandling();
+$anvil->startExceptionHandling();
 
 /*
 |--------------------------------------------------------------------------
@@ -158,9 +158,9 @@ $cms->startExceptionHandling();
 |
 */
 
-$config = new Config($cms['config.loader'], $env);
+$config = new Config($anvil['config.loader'], $env);
 
-$cms->instance('config', $config);
+$anvil->instance('config', $config);
 
 /*
 |--------------------------------------------------------------------------
@@ -186,7 +186,7 @@ date_default_timezone_set($config['app']['timezone']);
 |
 */
 
-$cms->registerAliasLoader($config['cms']['aliases']);
+$anvil->registerAliasLoader($config['cms']['aliases']);
 
 /*
 |--------------------------------------------------------------------------
@@ -214,7 +214,7 @@ Request::enableHttpMethodParameterOverride();
 
 $services = new ProviderRepository(new Filesystem, $config['cms']['manifest']);
 
-$services->load($cms, $config['cms']['providers']);
+$services->load($anvil, $config['cms']['providers']);
 
 /*
 |--------------------------------------------------------------------------
@@ -227,7 +227,7 @@ $services->load($cms, $config['cms']['providers']);
 |
 */
 
-$cms->boot();
+$anvil->boot();
 
 /*
 /*
@@ -274,7 +274,7 @@ Cms::error(function(Exception $exception, $code)
 
 if(empty($config['database']))
 {
-	header('Location: '.$cms['url']->base().'installer/');
+	header('Location: '.$anvil['url']->base().'installer/');
 	exit;
 }
 
@@ -289,7 +289,7 @@ if(empty($config['database']))
 |
 */
 
-Session::start($cms['cookie'], $cms['config']['session.cookie']);
+Session::start($anvil['cookie'], $config['session.cookie']);
 
 /*
 |--------------------------------------------------------------------------
@@ -342,4 +342,4 @@ include __DIR__.'/filters.php';
 |
 */
 
-$cms->start($cms['request'], $cms['settings'], $cms['router']);
+$anvil->start($anvil['request'], $anvil['settings'], $anvil['router']);

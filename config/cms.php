@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'manifest' => __DIR__.'/../cms/storage/meta',
+	'manifest' => __DIR__.'/../anvil/storage/meta',
 
 
 	/*

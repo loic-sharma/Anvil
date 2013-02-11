@@ -39,6 +39,6 @@ return array(
 	|
 	*/
 
-	'base' => __DIR__.'/..',
+	'base' => __DIR__.'/../',
 
 );

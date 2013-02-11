@@ -1,8 +1,8 @@
 {
-    "name": "loic-sharma/cms",
+    "name": "loic-sharma/Anvil",
     "description": "A simple CMS built ontop of Laravel 4",
     "config": {
-      "vendor-dir": "cms/vendor/"
+      "vendor-dir": "anvil/vendor/"
     },
     "require": {
         "laravel/framework": "4.0.*",
@@ -12,7 +12,7 @@
     },
     "autoload": {
         "classmap": [
-            "cms/classes"
+            "anvil/classes"
         ]
     },
     "minimum-stability": "dev"
