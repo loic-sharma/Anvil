@@ -27,13 +27,13 @@
 		<div class="container">
 			<ul class="breadcrumb">
 				@foreach($page->breadcrumbs() as $breadcrumb)
-					@if($breadcrumb->link)
+					@if($breadcrumb->hasLink())
 						<li>
-							<a href="{{ $breadcrumb->link }} ">{{ $breadcrumb->name }}</a>
-							<span class="dividider">/</span>
+							<a href="{{ $breadcrumb->link() }} ">{{ $breadcrumb }}</a>
+							<span class="divider">/</span>
 						</li>
 					@else
-						<li class="active">{{ $breadcrumb->name }}</span>
+						<li class="active">{{ $breadcrumb }}</span>
 		   			@endif
 				@endforeach
 			</ul>

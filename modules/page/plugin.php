@@ -1,5 +1,7 @@
 <?php
 
+use Page\Breadcrumb;
+
 class PagePlugin {
 
 	/**
@@ -49,15 +51,7 @@ class PagePlugin {
 	 */
 	public function addBreadcrumb($name, $link = null)
 	{
-		if( ! is_null($link))
-		{
-			if(strpos($link, '.') === false)
-			{
-				$link = ($link == '/') ? URL::base() : URL::to($link);
-			}
-		}
-
-		$this->breadcrumbs[] = (object) compact('name', 'link');
+		$this->breadcrumbs[] = new Breadcrumb($name, $link);
 	}
 
 	/**
@@ -152,7 +146,7 @@ class PagePlugin {
 				$link = Url::base();
 			}
 
-			array_unshift($breadcrumbs, (object) compact('name', 'link'));
+			array_unshift($breadcrumbs, new Breadcrumb($name, $link));
 		}
 
 		return $breadcrumbs;
