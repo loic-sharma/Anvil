@@ -1,4 +1,4 @@
 composer.lock
 .DS_Store
-anvil/vendor
+anvil/vendor/
 anvil/storage/
