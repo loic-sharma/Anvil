@@ -13,7 +13,7 @@ class AuthManager extends IlluminateAuthManager {
 	 */
 	public function check()
 	{
-		return ($this->user()->group->power > 0);
+		return ($this->user()->power > 0);
 	}
 
 	/**
@@ -23,7 +23,7 @@ class AuthManager extends IlluminateAuthManager {
 	 */
 	public function guest()
 	{
-		return ($this->user()->group->power <= 0);
+		return ($this->user()->power <= 0);
 	}
 
 	/**

@@ -71,6 +71,15 @@ class User extends Eloquent implements UserInterface {
 	}
 
 	/**
+	 * Get the user's power.
+	 *
+	 */
+	public function getPowerAttribute()
+	{
+		return $this->group->power;
+	}
+
+	/**
 	 * Check if a user belongs to a certain group.
 	 *
 	 * @param  string|int  $group
@@ -93,10 +102,11 @@ class User extends Eloquent implements UserInterface {
 	 * Get the group's permission.
 	 *
 	 */
-	public function givePermissions($permissions)
+	public function getPermissonsAttribute($permissions)
 	{
 		return $this->group->getPermissions($permissions);
 	}
+
 
 	/**
 	 * Verify that a user has a certain permission.
