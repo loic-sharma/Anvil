@@ -1,5 +1,0 @@
-<?php foreach($errors->all(':message') as $error): ?>
-	<div class="alert">
-		<span><b>Error:</b> <?php echo e($error); ?></span>
-	</div>
-<?php endforeach; ?>
