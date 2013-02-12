@@ -120,7 +120,6 @@ return array(
 		'Plugin'     => 'Cms\Plugins\Plugin',
 		'Controller' => 'Cms\Routing\Controllers\Controller',
 
-		'HttpNotFoundException' => 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException',
 
 		'Eloquent'     => 'Cms\Database\Eloquent',
 		'Autoloader'   => 'Cms\Facades\Autoloader',

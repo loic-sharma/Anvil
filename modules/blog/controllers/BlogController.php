@@ -30,7 +30,7 @@ class BlogController extends Controller {
 
 		if(is_null($post))
 		{
-			throw new HttpNotFoundException;
+			App::abort(404, 'Post #'.$id.' does not exist.');
 		}
 
 		$this->page->addBreadcrumb('Blog', 'blog');

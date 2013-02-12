@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Application as IlluminateApplication;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 class Application extends IlluminateApplication {
 
 	/**
@@ -132,7 +130,6 @@ class Application extends IlluminateApplication {
 	 */
 	public function run()
 	{
-		// Try to run the application.
 		try
 		{
 			parent::run();
@@ -145,7 +142,7 @@ class Application extends IlluminateApplication {
 		{
 			if($e->getMessage() == "Class {$this->controller} does not exist")
 			{
-				throw new NotFoundHttpException;
+				$this->abort(404);
 			}
 
 			else
