@@ -4,7 +4,7 @@
 <p>{{ $post->content }}</p>
 <p><span class="badge">{{ $post->comments->count() }} Comments</span></p>
 
-@if($post->comments_enabled)
+@if($post->commentsEnabled)
 	<hr>
 
 	{{{ $comments->show('blog-post-'.$post->id) }}}

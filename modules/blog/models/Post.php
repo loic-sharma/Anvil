@@ -43,10 +43,36 @@ class Post extends Eloquent {
 		return $this->belongsTo('User');
 	}
 
-	public function getCommentsAttribute()
+	/**
+	 * Enable the comments.
+	 *
+	 * @param  bool  $enable
+	 * @return void
+	 */
+	public function setCommentsEnabledAttribute($enable)
 	{
-		return Comment::where('area', 'blog-post-'.$this->attributes['id'])->get();
+		$this->attributes['comments_enabled'] = $enable;
 	}
+
+	/**
+	 * Check if the comments are enabled.
+	 *
+	 * @return bool
+	 */
+	public function getCommentsEnabledAttribute()
+	{
+		return $this->attributes['comments_enabled'];
+	}
+
+	/**
+	 * Get the post's comments.
+	 *
+	 */
+	public function comments()
+	{
+		return $this->hasMany('Comment')->where('area', 'blog-post-'.$this->attributes['id']);
+	}
+
 	/**
 	 * Get the date the post was created.
 	 *

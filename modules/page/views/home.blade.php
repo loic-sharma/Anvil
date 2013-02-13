@@ -2,6 +2,6 @@
 
 <p>{{ $page->content }}</p>
 
-@if($page->comments_enabled)
+@if($page->commentsEnabled)
 	{{ $comments->show('page-'.$page->slug) }}
 @endif
