@@ -118,7 +118,7 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 				// Parse the input as JSON.
 				$input = json_decode('{'.$match[3].'}', true);
 
-				// The input is be null if the JSON parsing failed. If
+				// The input is null if the JSON parsing failed. If
 				// that happens, we will just return what was originally matched.
 				if(is_null($input))
 				{
