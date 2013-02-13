@@ -15,11 +15,11 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 	 */
 	public function register()
 	{
+		parent::register();
+
 		$this->registerThemesPath();
 
 		$this->registerThemePath();
-
-		parent::register();
 	}
 
 	/**
