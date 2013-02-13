@@ -20,6 +20,8 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 		$this->registerThemesPath();
 
 		$this->registerThemePath();
+
+		$this->registerBladeExtension();
 	}
 
 	/**
@@ -94,6 +96,45 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 			$env->share('message', $app['session']->get('message'));
 
 			return $env;
+		});
+	}
+
+	/**
+	 * Parse JSON input parameters in blade views. This will parse
+	 * strings like:
+	 *
+	 *   {{ $plugin->method({"param": "value"}) }}
+	 *
+	 * @return void
+	 */
+	public function registerBladeExtension()
+	{
+		$engine = $this->app['view.engine.resolver']->resolve('blade');
+
+		$engine->getCompiler()->extend(function($value)
+		{
+			return preg_replace_callback("/\\$(.+?)->(.+?)\(\{(.+?)\}\)/s", function($match)
+			{
+				// Parse the input as JSON.
+				$input = json_decode('{'.$match[3].'}', true);
+
+				// The input is be null if the JSON parsing failed. If
+				// that happens, we will just return what was originally matched.
+				if(is_null($input))
+				{
+					return $match[0];
+				}
+
+				// Otherwise, replace the input with the PHP array
+				// representation of the JSON input.
+				else
+				{
+					$input = str_replace("\n", "", var_export($input, true));
+
+					return str_replace($match[0], '$'.$match[1].'->'.$match[2].'('.$input.')', $match[0]);
+				}
+
+			}, $value);
 		});
 	}
 }
