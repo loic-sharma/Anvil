@@ -101,6 +101,7 @@ return array(
 		'Lang'            => 'Illuminate\Support\Facades\Lang',
 		'Log'             => 'Illuminate\Support\Facades\Log',
 		'Mail'            => 'Illuminate\Support\Facades\Mail',
+		'MessageBag'      => 'Illuminate\Support\MessageBag',
 		'Paginator'       => 'Illuminate\Support\Facades\Paginator',
 		'Password'        => 'Illuminate\Support\Facades\Password',
 		'Queue'           => 'Illuminate\Support\Facades\Queue',
@@ -115,7 +116,6 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-
 
 		'Plugin'     => 'Cms\Plugins\Plugin',
 		'Controller' => 'Cms\Routing\Controllers\Controller',
