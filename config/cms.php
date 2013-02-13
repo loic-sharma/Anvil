@@ -62,7 +62,6 @@ return array(
 		'Cms\Providers\RoutingServiceProvider',
 		'Cms\Providers\ViewServiceProvider',
 		'Cms\Providers\ModuleServiceProvider',
-		'Cms\Providers\SessionServiceProvider',
 		'Cms\Providers\SettingsServiceProvider',
 		'Cms\Providers\MenuServiceProvider',
 
