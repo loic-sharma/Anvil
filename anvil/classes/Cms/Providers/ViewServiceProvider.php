@@ -113,7 +113,7 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 
 		$engine->getCompiler()->extend(function($value)
 		{
-			return preg_replace_callback("/\\$(.+?)->(.+?)\(\{(.+?)\}\)/s", function($match)
+			return preg_replace_callback("/\\$([a-zA-Z0-9_]*)->([a-zA-Z0-9_]*)\(\{(.+?)\}\)/s", function($match)
 			{
 				// Parse the input as JSON.
 				$input = json_decode('{'.$match[3].'}', true);
