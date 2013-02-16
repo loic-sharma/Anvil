@@ -28,27 +28,6 @@ class Page extends Eloquent {
 	);
 
 	/**
-	 * Enable the comments.
-	 *
-	 * @param  bool  $enable
-	 * @return void
-	 */
-	public function setCommentsEnabledAttribute($enable)
-	{
-		$this->attributes['comments_enabled'] = $enable;
-	}
-
-	/**
-	 * Check if the comments are enabled.
-	 *
-	 * @return bool
-	 */
-	public function getCommentsEnabledAttribute()
-	{
-		return $this->attributes['comments_enabled'];
-	}
-
-	/**
 	 * Fetch the model's layout.
 	 *
 	 * @param  string  $layout
