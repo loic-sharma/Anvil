@@ -177,4 +177,14 @@ class User extends Eloquent implements UserInterface {
 
 		return '<img src="'.$url.'" alt="Gravatar" class="gravatar" />';
 	}
+
+	/**
+	 * Get the author's full name.
+	 *
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->displayName();
+	}
 }

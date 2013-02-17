@@ -13,8 +13,8 @@
 		@foreach($blog->posts() as $post)
 			<tr>
 				<td>{{ $post->title }}</td>
-				<td>{{ $post->author->displayName() }}</td>
-				<td>{{ $post->date() }}</td>
+				<td>{{ $post->author }}</td>
+				<td>{{ $post->timeAgo }}</td>
 				<td>
 					<a href="{{ $url->to('blog/post/'.$post->id) }}" class="btn btn-success">View</a>
 					<a href="{{ $url->to('admin/blog/post/'.$post->id) }}" class="btn btn-warning">Edit</a>

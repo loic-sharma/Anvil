@@ -1,6 +1,6 @@
 <h1>{{ $post->title }}</h1>
 
-<p class="muted">Posted by {{ $post->author->displayName() }} {{ $post->date() }}.</p>
+<p class="muted">Posted by {{ $post->author }} {{ $post->timeAgo }}.</p>
 <p>{{ $post->content }}</p>
 <p><span class="badge">{{ $post->comments->count() }} Comments</span></p>
 

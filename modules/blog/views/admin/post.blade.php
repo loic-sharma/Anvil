@@ -11,7 +11,7 @@
 	<textarea name="content" rows="10" cols="50" class="span12">{{ Input::old('content', $post->content) }}</textarea>
 
 	<label class="checkbox">
-		@if(Input::old('comments_enabled', $post->comments_enabled))
+		@if(Input::old('comments_enabled', $post->commentsEnabled))
 			<input checked="checked" type="checkbox" name="comments_enabled" value="1">
 		@else
 			<input type="checkbox" name="comments_enabled" value="1">

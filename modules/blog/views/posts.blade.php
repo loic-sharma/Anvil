@@ -7,12 +7,12 @@
 			<div class="meta muted">
 				<div class="date">
 					Posted
-					<span>{{ $post->date() }}.</span>
+					<span>{{ $post->timeAgo }}.</span>
 				</div>
 
 				<div class="author">
 					by
-					<span>{{ $post->author->displayName() }}</span>
+					<span>{{ $post->author }}</span>
 				</div>
 			</div>
 			<div class="content">
