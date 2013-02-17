@@ -26,7 +26,7 @@ class BlogAdminController extends Controller {
 		$post = new Post;
 
 		// By default we'll enable comments.
-		$post->comments_enabled = true;
+		$post->commentsEnabled = true;
 
 		$this->page->addBreadcrumb('Blog', 'admin/blog');
 		$this->page->addBreadcrumb('Create Post');
@@ -46,7 +46,7 @@ class BlogAdminController extends Controller {
 		$post->author_id = Auth::user()->id;
 		$post->title = Input::get('title');
 		$post->content = Input::get('content');
-		$post->comments_enabled = Input::get('comments_enabled', 0);
+		$post->commentsEnabled = Input::get('comments_enabled', 0);
 
 		if($post->save())
 		{
