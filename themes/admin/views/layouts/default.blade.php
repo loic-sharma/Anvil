@@ -40,7 +40,7 @@
 
 			@if(isset($message))
 				<div class="alert alert-success">
-					<span>{{ $message }}</span>
+					<span>{{{ $message }}}</span>
 				</div>
 			@endif
 
