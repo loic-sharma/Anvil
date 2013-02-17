@@ -13,6 +13,24 @@ class NavigationPlugin {
 	}
 
 	/**
+	 * Fetch the main layout to the current section.
+	 *
+	 * @return  string
+	 */
+	public function mainMenu()
+	{
+		if(Cms::isAdmin())
+		{
+			return $this->menu('admin');
+		}
+
+		else
+		{
+			return $this->menu('header');
+		}
+	}
+
+	/**
 	 * Display a menu.
 	 *
 	 * @param  string  $name

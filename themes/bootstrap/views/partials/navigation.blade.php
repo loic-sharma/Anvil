@@ -5,7 +5,7 @@
 
 			<div class="navbar-content">
 				<ul class="nav">
-					{{{ $navigation->menu('header') }}}
+					{{{ $navigation->mainMenu() }}}
 				</ul>
 			</div>
 		</div>

@@ -17,7 +17,7 @@
 			
 					<div class="navbar-content">
 						<ul class="nav">
-							{{{ $navigation->menu('admin') }}}
+							{{{ $navigation->mainMenu() }}}
 						</ul>
 					</div>
 				</div>
