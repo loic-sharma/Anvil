@@ -33,7 +33,7 @@ class Page extends Eloquent {
 	 * @param  string  $layout
 	 * @return string
 	 */
-	public function giveLayout($layout)
+	public function getLayoutAttribute($layout)
 	{
 		// If the page doesn't have a layout set we'll just
 		// use the default layout.
