@@ -13,7 +13,7 @@ class NavigationPlugin {
 	}
 
 	/**
-	 * Fetch the main layout to the current section.
+	 * Fetch the menu to the current section.
 	 *
 	 * @return  string
 	 */
