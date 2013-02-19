@@ -2,10 +2,10 @@
 
 use Hash;
 use ExpressiveDate;
-use Cms\Database\Eloquent;
+use Cms\Database\Model;
 use Illuminate\Auth\UserInterface;
 
-class User extends Eloquent implements UserInterface {
+class User extends Model implements UserInterface {
 
 	/**
 	 * The table's name.

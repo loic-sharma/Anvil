@@ -92,7 +92,6 @@ return array(
 		'Cookie'          => 'Illuminate\Support\Facades\Cookie',
 		'Crypt'           => 'Illuminate\Support\Facades\Crypt',
 		'DB'              => 'Illuminate\Support\Facades\DB',
-		'Eloquent'        => 'Illuminate\Database\Eloquent\Model',
 		'Event'           => 'Illuminate\Support\Facades\Event',
 		'File'            => 'Illuminate\Support\Facades\File',
 		'Hash'            => 'Illuminate\Support\Facades\Hash',
@@ -121,7 +120,7 @@ return array(
 		'Controller' => 'Cms\Routing\Controllers\Controller',
 
 
-		'Eloquent'     => 'Cms\Database\Eloquent',
+		'Eloquent'     => 'Cms\Database\Model',
 		'Autoloader'   => 'Cms\Facades\Autoloader',
 		'Cms'          => 'Cms\Facades\Cms',
 		'JsonResponse' => 'Cms\Http\JsonResponse',

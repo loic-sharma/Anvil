@@ -5,7 +5,7 @@ use Validator;
 use Illuminate\Support\MessageBag;
 use Illuminate\Database\Eloquent\Model as IlluminateEloquent;
 
-class Eloquent extends IlluminateEloquent {
+class Model extends IlluminateEloquent {
 
 	/**
 	 * The model's validation rules.
