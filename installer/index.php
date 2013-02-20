@@ -18,7 +18,7 @@ use Illuminate\Routing\Router;
 |
 */
 
-$autoloader = require_once __DIR__.'/../cms/vendor/autoload.php';
+$autoloader = require_once __DIR__.'/../anvil/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ $autoloader = require_once __DIR__.'/../cms/vendor/autoload.php';
 |
 */
 
-$cms = new Cms\Application;
+$anvil = new Cms\Application;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,8 +44,8 @@ $cms = new Cms\Application;
 |
 */
 
-$cms->instance('path', __DIR__);
-$cms->instance('path.base', dirname(__DIR__));
+$anvil->instance('path', __DIR__);
+$anvil->instance('path.base', dirname(__DIR__));
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ $cms->instance('path.base', dirname(__DIR__));
 |
 */
 
-$cms->bind('autoloader', function() use($autoloader)
+$anvil->bind('autoloader', function() use($autoloader)
 {
 	return $autoloader;
 });
@@ -72,7 +72,7 @@ $cms->bind('autoloader', function() use($autoloader)
 |
 */
 
-$env = $cms->detectEnvironment(array(
+$env = $anvil->detectEnvironment(array(
 
 	'local' => array('your-machine-name'),
 
@@ -91,7 +91,7 @@ $env = $cms->detectEnvironment(array(
 
 Facade::clearResolvedInstances();
 
-Facade::setFacadeApplication($cms);
+Facade::setFacadeApplication($anvil);
 
 /*
 |--------------------------------------------------------------------------
@@ -104,9 +104,9 @@ Facade::setFacadeApplication($cms);
 |
 */
 
-$cms->bindIf('config.loader', function($cms)
+$anvil->bindIf('config.loader', function($anvil)
 {
-	return new FileLoader(new Filesystem, $cms['path.base'].'/config');
+	return new FileLoader(new Filesystem, $anvil['path.base'].'/config');
 
 }, true);
 
@@ -121,7 +121,7 @@ $cms->bindIf('config.loader', function($cms)
 |
 */
 
-$cms->startExceptionHandling();
+$anvil->startExceptionHandling();
 
 /*
 |--------------------------------------------------------------------------
@@ -134,9 +134,9 @@ $cms->startExceptionHandling();
 |
 */
 
-$config = new Config($cms['config.loader'], $env);
+$config = new Config($anvil['config.loader'], $env);
 
-$cms->instance('config', $config);
+$anvil->instance('config', $config);
 
 /*
 |--------------------------------------------------------------------------
@@ -162,7 +162,7 @@ date_default_timezone_set($config['app']['timezone']);
 |
 */
 
-$cms->registerAliasLoader($config['cms']['aliases']);
+$anvil->registerAliasLoader($config['cms']['aliases']);
 
 /*
 |--------------------------------------------------------------------------
@@ -186,7 +186,7 @@ Request::enableHttpMethodParameterOverride();
 |
 */
 
-$cms['config']['view.paths'] = array($cms['path'].'/views/');
+$config['view.paths'] = array($anvil['path'].'/views/');
 
 /*
 |--------------------------------------------------------------------------
@@ -211,21 +211,21 @@ $providers = array(
 
 foreach($providers as $provider)
 {
-	$cms->register(new $provider($cms));
+	$anvil->register(new $provider($anvil));
 }
 
 /*
 |--------------------------------------------------------------------------
-| Boot the User's Session
+| Boot The Application
 |--------------------------------------------------------------------------
 |
-| By default, Laravel boots the session in the route's before filter.
-| However, we want the plugins and modules to have access to the session
-| data so we will start the session in advance. 
+| Before we handle the requests we need to make sure the application has
+| been booted up. The boot process will call the "boot" method on all
+| service provider giving all a chance to register their overrides.
 |
 */
 
-Session::start($cms['cookie']);
+$anvil->boot();
 
 /*
 |--------------------------------------------------------------------------
@@ -237,7 +237,7 @@ Session::start($cms['cookie']);
 |
 */
 
-include $cms['path'].'/routes.php';
+include $anvil['path'].'/routes.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -248,4 +248,4 @@ include $cms['path'].'/routes.php';
 |
 */
 
-$cms['router']->dispatch(Request::createFromGlobals())->send();
+$anvil['router']->dispatch(Request::createFromGlobals())->send();
