@@ -19,7 +19,7 @@ Route::get('/', function()
 	{
 		if( ! is_writable($path))
 		{
-			$errors[] = '<p>'.$path . ' must be writable.</p>';
+			$errors[] = $path . ' must be writable.';
 		}
 	}
 
