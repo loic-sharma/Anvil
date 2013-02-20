@@ -2,7 +2,7 @@
 
 Route::get('/', function()
 {
-	$error = false;
+	$errors = array();
 
 	// Check requirements.
 	$base = dirname(dirname(__FILE__));
@@ -19,16 +19,11 @@ Route::get('/', function()
 	{
 		if( ! is_writable($path))
 		{
-			$errors = true;
-
-			echo '<p>'.$path . ' must be writable.</p>';
+			$errors[] = '<p>'.$path . ' must be writable.</p>';
 		}
 	}
 
-	if($errors == false)
-	{
-		echo '<p><a href="'.URL::to('step-2').'">Next step</a></p>';
-	}
+	return View::make('requirements', compact('errors'));
 });
 
 Route::get('step-2', function()
