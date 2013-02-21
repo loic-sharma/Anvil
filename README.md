@@ -6,7 +6,7 @@ A PHP 5.3 CMS built on top of Laravel 4 and other composer components.
 
 ## Installation
 
-Installing Anvil is easy. Run the following command in terminal (**Note**: This requires composer):
+Installing Anvil is easy. Run the following command in terminal ( **Note**: This requires composer):
 
 ```
 composer install
