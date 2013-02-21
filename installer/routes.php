@@ -380,18 +380,15 @@ Route::post('step-4', function()
 
 	if($form->passes())
 	{
-		DB::table('users')->insert(array(
+		$id = DB::table('users')->insertGetId(array(
 			'group_id' => 4,
-			'email' => 'admin@example.com',
-			'password' => Hash::make('admin'),
+			'email' => Input::get('email'),
+			'password' => Hash::make(Input::get('password')),
 			'first_name' => 'John',
 			'last_name' => 'Doe',
 		));
 
-		Auth::attempt(array(
-			'email' => 'admin@example.com',
-			'password' => 'admin',
-		));
+		Auth::loginUsingId($id);
 
 		return Redirect::to('/../../');	
 	}
