@@ -290,14 +290,6 @@ Route::get('step-3', function()
 		),
 	));
 
-	DB::table('users')->insert(array(
-		'group_id' => 4,
-		'email' => 'admin@example.com',
-		'password' => Hash::make('admin'),
-		'first_name' => 'John',
-		'last_name' => 'Doe',
-	));
-
 	DB::table('posts')->insert(array(
 		'author_id' => 1,
 		'title' => 'Hello World!',
@@ -371,10 +363,38 @@ Route::get('step-3', function()
 		),
 	));
 
-	Auth::attempt(array(
-		'email' => 'admin@example.com',
-		'password' => 'admin',
+	return Redirect::to('step-4');
+});
+
+Route::get('step-4', function()
+{
+	return View::make('create_admin');
+});
+
+Route::post('step-4', function()
+{
+	$form = Validator::make(Input::all(), array(
+		'email'    => array('required', 'email'),
+		'password' => array('required', 'confirmed'),
 	));
 
-	return Redirect::to('/../../');
+	if($form->passes())
+	{
+		DB::table('users')->insert(array(
+			'group_id' => 4,
+			'email' => 'admin@example.com',
+			'password' => Hash::make('admin'),
+			'first_name' => 'John',
+			'last_name' => 'Doe',
+		));
+
+		Auth::attempt(array(
+			'email' => 'admin@example.com',
+			'password' => 'admin',
+		));
+
+		return Redirect::to('/../../');	
+	}
+
+	return Redirect::to('step-4')->withErrors($form);
 });
