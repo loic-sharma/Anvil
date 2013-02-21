@@ -227,6 +227,7 @@ foreach($providers as $provider)
 
 $anvil->boot();
 
+
 /*
 |--------------------------------------------------------------------------
 | Load the Installation routes.
@@ -248,4 +249,4 @@ include $anvil['path'].'/routes.php';
 |
 */
 
-$anvil['router']->dispatch(Request::createFromGlobals())->send();
+$anvil->run();
