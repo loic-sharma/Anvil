@@ -44,7 +44,7 @@ $anvil = new Cms\Application;
 |
 */
 
-$anvil->instance('path', __DIR__);
+$anvil->instance('path', dirname(__DIR__).'/anvil');
 $anvil->instance('path.base', dirname(__DIR__));
 
 /*
@@ -186,7 +186,7 @@ Request::enableHttpMethodParameterOverride();
 |
 */
 
-$config['view.paths'] = array($anvil['path'].'/views/');
+$config['view.paths'] = array(__DIR__.'/views/');
 
 /*
 |--------------------------------------------------------------------------
@@ -206,6 +206,8 @@ $providers = array(
 	'Illuminate\Filesystem\FilesystemServiceProvider',
 	'Illuminate\Encryption\EncryptionServiceProvider',
 	'Illuminate\Session\SessionServiceProvider',
+	'Illuminate\Translation\TranslationServiceProvider',
+	'Illuminate\Validation\ValidationServiceProvider',
 	'Illuminate\View\ViewServiceProvider',
 );
 
@@ -238,7 +240,7 @@ $anvil->boot();
 |
 */
 
-include $anvil['path'].'/routes.php';
+include __DIR__.'/routes.php';
 
 /*
 |--------------------------------------------------------------------------
