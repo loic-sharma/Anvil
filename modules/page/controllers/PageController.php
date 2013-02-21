@@ -14,7 +14,7 @@ class PageController extends Controller {
 
 		if(is_null($page))
 		{
-			throw new HttpNotFoundException;
+			return Anvil::abort('404');
 		}
 
 		$this->page->layout  = 'layouts.'.$page->layout;
