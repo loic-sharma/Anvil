@@ -73,7 +73,7 @@ class PagePlugin {
 	 */
 	public function render()
 	{
-		$path = Cms::make('theme.path');
+		$path = Anvil::make('theme.path');
 
 		if(file_exists($path.'/start.php'))
 		{
@@ -134,7 +134,7 @@ class PagePlugin {
 
 		if($addBaseBreadcrumb)
 		{
-			if(Cms::isAdmin())
+			if(Anvil::isAdmin())
 			{
 				$name = 'Admin';
 				$link = Url::to('admin');

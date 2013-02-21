@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 
-class Cms extends Facade {
+class Anvil extends Facade {
 
 	/**
 	 * Get the registered name of the component.

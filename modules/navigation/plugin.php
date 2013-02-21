@@ -19,7 +19,7 @@ class NavigationPlugin {
 	 */
 	public function mainMenu()
 	{
-		if(Cms::isAdmin())
+		if(Anvil::isAdmin())
 		{
 			return $this->menu('admin');
 		}

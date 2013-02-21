@@ -120,9 +120,9 @@ return array(
 		'Controller' => 'Cms\Routing\Controllers\Controller',
 
 
+		'Anvil'        => 'Cms\Facades\Anvil',
 		'Eloquent'     => 'Cms\Database\Model',
 		'Autoloader'   => 'Cms\Facades\Autoloader',
-		'Cms'          => 'Cms\Facades\Cms',
 		'JsonResponse' => 'Cms\Http\JsonResponse',
 		'Menu'         => 'Cms\Facades\Menu',
 		'Modules'      => 'Cms\Facades\Modules',

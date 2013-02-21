@@ -19,7 +19,7 @@ Menu::filter(function($item)
 	{
 		if($item['a.href'] == Url::base())
 		{
-			if(Cms::isHome() == true)
+			if(Anvil::isHome() == true)
 			{
 				$item['li.class'] = 'active';
 			}

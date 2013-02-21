@@ -1,6 +1,6 @@
 <?php namespace Cms\Modules;
 
-use Cms;
+use Anvil;
 use Illuminate\Filesystem\Filesystem;
 use Composer\Autoload\ClassLoader;
 
@@ -166,10 +166,10 @@ class Repository {
 				// Todo: Dependency injection?
 				if(class_exists($plugin))
 				{
-					Cms::make('plugins')->register($module, $plugin);
+					Anvil::make('plugins')->register($module, $plugin);
 				}
 
-				Cms::make('view')->addNamespace($module, $path.'views');
+				Anvil::make('view')->addNamespace($module, $path.'views');
 			}
 
 			else

@@ -1,7 +1,7 @@
 <?php namespace Cms\Plugins;
 
-use Cms;
 use View;
+use Anvil;
 use Closure;
 
 class PluginManager {
@@ -24,7 +24,7 @@ class PluginManager {
 		// If we were given a string, let's get an instance of the plugin.
 		if(is_string($class) and class_exists($class))
 		{
-			$class = Cms::make($class);
+			$class = Anvil::make($class);
 		}
 
 		// If the class inherits the Plugin class, let's wrap it around
