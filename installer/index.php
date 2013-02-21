@@ -200,10 +200,12 @@ $config['view.paths'] = array(__DIR__.'/views/');
 */
 
 $providers = array(
+	'Illuminate\Auth\AuthServiceProvider',
 	'Illuminate\Cookie\CookieServiceProvider',
 	'Illuminate\Routing\ControllerServiceProvider',
 	'Illuminate\Database\DatabaseServiceProvider',
 	'Illuminate\Filesystem\FilesystemServiceProvider',
+	'Illuminate\Hashing\HashServiceProvider',	
 	'Illuminate\Encryption\EncryptionServiceProvider',
 	'Illuminate\Session\SessionServiceProvider',
 	'Illuminate\Translation\TranslationServiceProvider',
