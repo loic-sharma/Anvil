@@ -98,7 +98,7 @@ Route::get('step-3', function()
 	{
 		$table->increments('id');
 
-		$table->string('slug');
+		$table->string('slug')->unique();
 		$table->integer('enabled')->default(0);
 		$table->integer('installed')->default(0);
 		$table->integer('is_core')->default(0);
@@ -124,7 +124,7 @@ Route::get('step-3', function()
 	{
 		$table->increments('id');
 
-		$table->string('slug');
+		$table->string('slug')->unique();
 		$table->string('title')->nullable();
 	});
 
@@ -134,7 +134,7 @@ Route::get('step-3', function()
 	{
 		$table->increments('id');
 
-		$table->string('slug');
+		$table->string('slug')->unique();
 		$table->string('title')->nullable();
 		$table->string('layout')->nullable();
 		$table->text('content')->nullable();
@@ -149,8 +149,8 @@ Route::get('step-3', function()
 	{
 		$table->increments('id');
 
-		$table->string('slug');
-		$table->string('name')->nullabe();
+		$table->string('slug')->unique();
+		$table->string('name')->nullable();
 		$table->integer('required_power')->nullable();
 		$table->integer('max_power')->nullabe();
 	});
