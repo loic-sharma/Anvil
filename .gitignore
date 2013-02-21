@@ -1,3 +1,4 @@
 composer.lock
 .DS_Store
 anvil/vendor/
+config/database.php
