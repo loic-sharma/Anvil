@@ -51,8 +51,9 @@ class NavigationPlugin {
 	 */
 	protected function get($name, $power = null)
 	{
-		$menu = Menu::get($name);
 		$me = $this;
+
+		$menu = Menu::get($name);
 
 		// We first need to get all of the links that the current user
 		// has access to on the menu. We'll cache these links too.
