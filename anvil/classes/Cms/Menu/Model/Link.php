@@ -1,6 +1,4 @@
-<?php
-
-namespace Navigation;
+<?php namespace Cms\Menu\Model;
 
 use Url;
 use Eloquent;
@@ -45,19 +43,25 @@ class Link extends Eloquent {
 			return Url::base();
 		}
 
-		elseif(strpos($url, '{url}/') === 0)
-		{
-			return Url::to(substr($url, 6));
-		}
-
-		elseif(strpos($url, '{adminUrl}/') === 0)
-		{
-			return Url::to('admin/'.substr($url, 11));
-		}
-
 		else
 		{
-			return $url;
+			if(strpos($url, '{url}/') === 0)
+			{
+				return Url::to(substr($url, 6));
+			}
+
+			else
+			{
+				if(strpos($url, '{adminUrl}/') === 0)
+				{
+					return Url::to('admin/'.substr($url, 11));
+				}
+
+				else
+				{
+					return $url;
+				}
+			}
 		}
 	}
 
@@ -88,6 +92,6 @@ class Link extends Eloquent {
 	 */
 	public function menu()
 	{
-		return $this->belongsTo('Navigation\Menu');
+		return $this->belongsTo('Cms\Menu\Model\Menu');
 	}
 }

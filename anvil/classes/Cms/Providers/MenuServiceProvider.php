@@ -3,6 +3,7 @@
 use Menu\Factory as MenuFactory;
 use Menu\FilterRepository as MenuFilter;
 use Menu\Renderer as MenuRenderer;
+use Cms\Menu\Menu as MenuRepository;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -57,7 +58,7 @@ class MenuServiceProvider extends ServiceProvider {
 	{
 		$this->app['menu'] = $this->app->share(function($app)
 		{
-			return new MenuFactory($app['menu.filter'], $app['menu.renderer']);
+			return new MenuRepository(new MenuFactory($app['menu.filter'], $app['menu.renderer']));
 		});
 	}
 }

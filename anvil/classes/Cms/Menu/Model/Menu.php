@@ -1,6 +1,4 @@
-<?php
-
-namespace Navigation;
+<?php namespace Cms\Menu\Model;
 
 use Eloquent;
 
@@ -37,6 +35,6 @@ class Menu extends Eloquent {
 	 */
 	public function links()
 	{
-		return $this->hasMany('Navigation\Link');
+		return $this->hasMany('Cms\Menu\Model\Link');
 	}
 }
