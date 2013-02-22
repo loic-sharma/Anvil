@@ -234,14 +234,16 @@ $anvil->boot();
 | Install the CMS
 |--------------------------------------------------------------------------
 |
-| The installation process creates database configuration. If they don't
-| exist then the CMS needs to be installed.
+| The installation process creates a database configuration file. If it
+| doesn't exist then Anvil has not been installed yet. We'll redirect the
+| user here so that Anvil can be set up.
 |
 */
 
 if(empty($config['database']))
 {
 	header('Location: '.$anvil['url']->base().'installer/');
+
 	exit;
 }
 
