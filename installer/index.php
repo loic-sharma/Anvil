@@ -31,7 +31,7 @@ $autoloader = require_once __DIR__.'/../anvil/vendor/autoload.php';
 |
 */
 
-$anvil = new Cms\Application;
+$anvil = new Anvil\Application;
 
 /*
 |--------------------------------------------------------------------------

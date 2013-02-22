@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'model' => 'Cms\Auth\Models\User',
+	'model' => 'Anvil\Auth\Models\User',
 
 	/*
 	|--------------------------------------------------------------------------

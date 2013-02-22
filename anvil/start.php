@@ -56,7 +56,7 @@ $autoloader = include __DIR__.'/vendor/autoload.php';
 |
 */
 
-$anvil = new Cms\Application;
+$anvil = new Anvil\Application;
 
 /*
 |--------------------------------------------------------------------------
@@ -270,7 +270,7 @@ Session::start($anvil['cookie'], $config['session.cookie']);
 |
 */
 
-Plugins::register('url', new Cms\Plugins\UrlPlugin);
+Plugins::register('url', new Anvil\Plugins\UrlPlugin);
 
 /*
 |--------------------------------------------------------------------------
