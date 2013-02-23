@@ -59,6 +59,6 @@ class UrlPlugin {
 	 */
 	public function to($uri)
 	{
-		$this->url->to($uri);
+		return $this->url->to($uri);
 	}
 }
