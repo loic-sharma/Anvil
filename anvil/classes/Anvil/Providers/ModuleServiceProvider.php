@@ -68,7 +68,7 @@ class ModuleServiceProvider extends ServiceProvider {
 		{
 			Plugin::setApplication($app);
 
-			return new PluginManager($app);
+			return new PluginManager($app, $app['view']);
 		});
 	}
 }

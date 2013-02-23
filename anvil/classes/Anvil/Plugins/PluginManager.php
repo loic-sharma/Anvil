@@ -1,10 +1,23 @@
 <?php namespace Anvil\Plugins;
 
-use View;
-use Anvil;
-use Closure;
+use Illuminate\Container\Container;
+use Illuminate\View\Environment;
 
 class PluginManager {
+
+	/**
+	 * The container.
+	 *
+	 * @var Illuminate\Container\Container
+	 */
+	protected $container;
+
+	/**
+	 * The view manager.
+	 *
+	 * @var Illuminate\View\Environment
+	 */
+	protected $view;
 
 	/**
 	 * All of the registered plugins.
@@ -12,6 +25,19 @@ class PluginManager {
 	 * @var array
 	 */
 	protected $plugins = array();
+
+	/**
+	 * Register the view manager.
+	 *
+	 * @param  Illuminate\Container\Container $container
+	 * @param  Illuminate\View\Environment    $view
+	 * @return void
+	 */
+	public function __construct(Container $container, Environment $view)
+	{
+		$this->container = $container;
+		$this->view = $view;
+	}
 
 	/**
 	 * Register a plugin.
@@ -24,7 +50,7 @@ class PluginManager {
 		// If we were given a string, let's get an instance of the plugin.
 		if(is_string($class) and class_exists($class))
 		{
-			$class = Anvil::make($class);
+			$class = $this->container->make($class);
 		}
 
 		// If the class inherits the Plugin class, let's wrap it around
@@ -35,7 +61,7 @@ class PluginManager {
 		}
 
 		// Register the plugin in the view environment.
-		View::share($plugin, $class);
+		$this->view->share($plugin, $class);
 
 		$this->plugins[$plugin] = $class;
 	}
