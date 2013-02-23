@@ -117,11 +117,9 @@ return array(
 		'Plugin'     => 'Anvil\Plugins\Plugin',
 		'Controller' => 'Anvil\Routing\Controllers\Controller',
 
-
 		'Anvil'        => 'Anvil\Facades\Anvil',
 		'Eloquent'     => 'Anvil\Database\Model',
 		'Autoloader'   => 'Anvil\Facades\Autoloader',
-		'JsonResponse' => 'Anvil\Http\JsonResponse',
 		'Menu'         => 'Anvil\Facades\Menu',
 		'Modules'      => 'Anvil\Facades\Modules',
 		'Plugins'      => 'Anvil\Facades\Plugins',
