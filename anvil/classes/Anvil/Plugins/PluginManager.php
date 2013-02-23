@@ -76,7 +76,7 @@ class PluginManager {
 		// in the Facade class so that attributes can managed.
 		if($plugin instanceof Plugin)
 		{
-			$plugin = new Facade($plugin);
+			$plugin = new Decorator($plugin);
 		}
 
 		return $plugin;

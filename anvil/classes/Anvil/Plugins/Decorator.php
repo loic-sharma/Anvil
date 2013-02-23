@@ -2,7 +2,7 @@
 
 use Illuminate\View\Environment as ViewEnvironment;
 
-class Facade {
+class Decorator {
 
 	/**
 	 * The plugin.
