@@ -1,9 +1,35 @@
 <?php namespace Anvil\Plugins;
 
-use Url;
-use Request;
+use Illuminate\Http\Request;
+use Illuminate\Routing\UrlGenerator;
 
 class UrlPlugin {
+
+	/**
+	 * The current HttpRequest.
+	 *
+	 * @var Illuminate\Http\Request
+	 */
+	protected $request;
+
+	/**
+	 * The URL Generator.
+	 *
+	 * @var Illuminate\Routing\UrlGenerator
+	 */
+	protected $url;
+
+	/**
+	 * Register the reques and Url.
+	 *
+	 * @param Illuminate\Http\Request  $request
+	 * @param Illuminate\Routing\UrlGenerator  $url
+	 */
+	public function __construct(Request $request, UrlGenerator $url)
+	{
+		$this->request = $request;
+		$this->url = $url;
+	}
 
 	/**
 	 * Retrieve the base URL.
@@ -12,7 +38,7 @@ class UrlPlugin {
 	 */
 	public function base()
 	{
-		return Request::root();
+		return $this->request->root();
 	}
 
 	/**
@@ -22,7 +48,7 @@ class UrlPlugin {
 	 */
 	public function current()
 	{
-		return Request::getUri();
+		return $this->request->getUri();
 	}
 
 	/**
@@ -33,6 +59,6 @@ class UrlPlugin {
 	 */
 	public function to($uri)
 	{
-		return Url::to($uri);
+		$this->url->to($uri);
 	}
 }

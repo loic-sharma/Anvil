@@ -270,7 +270,7 @@ Session::start($anvil['cookie'], $config['session.cookie']);
 |
 */
 
-Plugins::register('url', new Anvil\Plugins\UrlPlugin);
+Plugins::register('url', new Anvil\Plugins\UrlPlugin($anvil['request'], $anvil['url']));
 
 /*
 |--------------------------------------------------------------------------
