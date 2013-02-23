@@ -42,28 +42,44 @@ class PluginManager {
 	/**
 	 * Register a plugin.
 	 *
-	 * @param  mixed  $plugin
-	 * @param  string  $value
+	 * @param  mixed  $name
+	 * @param  mixed  $value
+	 * @return void
 	 */
-	public function register($plugin, $class)
+	public function register($name, $plugin)
 	{
-		// If we were given a string, let's get an instance of the plugin.
-		if(is_string($class) and class_exists($class))
+		$plugin = $this->preparePlugin($plugin);
+
+		// Register the plugin to the view environment.
+		$this->view->share($name, $plugin);
+
+		$this->plugins[$name] = $plugin;
+	}
+
+	/**
+	 * Prepare the instance of the plugin.
+	 *
+	 * @param  mixed  $plugin
+	 * @return void
+	 */
+	protected function preparePlugin($plugin)
+	{
+		// If the plugin is currently a string, we will need to build an
+		// instance. We'll use Laravel's container to automatically
+		// Build an instance of the plugin.If we were given a string, let's get an instance of the plugin.
+		if(is_string($plugin))
 		{
-			$class = $this->container->make($class);
+			$plugin = $this->container->make($plugin);
 		}
 
 		// If the class inherits the Plugin class, let's wrap it around
 		// in the Facade class so that attributes can managed.
-		if($class instanceof Plugin)
+		if($plugin instanceof Plugin)
 		{
-			$class = new Facade($class);
+			$plugin = new Facade($plugin);
 		}
 
-		// Register the plugin in the view environment.
-		$this->view->share($plugin, $class);
-
-		$this->plugins[$plugin] = $class;
+		return $plugin;
 	}
 
 	/**
