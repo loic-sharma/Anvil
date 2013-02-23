@@ -92,7 +92,6 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 			$env->setContainer($app);
 
 			$env->share('app', $app);
-			$env->share('plugins', $app['plugins']);
 			$env->share('message', $app['session']->get('message'));
 
 			return $env;
