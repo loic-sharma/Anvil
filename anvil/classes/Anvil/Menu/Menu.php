@@ -49,12 +49,7 @@ class Menu {
 		$menu = $this->factory->get($name);
 
 		// We first need to get all of the links that the current user
-		// has access to on the menu. We'll cache these links too.
-		//$links = Cache::remember('navigation-links-'.$name.'-'.$power, 60, function() use($me, $name, $power)
-		//{
-		//	return $me->fetchLinks($name, $power);
-		//});
-
+		// has access to on the menu.
 		$links = $this->fetchLinks($name, $power);
 
 		// Now, add the links to the menu.
