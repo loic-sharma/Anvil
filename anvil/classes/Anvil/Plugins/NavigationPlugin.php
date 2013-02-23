@@ -1,4 +1,9 @@
-<?php
+<?php namespace Anvil\Plugins;
+
+use Anvil;
+use Auth;
+use Menu;
+use Cms\Menu\Model\Menu as MenuModel;
 
 class NavigationPlugin {
 
