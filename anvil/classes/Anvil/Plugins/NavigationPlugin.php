@@ -2,7 +2,7 @@
 
 use Menu\Factory as MenuFactory;
 use Anvil\Auth\Models\User;
-use Anvil\Menu\Model\Menu as MenuModel;
+use Anvil\Menu\Models\Menu as MenuModel;
 
 class NavigationPlugin {
 

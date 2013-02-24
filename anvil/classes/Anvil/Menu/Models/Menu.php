@@ -1,4 +1,4 @@
-<?php namespace Anvil\Menu\Model;
+<?php namespace Anvil\Menu\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,6 +35,6 @@ class Menu extends Model {
 	 */
 	public function links()
 	{
-		return $this->hasMany('Anvil\Menu\Model\Link');
+		return $this->hasMany('Anvil\Menu\Models\Link');
 	}
 }

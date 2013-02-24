@@ -2,8 +2,8 @@
 
 use Cache;
 use Menu\Factory as MenuFactory;
-use Anvil\Menu\Model\Menu as MenuModel;
-use Anvil\Menu\Model\Link as LinkModel;
+use Anvil\Menu\Models\Menu as MenuModel;
+use Anvil\Menu\Models\Link as LinkModel;
 
 class Menu {
 

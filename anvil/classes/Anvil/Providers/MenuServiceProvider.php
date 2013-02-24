@@ -5,7 +5,7 @@ use Menu\FilterRepository as MenuFilter;
 use Menu\Renderer as MenuRenderer;
 
 use Anvil\Menu\Menu as MenuRepository;
-use Anvil\Menu\Model\Menu as MenuModel;
+use Anvil\Menu\Models\Menu as MenuModel;
 use Anvil\Plugins\NavigationPlugin;
 
 use Illuminate\Support\ServiceProvider;

@@ -1,4 +1,4 @@
-<?php namespace Anvil\Menu\Model;
+<?php namespace Anvil\Menu\Models;
 
 use Url;
 use Illuminate\Database\Eloquent\Model;
@@ -92,6 +92,6 @@ class Link extends Model {
 	 */
 	public function menu()
 	{
-		return $this->belongsTo('Anvil\Menu\Model\Menu');
+		return $this->belongsTo('Anvil\Menu\Models\Menu');
 	}
 }
