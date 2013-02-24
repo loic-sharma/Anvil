@@ -5,15 +5,14 @@ use Illuminate\Auth\UserInterface;
 class Guest extends User implements UserInterface {
 
 	/**
-	 * Get the Guest group.
+	 * Get the user's group.
 	 *
-	 * @return void
 	 */
-	public function __construct()
+	public function group()
 	{
-		$this->group = Group::where('name', 'guest')
-							->orWhere('power', 0)
-							->first();
+		return $this->belongsTo('Anvil\Auth\Models\Group')
+				->where('name', 'guest')
+				->orWhere('power', 0);
 	}
 
 	/**
@@ -31,7 +30,7 @@ class Guest extends User implements UserInterface {
 	 *
 	 * @return string
 	 */
-	public function displayName()
+	public function getDisplayNameAttribute()
 	{
 		return 'Guest';
 	}
@@ -41,7 +40,7 @@ class Guest extends User implements UserInterface {
 	 *
 	 * @return string
 	 */
-	public function date()
+	public function getDateAttribute()
 	{
 		return 'Never';
 	}
@@ -51,7 +50,7 @@ class Guest extends User implements UserInterface {
 	 *
 	 * @return string
 	 */
-	public function gravatarUrl($size = 60)
+	public function getGravatarUrlAttribute($size = 60)
 	{
 		return 'http://www.gravatar.com/avatar/00000000000000000000000000000000?s='.$size;
 	}
