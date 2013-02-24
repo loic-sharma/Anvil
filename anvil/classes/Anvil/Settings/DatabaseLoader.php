@@ -42,6 +42,7 @@ class DatabaseLoader implements LoaderInterface {
 
 			foreach($settings as $setting)
 			{
+
 				$this->settings[$setting->key] = unserialize($setting->value);
 			}
 		}
@@ -60,13 +61,16 @@ class DatabaseLoader implements LoaderInterface {
 		foreach($settings as $key => $value)
 		{
 			// Only settings that have changed will be saved.
-			if(isset($this->settings[$key]) and $this->settings[$key] != $value)
+			if(isset($this->settings[$key]))
 			{
-				$value = serialize($value);
+				if($this->settings[$key] != $value)
+				{
+					$value = serialize($value);
 
-				$this->database->table('settings')
-					->where('key', '=', $key)
-					->update(compact('value'));
+					$this->database->table('settings')
+						->where('key', '=', $key)
+						->update(compact('value'));
+				}
 			}
 
 			else
