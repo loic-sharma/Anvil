@@ -4,7 +4,7 @@ use Menu\Factory as MenuFactory;
 use Anvil\Auth\Models\User;
 use Anvil\Menu\Model\Menu as MenuModel;
 
-class NavigationPlugin extends Plugin {
+class NavigationPlugin {
 
 	/**
 	 * The current user's model.
