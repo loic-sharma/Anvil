@@ -65,7 +65,7 @@ class Application extends IlluminateApplication {
 			{
 				$this->isAdminPanel = true;
 
-				$uri = implode('/', array_slice($segments, 0, 2));
+				$this->setTheme('admin');
 
 				// The second segment will be directly routed to a module.
 				if(count($segments) >= 2)
@@ -73,14 +73,13 @@ class Application extends IlluminateApplication {
 					$this->controller = ucfirst($segments[1]).'AdminController';
 				}
 
+				// Use the admin controller by default.
 				else
 				{
-					// By default, use the admin controller.
 					$this->controller = 'Cms\Controllers\AdminController';
 				}
-
-				// Register the admin theme.
-				$this->setTheme('admin');
+	
+				$uri = implode('/', array_slice($segments, 0, 2));
 			}
 
 			// Handle normal non-admin routes.
@@ -104,8 +103,8 @@ class Application extends IlluminateApplication {
 		}
 
 		// If the controller does not exist, Illuminate will
-		// through an exception. Since there might be a custom route
-		// already set to save the day, we'll silently kill the exception.
+		// throw an exception. we'll silently kill the exception
+		// Since there might be a custom route already set.
 		catch(\ReflectionException $e) {}
 	}
 
