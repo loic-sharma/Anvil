@@ -145,7 +145,7 @@ class User extends Model implements UserInterface {
 	 *
 	 * @return string
 	 */
-	public function date()
+	public function getDateAttribute()
 	{
 		$date = new ExpressiveDate($this->attributes['created_at']);
 
