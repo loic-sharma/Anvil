@@ -7,9 +7,9 @@ abstract class Plugin {
 	/**
 	 * The application instance.
 	 *
-	 * @var Illuminate\Foundation\Application
+	 * @var Anvil\Application
 	 */
-	protected static $app;
+	protected static $anvil;
 
 	/**
 	 * The plugin's model.
@@ -28,12 +28,12 @@ abstract class Plugin {
 	/**
 	 * Set the application instance.
 	 *
-	 * @param  Illuminate\Foundation\Application  $app
+	 * @param  Anvil\Application  $anvil
 	 * @return void
 	 */
-	public static function setApplication($app)
+	public static function setApplication($anvil)
 	{
-		static::$app = $app;
+		static::$anvil = $anvil;
 	}
 
 	/**
