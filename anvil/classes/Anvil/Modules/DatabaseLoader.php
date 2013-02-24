@@ -7,7 +7,7 @@ class DatabaseLoader implements LoaderInterface {
 	/**
 	 * The database instance.
 	 *
-	 * @var DatabaseManager
+	 * @var Illuminate\Database\DatabaseManager
 	 */
 	protected $database;
 
@@ -16,11 +16,12 @@ class DatabaseLoader implements LoaderInterface {
 	 *
 	 * @var array
 	 */
-	protected $modules = array();
+	protected $modules;
 
 	/**
 	 * Save the Database Manager instance.
 	 *
+	 * @param  Illuminate\Database\DatabaseManager $database
 	 * @return void
 	 */
 	public function __construct(DatabaseManager $database)
@@ -35,10 +36,11 @@ class DatabaseLoader implements LoaderInterface {
 	 */
 	public function get()
 	{
-		if(empty($this->modules))
+		if(is_null($this->modules))
 		{
-			$modules = $this->database
-						->table('modules')
+			$this->modules = array();
+
+			$modules = $this->database->table('modules')
 						->orderBy('is_core', 'desc')
 						->get();
 
