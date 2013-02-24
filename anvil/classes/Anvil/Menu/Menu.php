@@ -44,8 +44,6 @@ class Menu {
 	 */
 	public function get($name, $power = null)
 	{
-		$me = $this;
-
 		$menu = $this->factory->get($name);
 
 		// We first need to get all of the links that the current user
