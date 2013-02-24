@@ -92,7 +92,7 @@ class MenuServiceProvider extends ServiceProvider {
 	{
 		$this->app['menu.plugin'] = $this->app->share(function($app)
 		{
-			return new NavigationPlugin($app['auth']->user(), new MenuModel, $app['menu.factory']);
+			return new NavigationPlugin($app['auth']->user(), new MenuModel, $app['menu']);
 		});
 	}
 }

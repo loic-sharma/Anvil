@@ -1,8 +1,8 @@
 <?php namespace Anvil\Plugins;
 
-use Menu\Factory as MenuFactory;
 use Anvil\Auth\Models\User;
 use Anvil\Menu\Models\Menu as MenuModel;
+use Anvil\Menu\Menu as MenuGenerator;
 
 class NavigationPlugin {
 
@@ -32,10 +32,10 @@ class NavigationPlugin {
 	 *
 	 * @param  Anvil\Auth\Models\User  $currentuser
 	 * @param  Anvil\Menu\Model\Menu   $menu
-	 * @param  Menu\Factory            $generator
+	 * @param  Anvil\Menu\Menu         $generator
 	 * @return void
 	 */
-	public function __construct(User $currentUser, MenuModel $menu, MenuFactory $generator)
+	public function __construct(User $currentUser, MenuModel $menu, MenuGenerator $generator)
 	{
 		$this->currentUser = $currentUser;
 		$this->menu = $menu;
