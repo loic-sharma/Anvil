@@ -6,6 +6,6 @@ Schema::create('settings', function($table)
 {
 	$table->increments('id');
 
-	$table->string('key');
+	$table->string('key')->unique();
 	$table->text('value')->nullable();
 });
