@@ -3,7 +3,10 @@
 use Menu\Factory as MenuFactory;
 use Menu\FilterRepository as MenuFilter;
 use Menu\Renderer as MenuRenderer;
+
 use Anvil\Menu\Menu as MenuRepository;
+use Anvil\Menu\Model\Menu as MenuModel;
+use Anvil\Plugins\NavigationPlugin;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -20,7 +23,11 @@ class MenuServiceProvider extends ServiceProvider {
 
 		$this->registerMenuRenderer();
 
+		$this->registerMenuFactory();
+
 		$this->registerMenu();
+
+		$this->registerPlugin();
 	}
 
 	/**
@@ -49,6 +56,20 @@ class MenuServiceProvider extends ServiceProvider {
 		});
 	}
 
+
+	/**
+	 * Register the Menu Factory.
+	 *
+	 * @return void
+	 */
+	public function registerMenuFactory()
+	{
+		$this->app['menu.factory'] = $this->app->share(function($app)
+		{
+			return new MenuFactory($app['menu.filter'], $app['menu.renderer']);
+		});
+	}
+
 	/**
 	 * Register the Menu.
 	 *
@@ -58,7 +79,20 @@ class MenuServiceProvider extends ServiceProvider {
 	{
 		$this->app['menu'] = $this->app->share(function($app)
 		{
-			return new MenuRepository(new MenuFactory($app['menu.filter'], $app['menu.renderer']));
+			return new MenuRepository($app['menu.factory']);
+		});
+	}
+
+	/**
+	 * Register the menu's plugin.
+	 *
+	 * @return void
+	 */
+	public function registerPlugin()
+	{
+		$this->app['menu.plugin'] = $this->app->share(function($app)
+		{
+			return new NavigationPlugin($app['auth']->user(), new MenuModel, $app['menu.factory']);
 		});
 	}
 }

@@ -33,6 +33,8 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Foundation\ProviderRepository;
 
+use Anvil\Plugins\UrlPlugin;
+
 /*
 |--------------------------------------------------------------------------
 | Load The Autoloader
@@ -270,8 +272,9 @@ Session::start($anvil['cookie'], $config['session.cookie']);
 |
 */
 
-Plugins::register('url', new Anvil\Plugins\UrlPlugin($anvil['request'], $anvil['url']));
-Plugins::register('navigation', new Anvil\Plugins\NavigationPlugin);
+Plugins::register('url', new UrlPlugin($anvil['request'], $anvil['url']));
+
+Plugins::register('navigation', $anvil['menu.plugin']);
 
 /*
 |--------------------------------------------------------------------------

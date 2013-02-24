@@ -1,11 +1,46 @@
 <?php namespace Anvil\Plugins;
 
-use Anvil;
-use Auth;
-use Menu;
-use Cms\Menu\Model\Menu as MenuModel;
+use Menu\Factory as MenuFactory;
+use Anvil\Auth\Models\User;
+use Anvil\Menu\Model\Menu as MenuModel;
 
-class NavigationPlugin {
+class NavigationPlugin extends Plugin {
+
+	/**
+	 * The current user's model.
+	 *
+	 * @var Anvil\Auth\Models\User
+	 */
+	protected $currentUser;
+
+	/**
+	 * The menu's model.
+	 *
+	 * @var Anvil\Menu\Model\Menu
+	 */
+	protected $menu;
+
+	/**
+	 * The menu generator used to render menus.
+	 *
+	 * @var Menu\Factory
+	 */
+	protected $generator;
+
+	/**
+	 * Register the dependencies.
+	 *
+	 * @param  Anvil\Auth\Models\User  $currentuser
+	 * @param  Anvil\Menu\Model\Menu   $menu
+	 * @param  Menu\Factory            $generator
+	 * @return void
+	 */
+	public function __construct(User $currentUser, MenuModel $menu, MenuFactory $generator)
+	{
+		$this->currentUser = $currentUser;
+		$this->menu = $menu;
+		$this->generator = $generator;
+	}
 
 	/**
 	 * Get all of the navigation groups.
@@ -14,25 +49,7 @@ class NavigationPlugin {
 	 */
 	public function groups()
 	{
-		return Cms\Menu\Model\Menu::all();
-	}
-
-	/**
-	 * Fetch the menu to the current section.
-	 *
-	 * @return  string
-	 */
-	public function mainMenu()
-	{
-		if(Anvil::isAdmin())
-		{
-			return $this->menu('admin');
-		}
-
-		else
-		{
-			return $this->menu('header');
-		}
+		return $this->model->all();
 	}
 
 	/**
@@ -43,8 +60,8 @@ class NavigationPlugin {
 	 */
 	public function menu($name)
 	{
-		$power = Auth::user()->group->power;
+		$menu = $this->generator->get($name, $this->currentUser->power);
 
-		return Menu::get($name, $power)->render();
+		return $menu->render();
 	}
 }
