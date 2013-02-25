@@ -1,11 +1,24 @@
 <?php namespace Anvil\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Anvil\Plugins\UrlPlugin;
 use Anvil\Routing\UrlGenerator;
-use Anvil\Routing\Controllers\Router as ControllerRouter;
+
 use Illuminate\Routing\RoutingServiceProvider as IlluminateRoutingServiceProvider;
 
 class RoutingServiceProvider extends IlluminateRoutingServiceProvider {
+
+
+	/**
+	 * Register the service provider.
+	 *
+	 * @return void
+	 */
+	public function register()
+	{
+		parent::register();
+
+		$this->registerUrlPlugin();
+	}
 
 	/**
 	 * Register the URL generator service.
@@ -22,6 +35,19 @@ class RoutingServiceProvider extends IlluminateRoutingServiceProvider {
 			$routes = $app['router']->getRoutes();
 
 			return new UrlGenerator($routes, $app['request']);
+		});
+	}
+
+	/**
+	 * Register the URRL plugin.
+	 *
+	 * @return void
+	 */
+	protected function registerUrlPlugin()
+	{
+		$this->app['url.plugin'] = $this->app->share(function($app)
+		{
+			return new UrlPlugin($app['request'], $app['url']);
 		});
 	}
 }
