@@ -37,27 +37,14 @@ class Controller extends IlluminateController {
 		{
 			$this->page = $container->plugins->page;
 
-			$response = $this->directCallAction($method, $parameters);
+			$response = $this->callMethod($method, $parameters);
+
+			if(is_null($response))
+			{
+				$response = $this->page->render();
+			}
 		}
 
 		return $this->processResponse($router, $method, $response);
-	}
-
-	/**
-	 * Process a controller action response.
-	 *
-	 * @param  Illuminate\Routing\Router  $router
-	 * @param  string  $method
-	 * @param  mixed   $response
-	 * @return Symfony\Component\HttpFoundation\Response
-	 */
-	protected function processResponse($router, $method, $response)
-	{
-		if(is_null($response))
-		{
-			$response = $this->page->render();
-		}
-
-		return parent::processResponse($router, $method, $response);
 	}
 }
