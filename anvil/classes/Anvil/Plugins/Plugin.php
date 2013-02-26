@@ -37,6 +37,16 @@ abstract class Plugin {
 	}
 
 	/**
+	 * Reset the plugin's attributes.
+	 *
+	 * @return void
+	 */
+	public function resetAttributes()
+	{
+		$this->attributes = array();
+	}
+
+	/**
 	 * Set the plugin's attributes.
 	 *
 	 * @param  array  $attributes

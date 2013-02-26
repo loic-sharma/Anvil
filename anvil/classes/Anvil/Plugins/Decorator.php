@@ -63,7 +63,7 @@ class Decorator {
 	public function __call($method, $args)
 	{
 		// First things first, reset all of the plugin's attributes.
-		$this->plugin->setAttributes(array());
+		$this->plugin->resetAttributes();
 
 		// If only an array was passed to the method, then we will
 		// assume that the array contains attributes.
