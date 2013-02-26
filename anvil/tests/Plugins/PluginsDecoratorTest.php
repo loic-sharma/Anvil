@@ -1,6 +1,13 @@
 <?php
 
+use Anvil\Plugins\Decorator;
+
 class PluginsDecoratorTest extends PHPUnit_Framework_TestCase {
+
+	public function setUp()
+	{
+		require_once __DIR__.'/../stubs/PluginStub.php';
+	}
 
 	public function testGetMagicMethod()
 	{
@@ -52,6 +59,17 @@ class PluginsDecoratorTest extends PHPUnit_Framework_TestCase {
 			->will($this->returnValue($expected));
 
 		$decorator = $this->getMock('Anvil\Plugins\Decorator', NULL, array($plugin));
+
+		$this->assertEquals($expected, $decorator->test($parameters));
+	}
+
+	public function testCallMethodWithNamedVariables()
+	{
+		$parameters = array('fake' => 'value', 'foo' => 'bar');
+		$expected = 'bar default';
+
+		$plugin = new PluginStub;
+		$decorator = new Decorator($plugin);
 
 		$this->assertEquals($expected, $decorator->test($parameters));
 	}
