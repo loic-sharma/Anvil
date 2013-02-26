@@ -7,8 +7,8 @@ class PluginsDecoratorTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetMagicMethod()
 	{
-		$plugin = $this->getMock('Anvil\Plugins\Plugin');
-		$decorator = $this->getMock('Anvil\Plugins\Decorator', NULL, array($plugin));
+		$plugin = new PluginStub;
+		$decorator = new Decorator($plugin);
 
 		$plugin->key = 'value';
 
@@ -17,8 +17,8 @@ class PluginsDecoratorTest extends PHPUnit_Framework_TestCase {
 
 	public function testSetMagicMethod()
 	{
-		$plugin = $this->getMock('Anvil\Plugins\Plugin');
-		$decorator = $this->getMock('Anvil\Plugins\Decorator', NULL, array($plugin));
+		$plugin = new PluginStub;
+		$decorator = new Decorator($plugin);
 
 		$decorator->key = 'value';
 
