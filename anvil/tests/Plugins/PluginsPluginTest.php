@@ -1,12 +1,15 @@
 <?php
 
+use Anvil\Plugins\Plugin;
+use Illuminate\Database\Eloquent\Model;
+
 class PluginPluginTest extends PHPUnit_Framework_TestCase {
 
 	public function testAttributes()
 	{
 		$attributes = array('foo' => 'bar');
 
-		$plugin = $this->getMockForAbstractClass('Anvil\Plugins\Plugin');
+		$plugin = new PluginStub;
 		$plugin->setAttributes($attributes);
 
 		$this->assertEquals($attributes['foo'], $plugin->attribute('foo'));
@@ -17,7 +20,7 @@ class PluginPluginTest extends PHPUnit_Framework_TestCase {
 		$attributes = array('foo' => 'bar');
 		$expected = 'Expected';
 
-		$plugin = $this->getMockForAbstractClass('Anvil\Plugins\Plugin');
+		$plugin = new PluginStub;
 		$plugin->setAttributes($attributes);
 		$plugin->resetAttributes();
 
@@ -28,15 +31,15 @@ class PluginPluginTest extends PHPUnit_Framework_TestCase {
 	{
 		$expected = 'Expected';
 
-		$model = $this->getMock('Model', array('test'));
+		$model = $this->getMock('Model', array('foo'));
 		$model->expects($this->once())
-			->method('test')
+			->method('foo')
 			->will($this->returnValue($expected));
 
-		$plugin = $this->getMockForAbstractClass('Anvil\Plugins\Plugin');
+		$plugin = new PluginStub;
 		$plugin->model = $model;
 
-		$this->assertEquals($expected, $plugin->test());
+		$this->assertEquals($expected, $plugin->foo());
 	}
 
 	public function testEloquentModelCalls()
@@ -59,3 +62,5 @@ class PluginPluginTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($expected, $plugin->test());
 	}
 }
+
+class PluginStub extends Plugin {}
