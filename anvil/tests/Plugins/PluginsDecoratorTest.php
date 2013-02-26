@@ -7,7 +7,7 @@ class PluginsDecoratorTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetMagicMethod()
 	{
-		$plugin = new PluginStub;
+		$plugin = new DecoratorPluginStub;
 		$decorator = new Decorator($plugin);
 
 		$plugin->key = 'value';
@@ -17,7 +17,7 @@ class PluginsDecoratorTest extends PHPUnit_Framework_TestCase {
 
 	public function testSetMagicMethod()
 	{
-		$plugin = new PluginStub;
+		$plugin = new DecoratorPluginStub;
 		$decorator = new Decorator($plugin);
 
 		$decorator->key = 'value';
@@ -64,14 +64,16 @@ class PluginsDecoratorTest extends PHPUnit_Framework_TestCase {
 		$parameters = array('fake' => 'value', 'foo' => 'bar');
 		$expected = 'bar default';
 
-		$plugin = new PluginStub;
+		$plugin = new PluginNamedVariableStub;
 		$decorator = new Decorator($plugin);
 
 		$this->assertEquals($expected, $decorator->test($parameters));
 	}
 }
 
-class PluginStub extends Plugin {
+class DecoratorPluginStub extends Plugin {}
+
+class PluginNamedVariableStub extends Plugin {
 
 	public function test($foo, $bar = 'default')
 	{
