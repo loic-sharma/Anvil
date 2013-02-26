@@ -1,13 +1,9 @@
 <?php
 
+use Anvil\Plugins\Plugin;
 use Anvil\Plugins\Decorator;
 
 class PluginsDecoratorTest extends PHPUnit_Framework_TestCase {
-
-	public function setUp()
-	{
-		require_once __DIR__.'/../stubs/PluginStub.php';
-	}
 
 	public function testGetMagicMethod()
 	{
@@ -72,5 +68,13 @@ class PluginsDecoratorTest extends PHPUnit_Framework_TestCase {
 		$decorator = new Decorator($plugin);
 
 		$this->assertEquals($expected, $decorator->test($parameters));
+	}
+}
+
+class PluginStub extends Plugin {
+
+	public function test($foo, $bar = 'default')
+	{
+		return $foo.' '.$bar;
 	}
 }
