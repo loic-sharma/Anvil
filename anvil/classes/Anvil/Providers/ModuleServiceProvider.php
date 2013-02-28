@@ -71,4 +71,14 @@ class ModuleServiceProvider extends ServiceProvider {
 			return new PluginManager($app, $app['view']);
 		});
 	}
+
+	/**
+	 * Get the services provided by the provider.
+	 *
+	 * @return array
+	 */
+	public function provides()
+	{
+		return array('menu.loader', 'modules', 'plugins');
+	}
 }

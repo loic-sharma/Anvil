@@ -95,4 +95,14 @@ class MenuServiceProvider extends ServiceProvider {
 			return new NavigationPlugin($app['auth']->user(), new MenuModel, $app['menu']);
 		});
 	}
+
+	/**
+	 * Get the services provided by the provider.
+	 *
+	 * @return array
+	 */
+	public function provides()
+	{
+		return array('menu.filter', 'menu.factory', 'menu', 'menu.plugin');
+	}
 }
