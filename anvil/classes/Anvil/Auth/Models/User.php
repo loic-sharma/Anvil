@@ -159,7 +159,7 @@ class User extends Model implements UserInterface {
 	 */
 	public function gravatarUrl($size = 60)
 	{
-		$email .= md5(strtolower($this->attributes['email']));
+		$email = md5(strtolower($this->attributes['email']));
 
 		return 'http://www.gravatar.com/avatar/'.$email.'?s='.$size;
 	}
