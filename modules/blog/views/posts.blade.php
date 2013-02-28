@@ -21,4 +21,5 @@
 		</div>
 	@endforeach
 @else
+	<p>This blog has no posts!</p>
 @endif
