@@ -118,7 +118,7 @@ Route::post('step-4', function()
 
 		Auth::loginUsingId($id);
 
-		return Redirect::to('/../../');	
+		return Redirect::to('/../');	
 	}
 
 	return Redirect::to('step-4')->withErrors($form);
