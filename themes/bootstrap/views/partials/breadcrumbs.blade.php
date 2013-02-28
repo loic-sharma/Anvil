@@ -3,11 +3,11 @@
 		@foreach($page->breadcrumbs() as $breadcrumb)
 			@if($breadcrumb->hasLink())
 				<li>
-					<a href="{{ $breadcrumb->link() }} ">{{ $breadcrumb }}</a>
 					<span class="dividider">/</span>
+					<a href="{{ $breadcrumb->link() }} ">{{{ $breadcrumb }}}</a>
 				</li>
 			@else
-				<li class="active">{{ $breadcrumb }}</span>
+				<li class="active">{{{ $breadcrumb }}}</span>
 			@endif
 		@endforeach
     </ul>
