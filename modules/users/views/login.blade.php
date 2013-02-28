@@ -3,7 +3,7 @@
 <form method="POST" action="{{ $url->current() }}" accept-charset="utf-8">
 	<div class="control-group">
 		<div class="controls">
-			<input type="text" name="email" value="{{ Input::old('email') }}" placeholder="Username" class="input-large">
+			<input type="text" name="email" value="{{{ Input::old('email') }}}" placeholder="Username" class="input-large">
 		</div>
 	</div>
 
