@@ -2,13 +2,18 @@
 
 class SettingsRepositoryTest extends PHPUnit_Framework_TestCase {
 
-	public function testInstantiation()
+	public function testFetchSettings()
 	{
+		$expected = array('foo' => 'bar', 'fooz' => 'baz');
+
 		$loader = $this->getMock('Anvil\Settings\LoaderInterface');
 		$loader->expects($this->once())
-			->method('get');
+			->method('get')
+			->will($this->returnValue($expected));
 
 		$repository = new Anvil\Settings\Repository($loader);
+
+		$this->assertEquals($expected, $repository->fetch());
 	}
 
 	public function testGetSetting()

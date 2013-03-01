@@ -25,7 +25,6 @@ class Repository {
 	public function __construct(LoaderInterface $loader)
 	{
 		$this->loader = $loader;
-		$this->settings = $this->loader->get();
 	}
 
 	/**
@@ -42,6 +41,22 @@ class Repository {
 	}
 
 	/**
+	 * Fetch the settings if they haven't been
+	 * loaded yet.
+	 *
+	 * @return array
+	 */
+	public function fetch()
+	{
+		if(is_null($this->settings))
+		{
+			$this->settings = $this->loader->get();
+		}
+
+		return $this->settings;
+	}
+
+	/**
 	 * Retrieve a setting.
 	 *
 	 * @param  string  $key
@@ -50,6 +65,8 @@ class Repository {
 	 */
 	public function get($key, $defaultValue = null)
 	{
+		$this->fetch();
+
 		if(isset($this->settings[$key]))
 		{
 			return $this->settings[$key];
@@ -70,6 +87,8 @@ class Repository {
 	 */
 	public function set($key, $value)
 	{
+		$this->fetch();
+
 		$this->settings[$key] = $value;
 	}
 }

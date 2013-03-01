@@ -36,15 +36,11 @@ class DatabaseLoader implements LoaderInterface {
 	 */
 	public function get()
 	{
-		if(empty($this->settings))
+		$settings = $this->database->table('settings')->get();
+
+		foreach($settings as $setting)
 		{
-			$settings = $this->database->table('settings')->get();
-
-			foreach($settings as $setting)
-			{
-
-				$this->settings[$setting->key] = unserialize($setting->value);
-			}
+			$this->settings[$setting->key] = unserialize($setting->value);
 		}
 
 		return $this->settings;
