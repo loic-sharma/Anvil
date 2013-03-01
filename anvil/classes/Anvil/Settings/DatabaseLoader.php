@@ -77,6 +77,6 @@ class DatabaseLoader implements LoaderInterface {
 		}
 
 		// Save the new settings locally in case new settings are saved.
-		$this->settings = $settings;
+		$this->settings = array_merge($this->settings, $settings);
 	}
 }
