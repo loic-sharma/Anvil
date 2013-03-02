@@ -15,7 +15,7 @@ class BlogController extends Controller {
 		
 		$this->page->addBreadcrumb('Blog');
 
-		$this->page->setContent('blog::posts', array('posts' => $posts));
+		$this->page->setContent('blog::posts', compact('posts'));
 	}
 
 	/**
