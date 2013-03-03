@@ -1,5 +1,6 @@
 <?php namespace Anvil\Plugins;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class Plugin {
@@ -31,7 +32,7 @@ abstract class Plugin {
 	 * @param  Anvil\Application  $anvil
 	 * @return void
 	 */
-	public static function setApplication($anvil)
+	public static function setApplication(Application $anvil)
 	{
 		static::$anvil = $anvil;
 	}
