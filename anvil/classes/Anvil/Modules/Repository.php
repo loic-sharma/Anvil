@@ -1,10 +1,11 @@
 <?php namespace Anvil\Modules;
 
 use Anvil;
+use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
 use Composer\Autoload\ClassLoader;
 
-class Repository {
+class Repository extends Collection {
 
 	/**
 	 * The instance of the composer Class Loader.
@@ -51,6 +52,8 @@ class Repository {
 		$this->autoloader = $autoloader;
 		$this->modules = $loader->get();
 		$this->path = $path;
+
+		parent::__construct($this->modules);
 	}
 
 	/**
@@ -127,57 +130,5 @@ class Repository {
 		}
 
 		return $this->filesystem->isDirectory($this->getPath($module));
-	}
-
-	/**
-	 * Load a module.
-	 *
-	 * @param  string  $module
-	 * @return void
-	 */
-	public function boot($module)
-	{
-		if( ! in_array($module, $this->booted))
-		{
-			$path = $this->getPath($module);
-
-			if(is_dir($path))
-			{
-				// Add the module's controller and model directories (if they exist)
-				// to the autoloader's list of directories.
-				$directories = array($path.'controllers', $path.'models');
-
-				$directories = array_filter($directories, function($directory)
-				{
-					return is_dir($directory);
-				});
-
-				$this->autoloader->add(null, $directories);
-				$this->autoloader->add(ucfirst($module), $path.'classes');
-
-				// Load the module's start files.
-				foreach($this->filesystem->files($path) as $file)
-				{
-					$this->filesystem->requireOnce($file);
-				}
-
-				$plugin = ucfirst($module).'Plugin';
-
-				// Todo: Dependency injection?
-				if(class_exists($plugin))
-				{
-					Anvil::make('plugins')->register($module, $plugin);
-				}
-
-				Anvil::make('view')->addNamespace($module, $path.'views');
-			}
-
-			else
-			{
-				throw new \InvalidArgumentException("Module [$module] does not exist.");
-			}
-
-			$this->booted[] = $module;
-		}
 	}
 }

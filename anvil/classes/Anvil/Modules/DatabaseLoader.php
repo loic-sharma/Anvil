@@ -47,7 +47,7 @@ class DatabaseLoader implements LoaderInterface {
 			// Organize the modules by their slugs. 
 			foreach($modules as $module)
 			{
-				$this->modules[$module->slug] = $module;
+				$this->modules[$module->slug] = new Module($module);
 			}
 		}
 
