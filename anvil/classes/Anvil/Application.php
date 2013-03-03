@@ -76,7 +76,7 @@ class Application extends IlluminateApplication {
 				// Use the admin controller by default.
 				else
 				{
-					$this->controller = 'Cms\Controllers\AdminController';
+					$this->controller = 'Anvil\Controllers\AdminController';
 				}
 	
 				$uri = implode('/', array_slice($segments, 0, 2));
