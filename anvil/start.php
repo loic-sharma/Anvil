@@ -284,9 +284,9 @@ $anvil['plugins']->register('navigation', $anvil['menu.plugin']);
 |
 */
 
-foreach(Modules::get() as $module => $details)
+foreach($anvil['modules']->get() as $module => $details)
 {
-	Modules::boot($module);
+	$anvil['modules']->boot($module);
 }
 
 /*
