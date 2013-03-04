@@ -1,7 +1,6 @@
 <?php namespace Blog;
 
 use URL;
-use Comment;
 use Eloquent;
 use ExpressiveDate;
 
