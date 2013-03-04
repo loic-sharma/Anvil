@@ -77,7 +77,7 @@ class Post extends Eloquent {
 	 *
 	 * @return string
 	 */
-	public function url()
+	public function getUrlAttribute()
 	{
 		return Url::to('blog/post/'.$this->attributes['id']);
 	}

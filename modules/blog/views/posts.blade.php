@@ -2,7 +2,7 @@
 	@foreach($posts as $post)
 		<div class="post">
 			<!-- Post heading -->
-			<h3><a href="{{{ $post->url() }}}">{{{ $post->title }}}</a></h3>
+			<h3><a href="{{{ $post->url }}}">{{{ $post->title }}}</a></h3>
 			
 			<div class="meta muted">
 				<div class="date">
