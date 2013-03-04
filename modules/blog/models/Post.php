@@ -53,6 +53,16 @@ class Post extends Eloquent {
 	}
 
 	/**
+	 * Get wether the comments are enabled for the post.
+	 *
+	 * @return bool
+	 */
+	public function getCommentsEnabledAttribute()
+	{
+		return $this->attributes['comments_enabled'];
+	}
+
+	/**
 	 * Get the date the post was created.
 	 *
 	 * @return string

@@ -47,4 +47,14 @@ class Page extends Eloquent {
 			return $layout;
 		}
 	}
+
+	/**
+	 * Get wether the page's comments are enabled.
+	 *
+	 * @return bool
+	 */
+	public function getCommentsEnabledAttribute()
+	{
+		return $this->attributes['comments_enabled'];
+	}
 }
