@@ -10,18 +10,18 @@ if(Auth::user()->can('access_admin_panel'))
 
 Menu::filter(function($item)
 {
-	if($item['a.href'] == Url::current())
+	if($item->url == Url::current())
 	{
-		$item['li.class'] = 'active';
+		$item->attribute('li.class', 'active');
 	}
 
 	else
 	{
-		if($item['a.href'] == Url::base())
+		if($item->url == Url::base())
 		{
 			if(Anvil::isHome() == true)
 			{
-				$item['li.class'] = 'active';
+				$item->attribute('li.class', 'active');
 			}
 		}
 	}

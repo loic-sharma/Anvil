@@ -116,17 +116,17 @@ class Menu {
 
 			$parent->add($link->title, function($item) use ($link)
 			{
-				$item['id']  = $link->id;
-				$item['url'] = $link->url;
+				$item->attribute('li.id', $link->id);
+				$item->url = $link->url;
 			});
 
 			// Let's also add a dropdown.
-			$parent['li.class'] = 'dropdown';
-			$parent['a.role'] = 'button';
-			$parent['a.class'] = 'dropdown-toggle';
-			$parent['a.data-toggle'] = 'dropdown';
-			$parent['ul.class'] = 'dropdown-menu';
-			$parent['ul.role'] = 'menu';
+			$parent->attribute('li.class', 'dropdown');
+			$parent->attribute('a.role', 'button');
+			$parent->attribute('a.class', 'dropdown-toggle');
+			$parent->attribute('a.data-toggle', 'dropdown');
+			$parent->attribute('ul.class', 'dropdown-menu');
+			$parent->attribute('ul.role', 'menu');
 		}
 
 		return $menu;
