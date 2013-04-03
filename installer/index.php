@@ -46,6 +46,7 @@ $anvil = new Anvil\Application;
 
 $anvil->instance('path', dirname(__DIR__).'/anvil');
 $anvil->instance('path.base', dirname(__DIR__));
+$anvil->instance('path.storage', dirname(__DIR__).'/anvil/storage');
 
 /*
 |--------------------------------------------------------------------------
