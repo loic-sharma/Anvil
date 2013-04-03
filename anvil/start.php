@@ -218,19 +218,6 @@ $services->load($anvil, $config['cms']['providers']);
 
 /*
 |--------------------------------------------------------------------------
-| Boot The Application
-|--------------------------------------------------------------------------
-|
-| Before we handle the requests we need to make sure the application has
-| been booted up. The boot process will call the "boot" method on all
-| service provider giving all a chance to register their overrides.
-|
-*/
-
-$anvil->boot();
-
-/*
-|--------------------------------------------------------------------------
 | Install the CMS
 |--------------------------------------------------------------------------
 |
@@ -246,6 +233,19 @@ if(empty($config['database']))
 
 	exit;
 }
+
+/*
+|--------------------------------------------------------------------------
+| Boot The Application
+|--------------------------------------------------------------------------
+|
+| Before we handle the requests we need to make sure the application has
+| been booted up. The boot process will call the "boot" method on all
+| service provider giving all a chance to register their overrides.
+|
+*/
+
+$anvil->boot();
 
 /*
 |--------------------------------------------------------------------------
