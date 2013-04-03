@@ -33,7 +33,7 @@ class Model extends IlluminateEloquent {
 	 *
 	 * @return bool
 	 */
-	public function save()
+	public function save(array $options = array())
 	{
 		$this->validator = Validator::make($this->attributes, $this->rules);
 
@@ -44,7 +44,7 @@ class Model extends IlluminateEloquent {
 		
 		else
 		{
-			$this->forceSave();
+			$this->forceSave($options);
 
 			return true;
 		}
@@ -56,7 +56,7 @@ class Model extends IlluminateEloquent {
 	 *
 	 * @return void
 	 */
-	public function forceSave()
+	public function forceSave(array $options = array())
 	{
 		$this->hashAttributes();
 		$this->removeConfirmationAttributes();
