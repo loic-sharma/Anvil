@@ -52,6 +52,17 @@ class Breadcrumb {
 	}
 
 	/**
+	 * Set the breadcrumb's link.
+	 *
+	 * @param  string  $link
+	 * @return void
+	 */
+	public function to($link)
+	{
+		$this->link = $link;
+	}
+
+	/**
 	 * Fetch the breadcrumb's link.
 	 *
 	 * @return string
