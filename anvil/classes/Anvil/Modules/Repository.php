@@ -57,25 +57,6 @@ class Repository extends Collection {
 	}
 
 	/**
-	 * Get a specific module, or all of the registered moules.
-	 *
-	 * @param  string  $module
-	 * @return array
-	 */
-	public function get($module = null)
-	{
-		if( ! is_null($module))
-		{
-			return $this->modules[$module];
-		}
-
-		else
-		{
-			return $this->modules;
-		}
-	}
-
-	/**
 	 * Get the registered modules that are enabled.
 	 *
 	 * @return array
