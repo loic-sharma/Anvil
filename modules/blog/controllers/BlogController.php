@@ -26,12 +26,7 @@ class BlogController extends Controller {
 	 */
 	public function getPost($id)
 	{
-		$post = Post::find($id);
-
-		if(is_null($post))
-		{
-			App::abort(404, 'Post #'.$id.' does not exist.');
-		}
+		$post = Post::findOrFail($id);
 
 		$this->page->addBreadcrumb('Blog')->to('blog');
 		$this->page->addBreadcrumb('Post');
