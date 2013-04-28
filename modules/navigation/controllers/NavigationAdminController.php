@@ -13,7 +13,7 @@ class NavigationAdminController extends Controller {
 	{
 		$menu = new Navigation\Menu;
 
-		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
+		$this->page->addBreadcrumb('Navigation')->to('admin/navigation');
 		$this->page->addBreadcrumb('Add Menu');
 
 		$this->page->setContent('navigation::admin.menu', compact('menu'));
@@ -46,7 +46,7 @@ class NavigationAdminController extends Controller {
 			->where('slug', $menu)
 			->first()->links;
 
-		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
+		$this->page->addBreadcrumb('Navigation')->to('admin/navigation');
 		$this->page->addBreadcrumb('Menu');
 
 		$this->page->setContent('navigation::admin.links', compact('menu', 'links'));
@@ -69,8 +69,8 @@ class NavigationAdminController extends Controller {
 
 	public function getCreateLink($menu)
 	{
-		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
-		$this->page->addBreadcrumb('Menu', 'admin/navigation/menu/'.$menu.'/edit');
+		$this->page->addBreadcrumb('Navigation')->to('admin/navigation');
+		$this->page->addBreadcrumb('Menu')->to('admin/navigation/menu/'.$menu.'/edit');
 		$this->page->addBreadcrumb('Add Link');
 
 		$link = new Navigation\Link;
@@ -124,8 +124,8 @@ class NavigationAdminController extends Controller {
 			return Redirect::back();
 		}
 
-		$this->page->addBreadcrumb('Navigation', 'admin/navigation');
-		$this->page->addBreadcrumb('Menu', 'admin/navigation/menu/'.$link->menu->slug);
+		$this->page->addBreadcrumb('Navigation')->to('admin/navigation');
+		$this->page->addBreadcrumb('Menu')->to('admin/navigation/menu/'.$link->menu->slug);
 		$this->page->addBreadcrumb('Edit Link');
 
 		$this->page->setContent('navigation::admin.link', compact('link'));

@@ -13,7 +13,7 @@ class GroupsAdminController extends Controller {
 	{
 		$group = new Group;
 
-		$this->page->addBreadcrumb('Groups', 'admin/groups');
+		$this->page->addBreadcrumb('Groups')->to('admin/groups');
 		$this->page->addBreadcrumb('Create Group');
 
 		$this->page->setContent('users::admin.groups.group', compact('group'));
@@ -42,7 +42,7 @@ class GroupsAdminController extends Controller {
 	{
 		$group = Group::find($id);
 
-		$this->page->addBreadcrumb('Groups', 'admin/groups');
+		$this->page->addBreadcrumb('Groups')->to('admin/groups');
 		$this->page->addBreadcrumb('Edit Group');
 
 		$this->page->setContent('users::admin.groups.group', compact('group'));

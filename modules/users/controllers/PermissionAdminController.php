@@ -4,7 +4,7 @@ class PermissionAdminController extends Controller {
 
 	public function getIndex()
 	{
-		$this->page->addBreadcrumb('Users', 'admin/users');
+		$this->page->addBreadcrumb('Users')->to('admin/users');
 		$this->page->addBreadcrumb('Permissions');
 
 		$this->page->setContent('users::admin.permissions');
@@ -20,7 +20,7 @@ class PermissionAdminController extends Controller {
 			return Redirect::to('admin/permissions');
 		}
 
-		$this->page->addBreadcrumb('Permissions', 'admin/permissions');
+		$this->page->addBreadcrumb('Permissions')->to('admin/permissions');
 		$this->page->addBreadcrumb('Permission');
 
 		$this->page->setContent('users::admin.permission', compact('permission'));

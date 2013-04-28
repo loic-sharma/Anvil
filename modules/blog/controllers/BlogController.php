@@ -33,7 +33,7 @@ class BlogController extends Controller {
 			App::abort(404, 'Post #'.$id.' does not exist.');
 		}
 
-		$this->page->addBreadcrumb('Blog', 'blog');
+		$this->page->addBreadcrumb('Blog')->to('blog');
 		$this->page->addBreadcrumb('Post');
 
 		$this->page->setContent('blog::post', compact('post'));

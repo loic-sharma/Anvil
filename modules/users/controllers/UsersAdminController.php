@@ -13,7 +13,7 @@ class UsersAdminController extends Controller {
 	{
 		$user = new User;
 
-		$this->page->addBreadcrumb('Users', 'admin/users');
+		$this->page->addBreadcrumb('Users')->to('admin/users');
 		$this->page->addBreadcrumb('Create User');
 
 		$this->page->setContent('users::admin.user', compact('user'));
@@ -53,7 +53,7 @@ class UsersAdminController extends Controller {
 			return Redirect::back();
 		}
 
-		$this->page->addBreadcrumb('Users', 'admin/users');
+		$this->page->addBreadcrumb('Users')->to('admin/users');
 		$this->page->addBreadcrumb('Create User');
 
 		$this->page->setContent('users::admin.user', compact('user'));

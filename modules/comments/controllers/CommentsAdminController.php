@@ -4,7 +4,7 @@ class CommentsAdminController extends Controller {
 
 	public function getIndex()
 	{
-		$this->page->addBreadcrumb('Blog', 'admin/blog');
+		$this->page->addBreadcrumb('Blog')->to('admin/blog');
 		$this->page->addBreadcrumb('Comments');
 
 		$this->page->setContent('comments::admin.home');

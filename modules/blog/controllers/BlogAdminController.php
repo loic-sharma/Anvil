@@ -28,7 +28,7 @@ class BlogAdminController extends Controller {
 		// By default we'll enable comments.
 		$post->commentsEnabled = true;
 
-		$this->page->addBreadcrumb('Blog', 'admin/blog');
+		$this->page->addBreadcrumb('Blog')->to('admin/blog');
 		$this->page->addBreadcrumb('Create Post');
 
 		$this->page->setContent('blog::admin.post', compact('post'));
@@ -82,7 +82,7 @@ class BlogAdminController extends Controller {
 			return Redirect::back();
 		}
 
-		$this->page->addBreadcrumb('Blog', 'admin/blog');
+		$this->page->addBreadcrumb('Blog')->to('admin/blog');
 		$this->page->addBreadcrumb('Post');
 
 		$this->page->setContent('blog::admin.post', compact('post'));
