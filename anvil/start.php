@@ -284,17 +284,15 @@ $anvil['plugins']->register('navigation', $anvil['menu.plugin']);
 |
 */
 
-foreach($anvil['modules'] as $module)
-{
-	$module->boot();
-}
+$anvil['modules']->boot();
 
 /*
 |--------------------------------------------------------------------------
 | Load the CMS's filters.
 |--------------------------------------------------------------------------
 |
-| The filters manage the user's access to sensitive routes.
+| The filters manage the user's access to sensitive routes. For example,
+| They ensure that regular users do not attempt to access the Admin panel.
 |
 */
 

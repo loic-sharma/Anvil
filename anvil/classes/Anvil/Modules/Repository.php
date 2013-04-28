@@ -112,4 +112,17 @@ class Repository extends Collection {
 
 		return $this->filesystem->isDirectory($this->getPath($module));
 	}
+
+	/**
+	 * Boot all of the modules.
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+		foreach($this->modules as $module)
+		{
+			$module->boot();
+		}
+	}
 }
