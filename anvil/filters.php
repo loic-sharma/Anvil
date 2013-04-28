@@ -1,12 +1,12 @@
 <?php
 
 /*
- *--------------------------------------------------------------------------
- * Logged in authentication filter.
- *--------------------------------------------------------------------------
- *
- * Verify that the current user is logged in.
- *
+ |--------------------------------------------------------------------------
+ | Logged in Authentication Filter
+ |--------------------------------------------------------------------------
+ |
+ | Verify that the current user is logged in.
+ |
  */
 
 Route::filter('loggedIn', function()
@@ -18,12 +18,12 @@ Route::filter('loggedIn', function()
 });
 
 /*
- *--------------------------------------------------------------------------
- * Logged out authentication filter.
- *--------------------------------------------------------------------------
- *
- * Verify that the current user is logged out.
- *
+ |--------------------------------------------------------------------------
+ | Logged Out Authentication Filter
+ |--------------------------------------------------------------------------
+ |
+ | Verify that the current user is logged out.
+ |
  */
 
 Route::filter('loggedOut', function()
@@ -35,12 +35,12 @@ Route::filter('loggedOut', function()
 });
 
 /*
- *--------------------------------------------------------------------------
- * Permission authentication filter.
- *--------------------------------------------------------------------------
- *
- * Verify that the current user has a certain permission.
- *
+ |--------------------------------------------------------------------------
+ | Permission Authentication Filter
+ |--------------------------------------------------------------------------
+ |
+ | Verify that the current user has a certain permission.
+ |
  */
 
 Route::filter('can', function($permission)
@@ -60,12 +60,12 @@ Route::filter('can', function($permission)
 });
 
 /*
- *--------------------------------------------------------------------------
- * Power authentication filter.
- *--------------------------------------------------------------------------
- *
- * Verify that the current user's power is less than a certain integer.
- *
+ |--------------------------------------------------------------------------
+ | Power Authentication Filter
+ |--------------------------------------------------------------------------
+ |
+ | Verify that the current user's power is less than a certain integer.
+ |
  */
 
 Route::filter('maxPower', function($power)
@@ -85,12 +85,12 @@ Route::filter('maxPower', function($power)
 });
 
 /*
- *--------------------------------------------------------------------------
- * Power authentication filter.
- *--------------------------------------------------------------------------
- *
- * Verify that the current user's power is greater than a certain integer.
- *
+ |--------------------------------------------------------------------------
+ | Power Authentication Filter.
+ |--------------------------------------------------------------------------
+ |
+ | Verify that the current user's power is greater than a certain integer.
+ |
  */
 
 Route::filter('requirePower', function($power)
@@ -110,12 +110,12 @@ Route::filter('requirePower', function($power)
 });
 
 /*
- *--------------------------------------------------------------------------
- * Group authentication filter.
- *--------------------------------------------------------------------------
- *
- * Verify that the current user's power is greater than a certain integer.
- *
+ |--------------------------------------------------------------------------
+ | Group Authentication Filter
+ |--------------------------------------------------------------------------
+ |
+ | Verify that the current user's power is greater than a certain integer.
+ |
  */
 
 Route::filter('requirePower', function($power)
@@ -135,12 +135,12 @@ Route::filter('requirePower', function($power)
 });
 
 /*
- *--------------------------------------------------------------------------
- * Group authentication filter.
- *--------------------------------------------------------------------------
- *
- * Require the current user to belong to a certain group.
- *
+ |--------------------------------------------------------------------------
+ | Group Authentication Filter
+ |--------------------------------------------------------------------------
+ |
+ | Require the current user to belong to a certain group.
+ |
  */
 
 Route::filter('is', function($group)
@@ -160,12 +160,12 @@ Route::filter('is', function($group)
 });
 
 /*
- *--------------------------------------------------------------------------
- * Admin authentication filter.
- *--------------------------------------------------------------------------
- *
- * Verify that the current user is an admin.
- *
+ |--------------------------------------------------------------------------
+ | Admin Authentication Filter
+ |--------------------------------------------------------------------------
+ |
+ | Verify that the current user is an admin.
+ |
  */
 
 Route::filter('admin', function()
@@ -185,12 +185,12 @@ Route::filter('admin', function()
 });
 
 /*
- *--------------------------------------------------------------------------
- * Register filters.
- *--------------------------------------------------------------------------
- *
- * Prevent users from accessing routes that they do not have permission for.
- *
+ |--------------------------------------------------------------------------
+ | Register Admin Filters
+ |--------------------------------------------------------------------------
+ |
+ | Prevent users from accessing routes that they do not have permission for.
+ |
  */
 
 Route::when('admin', 'admin');
