@@ -51,7 +51,11 @@ class PagePlugin {
 	 */
 	public function addBreadcrumb($name, $link = null)
 	{
-		$this->breadcrumbs[] = new Breadcrumb($name, $link);
+		$breadcrumb = new Breadcrumb($name, $link);
+
+		$this->breadcrumbs[] = $breadcrumb;
+
+		return $breadcrumb;
 	}
 
 	/**
