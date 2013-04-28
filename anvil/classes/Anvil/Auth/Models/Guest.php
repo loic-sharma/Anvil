@@ -20,7 +20,7 @@ class Guest extends User implements UserInterface {
 	 * never be saved.
 	 * 
 	 */
-	public function save()
+	public function save(array $options = array())
 	{
 		throw new Exception("Attempting to save a guest.");
 	}
