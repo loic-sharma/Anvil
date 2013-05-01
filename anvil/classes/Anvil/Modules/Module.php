@@ -42,6 +42,9 @@ class Module {
 	{
 		$this->modules = $modules;
 		$this->data = $data;
+
+		$this->autoloader = $this->modules->getAutoloader();
+		$this->filesystem = $this->modules->getFiles();
 	}
 
 	/**
@@ -52,7 +55,7 @@ class Module {
 	public function boot()
 	{
 		// Make sure the module exists before trying to load it.
-		if(is_dir($path = $this->getPath()))
+		if($this->filesystem->isDirectory($path = $this->getPath()))
 		{
 			$this->addClassPaths($path);
 
@@ -88,8 +91,8 @@ class Module {
 	{
 		$directories = $this->getExistingDirectories($path);
 	
-		$this->modules->getAutoloader()->add(null, $directories);
-		$this->modules->getAutoloader()->add(ucfirst($this->data->slug), $path.'classes');
+		$this->autoloader->add(null, $directories);
+		$this->autoloader->add(ucfirst($this->data->slug), $path.'classes');
 	}
 
 	/**
@@ -100,9 +103,9 @@ class Module {
 	 */
 	protected function loadStartFiles($path)
 	{
-		foreach(Anvil::make('files')->files($path) as $file)
+		foreach($this->filesystem->files($path) as $file)
 		{
-			Anvil::make('files')->requireOnce($file);
+			$this->filesystem->requireOnce($file);
 		}
 	}
 
