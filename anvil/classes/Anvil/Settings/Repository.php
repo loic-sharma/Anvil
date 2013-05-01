@@ -34,7 +34,7 @@ class Repository {
 	 */
 	public function __destruct()
 	{
-		// Save the settings if they have been loaded. 
+		// Save the settings only if they have already been loaded. 
 		if( ! is_null($this->settings))
 		{
 			$this->loader->save($this->settings);
