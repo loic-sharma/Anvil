@@ -64,7 +64,7 @@ class Module {
 		// The module's directory cannot be found. Let's throw an exception!
 		else
 		{
-			throw new \InvalidArgumentException("Module [$module] does not exist.");
+			throw new \InvalidArgumentException("Module [{$this->data->slug}] does not exist.");
 		}
 	}
 
