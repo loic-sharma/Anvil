@@ -5,11 +5,25 @@ use Anvil;
 class Module {
 
 	/**
+	 * The module repository.
+	 *
+	 * @var Anvil\Modules\Repository
+	 */
+	protected $modules;
+
+	/**
 	 * The module's data.
 	 *
 	 * @var array
 	 */
 	protected $data;
+
+	/**
+	 * The directories in a module that contain classes.
+	 *
+	 * @var array
+	 */
+	protected $directories = array('controllers', 'models');
 
 	/**
 	 * Wether the module has been loaded or not.
@@ -24,19 +38,10 @@ class Module {
 	 * @param  array  $data
 	 * @return void
 	 */
-	public function __construct($data)
+	public function __construct(Repository $modules, $data)
 	{
+		$this->modules = $modules;
 		$this->data = $data;
-	}
-
-	/**
-	 * Fetch the module's path.
-	 *
-	 * @return string
-	 */
-	public function getPath()
-	{
-		return Anvil::make('module.path').'/'.$this->data->slug.'/';
 	}
 
 	/**
@@ -46,40 +51,93 @@ class Module {
 	 */
 	public function boot()
 	{
+		// Make sure the module exists before trying to load it.
 		if(is_dir($path = $this->getPath()))
 		{
-			// Add the module's controller and model directories (if they exist)
-			// to the autoloader's list of directories.
-			$directories = array($path.'controllers', $path.'models');
+			$this->addClassPaths($path);
 
-			$directories = array_filter($directories, function($directory)
-			{
-				return is_dir($directory);
-			});
+			$this->loadStartFiles($path);
 
-			Anvil::make('autoloader')->add(null, $directories);
-			Anvil::make('autoloader')->add(ucfirst($this->data->slug), $path.'classes');
-
-			// Load the module's start files.
-			foreach(Anvil::make('files')->files($path) as $file)
-			{
-				Anvil::make('files')->requireOnce($file);
-			}
-
-			$plugin = ucfirst($this->data->slug).'Plugin';
-
-			// Todo: Dependency injection?
-			if(class_exists($plugin))
-			{
-				Anvil::make('plugins')->register($this->data->slug, $plugin);
-			}
-
-			Anvil::make('view')->addNamespace($this->data->slug, $path.'views');
+			$this->loadPlugin($path);
 		}
 
+		// The module's directory cannot be found. Let's throw an exception!
 		else
 		{
 			throw new \InvalidArgumentException("Module [$module] does not exist.");
 		}
+	}
+
+	/**
+	 * Fetch the module's path.
+	 *
+	 * @return string
+	 */
+	protected function getPath()
+	{
+		return $this->modules->getPath($this->data->slug);
+	}
+
+	/**
+	 * Add the module's classes to the autoloader.
+	 *
+	 * @param  string  $path
+	 * @return void
+	 */
+	protected function addClassPaths($path)
+	{
+		$directories = $this->getExistingDirectories($path);
+	
+		$this->modules->getAutoloader()->add(null, $directories);
+		$this->modules->getAutoloader()->add(ucfirst($this->data->slug), $path.'classes');
+	}
+
+	/**
+	 * Load the module's start files.
+	 *
+	 * @param  string  $path
+	 * @return void
+	 */
+	protected function loadStartFiles($path)
+	{
+		foreach(Anvil::make('files')->files($path) as $file)
+		{
+			Anvil::make('files')->requireOnce($file);
+		}
+	}
+
+	/**
+	 * Load the module's plugin, if it has one.
+	 *
+	 * @param  string  $path
+	 * @return void
+	 */
+	protected function loadPlugin($path)
+	{
+		$plugin = ucfirst($this->data->slug).'Plugin';
+
+		// Todo: Dependency injection?
+		if(class_exists($plugin))
+		{
+			Anvil::make('plugins')->register($this->data->slug, $plugin);
+		}
+
+		Anvil::make('view')->addNamespace($this->data->slug, $path.'views');
+	}
+
+	/**
+	 * Find the module's existing directories.
+	 *
+	 * @param  string  $path
+	 * @return array
+	 */
+	protected function getExistingDirectories($path)
+	{
+		// All of the module's directories are optional. So, let's find the
+		// directories that the module does have.
+		$directories = array_filter($this->directories, function($directory) use ($path)
+		{
+			return is_dir($path.$directory);
+		});
 	}
 }

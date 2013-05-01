@@ -48,6 +48,8 @@ class Repository extends Collection {
                                 LoaderInterface $loader,
                                 $path)
 	{
+		$loader->setRepository($this);
+
 		$this->filesystem = $filesystem;
 		$this->autoloader = $autoloader;
 		$this->modules = $loader->get();
@@ -98,7 +100,7 @@ class Repository extends Collection {
 	}
 
 	/**
-	 * Verify if that a module exists.
+	 * Verify that a module exists.
 	 *
 	 * @param  string  $module
 	 * @return bool
@@ -128,5 +130,25 @@ class Repository extends Collection {
 		{
 			$module->boot();
 		}
+	}
+
+	/**
+	 * Get the autoloader.
+	 *
+	 * @return Composer\Autoload\ClassLoader
+	 */ 
+	public function getAutoloader()
+	{
+		return $this->autoloader;
+	}
+
+	/**
+	 * Get the filesystem.
+	 *
+	 * @return Illuminate\Filesystem\Filesystem
+	 */
+	public function getFiles()
+	{
+		return $this->filesystem;
 	}
 }
