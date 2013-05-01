@@ -16,7 +16,7 @@ class DatabaseLoader implements LoaderInterface {
 	 *
 	 * @var array
 	 */
-	protected $modules;
+	protected $modules = array();
 
 	/**
 	 * Save the Database Manager instance.
@@ -36,10 +36,8 @@ class DatabaseLoader implements LoaderInterface {
 	 */
 	public function get()
 	{
-		if(is_null($this->modules))
+		if(empty($this->modules))
 		{
-			$this->modules = array();
-
 			$modules = $this->database->table('modules')
 						->orderBy('is_core', 'desc')
 						->get();
