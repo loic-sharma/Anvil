@@ -60,10 +60,12 @@ class Group extends Model {
 			{
 				$query->whereNull('required_power');
 				$query->orWhere('required_power', '<=', $power);
+
 			})->where(function($query)
 			{
 				$query->whereNull('max_power');
 				$query->orWhere('max_power', '>=', $this->power);
+
 			})->get();
 		}
 
