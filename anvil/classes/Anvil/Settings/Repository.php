@@ -5,7 +5,7 @@ class Repository {
 	/**
 	 * The settings loader.
 	 *
-	 * @var Cms\Settings\LoaderInterface
+	 * @var Anvil\Settings\LoaderInterface
 	 */
 	protected $loader;
 
@@ -19,7 +19,7 @@ class Repository {
 	/**
 	 * Create a new Settings Repository instance.
 	 *
-	 * @param  Cms\Settings\LoaderInterface  $loader
+	 * @param  Anvil\Settings\LoaderInterface  $loader
 	 * @return void
 	 */
 	public function __construct(LoaderInterface $loader)
