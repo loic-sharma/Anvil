@@ -42,8 +42,7 @@ class Repository {
 	}
 
 	/**
-	 * Fetch the settings if they haven't been
-	 * loaded yet.
+	 * Fetch the settings if they haven't been loaded yet.
 	 *
 	 * @return array
 	 */
