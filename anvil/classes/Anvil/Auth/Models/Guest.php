@@ -22,7 +22,7 @@ class Guest extends User implements UserInterface {
 	 */
 	public function save(array $options = array())
 	{
-		throw new Exception("Attempting to save a guest.");
+		throw new Exception('Attempting to save a guest.');
 	}
 
 	/**
