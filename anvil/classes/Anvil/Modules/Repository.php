@@ -105,11 +105,15 @@ class Repository extends Collection {
 	 */
 	public function exists($module)
 	{
+		// First, let's check if a module with that name has already
+		// been booted.
 		if(in_array($module, $this->booted))
 		{
 			return true;
 		}
 
+		// If not, let's check if there is a directory that matches
+		// the module's name.
 		return $this->filesystem->isDirectory($this->getPath($module));
 	}
 
