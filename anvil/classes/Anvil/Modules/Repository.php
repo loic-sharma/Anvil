@@ -84,8 +84,8 @@ class Repository extends Collection {
 	 */
 	public function getPath($module = null)
 	{
-		// We will return the module path if we weren't given a
-		// module name.
+		// We will return the directory in which the modules are
+		// stored if we weren't given the name to a specific module.
 		if(is_null($module))
 		{
 			return $this->path;
