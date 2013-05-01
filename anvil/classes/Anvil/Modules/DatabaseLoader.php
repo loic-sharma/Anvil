@@ -38,6 +38,9 @@ class DatabaseLoader implements LoaderInterface {
 	{
 		if(empty($this->modules))
 		{
+			// Let's fetch the modules from the database. Note that we
+			// order the modules by 'is_core' in descending order to
+			// ensure that the core modules will be fetched first.
 			$modules = $this->database->table('modules')
 						->orderBy('is_core', 'desc')
 						->get();
