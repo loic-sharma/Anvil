@@ -61,7 +61,9 @@ class Module {
 
 			$this->loadStartFiles($path);
 
-			$this->loadPlugin($path);
+			$this->loadPlugin();
+
+			$this->addViewPath($path);
 		}
 
 		// The module's directory cannot be found. Let's throw an exception!
@@ -112,10 +114,9 @@ class Module {
 	/**
 	 * Load the module's plugin, if it has one.
 	 *
-	 * @param  string  $path
 	 * @return void
 	 */
-	protected function loadPlugin($path)
+	protected function loadPlugin()
 	{
 		$plugin = ucfirst($this->data->slug).'Plugin';
 
@@ -124,7 +125,16 @@ class Module {
 		{
 			Anvil::make('plugins')->register($this->data->slug, $plugin);
 		}
+	}
 
+	/**
+	 * Add the module name to the view paths.
+	 *
+	 * @param  string  $path
+	 * @return void
+	 */
+	protected function addViewPath($path)
+	{
 		Anvil::make('view')->addNamespace($this->data->slug, $path.'views');
 	}
 
