@@ -87,7 +87,7 @@ $anvil = new Anvil\Application;
 |
 */
 
-$anvil['app'] = $anvil->share(function($app) { return $app; });
+$anvil->instance('app', $anvil);
 
 /*
 |--------------------------------------------------------------------------
