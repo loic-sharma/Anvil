@@ -126,11 +126,7 @@ $anvil->bindInstallPaths(require __DIR__.'/paths.php');
 |
 */
 
-$env = $anvil->detectEnvironment(array(
-
-	'local' => array('your-machine-name'),
-
-));
+$env = $anvil->detectEnvironment(array());
 
 /*
 |--------------------------------------------------------------------------
