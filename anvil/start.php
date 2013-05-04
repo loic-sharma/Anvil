@@ -167,19 +167,6 @@ $anvil->bindIf('config.loader', function($anvil)
 
 /*
 |--------------------------------------------------------------------------
-| Register Application Exception Handling
-|--------------------------------------------------------------------------
-|
-| We will go ahead and register the application exception handling here
-| which will provide a great output of exception details and a stack
-| trace in the case of exceptions while an application is running.
-|
-*/
-
-$anvil->startExceptionHandling();
-
-/*
-|--------------------------------------------------------------------------
 | Register The Configuration Repository
 |--------------------------------------------------------------------------
 |
@@ -192,6 +179,20 @@ $anvil->startExceptionHandling();
 $config = new Config($anvil['config.loader'], $env);
 
 $anvil->instance('config', $config);
+
+
+/*
+|--------------------------------------------------------------------------
+| Register Application Exception Handling
+|--------------------------------------------------------------------------
+|
+| We will go ahead and register the application exception handling here
+| which will provide a great output of exception details and a stack
+| trace in the case of exceptions while an application is running.
+|
+*/
+
+$anvil->startExceptionHandling();
 
 /*
 |--------------------------------------------------------------------------
