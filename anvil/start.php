@@ -44,6 +44,7 @@ if ( ! defined('LARAVEL_VERSION'))
 | config files for this application, such as the config repository.
 |
 */
+
 use Illuminate\Http\Request;
 use Illuminate\Config\FileLoader;
 use Illuminate\Filesystem\Filesystem;
@@ -91,6 +92,17 @@ $anvil->instance('app', $anvil);
 
 /*
 |--------------------------------------------------------------------------
+| Register The Autoloader
+|--------------------------------------------------------------------------
+|
+| Inject the composer autoloader into the app.
+|
+*/
+
+$anvil->instance('autoloader', $autoloader);
+
+/*
+|--------------------------------------------------------------------------
 | Define The Application Path
 |--------------------------------------------------------------------------
 |
@@ -102,19 +114,6 @@ $anvil->instance('app', $anvil);
 
 $anvil->bindInstallPaths(require __DIR__.'/paths.php');
 
-/*
-|--------------------------------------------------------------------------
-| Register The Autoloader
-|--------------------------------------------------------------------------
-|
-| Inject the autoloader into the app.
-|
-*/
-
-$anvil->bind('autoloader', function() use($autoloader)
-{
-	return $autoloader;
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -218,7 +217,9 @@ date_default_timezone_set($config['app']['timezone']);
 |
 */
 
-$anvil->registerAliasLoader($config['cms']['aliases']);
+$aliases = $config['aliases'];
+
+AliasLoader::getInstance($aliases)->register();
 
 /*
 |--------------------------------------------------------------------------
