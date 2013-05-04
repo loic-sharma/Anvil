@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Config\FileLoader;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Foundation\ProviderRepository;
 use Illuminate\Routing\Router;
@@ -35,6 +36,17 @@ $anvil = new Anvil\Application;
 
 /*
 |--------------------------------------------------------------------------
+| Register The Autoloader
+|--------------------------------------------------------------------------
+|
+| Inject the composer autoloader into the app.
+|
+*/
+
+$anvil->instance('autoloader', $autoloader);
+
+/*
+|--------------------------------------------------------------------------
 | Define The Application Path
 |--------------------------------------------------------------------------
 |
@@ -50,20 +62,6 @@ $anvil->instance('path.storage', dirname(__DIR__).'/anvil/storage');
 
 /*
 |--------------------------------------------------------------------------
-| Register The Autoloader
-|--------------------------------------------------------------------------
-|
-| Inject the autoloader into the app.
-|
-*/
-
-$anvil->bind('autoloader', function() use($autoloader)
-{
-	return $autoloader;
-});
-
-/*
-|--------------------------------------------------------------------------
 | Detect The Application Environment
 |--------------------------------------------------------------------------
 |
@@ -73,11 +71,7 @@ $anvil->bind('autoloader', function() use($autoloader)
 |
 */
 
-$env = $anvil->detectEnvironment(array(
-
-	'local' => array('your-machine-name'),
-
-));
+$env = $anvil->detectEnvironment(array());
 
 /*
 |--------------------------------------------------------------------------
@@ -113,6 +107,21 @@ $anvil->bindIf('config.loader', function($anvil)
 
 /*
 |--------------------------------------------------------------------------
+| Register The Configuration Repository
+|--------------------------------------------------------------------------
+|
+| The configuration repository is used to lazily load in the options for
+| this application from the configuration files. The files are easily
+| separated by their concerns so they do not become really crowded.
+|
+*/
+
+$config = new Config($anvil['config.loader'], null);
+
+$anvil->instance('config', $config);
+
+/*
+|--------------------------------------------------------------------------
 | Register Application Exception Handling
 |--------------------------------------------------------------------------
 |
@@ -123,21 +132,6 @@ $anvil->bindIf('config.loader', function($anvil)
 */
 
 $anvil->startExceptionHandling();
-
-/*
-|--------------------------------------------------------------------------
-| Register The Configuration Repository
-|--------------------------------------------------------------------------
-|
-| The configuration repository is used to lazily load in the options for
-| this application from the configuration files. The files are easily
-| separated by their concerns so they do not become really crowded.
-|
-*/
-
-$config = new Config($anvil['config.loader'], $env);
-
-$anvil->instance('config', $config);
 
 /*
 |--------------------------------------------------------------------------
@@ -163,7 +157,9 @@ date_default_timezone_set($config['app']['timezone']);
 |
 */
 
-$anvil->registerAliasLoader($config['cms']['aliases']);
+$aliases = $config['aliases'];
+
+AliasLoader::getInstance($aliases)->register();
 
 /*
 |--------------------------------------------------------------------------
