@@ -115,7 +115,6 @@ $anvil->instance('autoloader', $autoloader);
 
 $anvil->bindInstallPaths(require __DIR__.'/paths.php');
 
-
 /*
 |--------------------------------------------------------------------------
 | Detect The Application Environment
