@@ -14,8 +14,8 @@ use Illuminate\Routing\Router;
 | Load The Autoloader
 |--------------------------------------------------------------------------
 |
-| The CMS relies heavily on Composer components. We'll need the autoloader
-| to load those components, and then to load the CMS itself.
+| Anvil relies heavily on Composer components. We'll need the autoloader
+| to load those components and Anvil.
 |
 */
 
@@ -157,7 +157,7 @@ date_default_timezone_set($config['app']['timezone']);
 |
 */
 
-$aliases = $config['aliases'];
+$aliases = $config['anvil']['aliases'];
 
 AliasLoader::getInstance($aliases)->register();
 

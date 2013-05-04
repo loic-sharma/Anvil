@@ -58,8 +58,8 @@ use Illuminate\Foundation\ProviderRepository;
 | Load The Autoloader
 |--------------------------------------------------------------------------
 |
-| The CMS relies heavily on Composer components. We'll need the autoloader
-| to load those components, and then to load the CMS itself.
+| Anvil relies heavily on Composer components. We'll need the autoloader
+| to load those components and Anvil.
 |
 */
 
@@ -213,7 +213,7 @@ date_default_timezone_set($config['app']['timezone']);
 |
 */
 
-$aliases = $config['aliases'];
+$aliases = $config['anvil']['aliases'];
 
 AliasLoader::getInstance($aliases)->register();
 
@@ -241,9 +241,9 @@ Request::enableHttpMethodParameterOverride();
 |
 */
 
-$services = new ProviderRepository(new Filesystem, $config['cms']['manifest']);
+$services = new ProviderRepository(new Filesystem, $config['anvil']['manifest']);
 
-$services->load($anvil, $config['cms']['providers']);
+$services->load($anvil, $config['anvil']['providers']);
 
 /*
 |--------------------------------------------------------------------------
