@@ -36,7 +36,7 @@ Route::post('step-2', function()
 	$form = Validator::make($input = Input::all(), array(
 		'hostname' => array('required'),
 		'username' => array('required'),
-		'password' => array('required'),
+		'password' => array(''),
 		'database' => array('required'),
 	));
 
