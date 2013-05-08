@@ -108,13 +108,13 @@ class UriInspector {
 
 		else
 		{
-			// If this is an admin route, fetch the first two segments.
+			// Fetch the first two URI segments if this is an admin route.
 			if($this->isAdmin())
 			{
 				return implode('/', array_slice($this->getSegments(), 0, 2));
 			}
 
-			// Otherewise, the URI will be just the first segment.
+			// Otherwise, the route will be just the first segment.
 			else
 			{
 				return $this->getSegment(0);
