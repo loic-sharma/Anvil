@@ -329,14 +329,14 @@ include __DIR__.'/filters.php';
 
 /*
 |--------------------------------------------------------------------------
-| Start The CMS
+| Start Anvil
 |--------------------------------------------------------------------------
 |
 | Each action corresponds, by default, to a module and a controller.
-| Although a module may have already registered a route that matches the
-| request, the CMS will still register a default route. Note that any
-| routes registered after the default route will be ignored.
+| Anvil will attempt to register a default route for each request, even
+| though a module might have already registered a route. Let's set the
+| default the route now and then start Laravel.
 |
 */
 
-$anvil->start($anvil['request'], $anvil['settings'], $anvil['router']);
+$anvil->start($anvil['routing.inspector'], $anvil['router']);

@@ -1,110 +1,43 @@
 <?php namespace Anvil;
 
 use Anvil\Auth\AuthManager as Auth;
-use Anvil\Settings\Repository as Settings;
+use Anvil\Routing\UriInspector;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Application as IlluminateApplication;
 
 class Application extends IlluminateApplication {
 
 	/**
-	 * The current request's detected controller.
+	 * The URI inspector, which retrieves data about the current
+	 * request from the URI.
 	 *
-	 * @var string
+	 * @var Anvil\Routing\UriInspector
 	 */
-	protected $controller;
-
-	/**
-	 * The current request's URI that corresponds to a route.
-	 *
-	 * @var string
-	 */
-	protected $uri;
-
-	/**
-	 * Is the current request the home page?
-	 *
-	 * @var bool
-	 */
-	protected $isHome = false;
-
-	/**
-	 * Is the current request for the admin panel?
-	 *
-	 * @var bool
-	 */
-	protected $isAdminPanel = false;
+	protected $inspector;
 
 	/**
 	 * Create a route to the detected current controller.
 	 *
-	 * @param  Illuminate\Http\Request    $request
-	 * @param  Cms\Settings\Repository    $settings
+	 * @param  Anvil\Routing\UriInspector  $inspector
 	 * @param  Illuminate\Routing\Router  $router
 	 * @return void
 	 */
-	public function start(Request $request, Settings $settings, Router $router)
+	public function start(UriInspector $inspector, Router $router)
 	{
-		$uri = $request->path();
-		$defaultController = $settings->get('defaultController');
-		
-		if($uri == '/')
-		{
-			$this->controller = $defaultController;
-			$this->isHome = true;
-		}
+		$this->inspector = $inspector;
 
-		else
-		{
-			$segments = explode('/', trim($uri, '/'));
-
-			// Handle admin routing separately.
-			if($segments[0] == 'admin')
-			{
-				$this->isAdminPanel = true;
-
-				$this->setTheme('admin');
-
-				// The second segment will be directly routed to a module.
-				if(count($segments) >= 2)
-				{
-					$this->controller = ucfirst($segments[1]).'AdminController';
-				}
-
-				// Use the admin controller by default.
-				else
-				{
-					$this->controller = 'Anvil\Controllers\AdminController';
-				}
-	
-				$uri = implode('/', array_slice($segments, 0, 2));
-			}
-
-			// Handle normal non-admin routes.
-			else
-			{
-				$uri = $segments[0];
-
-				$this->controller = ucfirst($segments[0]).'Controller';
-
-				// Let's do one last check to see if this is the home page.
-				if($this->controller == $defaultController and ! isset($segments[1]))
-				{
-					$this->isHome = true;
-				}
-			}
-		}
+		$controller = $inspector->detectController();
+		$uri = $inspector->detectUri();
 
 		try
 		{
-			$router->controller($uri, $this->controller);
+			$router->controller($uri, $controller);
 		}
 
-		// If the controller does not exist, Illuminate will
+		// If the controller does not exist, Laravel will
 		// throw an exception. we'll silently kill the exception
-		// Since there might be a custom route already set.
+		// since there might be a custom route already set.
 		catch(\ReflectionException $e) {}
 	}
 
@@ -158,7 +91,7 @@ class Application extends IlluminateApplication {
 	 */
 	public function isHome()
 	{
-		return $this->isHome;
+		return $this->inspector->isHome();
 	}
 
 	/**
@@ -168,6 +101,6 @@ class Application extends IlluminateApplication {
 	 */
 	public function isAdmin()
 	{
-		return $this->isAdminPanel;
+		return $this->inspector->isAdmin();
 	}
 }
