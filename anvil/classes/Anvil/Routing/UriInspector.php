@@ -95,11 +95,11 @@ class UriInspector {
 	}
 
 	/**
-	 * Detect the URI that should be routed to the controller.
+	 * Detect the route needed to map the current URI to the controller.
 	 *
 	 * @return string
 	 */
-	public function detectUri()
+	public function detectRoute()
 	{
 		if($this->uri == '/')
 		{

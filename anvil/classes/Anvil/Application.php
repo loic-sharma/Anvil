@@ -27,12 +27,14 @@ class Application extends IlluminateApplication {
 	{
 		$this->inspector = $inspector;
 
+		// Let's use the inspector to detect how to route the current
+		// request to a controller.
 		$controller = $inspector->detectController();
-		$uri = $inspector->detectUri();
+		$route = $inspector->detectRoute();
 
 		try
 		{
-			$router->controller($uri, $controller);
+			$router->controller($route, $controller);
 		}
 
 		// If the controller does not exist, Laravel will
