@@ -2,7 +2,7 @@
 
 use Anvil\Plugins\UrlPlugin;
 use Anvil\Routing\UrlGenerator;
-use Anvil\Routing\UriInspector;
+use Anvil\Routing\Inspector;
 
 use Illuminate\Routing\RoutingServiceProvider as IlluminateRoutingServiceProvider;
 
@@ -53,7 +53,7 @@ class RoutingServiceProvider extends IlluminateRoutingServiceProvider {
 
 			$defaultController = $app['settings']->get('defaultController');
 
-			return new UriInspector($uri, $defaultController);
+			return new Inspector($uri, $defaultController);
 		});
 	}
 

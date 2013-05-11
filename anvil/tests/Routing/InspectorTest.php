@@ -1,8 +1,8 @@
 <?php
 
-use Anvil\Routing\UriInspector;
+use Anvil\Routing\Inspector;
 
-class UriInspectorTest extends PHPUnit_Framework_TestCase {
+class InspectorTest extends PHPUnit_Framework_TestCase {
 
 	public function testHomePage()
 	{
@@ -57,12 +57,12 @@ class UriInspectorTest extends PHPUnit_Framework_TestCase {
 
 		$inspector = $this->getInspector('admin', null);
 		$this->assertTrue($inspector->isAdmin());
-		$this->assertEquals(UriInspector::ADMIN_HOME_CONTROLLER, $inspector->detectController());
+		$this->assertEquals(Inspector::ADMIN_HOME_CONTROLLER, $inspector->detectController());
 		$this->assertEquals('admin', $inspector->detectRoute());
 
 		$inspector = $this->getInspector('admin', 'FooController');
 		$this->assertTrue($inspector->isAdmin());
-		$this->assertEquals(UriInspector::ADMIN_HOME_CONTROLLER, $inspector->detectController());
+		$this->assertEquals(Inspector::ADMIN_HOME_CONTROLLER, $inspector->detectController());
 		$this->assertEquals('admin', $inspector->detectRoute());
 
 		$inspector = $this->getInspector('admin/foo', null);
@@ -83,6 +83,6 @@ class UriInspectorTest extends PHPUnit_Framework_TestCase {
 
 	public function getInspector($uri, $defaultController)
 	{
-		return new UriInspector($uri, $defaultController);
+		return new Inspector($uri, $defaultController);
 	}
 }

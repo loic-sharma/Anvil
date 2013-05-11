@@ -1,7 +1,7 @@
 <?php namespace Anvil;
 
 use Anvil\Auth\AuthManager as Auth;
-use Anvil\Routing\UriInspector;
+use Anvil\Routing\Inspector;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Application as IlluminateApplication;
@@ -19,11 +19,11 @@ class Application extends IlluminateApplication {
 	/**
 	 * Create a route to the detected current controller.
 	 *
-	 * @param  Anvil\Routing\UriInspector  $inspector
+	 * @param  Anvil\Routing\Inspector  $inspector
 	 * @param  Illuminate\Routing\Router  $router
 	 * @return void
 	 */
-	public function start(UriInspector $inspector, Router $router)
+	public function start(Inspector $inspector, Router $router)
 	{
 		$this->inspector = $inspector;
 

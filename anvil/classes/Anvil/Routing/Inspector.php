@@ -1,6 +1,6 @@
 <?php namespace Anvil\Routing;
 
-class UriInspector {
+class Inspector {
 
 	/**
 	 * The current URI to detect routes off of.
