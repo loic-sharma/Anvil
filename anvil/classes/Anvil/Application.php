@@ -27,8 +27,8 @@ class Application extends IlluminateApplication {
 	public function start(Request $request, Inspector $inspector, Router $router)
 	{
 		// Let's pass the request to the inspector. The inspector
-		// will determine which route and controller should respond
-		// to the current request.
+		// will determine which route and controller that should
+		// respond to the current request.
 		$this->route = $inspector->inspect($request);
 
 		// If the route is null, then the inspector could not find
