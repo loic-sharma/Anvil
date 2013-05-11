@@ -1,6 +1,6 @@
 <?php namespace Anvil\Plugins;
 
-use Illuminate\Container\Container;
+use Anvil\Application;
 use Illuminate\View\Environment;
 
 class PluginManager {
@@ -8,9 +8,9 @@ class PluginManager {
 	/**
 	 * The container.
 	 *
-	 * @var Illuminate\Container\Container
+	 * @var Anvil\Application
 	 */
-	protected $container;
+	protected $anvil;
 
 	/**
 	 * The view manager.
@@ -29,13 +29,13 @@ class PluginManager {
 	/**
 	 * Register the view manager.
 	 *
-	 * @param  Illuminate\Container\Container $container
+	 * @param  Anvil\Application              $anvil
 	 * @param  Illuminate\View\Environment    $view
 	 * @return void
 	 */
-	public function __construct(Container $container, Environment $view)
+	public function __construct(Application $anvil, Environment $view)
 	{
-		$this->container = $container;
+		$this->anvil = $anvil;
 		$this->view = $view;
 	}
 
@@ -66,14 +66,14 @@ class PluginManager {
 	{
 		// If the plugin is currently a string, we will need to build an
 		// instance. We'll use Laravel's container to automatically
-		// Build an instance of the plugin.If we were given a string, let's get an instance of the plugin.
+		// Build an instance of the plugin.
 		if(is_string($plugin))
 		{
-			$plugin = $this->container->make($plugin);
+			$plugin = $this->anvil->make($plugin);
 		}
 
 		// If the class inherits the Plugin class, let's wrap it around
-		// in the Facade class so that attributes can managed.
+		// with the Decorator class so that attributes can managed.
 		if($plugin instanceof Plugin)
 		{
 			$plugin = new Decorator($plugin);
