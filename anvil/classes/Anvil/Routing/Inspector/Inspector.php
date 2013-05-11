@@ -38,7 +38,7 @@ class Inspector {
 	 */
 	public function addInspector($inspector)
 	{
-		$this->inspectors[] = $inspector;
+		array_unshift($this->inspectors, $inspector);
 	}
 
 	/**
