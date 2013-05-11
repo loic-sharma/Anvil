@@ -10,17 +10,11 @@ class PageController extends Controller {
 	 */
 	public function page($slug)
 	{
-		$page = Page::where('slug', '=', $slug)->first();
-
-		if(is_null($page))
-		{
-			return Anvil::abort('404');
-		}
+		$page = Page::where('slug', '=', $slug)->firstOrFail();
 
 		$this->page->layout  = 'layouts.'.$page->layout;
 
 		$this->page->addBreadcrumb($page->title);
-
 		$this->page->setContent('page::home', compact('page'));
 	}
 }
