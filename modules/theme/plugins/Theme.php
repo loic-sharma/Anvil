@@ -3,13 +3,6 @@
 class ThemePlugin extends Plugin {
 
 	/**
-	 * The URL to the theme's directory.
-	 *
-	 * @var string
-	 */
-	protected $themeUrl;
-
-	/**
 	 * The different supported asset types.
 	 *
 	 * @var array
@@ -24,24 +17,13 @@ class ThemePlugin extends Plugin {
 	protected $assets = array();
 
 	/**
-	 * Set the default theme.
+	 * The URL to the current theme.
 	 *
-	 * @return void
+	 * @return string
 	 */
-	public function __construct()
+	public function getThemeUrl()
 	{
-		$this->setTheme(Settings::get('theme'));
-	}
-
-	/**
-	 * Set the current theme.
-	 *
-	 * @param  string  $theme
-	 * @return void
-	 */
-	public function setTheme($theme)
-	{
-		$this->themeUrl = URL::base().'themes/'.$theme;
+		return URL::base().'themes/'.Anvil::getTheme();
 	}
 
 	/**
@@ -110,7 +92,7 @@ class ThemePlugin extends Plugin {
 
 		else
 		{
-			return $this->themeUrl.'/'.$path;
+			return $this->getThemeUrl().'/'.$path;
 		}
 	}
 
