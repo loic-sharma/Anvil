@@ -87,7 +87,6 @@ return array(
 		'Cache'           => 'Illuminate\Support\Facades\Cache',
 		'ClassLoader'     => 'Illuminate\Support\ClassLoader',
 		'Config'          => 'Illuminate\Support\Facades\Config',
-		'Controller'      => 'Illuminate\Routing\Controllers\Controller',
 		'Cookie'          => 'Illuminate\Support\Facades\Cookie',
 		'Crypt'           => 'Illuminate\Support\Facades\Crypt',
 		'DB'              => 'Illuminate\Support\Facades\DB',
