@@ -44,7 +44,7 @@ class Inspector {
 	/**
 	 * Inspect a URI and attempt to find a matching route.
 	 *
-	 * @param  string  $uri
+	 * @param  Illuminate\Http\Request  $request
 	 * @return Anvil\Inspector\Route
 	 */
 	public function inspect($request)
