@@ -1,88 +1,43 @@
 <?php
 
-use Anvil\Routing\Inspector;
+use Illuminate\Http\Request;
+use Anvil\Routing\Inspector\AdminInspector;
+use Anvil\Routing\Inspector\DefaultInspector;
+use Anvil\Routing\Inspector\Route;
 
 class InspectorTest extends PHPUnit_Framework_TestCase {
 
-	public function testHomePage()
+	public function testAdminInspector()
 	{
-		$inspector = $this->getInspector('/', null);
-		$this->assertTrue($inspector->isHome());
+		$inspector = new AdminInspector;
 
-		$inspector = $this->getInspector('/', 'FooController');
-		$this->assertTrue($inspector->isHome());
-		$this->assertEquals('FooController', $inspector->detectController());
-		$this->assertEquals('/', $inspector->detectRoute());
+		$route = new Route(Request::create('/'));
+		$this->assertEquals(null, $inspector->inspect($route));
 
-		$inspector = $this->getInspector('test', 'FooController');
-		$this->assertFalse($inspector->isHome());
-		$this->assertEquals('TestController', $inspector->detectController());
-		$this->assertEquals('test', $inspector->detectRoute());
+		$route = new Route(Request::create('foo'));
+		$this->assertEquals(null, $inspector->inspect($route));
 
-		$inspector = $this->getInspector('foo', 'FooController');
-		$this->assertTrue($inspector->isHome());
-		$this->assertEquals('FooController', $inspector->detectController());
-		$this->assertEquals('foo', $inspector->detectRoute());
+		$route = new Route(Request::create('admin'));
+		$route = $inspector->inspect($route);
+		$this->assertEquals(true, $route->isAdmin);
+		$this->assertEquals('admin', $route->route);
+		$this->assertEquals('Anvil\Controllers\AdminController', $route->controller);
 
-		$inspector = $this->getInspector('foo', 'BarController');
-		$this->assertFalse($inspector->isHome());
-		$this->assertEquals('FooController', $inspector->detectController());
-		$this->assertEquals('foo', $inspector->detectRoute());
+		$route = new Route(Request::create('admin/foo'));
+		$route = $inspector->inspect($route);
+		$this->assertEquals(true, $route->isAdmin);
+		$this->assertEquals('admin/foo', $route->route);
+		$this->assertEquals('FooAdminController', $route->controller);
+
+		$route = new Route(Request::create('admin/foo/bar'));
+		$route = $inspector->inspect($route);
+		$this->assertEquals(true, $route->isAdmin);
+		$this->assertEquals('admin/foo', $route->route);
+		$this->assertEquals('FooAdminController', $route->controller);
 	}
 
-	public function testHomePageFailsWithExtraUriSegments()
+	public function testDefaultInspector()
 	{
-		$inspector = $this->getInspector('foo', 'FooController');
-		$this->assertTrue($inspector->isHome());
-		$this->assertEquals('FooController', $inspector->detectController());
-		$this->assertEquals('foo', $inspector->detectRoute());
 
-		$inspector = $this->getInspector('foo/bar', 'FooController');
-		$this->assertFalse($inspector->isHome());
-		$this->assertEquals('FooController', $inspector->detectController());
-		$this->assertEquals('foo', $inspector->detectRoute());
-	}
-
-	public function testAdminRoutes()
-	{
-		$inspector = $this->getInspector('/', 'FooController');
-		$this->assertFalse($inspector->isAdmin());
-		$this->assertEquals('FooController', $inspector->detectController());
-		$this->assertEquals('/', $inspector->detectRoute());
-
-		$inspector = $this->getInspector('foo/bar', null);
-		$this->assertFalse($inspector->isAdmin());
-		$this->assertEquals('FooController', $inspector->detectController());
-		$this->assertEquals('foo', $inspector->detectRoute());
-
-		$inspector = $this->getInspector('admin', null);
-		$this->assertTrue($inspector->isAdmin());
-		$this->assertEquals(Inspector::ADMIN_HOME_CONTROLLER, $inspector->detectController());
-		$this->assertEquals('admin', $inspector->detectRoute());
-
-		$inspector = $this->getInspector('admin', 'FooController');
-		$this->assertTrue($inspector->isAdmin());
-		$this->assertEquals(Inspector::ADMIN_HOME_CONTROLLER, $inspector->detectController());
-		$this->assertEquals('admin', $inspector->detectRoute());
-
-		$inspector = $this->getInspector('admin/foo', null);
-		$this->assertTrue($inspector->isAdmin());
-		$this->assertEquals('FooAdminController', $inspector->detectController());
-		$this->assertEquals('admin/foo', $inspector->detectRoute());
-
-		$inspector = $this->getInspector('admin/foo', 'FooController');
-		$this->assertTrue($inspector->isAdmin());
-		$this->assertEquals('FooAdminController', $inspector->detectController());
-		$this->assertEquals('admin/foo', $inspector->detectRoute());
-
-		$inspector = $this->getInspector('admin/foo/bar', 'FooController');
-		$this->assertTrue($inspector->isAdmin());
-		$this->assertEquals('FooAdminController', $inspector->detectController());
-		$this->assertEquals('admin/foo', $inspector->detectRoute());
-	}
-
-	public function getInspector($uri, $defaultController)
-	{
-		return new Inspector($uri, $defaultController);
 	}
 }
