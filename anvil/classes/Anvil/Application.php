@@ -74,7 +74,6 @@ class Application extends IlluminateApplication {
 		// Todo: remove the stuff below
 		$this['theme.path'] = $this['path.base'].'/themes/'.$theme;
 
-		$this['view.finder']->setThemePath($this['theme.path']);
 		$this['plugins']->theme->setTheme($theme);
 	}
 
