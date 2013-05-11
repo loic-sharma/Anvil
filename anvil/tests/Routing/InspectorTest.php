@@ -2,14 +2,14 @@
 
 use Illuminate\Http\Request;
 use Anvil\Routing\Inspector\AdminInspector;
-use Anvil\Routing\Inspector\ModuleInspector;
+use Anvil\Routing\Inspector\BasicInspector;
 use Anvil\Routing\Inspector\Route;
 
 class InspectorTest extends PHPUnit_Framework_TestCase {
 
 	public function testModuleInspector()
 	{
-		$inspector = new ModuleInspector;
+		$inspector = new BasicInspector;
 
 		$route = new Route(Request::create('/'));
 		$route = $inspector->inspect($route, 'foo');
