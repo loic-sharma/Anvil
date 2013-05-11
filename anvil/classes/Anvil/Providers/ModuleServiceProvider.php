@@ -28,7 +28,9 @@ class ModuleServiceProvider extends ServiceProvider {
 	 */
 	public function registerModulePath()
 	{
-		$this->app->instance('module.path', $this->app['path.base'].'/modules');
+		$path = $this->app['path.base'].'modules';
+
+		$this->app->instance('module.path', realpath($path));
 	}
 
 	/**
