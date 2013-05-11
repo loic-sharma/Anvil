@@ -70,11 +70,6 @@ class Application extends IlluminateApplication {
 	public function setTheme($theme)
 	{
 		$this->theme = $theme;
-
-		// Todo: remove the stuff below
-		$this['theme.path'] = $this['path.base'].'/themes/'.$theme;
-
-		$this['plugins']->theme->setTheme($theme);
 	}
 
 	/**
@@ -82,7 +77,7 @@ class Application extends IlluminateApplication {
 	 *
 	 * @return string
 	 */
-	public function theme()
+	public function getTheme()
 	{
 		return $this->theme;
 	}
