@@ -10,7 +10,7 @@ class ModuleInspector {
 	 * @param string                          $defaultController
 	 * @return mixed
 	 */
-	public function inspect($route, $defaultController)
+	public function inspect(Route $route, $defaultController)
 	{
 		// The request is for the home page if the URI is empty.
 		if($route->request->path() == '/')
