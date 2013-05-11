@@ -358,3 +358,15 @@ include __DIR__.'/filters.php';
 */
 
 $anvil->start($anvil['request'], $anvil['routing.inspector'], $anvil['router']);
+
+/*
+|--------------------------------------------------------------------------
+| Set The Current Theme
+|--------------------------------------------------------------------------
+|
+| All of the design elements for the current page are stored in the theme.
+| Let's register the current theme now.
+|
+*/
+
+$anvil->setTheme($anvil['settings']->get('theme'));
