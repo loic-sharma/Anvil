@@ -28,6 +28,9 @@ class ModuleInspector {
 			$route->route = $uriSegments[0];
 
 			// One last thing! Let's see if the URI mapped to the home page.
+			// If there is only the controller's name in the URI, and that
+			// controller is the home page's controller, then this is the home
+			// page. 
 			if(count($uriSegments) == 1 and $route->controller == $defaultController)
 			{
 				$route->isHome = true;
