@@ -53,7 +53,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Foundation\ProviderRepository;
 
-use Anvil\Routing\Inspector\DefaultInspector;
+use Anvil\Routing\Inspector\ModuleInspector;
 use Anvil\Routing\Inspector\AdminInspector;
 
 /*
@@ -279,7 +279,7 @@ if(empty($config['database']))
 
 $anvil->boot();
 
-Inspector::addInspector(new DefaultInspector);
+Inspector::addInspector(new ModuleInspector);
 Inspector::addInspector(new AdminInspector);
 
 /*

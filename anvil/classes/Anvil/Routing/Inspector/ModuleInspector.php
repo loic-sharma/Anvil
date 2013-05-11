@@ -1,6 +1,6 @@
 <?php namespace Anvil\Routing\Inspector;
 
-class DefaultInspector {
+class ModuleInspector {
 
 	/**
 	 * Attempt to match the current request to one of the
