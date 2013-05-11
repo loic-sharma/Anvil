@@ -25,7 +25,7 @@ class ModuleInspector {
 			$uriSegments = explode('/', $route->request->path());
 
 			$route->controller = $this->formatController($uriSegments[0]);
-			$route->uri = $uriSegments[0];
+			$route->route = $uriSegments[0];
 
 			// One last thing! Let's see if the URI mapped to the home page.
 			if(count($uriSegments) == 0 and $route->controller == $defaultController)
