@@ -69,35 +69,6 @@ class Application extends IlluminateApplication {
 	}
 
 	/**
-	 * Run the application.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		try
-		{
-			parent::run();
-		}
-
-		// Because of the default routing system, it is possible that the CMS
-		// created a route to a nonexistent controller. If that happens, let's
-		// throw a more accurate exception.
-		catch(\ReflectionException $e)
-		{
-			if($e->getMessage() == "Class {$this->controller} does not exist")
-			{
-				$this->abort(404);
-			}
-
-			else
-			{
-				throw new \ReflectionException($e->getMessage());
-			}
-		}
-	}
-
-	/**
 	 * Determine if the current request is the home page.
 	 *
 	 * @return bool
