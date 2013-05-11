@@ -7,6 +7,7 @@ class ModuleInspector {
 	 * modules' controllers.
 	 *
 	 * @param  Anvil\Routing\Inspector\Route  $route
+	 * @param string                          $defaultController
 	 * @return mixed
 	 */
 	public function inspect($route, $defaultController)
