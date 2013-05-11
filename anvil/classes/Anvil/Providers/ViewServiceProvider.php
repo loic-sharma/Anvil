@@ -57,7 +57,7 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 	{
 		$this->app['view.finder'] = $this->app->share(function($app)
 		{
-			$finder = new FileViewFinder($app['files']);
+			$finder = new FileViewFinder($app, $app['files']);
 
 			$finder->setThemePath($app['theme.path']);
 			$finder->setModulePath($app['module.path']);

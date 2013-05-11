@@ -1,8 +1,8 @@
 <?php namespace Anvil\View;
 
+use Anvil\Application;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\FileViewFinder as IlluminateViewFinder;
-use Cms\Settings\Repository as Settings;
 
 class FileViewFinder extends IlluminateViewFinder {
 
@@ -14,7 +14,7 @@ class FileViewFinder extends IlluminateViewFinder {
 	protected $files;
 
 	/**
-	 * The path to the current theme's directory.
+	 * The path to the current themes' directory.
 	 *
 	 * @var string
 	 */
@@ -45,17 +45,18 @@ class FileViewFinder extends IlluminateViewFinder {
 	/**
 	 * Create a new instance.
 	 *
-	 * @param  Filesystem  $files
-	 * @param  Settings    $settings
+	 * @param  Anvil\Application                 $anvil
+	 * @param  Illuminate\Filesystem\Filesystem  $files
 	 * @return void
 	 */
-	public function __construct(Filesystem $files)
+	public function __construct(Application $anvil, Filesystem $files)
 	{
+		$this->anvil = $anvil;
 		$this->files = $files;
 	}
 
 	/**
-	 * Set the theme path.
+	 * Set the path to the themes.
 	 *
 	 * @param  string  $path
 	 * @return void
@@ -63,16 +64,6 @@ class FileViewFinder extends IlluminateViewFinder {
 	public function setThemePath($path)
 	{
 		$this->themePath = rtrim($path, '/').'/';
-	}
-
-	/**
-	 * Get the current theme path.
-	 *
-	 * @return string
-	 */
-	public function getThemePath()
-	{
-		return $this->themePath;
 	}
 
 	/**
@@ -84,6 +75,18 @@ class FileViewFinder extends IlluminateViewFinder {
 	public function setModulePath($path)
 	{
 		$this->modulePath = rtrim($path, '/').'/';
+	}
+
+	/**
+	 * Get the current theme path.
+	 *
+	 * @return string
+	 */
+	public function currentThemePath()
+	{
+		$theme = $this->anvil->getTheme();
+
+		return $this->themePath.$theme.'/';
 	}
 
 	/**
