@@ -92,7 +92,7 @@ class Module {
 	protected function addClassPaths($path)
 	{
 		$directories = $this->getExistingDirectories($path);
-	
+
 		$this->autoloader->add(null, $directories);
 		$this->autoloader->add(ucfirst($this->data->slug), $path.'classes');
 	}
@@ -146,11 +146,18 @@ class Module {
 	 */
 	protected function getExistingDirectories($path)
 	{
+		$directories = array();
+
 		// All of the module's directories are optional. So, let's find the
 		// directories that the module does have.
-		$directories = array_filter($this->directories, function($directory) use ($path)
+		foreach($this->directories as $directory)
 		{
-			return is_dir($path.$directory);
-		});
+			if($this->filesystem->isDirectory($path.$directory))
+			{
+				$directories[] = $path.$directory;
+			}
+		}
+
+		return $directories;
 	}
 }
