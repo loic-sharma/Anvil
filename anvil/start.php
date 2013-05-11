@@ -53,6 +53,9 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Foundation\ProviderRepository;
 
+use Anvil\Routing\Inspector\DefaultInspector;
+use Anvil\Routing\Inspector\AdminInspector;
+
 /*
 |--------------------------------------------------------------------------
 | Load The Autoloader
@@ -276,6 +279,9 @@ if(empty($config['database']))
 
 $anvil->boot();
 
+Inspector::addInspector(new DefaultInspector);
+Inspector::addInspector(new AdminInspector);
+
 /*
 |--------------------------------------------------------------------------
 | Boot the User's Session
@@ -339,4 +345,4 @@ include __DIR__.'/filters.php';
 |
 */
 
-$anvil->start($anvil['routing.inspector'], $anvil['router']);
+$anvil->start($anvil['request'], $anvil['routing.inspector'], $anvil['router']);

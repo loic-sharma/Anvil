@@ -122,6 +122,7 @@ return array(
 		'Controller'   => 'Anvil\Routing\Controllers\Controller',
 		'Eloquent'     => 'Anvil\Database\Model',
 		'Group'        => 'Anvil\Auth\Models\Group',
+		'Inspector'    => 'Anvil\Facades\Inspector',
 		'Menu'         => 'Anvil\Facades\Menu',
 		'Modules'      => 'Anvil\Facades\Modules',
 		'Permission'   => 'Anvil\Auth\Models\Permission',

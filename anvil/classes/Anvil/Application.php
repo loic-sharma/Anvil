@@ -1,46 +1,57 @@
 <?php namespace Anvil;
 
 use Anvil\Auth\AuthManager as Auth;
-use Anvil\Routing\Inspector;
+use Anvil\Routing\Inspector\Inspector;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Application as IlluminateApplication;
 
 class Application extends IlluminateApplication {
 
 	/**
-	 * The URI inspector, which retrieves data about the current
-	 * request from the URI.
+	 * The route detected from the requested URI.
 	 *
-	 * @var Anvil\Routing\UriInspector
+	 * @var Anvil\Routing\Inspector\Route
 	 */
-	protected $inspector;
+	protected $route;
 
 	/**
 	 * Create a route to the detected current controller.
 	 *
-	 * @param  Anvil\Routing\Inspector  $inspector
+	 * @param  Illuminate\Http\Request    $request
+	 * @param  Anvil\Routing\Inspector    $inspector
 	 * @param  Illuminate\Routing\Router  $router
 	 * @return void
 	 */
-	public function start(Inspector $inspector, Router $router)
+	public function start(Request $request, Inspector $inspector, Router $router)
 	{
-		$this->inspector = $inspector;
+		// Let's pass the request to the inspector. The inspector
+		// will determine which route and controller should respond
+		// to the current request.
+		$this->route = $inspector->inspect($request);
 
-		// Let's use the inspector to detect how to route the current
-		// request to a controller.
-		$controller = $inspector->detectController();
-		$route = $inspector->detectRoute();
-
-		try
+		// If the route is null, then the inspector could not find
+		// a matching route and controller. Let's just abort with a
+		// 404 error message.
+		if(is_null($this->route))
 		{
-			$router->controller($route, $controller);
+			$this->abort(404);
 		}
 
-		// If the controller does not exist, Laravel will
-		// throw an exception. we'll silently kill the exception
-		// since there might be a custom route already set.
-		catch(\ReflectionException $e) {}
+		// Otherwise, let's attempt to register the detected route.
+		else
+		{
+			try
+			{
+				$router->controller($this->route->route, $this->route->controller);
+			}
+
+			// If the controller does not exist, Laravel will
+			// throw an exception. we'll silently kill the exception
+			// since there might be a custom route already set.
+			catch(\ReflectionException $e) {}
+		}
 	}
 
 	/**
@@ -93,7 +104,7 @@ class Application extends IlluminateApplication {
 	 */
 	public function isHome()
 	{
-		return $this->inspector->isHome();
+		return $this->route->isHome;
 	}
 
 	/**
@@ -103,6 +114,6 @@ class Application extends IlluminateApplication {
 	 */
 	public function isAdmin()
 	{
-		return $this->inspector->isAdmin();
+		return $this->route->isAdmin;
 	}
 }

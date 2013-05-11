@@ -2,7 +2,7 @@
 
 use Anvil\Plugins\UrlPlugin;
 use Anvil\Routing\UrlGenerator;
-use Anvil\Routing\Inspector;
+use Anvil\Routing\Inspector\Inspector;
 
 use Illuminate\Routing\RoutingServiceProvider as IlluminateRoutingServiceProvider;
 
@@ -17,7 +17,7 @@ class RoutingServiceProvider extends IlluminateRoutingServiceProvider {
 	{
 		parent::register();
 
-		$this->registerUriInspector();
+		$this->registerInspector();
 
 		$this->registerUrlPlugin();
 	}
@@ -45,15 +45,13 @@ class RoutingServiceProvider extends IlluminateRoutingServiceProvider {
 	 *
 	 * @return void
 	 */
-	protected function registerUriInspector()
+	protected function registerInspector()
 	{
 		$this->app['routing.inspector'] = $this->app->share(function($app)
 		{
-			$uri = $app['request']->path();
-
 			$defaultController = $app['settings']->get('defaultController');
 
-			return new Inspector($uri, $defaultController);
+			return new Inspector($defaultController);
 		});
 	}
 
