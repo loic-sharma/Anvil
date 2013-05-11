@@ -2,10 +2,45 @@
 
 use Illuminate\Http\Request;
 use Anvil\Routing\Inspector\AdminInspector;
-use Anvil\Routing\Inspector\DefaultInspector;
+use Anvil\Routing\Inspector\ModuleInspector;
 use Anvil\Routing\Inspector\Route;
 
 class InspectorTest extends PHPUnit_Framework_TestCase {
+
+	public function testModuleInspector()
+	{
+		$inspector = new ModuleInspector;
+
+		$route = new Route(Request::create('/'));
+		$route = $inspector->inspect($route, 'foo');
+		$this->assertEquals(true, $route->isHome);
+		$this->assertEquals('/', $route->route);
+		$this->assertEquals('foo', $route->controller);
+
+		$route = new Route(Request::create('foo'));
+		$route = $inspector->inspect($route, 'FooController');
+		$this->assertEquals(true, $route->isHome);
+		$this->assertEquals('foo', $route->route);
+		$this->assertEquals('FooController', $route->controller);
+
+		$route = new Route(Request::create('foo'));
+		$route = $inspector->inspect($route, 'BarController');
+		$this->assertEquals(false, $route->isHome);
+		$this->assertEquals('foo', $route->route);
+		$this->assertEquals('FooController', $route->controller);
+
+		$route = new Route(Request::create('foo/bar'));
+		$route = $inspector->inspect($route, 'FooController');
+		$this->assertEquals(false, $route->isHome);
+		$this->assertEquals('foo', $route->route);
+		$this->assertEquals('FooController', $route->controller);
+
+		$route = new Route(Request::create('foo/bar'));
+		$route = $inspector->inspect($route, 'BarController');
+		$this->assertEquals(false, $route->isHome);
+		$this->assertEquals('foo', $route->route);
+		$this->assertEquals('FooController', $route->controller);
+	}
 
 	public function testAdminInspector()
 	{
@@ -34,10 +69,5 @@ class InspectorTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(true, $route->isAdmin);
 		$this->assertEquals('admin/foo', $route->route);
 		$this->assertEquals('FooAdminController', $route->controller);
-	}
-
-	public function testDefaultInspector()
-	{
-
 	}
 }
