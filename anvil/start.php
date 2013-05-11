@@ -279,6 +279,19 @@ if(empty($config['database']))
 
 $anvil->boot();
 
+/*
+|--------------------------------------------------------------------------
+| Register The Anvil Request Inspectors
+|--------------------------------------------------------------------------
+|
+| Anvil matches a request to controllers through its inspectors. The
+| inspectors examine a request and then attempts to detect the correct
+| controller for the request. The detected routes can be overriden
+| by simply registering custom routes. Additionally, modules can register
+| their own inspectors to modify how requests are handled.
+|
+*/
+
 Inspector::addInspector(new ModuleInspector);
 Inspector::addInspector(new AdminInspector);
 
