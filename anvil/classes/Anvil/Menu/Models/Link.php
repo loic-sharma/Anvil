@@ -38,31 +38,32 @@ class Link extends Model {
 	 */
 	public function getUrlAttribute($url)
 	{
-		if($url == '/' or $url == '{url}/')
+		if($url == '/')
 		{
 			return URL::base();
 		}
 
 		else
 		{
-			if(strpos($url, '{url}/') === 0)
-			{
-				return URL::to(substr($url, 6));
-			}
+			// The site's links are "tagged" in the database. The link is prefixed
+			// by {url} if the link is for the main site and {adminurl} if the link
+			// is for the admin panel. Let's remove the tag now and fetch the full
+			// URL for the link.
+			$search  = array('{url}/', '{adminUrl}/');
+			$replace = array('', 'admin/');
 
-			else
+			foreach($search as $key => $needle)
 			{
-				if(strpos($url, '{adminUrl}/') === 0)
+				if(strpos($url, $needle) === 0)
 				{
-					return URL::to('admin/'.substr($url, 11));
-				}
+					$url = str_replace($search[$key], $replace[$key], $url);
 
-				else
-				{
-					return $url;
+					return URL::to($url);
 				}
 			}
 		}
+
+		return $url;
 	}
 
 	/**
