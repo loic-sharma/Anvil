@@ -1,6 +1,6 @@
 <?php namespace Anvil\Menu\Models;
 
-use Url;
+use URL;
 use Illuminate\Database\Eloquent\Model;
 
 class Link extends Model {
@@ -40,21 +40,21 @@ class Link extends Model {
 	{
 		if($url == '/' or $url == '{url}/')
 		{
-			return Url::base();
+			return URL::base();
 		}
 
 		else
 		{
 			if(strpos($url, '{url}/') === 0)
 			{
-				return Url::to(substr($url, 6));
+				return URL::to(substr($url, 6));
 			}
 
 			else
 			{
 				if(strpos($url, '{adminUrl}/') === 0)
 				{
-					return Url::to('admin/'.substr($url, 11));
+					return URL::to('admin/'.substr($url, 11));
 				}
 
 				else
