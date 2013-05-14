@@ -365,8 +365,12 @@ $anvil->start($anvil['request'], $anvil['routing.inspector'], $anvil['router']);
 |--------------------------------------------------------------------------
 |
 | All of the design elements for the current page are stored in the theme.
-| Let's register the current theme now.
+| Let's register the current theme now. Note that the admin panel has its
+| own unique theme, whereas the rest of the site just uses the theme
+| in the settings.
 |
 */
 
-$anvil->setTheme($anvil['settings']->get('theme'));
+$theme = $anvil->isAdmin() ? 'admin' : Settings::get('theme');
+
+Themes::start($theme);

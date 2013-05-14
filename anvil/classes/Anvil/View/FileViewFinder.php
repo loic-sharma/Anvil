@@ -134,7 +134,7 @@ class FileViewFinder extends IlluminateViewFinder {
 		{
 			// If we're rendering a module's view, let's add the theme's
 			// path to view partials.
-			$paths[] = $this->themePath.'views/partials/'.$module;
+			$paths[] = $this->currentThemePath().'views/partials/'.$module;
 
 			// Next, register the corresponding module's views.
 			$paths[] = $this->modulePath.$module.'/views';
@@ -144,7 +144,7 @@ class FileViewFinder extends IlluminateViewFinder {
 		{
 			// If the view doesn't belong to any modules, let's add
 			// the template's path as a fallback.
-			$paths[] = $this->themePath.'views/';
+			$paths[] = $this->currentThemePath().'views/';
 		}
 
 		return $paths;

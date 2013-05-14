@@ -17,13 +17,6 @@ class Application extends IlluminateApplication {
 	protected $route;
 
 	/**
-	 * The current theme for the website.
-	 *
-	 * @var string
-	 */
-	protected $theme;
-
-	/**
 	 * Create a route to the detected current controller.
 	 *
 	 * @param  Illuminate\Http\Request    $request
@@ -69,7 +62,7 @@ class Application extends IlluminateApplication {
 	 */
 	public function setTheme($theme)
 	{
-		$this->theme = $theme;
+		$this['themes']->setTheme($theme);
 	}
 
 	/**
@@ -79,7 +72,7 @@ class Application extends IlluminateApplication {
 	 */
 	public function getTheme()
 	{
-		return $this->theme;
+		return $this['themes']->getCurrentTheme();
 	}
 
 	/**

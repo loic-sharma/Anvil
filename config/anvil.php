@@ -128,6 +128,8 @@ return array(
 		'Plugin'       => 'Anvil\Plugins\Plugin',
 		'Plugins'      => 'Anvil\Facades\Plugins',
 		'Settings'     => 'Anvil\Facades\Settings',
+		'Theme'        => 'Anvil\Facades\Theme',
+		'Themes'       => 'Anvil\Facades\Themes',
 		'User'         => 'Anvil\Auth\Models\User',
 
 		'Profiler'     => 'Profiler\Facades\Profiler',

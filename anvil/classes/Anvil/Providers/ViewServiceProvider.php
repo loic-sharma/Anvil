@@ -3,6 +3,8 @@
 use Illuminate\View\Environment;
 use Illuminate\Support\MessageBag;
 use Illuminate\View\ViewServiceProvider as IlluminateViewServiceProvider;
+
+use Anvil\View\Themes;
 use Anvil\View\FileViewFinder;
 use Anvil\Plugins\PluginManager;
 
@@ -17,9 +19,9 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 	{
 		parent::register();
 
-		$this->registerThemesPath();
-
 		$this->registerThemePath();
+
+		$this->registerThemes();
 
 		$this->registerBladeExtension();
 	}
@@ -29,25 +31,21 @@ class ViewServiceProvider extends IlluminateViewServiceProvider {
 	 *
 	 * @return void
 	 */
-	public function registerThemesPath()
-	{
-		$this->app['themes.path'] = $this->app['path.base'].'/themes';
-	}
-
-	/**
-	 * Register the theme path.
-	 *
-	 * @return void
-	 */
 	public function registerThemePath()
 	{
-		$this->app['theme.path'] = $this->app->share(function($app)
-		{
-			$currentTheme = $app['settings']->get('theme');
+		$path = $this->app['path.base'].'/themes';
 
-			return $app['themes.path'].'/'.$currentTheme;
+		$this->app['theme.path'] = realpath($path);
+	}
+
+	public function registerThemes()
+	{
+		$this->app['themes'] = $this->app->share(function($app)
+		{
+			return new Themes($app['theme.path'], $app['files'], $app['url'], $app['html']);
 		});
 	}
+
 	/**
 	 * Register the view finder implementation.
 	 *
