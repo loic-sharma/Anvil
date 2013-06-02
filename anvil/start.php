@@ -1,5 +1,20 @@
 <?php
 
+define('LARAVEL_START', microtime(true));
+
+/*
+|--------------------------------------------------------------------------
+| Set PHP Error Reporting Options
+|--------------------------------------------------------------------------
+|
+| Here we will set the strictest error reporting options, and also turn
+| off PHP's error reporting, since all errors will be handled by the
+| framework and we don't want any output leaking back to the user.
+|
+*/
+
+error_reporting(-1);
+
 /*
 |--------------------------------------------------------------------------
 | Check Extensions
@@ -36,6 +51,31 @@ if ( ! defined('LARAVEL_VERSION'))
 
 /*
 |--------------------------------------------------------------------------
+| Load The Autoloader
+|--------------------------------------------------------------------------
+|
+| Anvil relies heavily on Composer components. We'll need the autoloader
+| to load those components and Anvil.
+|
+*/
+
+$autoloader = include __DIR__.'/vendor/autoload.php';
+
+/*
+|--------------------------------------------------------------------------
+| Setup Patchwork UTF-8 Handling
+|--------------------------------------------------------------------------
+|
+| The Patchwork library provides solid handling of UTF-8 strings as well
+| as provides replacements for all mb_* and iconv type functions that
+| are not available by default in PHP. We'll setup this stuff here.
+|
+*/
+
+Patchwork\Utf8\Bootup::initMbstring();
+
+/*
+|--------------------------------------------------------------------------
 | Register Class Imports
 |--------------------------------------------------------------------------
 |
@@ -58,18 +98,6 @@ use Anvil\Routing\Inspector\AdminInspector;
 
 /*
 |--------------------------------------------------------------------------
-| Load The Autoloader
-|--------------------------------------------------------------------------
-|
-| Anvil relies heavily on Composer components. We'll need the autoloader
-| to load those components and Anvil.
-|
-*/
-
-$autoloader = include __DIR__.'/vendor/autoload.php';
-
-/*
-|--------------------------------------------------------------------------
 | Create The CMS
 |--------------------------------------------------------------------------
 |
@@ -80,6 +108,8 @@ $autoloader = include __DIR__.'/vendor/autoload.php';
 */
 
 $anvil = new Anvil\Application;
+
+$anvil->redirectIfTrailingSlash();
 
 /*
 |--------------------------------------------------------------------------
@@ -157,27 +187,9 @@ Facade::setFacadeApplication($anvil);
 |
 */
 
-$anvil->bindIf('config.loader', function($anvil)
-{
-	return new FileLoader(new Filesystem, $anvil['path.base'].'config');
-
-}, true);
-
-/*
-|--------------------------------------------------------------------------
-| Register The Configuration Repository
-|--------------------------------------------------------------------------
-|
-| The configuration repository is used to lazily load in the options for
-| this application from the configuration files. The files are easily
-| separated by their concerns so they do not become really crowded.
-|
-*/
-
-$config = new Config($anvil['config.loader'], $env);
+$config = new Config($anvil->getConfigLoader(), $env);
 
 $anvil->instance('config', $config);
-
 
 /*
 |--------------------------------------------------------------------------
@@ -244,27 +256,9 @@ Request::enableHttpMethodParameterOverride();
 |
 */
 
-$services = new ProviderRepository(new Filesystem, $config['anvil']['manifest']);
+$providers = $config['anvil']['providers'];
 
-$services->load($anvil, $config['anvil']['providers']);
-
-/*
-|--------------------------------------------------------------------------
-| Install the CMS
-|--------------------------------------------------------------------------
-|
-| The installation process creates a database configuration file. If it
-| doesn't exist then Anvil has not been installed yet. We'll redirect the
-| user here so that Anvil can be set up.
-|
-*/
-
-if(empty($config['database']))
-{
-	header('Location: '.$anvil['url']->base().'installer/');
-
-	exit;
-}
+$anvil->getProviderRepository()->load($anvil, $providers);
 
 /*
 |--------------------------------------------------------------------------
@@ -278,6 +272,19 @@ if(empty($config['database']))
 */
 
 $anvil->boot();
+
+/*
+|--------------------------------------------------------------------------
+| Install the CMS
+|--------------------------------------------------------------------------
+|
+| The installation process creates a database configuration file. If it
+| doesn't exist then Anvil has not been installed yet. We'll redirect the
+| user here so that Anvil can be set up.
+|
+*/
+
+$anvil->redirectIfUninstalled($config);
 
 /*
 |--------------------------------------------------------------------------
@@ -374,3 +381,16 @@ $anvil->start($anvil['request'], $anvil['routing.inspector'], $anvil['router']);
 $theme = $anvil->isAdmin() ? 'admin' : Settings::get('theme');
 
 Themes::start($theme);
+
+/*
+|--------------------------------------------------------------------------
+| Return The Application
+|--------------------------------------------------------------------------
+|
+| This script returns the application instance. The instance is given to
+| the calling script so we can separate the building of the instances
+| from the actual running of the application and sending responses.
+|
+*/
+
+return $anvil;

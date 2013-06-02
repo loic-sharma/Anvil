@@ -5,7 +5,10 @@ use Anvil\Routing\Inspector\Inspector;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
+use Illuminate\Config\FileLoader;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Application as IlluminateApplication;
+use Symfony\Component\HttpFoundation\RedirectResponse as SymfonyRedirect;
 
 class Application extends IlluminateApplication {
 
@@ -15,6 +18,32 @@ class Application extends IlluminateApplication {
 	 * @var Anvil\Routing\Inspector\Route
 	 */
 	protected $route;
+
+	/**
+	 * Get the configuration loader instance.
+	 *
+	 * @return \Illuminate\Config\LoaderInterface
+	 */
+	public function getConfigLoader()
+	{
+		return new FileLoader(new Filesystem, $this['path.base'].'/config');
+	}
+
+	/**
+	 * Redirect to the installer if the database configuration is empty.
+	 *
+	 * @param  test
+	 * @return void
+	 */
+	public function redirectIfUninstalled($config)
+	{
+		if(empty($config['database']))
+		{
+			with(new SymfonyRedirect($this['url']->base().'installer/', 301))->send();
+
+			exit;
+		}
+	}
 
 	/**
 	 * Create a route to the detected current controller.

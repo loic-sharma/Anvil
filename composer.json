@@ -5,7 +5,7 @@
       "vendor-dir": "anvil/vendor/"
     },
     "require": {
-        "laravel/framework": "4.0.*-dev",
+        "laravel/framework": "4.0.*",
         "loic-sharma/menu": ">1.0.0",
         "loic-sharma/profiler": "1.0.*",
         "jasonlewis/expressive-date": "1.0.*"

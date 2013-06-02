@@ -1,7 +1,5 @@
 <?php
 
-define('LARAVEL_START', microtime(true));
-
 /*
 |--------------------------------------------------------------------------
 | Load Anvil
@@ -12,7 +10,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-include 'anvil/start.php';
+$anvil = include 'anvil/start.php';
 
 /*
 |--------------------------------------------------------------------------
