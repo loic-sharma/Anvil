@@ -2,6 +2,7 @@
 
 use URL;
 use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Eloquent {
 
@@ -30,6 +31,26 @@ class Post extends Eloquent {
 	 * @var bool
 	 */
 	public $timestamps = true;
+
+	/**
+	 * Get the newest posts.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Builder
+	 */
+	public function scopeNewest(Builder $query)
+	{
+		$query->orderBy('created_at', 'desc');
+	}
+
+	/**
+	 * Get the oldest posts.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Builder
+	 */
+	public function scopeOldest(Builder $query)
+	{
+		$query->orderBy('created_at', 'asc');
+	}
 
 	/**
 	 * Get the post's author.
