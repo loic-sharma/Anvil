@@ -66,7 +66,7 @@ class Comment extends Eloquent {
 	 */
 	public function getTimeAgoAttribute()
 	{
-		return ExpressiveDate::make($this->date)->getRelativeDate();
+		return $this->created_at->diffForHumans();
 	}
 
 	/**

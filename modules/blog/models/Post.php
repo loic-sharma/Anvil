@@ -68,7 +68,7 @@ class Post extends Eloquent {
 	 */ 
 	public function getTimeAgoAttribute()
 	{
-		return ExpressiveDate::make($this->attributes['created_at'])->getRelativeDate();
+		return $this->created_at->diffForHumans();
 	}
 
 	/**
