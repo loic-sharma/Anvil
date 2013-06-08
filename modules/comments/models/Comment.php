@@ -28,6 +28,28 @@ class Comment extends Eloquent {
 	);
 
 	/**
+	 * Get the newest comments.
+	 *
+	 * @param  \Illuminate\Database\ELoquent\Builder  $query
+	 * @return \Illuminate\Database\Eloquent\Builder
+	 */
+	public function scopeNewest(Builder $query)
+	{
+		return $query->orderBy('created_at', 'desc');
+	}
+
+	/**
+	 * Get the oldest comments.
+	 *
+	 * @param  \Illuminate\Database\ELoquent\Builder  $query
+	 * @return \Illuminate\Database\Eloquent\Builder
+	 */
+	public function scopeOldest(Builder $query)
+	{
+		return $query->orderBy('created_at', 'asc');
+	}
+
+	/**
 	 * Get the name of the area the comment belongs to.
 	 *
 	 * @return string
