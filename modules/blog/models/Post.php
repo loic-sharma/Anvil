@@ -35,21 +35,23 @@ class Post extends Eloquent {
 	/**
 	 * Get the newest posts.
 	 *
+	 * @param  \Illuminate\Database\ELoquent\Builder  $query
 	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
 	public function scopeNewest(Builder $query)
 	{
-		$query->orderBy('created_at', 'desc');
+		return $query->orderBy('created_at', 'desc');
 	}
 
 	/**
 	 * Get the oldest posts.
 	 *
+	 * @param  \Illuminate\Database\ELoquent\Builder  $query
 	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
 	public function scopeOldest(Builder $query)
 	{
-		$query->orderBy('created_at', 'asc');
+		return $query->orderBy('created_at', 'asc');
 	}
 
 	/**
