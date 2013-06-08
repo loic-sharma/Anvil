@@ -2,7 +2,6 @@
 
 use URL;
 use Eloquent;
-use ExpressiveDate;
 
 class Post extends Eloquent {
 
