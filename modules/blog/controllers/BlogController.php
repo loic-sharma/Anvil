@@ -1,7 +1,5 @@
 <?php
 
-use Blog\Post;
-
 class BlogController extends Controller {
 
 	/**
@@ -14,7 +12,6 @@ class BlogController extends Controller {
 		$posts = Post::newest()->take(5)->get();
 
 		$this->page->addBreadcrumb('Blog');
-
 		$this->page->setContent('blog::posts', compact('posts'));
 	}
 

@@ -1,7 +1,5 @@
-<?php namespace Blog;
+<?php
 
-use URL;
-use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Eloquent {
@@ -100,6 +98,6 @@ class Post extends Eloquent {
 	 */
 	public function getUrlAttribute()
 	{
-		return Url::to('blog/post/'.$this->attributes['id']);
+		return URL::to('blog/post/'.$this->attributes['id']);
 	}
 }
