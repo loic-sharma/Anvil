@@ -141,11 +141,7 @@ class BlogAdminController extends Controller {
 
 		if( ! is_null($post))
 		{
-			// Unless the event prevent deletion, delete the post.
-			if( ! isset($event->preventDelete) or $event->preventDelete == false)
-			{
-				$post->delete();
-			}
+			$post->delete();
 
 			return Redirect::to('admin/blog')
 					->with('message', 'Successfully deleted post.');
