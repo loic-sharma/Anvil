@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Database\Eloquent\Builder;
-
 class Post extends Eloquent {
 
 	/**
@@ -36,7 +34,7 @@ class Post extends Eloquent {
 	 * @param  \Illuminate\Database\ELoquent\Builder  $query
 	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
-	public function scopeNewest(Builder $query)
+	public function scopeNewest($query)
 	{
 		return $query->orderBy('created_at', 'desc');
 	}
@@ -47,7 +45,7 @@ class Post extends Eloquent {
 	 * @param  \Illuminate\Database\ELoquent\Builder  $query
 	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
-	public function scopeOldest(Builder $query)
+	public function scopeOldest($query)
 	{
 		return $query->orderBy('created_at', 'asc');
 	}
