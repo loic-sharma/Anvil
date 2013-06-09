@@ -50,8 +50,6 @@ class BlogAdminController extends Controller {
 
 		if($post->save())
 		{
-			Event::fire('post.create', compact('post'));
-
 			$message  = 'Successfully created post. ';
 			$message .= '<a href="'.Url::to('blog/post/'.$post->id).'">View post</a>';
 
@@ -106,8 +104,6 @@ class BlogAdminController extends Controller {
 
 			if($post->save())
 			{
-				Event::fire('post.edit', compact('post'));
-
 				$message  = 'Successfully edited post. ';
 				$message .= '<a href="'.Url::to('blog/post/'.$post->id).'">View post</a>';
 
@@ -145,8 +141,6 @@ class BlogAdminController extends Controller {
 
 		if( ! is_null($post))
 		{
-			$event = Event::fire('post.delete', compact('post'));
-
 			// Unless the event prevent deletion, delete the post.
 			if( ! isset($event->preventDelete) or $event->preventDelete == false)
 			{
