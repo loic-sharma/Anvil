@@ -91,7 +91,7 @@ class Application extends IlluminateApplication {
 	 */
 	public function setTheme($theme)
 	{
-		$this['themes']->setTheme($theme);
+		$this->make('themes')->setTheme($theme);
 	}
 
 	/**
@@ -101,7 +101,7 @@ class Application extends IlluminateApplication {
 	 */
 	public function getTheme()
 	{
-		return $this['themes']->getCurrentTheme();
+		return $this->make('themes')->getCurrentTheme();
 	}
 
 	/**
