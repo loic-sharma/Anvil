@@ -53,7 +53,7 @@ class Post extends Eloquent {
 	/**
 	 * Get the post's author.
 	 *
-	 * @return User
+	 * @return \User
 	 */
 	public function author()
 	{
@@ -63,6 +63,8 @@ class Post extends Eloquent {
 	/**
 	 * Get the post's comments.
 	 *
+	 * @return \Illuminate\Database\Eloquent\Builder
+	 */
 	 */
 	public function comments()
 	{
