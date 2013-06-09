@@ -131,6 +131,7 @@ return array(
 		'Theme'        => 'Anvil\Facades\Theme',
 		'Themes'       => 'Anvil\Facades\Themes',
 		'User'         => 'Anvil\Auth\Models\User',
+		'Variable'     => 'Anvil\Modules\Variable',
 
 		'Profiler'     => 'Profiler\Facades\Profiler',
 	),
