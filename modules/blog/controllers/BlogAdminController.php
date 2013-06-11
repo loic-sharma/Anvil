@@ -149,9 +149,7 @@ class BlogAdminController extends Controller {
 
 		else
 		{
-			$errors = new MessageBag(array(
-				'post' => 'Post does not exist.',
-			));
+			$errors = 'Post does not exist.';
 		}
 
 		return Redirect::back()->withErrors($errors);

@@ -30,9 +30,7 @@ class CommentsAdminController extends Controller {
 
 		else
 		{
-			$errors = new MessageBag(array(
-				'comment' => 'Comment does not exist.',
-			));
+			$errors = 'Comment does not exist.';
 		}
 
 		return Redirect::back()->withErrors($errors);

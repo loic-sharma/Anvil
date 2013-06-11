@@ -59,9 +59,7 @@ class PermissionAdminController extends Controller {
 
 		else
 		{
-			$errors = new MessageBag(array(
-				'permission' => 'Permission does not exist.',
-			));
+			$errors = 'Permission does not exist.';
 		}
 
 		return Redirect::to('admin/permission/'.$id.'/edit')->withInput()->withErrors($errors);

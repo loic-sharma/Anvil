@@ -64,7 +64,7 @@ class NavigationAdminController extends Controller {
 		}
 
 		return Redirect::to('admin/navigation')
-			->with('message', 'Sucessfully deleted menu.');
+			->with('message', 'Successfully deleted menu.');
 	}
 
 	public function getCreateLink($menu)
@@ -146,7 +146,7 @@ class NavigationAdminController extends Controller {
 				Cache::flush();
 
 				return Redirect::to('admin/navigation/link/'.$id.'/edit')
-					->with('message', 'Sucessfully edited link.');
+					->with('message', 'Successfully edited link.');
 			}
 
 			else
@@ -157,9 +157,7 @@ class NavigationAdminController extends Controller {
 
 		else
 		{
-			$errors = new MessageBag(array(
-				'link' => 'Link does not exist.',
-			));
+			$errors = 'Link does not exist.';
 		}
 
 		return Redirect::to('admin/navigation/link/'.$id.'/edit')
@@ -179,6 +177,6 @@ class NavigationAdminController extends Controller {
 		}
 
 		return Redirect::to('admin/navigation/menu/'.$menu)
-			->with('message', 'Sucessfully deleted link.');
+			->with('message', 'Successfully deleted link.');
 	}
 }

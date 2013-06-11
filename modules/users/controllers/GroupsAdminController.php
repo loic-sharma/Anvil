@@ -71,9 +71,7 @@ class GroupsAdminController extends Controller {
 
 		else
 		{
-			$errors = new MessageBag(array(
-				'group' => 'Group does not exist.',
-			));
+			$errors = 'Group does not exist.';
 		}
 
 		return Redirect::back()->withInput()->withErrors($errors);

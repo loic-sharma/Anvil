@@ -79,9 +79,7 @@ class PageAdminController extends Controller {
 
 		if(is_null($page))
 		{
-			$errors = new MessageBag(array(
-				'page' => 'Page does not exist.',
-			));
+			$errors = 'Page does not exist.';
 		}
 
 		else

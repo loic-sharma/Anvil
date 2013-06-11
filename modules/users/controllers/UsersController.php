@@ -52,9 +52,7 @@ class UsersController extends Controller {
 
 			else
 			{
-				$errors = new MessageBag(array(
-					'login' => 'Invalid credentials.',
-				));
+				$errors = 'Invalid credentials.';
 			}
 		}
 

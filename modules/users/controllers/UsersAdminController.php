@@ -95,7 +95,9 @@ class UsersAdminController extends Controller {
 			}
 		}
 
-		return Redirect::to('admin/users/'.$id.'/edit')->withInput()->withErrors($errors);
+		return Redirect::to('admin/users/'.$id.'/edit')
+				->withInput()
+				->withErrors($errors);
 	}
 
 	public function getDeleteUser($id)
