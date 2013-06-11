@@ -28,7 +28,7 @@ class PageAdminController extends Controller {
 		$page = new Page;
 
 		$page->title = Input::get('title');
-		$page->slug = strtolower(str_replace(' ', '-', $page->title));
+		$page->slug = Str::slug(Input::get('title'));
 		$page->content = Input::get('content');
 		$page->comments_enabled = Input::get('comments_enabled', 0);
 
