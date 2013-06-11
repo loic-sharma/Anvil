@@ -33,18 +33,18 @@ class UsersController extends Controller {
 	 */
 	public function postLogin()
 	{
-		$form = Validator::make(Input::all(), array(
+		$credentials = array(
+			'email'    => Input::get('email'),
+			'password' => Input::get('password'),
+		);
+
+		$form = Validator::make($credentials, array(
 			'email'    => array('required', 'email'),
 			'password' => array('required'),
 		));
 
 		if($form->passes())
 		{
-			$credentials = array(
-				'email'    => Input::get('email'),
-				'password' => Input::get('password'),
-			);
-
 			if(Auth::attempt($credentials))
 			{
 				return Redirect::to('users/profile');
