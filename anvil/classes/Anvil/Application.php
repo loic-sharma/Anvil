@@ -57,13 +57,10 @@ class Application extends IlluminateApplication {
 	{
 		// Let's pass the request to the inspector. The inspector
 		// will determine which route and controller that should
-		// respond to the current request.
-		$this->route = $inspector->inspect($request);
-
-		// If the route is null, then the inspector could not find
-		// a matching route and controller. Let's just abort with a
-		// 404 error message.
-		if(is_null($this->route))
+		// respond to the current request. If the route is null,
+		// then the inspector could not find a matching route and
+		// controller. Let's just abort with a 404 error message.
+		if( ! ($this->route = $inspector->inspect($request)))
 		{
 			$this->abort(404);
 		}
@@ -71,14 +68,14 @@ class Application extends IlluminateApplication {
 		// Otherwise, let's attempt to register the detected route.
 		else
 		{
+			// If the controller does not exist, Laravel will
+			// throw an exception. We will silently kill the exception
+			// since there might be a custom route already set.
 			try
 			{
 				$router->controller($this->route->route, $this->route->controller);
 			}
 
-			// If the controller does not exist, Laravel will
-			// throw an exception. we'll silently kill the exception
-			// since there might be a custom route already set.
 			catch(\ReflectionException $e) {}
 		}
 	}
