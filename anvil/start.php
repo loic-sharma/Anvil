@@ -215,7 +215,7 @@ $anvil->startExceptionHandling();
 |
 */
 
-date_default_timezone_set($config['app']['timezone']);
+date_default_timezone_set($config['app.timezone']);
 
 /*
 |--------------------------------------------------------------------------
@@ -228,7 +228,7 @@ date_default_timezone_set($config['app']['timezone']);
 |
 */
 
-$aliases = $config['anvil']['aliases'];
+$aliases = $config['anvil.aliases'];
 
 AliasLoader::getInstance($aliases)->register();
 
@@ -256,7 +256,7 @@ Request::enableHttpMethodParameterOverride();
 |
 */
 
-$providers = $config['anvil']['providers'];
+$providers = $config['anvil.providers'];
 
 $anvil->getProviderRepository()->load($anvil, $providers);
 
