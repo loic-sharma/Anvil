@@ -15,7 +15,7 @@ class Application extends IlluminateApplication {
 	/**
 	 * The route detected from the requested URI.
 	 *
-	 * @var Anvil\Routing\Inspector\Route
+	 * @var \Anvil\Routing\Inspector\Route
 	 */
 	protected $route;
 
@@ -32,7 +32,7 @@ class Application extends IlluminateApplication {
 	/**
 	 * Redirect to the installer if the database configuration is empty.
 	 *
-	 * @param  test
+	 * @param  \Illuminate\Config\Repository
 	 * @return void
 	 */
 	public function redirectIfUninstalled($config)
@@ -48,9 +48,9 @@ class Application extends IlluminateApplication {
 	/**
 	 * Create a route to the detected current controller.
 	 *
-	 * @param  Illuminate\Http\Request    $request
-	 * @param  Anvil\Routing\Inspector    $inspector
-	 * @param  Illuminate\Routing\Router  $router
+	 * @param  \Illuminate\Http\Request    $request
+	 * @param  \Anvil\Routing\Inspector    $inspector
+	 * @param  \Illuminate\Routing\Router  $router
 	 * @return void
 	 */
 	public function start(Request $request, Inspector $inspector, Router $router)
