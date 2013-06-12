@@ -36,7 +36,7 @@ class Inspector {
 	 * @param  mixed  $inspector
 	 * @return void
 	 */
-	public function addInspector($inspector)
+	public function register($inspector)
 	{
 		array_unshift($this->inspectors, $inspector);
 	}

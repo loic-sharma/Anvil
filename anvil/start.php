@@ -291,15 +291,14 @@ $anvil->redirectIfUninstalled($config);
 | Register The Anvil Request Inspectors
 |--------------------------------------------------------------------------
 |
-| Anvil matches a request to controllers through its inspectors. The
-| detected routes can be overriden by simply registering custom routes.
-| Additionally, modules can register their own inspectors to modify how
-| requests are handled.
+| Anvil matches a request to controllers through its inspectors. The way
+| requests are handled can be modified by registering additional
+| inspectors.
 |
 */
 
-Inspector::addInspector(new BasicInspector);
-Inspector::addInspector(new AdminInspector);
+Inspector::register(new BasicInspector);
+Inspector::register(new AdminInspector);
 
 /*
 |--------------------------------------------------------------------------
