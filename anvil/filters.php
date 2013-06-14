@@ -114,31 +114,6 @@ Route::filter('requirePower', function($power)
  | Group Authentication Filter
  |--------------------------------------------------------------------------
  |
- | Verify that the current user's power is greater than a certain integer.
- |
- */
-
-Route::filter('requirePower', function($power)
-{
-	if(Auth::user()->group->power <= $power)
-	{
-		if(Auth::check())
-		{
-			return Redirect::to('users/profile');
-		}
-
-		else
-		{
-			return Redirect::to('users/login');
-		}
-	}
-});
-
-/*
- |--------------------------------------------------------------------------
- | Group Authentication Filter
- |--------------------------------------------------------------------------
- |
  | Require the current user to belong to a certain group.
  |
  */
@@ -164,7 +139,7 @@ Route::filter('is', function($group)
  | Admin Authentication Filter
  |--------------------------------------------------------------------------
  |
- | Verify that the current user is an admin.
+ | Verify that the current user can access the admin panel.
  |
  */
 
