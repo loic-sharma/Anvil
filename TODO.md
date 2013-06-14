@@ -4,6 +4,7 @@ These are the general topics I would like to improve.
 
 ## Core
 
+* Rename all the database fields to use camel casing.
 * Refactor the menu system. Use [nested sets](http://docs.cartalyst.com/nested-sets-2)?
 * Refactor the module system
 * Move Breadcrumb class out of Page module
@@ -26,4 +27,5 @@ These are the general topics I would like to improve.
 
 ## Admin
 
+* Add admin links in installer.
 * Redo admin system?
