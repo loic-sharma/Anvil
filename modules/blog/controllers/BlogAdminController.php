@@ -1,8 +1,5 @@
 <?php
 
-use Blog\Post;
-use Blog\Comment;
-
 class BlogAdminController extends Controller {
 
 	/**

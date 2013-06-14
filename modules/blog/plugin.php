@@ -1,7 +1,5 @@
 <?php
 
-use Blog\Post;
-
 class BlogPlugin extends Plugin {
 
 	/**
