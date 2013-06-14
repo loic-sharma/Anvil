@@ -141,13 +141,13 @@ class PagePlugin {
 			if(Anvil::isAdmin())
 			{
 				$name = 'Admin';
-				$link = Url::to('admin');
+				$link = URL::to('admin');
 			}
 
 			else
 			{
 				$name = 'Home';
-				$link = Url::base();
+				$link = URL::base();
 			}
 
 			array_unshift($breadcrumbs, new Breadcrumb($name, $link));
