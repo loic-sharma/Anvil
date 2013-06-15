@@ -13,7 +13,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach($themes->get() as $theme)
+			{{-- @foreach($themes->get() as $theme) --}}
+			@foreach(array() as $theme)
 				<tr>
 					<td>
 						@if($theme->slug == Input::old('theme', Settings::get('theme')))
