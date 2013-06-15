@@ -1,7 +1,6 @@
 <?php namespace Anvil\Auth\Models;
 
 use Hash;
-use ExpressiveDate;
 use Anvil\Database\Model;
 use Illuminate\Auth\UserInterface;
 
@@ -147,9 +146,7 @@ class User extends Model implements UserInterface {
 	 */
 	public function getDateAttribute()
 	{
-		$date = new ExpressiveDate($this->attributes['created_at']);
-
-		return $date->getRelativeDate();
+		return $this->created_at->diffForHumans();
 	}
 
 	/**

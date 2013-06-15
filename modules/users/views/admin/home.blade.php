@@ -14,7 +14,7 @@
 			<tr>
 				<td>{{ $user->email }}</td>
 				<td>{{ $user->displayName() }}</td>
-				<td>{{ $user->date() }}</td>
+				<td>{{ $user->date }}</td>
 				<td>
 					<a href="{{ $url->to('admin/users/'.$user->id.'/edit') }}" class="btn btn-warning">Edit</a>
 					<a href="{{ $url->to('admin/users/'.$user->id.'/delete') }}" class="btn btn-danger">Delete</a> 
