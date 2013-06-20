@@ -4,6 +4,7 @@ These are the general topics I would like to improve.
 
 ## Core
 
+* Add observer-like model validation.
 * Rename all the database fields to use camel casing.
 * Refactor the menu system. Use [nested sets](http://docs.cartalyst.com/nested-sets-2)?
 * Refactor the module system
