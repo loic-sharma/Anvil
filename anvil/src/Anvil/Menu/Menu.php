@@ -33,7 +33,7 @@ class Menu {
 	 */
 	public function filter($filter)
 	{
-		$this->factory->filter($filter);
+		$this->factory->addFilter($filter);
 	}
 
 	/**
