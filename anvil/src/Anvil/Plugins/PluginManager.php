@@ -72,13 +72,6 @@ class PluginManager {
 			$plugin = $this->anvil->make($plugin);
 		}
 
-		// If the class inherits the Plugin class, let's wrap it around
-		// with the Decorator class so that attributes can managed.
-		if($plugin instanceof Plugin)
-		{
-			$plugin = new Decorator($plugin);
-		}
-
 		return $plugin;
 	}
 
