@@ -65,9 +65,9 @@ class Post extends Eloquent {
 	 *
 	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
-	public function comments()
+	public function getCommentsAttribute()
 	{
-		return $this->hasMany('Comment')->where('area', 'blog-post-'.$this->attributes['id']);
+		return Comment::where('area', 'blog-post-'.$this->attributes['id'])->get();
 	}
 
 	/**

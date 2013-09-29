@@ -2,7 +2,7 @@
 
 <p class="muted">Posted by {{{ $post->author }}} {{{ $post->timeAgo }}}.</p>
 <p>{{{ $post->content }}}</p>
-<p><span class="badge">{{{ $post->comments->count() }}} Comments</span></p>
+<p><span class="badge">{{{ $post->comments->count() }}} comments</span></p>
 
 @if($post->commentsEnabled)
 	<hr>
